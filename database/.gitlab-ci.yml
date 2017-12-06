@@ -1,0 +1,36 @@
+image: registry.gitcity.sk/cakehub/cakeapp:fpm
+
+.run-on-do-docker: &run-on-do-docker
+    tags:
+        - digitalocean
+        - docker
+
+.default-variables: &default-variables
+    DB_CONNECTION: pgsql
+    DB_HOST: postgres
+    DB_PORT: 5432
+    DB_DATABASE: "gitcity-test"
+    DB_USERNAME: postgres
+    DB_PASSWORD: "5RGGjwubxdqyF6dL"
+
+.postgres-variables: &postgres-variables
+    variables:
+        <<: *default-variables
+        POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
+        POSTGRES_DB: "gitcity-test"
+
+.install-dependencies: &install-dependencies
+    before_script:
+        - composer -V
+        - composer install
+        - php artisan key:generate
+        - php artisan migrate
+
+php:postgres-phpunit:
+    <<: *postgres-variables
+    <<: *install-dependencies
+    services:
+        - postgres
+    script:
+        - phpunit
+    <<: *run-on-do-docker
