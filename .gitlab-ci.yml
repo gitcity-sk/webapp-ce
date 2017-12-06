@@ -23,6 +23,7 @@ image: registry.gitcity.sk/cakehub/cakeapp:fpm
 
 .install-dependencies: &install-dependencies
     before_script:
+        - composer self-update
         - composer -V
         - composer install
         - php artisan migrate
@@ -33,5 +34,5 @@ php:postgres-phpunit:
     services:
         - postgres
     script:
-        - phpunit
+        - phpunit --coverage-text --colors=never
     <<: *run-on-do-docker
