@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+    <body data-smooth-scroll-offset="77">
+            {{ partial "header.html" . }}
+        <div class="main-container" data-author-tag="Hana MayMeow Song">
+            {{ partial "nav.html"}}
+            {{ block "main" . }}
+                <!-- main content -->
+                
+            {{ end }}
+            {{ partial "footer.html" . }}
+        </div>
+        {{ partial "scripts.html" . }}
+            
+    </body>
+            
+</html>

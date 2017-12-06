@@ -1,0 +1,10 @@
+#!/usr/bin/env php
+<?php
+    preg_match('/^key-(\d*)/', $_SERVER['argv'][1], $matches);
+    putenv('GC_ID=' . $matches[1]);
+
+    $cmd = "git-shell -c \"{$_SERVER['SSH_ORIGINAL_COMMAND']}\"";
+
+    passthru($cmd);
+
+    // file_put_contents('/root/git-shell/texty', json_encode($_SERVER));

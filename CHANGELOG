@@ -1,0 +1,21 @@
+v 0.0.4
+
+NEW Project page now including README if this is exists in repository
+
+v 0.0.3
+
+NEW admin Section
+ADD ACL with Roles and Permission
+ADD Git Repositories
+ADD Admin section for USERS
+ADD admin section for ACL
+NEW Project Sidebar
+
+v 0.0.2
+
+ADD Issues
+ADD Comments for issues
+
+v 0.0.1
+
+Intial release with USERS and projects

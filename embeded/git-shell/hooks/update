@@ -1,0 +1,13 @@
+#!/usr/bin/env php
+<?php
+
+echo "----> " . getcwd() . "\n";
+$ref = $_SERVER['argv'][1];
+echo "----> $ref \n";
+
+print_r($_SERVER);
+
+if ($ref == "refs/heads/master") {
+    echo "----> not allowed $ref is protected branch \n";
+    exit(1);
+}
