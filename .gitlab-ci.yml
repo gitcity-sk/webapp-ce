@@ -12,6 +12,7 @@ image: registry.gitcity.sk/cakehub/cakeapp:fpm
     DB_DATABASE: "gitcity-test"
     DB_USERNAME: postgres
     DB_PASSWORD: "5RGGjwubxdqyF6dL"
+    APP_KEY: "base64:i401pX1nVrGs5i4eWFoxB67N5mkfVhrF9kxqKSkj15o="
 
 .postgres-variables: &postgres-variables
     variables:
@@ -23,7 +24,6 @@ image: registry.gitcity.sk/cakehub/cakeapp:fpm
     before_script:
         - composer -V
         - composer install
-        - php artisan key:generate
         - php artisan migrate
 
 php:postgres-phpunit:
