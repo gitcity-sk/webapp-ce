@@ -95,7 +95,7 @@ What to do?
 * Next two months
   * Chunked upload to spaces
 
-More will composer
+More will come.
 
 ## License
 
