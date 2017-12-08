@@ -50,9 +50,10 @@ php srv.php
 All paths are sent to workhorse from webapplicaton. Open `.env` file (in webapp project folder) and add following lines (update paths as you need)
 
 ```
-GIT_DATA=F:\data\Repositories\
-GIT_SSH_KEYS=F:\data\Repositories\.ssh\
-SPACES_DATA=F:\data\Spaces\
+GIT_DATA=/var/opt/gitcity/git-data/
+GIT_SSH_KEYS=/var/opt/gitcity/git-data/.ssh/
+SPACES_DATA=/data/spaces
+GITCITY_SHELL_HOOKS=/opt/gitcity/embeded/git-shell/hooks/
 ```
 
 * Setup Database
