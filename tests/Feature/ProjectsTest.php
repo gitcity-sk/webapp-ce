@@ -33,6 +33,7 @@ class ProjectsTest extends TestCase
                 'id' => $first->id,
                 'user_id' => $first->user->id,
                 'private' => $first->private,
+                'created' => $first->created,
                 'created_at' => $first->created_at,
                 'updated_at' => $first->updated_at
             ]

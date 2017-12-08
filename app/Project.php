@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Services\Workhorse;
 
 class Project extends Model
 {
@@ -27,5 +28,26 @@ class Project extends Model
     public function scopePublic($query)
     {
         return $query->where('private', 0);
+    }
+
+    public function createOnServer()
+    {
+        $user = User::find($this->user_id);
+        try {
+            $unicorn = new Workhorse('tcp://127.0.0.1:88001');
+            $response = $unicorn
+                ->setAction('git:init:bare')
+                ->setData([
+                    'hooks' => Repo::hooks(),
+                    'path' => Repo::path($user->name, $this->slug)
+                ])->run();
+        } catch (\Exception $e) {
+            $response = null;
+        }
+
+        if (null != $response && (json_decode($response))->code == 200) {
+            $this->created = true;
+            $this->save();
+        }
     }
 }

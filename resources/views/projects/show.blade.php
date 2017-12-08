@@ -57,6 +57,15 @@
             </div>
         </div>
 
+        @if ( false == $project->created )
+            <div class="card" style="margin-bottom: 15px">
+                <div class="card-body text-center">
+                    <p><span class="text-danger">Project is not created on server.</span> If problem presist contact server administrator. </p>
+                    <a href="/projects/{{ $project->id }}/create-on-server" class="btn btn-outline-primary">Refresh</a>
+                </div>
+            </div>
+        @endif
+
         @if (null != $tree)
         <div class="row">
             <div class="col-12">
@@ -95,6 +104,13 @@
                        @endforeach
                    </table>
                 </div>
+            </div>
+        </div>
+        @else
+        <div class="card">
+            <div class="card-body text-center">
+                <p>Empty project</p>
+                <a href="#" class="btn btn-outline-danger">Delete project</a>
             </div>
         </div>
         @endif
