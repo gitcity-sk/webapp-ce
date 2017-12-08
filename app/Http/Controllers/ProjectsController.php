@@ -68,6 +68,12 @@ class ProjectsController extends Controller
         return view('projects.create');
     }
 
+    public function createOnServer(Project $project)
+    {
+        $project->createOnServer();
+        return back();
+    }
+
     /**
      *
      */

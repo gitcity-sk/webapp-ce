@@ -32,6 +32,7 @@ Route::get('/projects/{project}/issues', 'ProjectsController@issues');
 Route::get('/projects/{project}/commits', 'CommitsController@show');
 Route::get('/projects/{project}/branches', 'BranchesController@show');
 Route::get('/projects/{project}/tags', 'TagsController@show');
+Route::get('/projects/{project}/create-on-server', 'ProjectsController@createOnServer');
 Route::post('/projects', 'ProjectsController@store');
 Route::post('/projects/{project}/issues/', 'IssuesController@store');
 

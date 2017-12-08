@@ -42,16 +42,24 @@ class User extends Authenticatable
     public function publish(Project $project)
     {
         $project['slug'] = str_slug($project['name']);
+        $project = $this->projects()->save($project);
 
-        $this->projects()->save($project);
+        try {
+            $unicorn = new Workhorse('tcp://127.0.0.1:88001');
+            $response = $unicorn
+                ->setAction('git:init:bare')
+                ->setData([
+                    'hooks' => Repo::hooks(),
+                    'path' => Repo::path($this->name, $project['slug'])
+                ])->run();
+        } catch (\Exception $e) {
+            $response = null;
+        }
 
-        $unicorn = new Workhorse('tcp://127.0.0.1:88001');
-        $response = $unicorn
-            ->setAction('git:init:bare')
-            ->setData([
-                'path' => Repo::path($this->name, $project['slug'])
-            ])->run();
-
+        if (null != $response && (json_decode($response))->code == 200) {
+            $project['created'] = true;
+            $this->projects()->save($project);
+        }
     }
 
     public function addKey(AuthorizedKey $authorizedKey)

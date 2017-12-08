@@ -21,6 +21,7 @@ class CreateProjectsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->boolean('private')->default(false);
+            $table->boolean('created')->default(false);
             $table->timestamps();
 
             $table->unique(['user_id', 'slug']);

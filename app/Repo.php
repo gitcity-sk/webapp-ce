@@ -22,4 +22,9 @@ class Repo extends Model
     {
         return env('GIT_DATA') . $namespace . DIRECTORY_SEPARATOR . $name . '.git';
     }
+
+    public static function hooks()
+    {
+        return env('GITCITY_SHELL_HOOKS');
+    }
 }
