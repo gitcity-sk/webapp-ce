@@ -34,7 +34,7 @@ class Project extends Model
     {
         $user = User::find($this->user_id);
         try {
-            $unicorn = new Workhorse('tcp://127.0.0.1:88001');
+            $unicorn = new Workhorse('tcp://unicorn:88001');
             $response = $unicorn
                 ->setAction('git:init:bare')
                 ->setData([
