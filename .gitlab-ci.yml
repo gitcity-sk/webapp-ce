@@ -1,5 +1,9 @@
 image: registry.gitcity.sk/cakehub/cakeapp:fpm
 
+stages:
+    - test
+    - build
+
 .run-on-do-docker: &run-on-do-docker
     tags:
         - digitalocean
@@ -36,3 +40,17 @@ php:postgres-phpunit:
     script:
         - phpunit --coverage-text --colors=never
     <<: *run-on-do-docker
+
+build image:
+    image: docker:latest
+    services:
+        - docker:dind
+    stage: build
+    before_script:
+        - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
+    script:
+        - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+        - docker push "$CI_REGISTRY_IMAGE"
+    <<: *run-on-do-docker
+    only:
+        - master
