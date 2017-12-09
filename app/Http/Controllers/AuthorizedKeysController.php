@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\AuthorizedKeys;
+use App\AuthorizedKey;
 
 class AuthorizedKeysController extends Controller
 {
@@ -30,7 +31,7 @@ class AuthorizedKeysController extends Controller
     public function destroy(AuthorizedKey $authorizedKey)
     {
         auth()->user()->removeKey($authorizedKey);
-        
+
         return back();
     }
 }

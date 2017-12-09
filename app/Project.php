@@ -34,7 +34,7 @@ class Project extends Model
     {
         $user = User::find($this->user_id);
         try {
-            $unicorn = new Workhorse('tcp://unicorn:8801');
+            $unicorn = new Workhorse();
             $response = $unicorn
                 ->setAction('git:init:bare')
                 ->setData([
@@ -42,7 +42,9 @@ class Project extends Model
                     'path' => Repo::path($user->name, $this->slug)
                 ])->run();
         } catch (\Exception $e) {
+          dd($e);
             $response = null;
+            report($e);
         }
 
         if (null != $response && (json_decode($response))->code == 200) {

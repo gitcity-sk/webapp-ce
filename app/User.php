@@ -45,7 +45,7 @@ class User extends Authenticatable
         $project = $this->projects()->save($project);
 
         try {
-            $unicorn = new Workhorse('tcp://unicorn:8801');
+            $unicorn = new Workhorse();
             $response = $unicorn
                 ->setAction('git:init:bare')
                 ->setData([
@@ -67,25 +67,35 @@ class User extends Authenticatable
     {
         $this->authorizedKeys()->save($authorizedKey);
 
-        $unicorn = new Workhorse('tcp://unicorn:8801');
-        $response = $unicorn
-            ->setAction('security:write:keys')
-            ->setData([
-                'path' => env('GIT_SSH_KEYS'),
-                'keys' => AuthorizedKey::select(['id', 'public_key'])->get()->toArray()
-            ])->run();
+        try {
+            $unicorn = new Workhorse();
+            $response = $unicorn
+                ->setAction('security:write:keys')
+                ->setData([
+                    'path' => env('GIT_SSH_KEYS'),
+                    'keys' => AuthorizedKey::select(['id', 'public_key'])->get()->toArray()
+                ])->run();
+        } catch (\Exception $e) {
+            $response = null;
+            report($e);
+        }
     }
 
     public function removeKey(AuthorizedKey $authorizedKey)
     {
         $authorizedKey->delete();
 
-        $unicorn = new Workhorse('tcp://unicorn:8801');
-        $response = $unicorn
-            ->setAction('security:write:keys')
-            ->setData([
-                'path' => env('GIT_SSH_KEYS'),
-                'keys' => AuthorizedKey::select(['id', 'public_key'])->get()->toArray()
-            ])->run();
+        try {
+            $unicorn = new Workhorse();
+            $response = $unicorn
+                ->setAction('security:write:keys')
+                ->setData([
+                    'path' => env('GIT_SSH_KEYS'),
+                    'keys' => AuthorizedKey::select(['id', 'public_key'])->get()->toArray()
+                ])->run();
+        } catch (\Exception $e) {
+            $response = null;
+            report($e);
+        }
     }
 }

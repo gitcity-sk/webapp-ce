@@ -8,12 +8,15 @@ class Workhorse
 
     protected $data;
 
+    protected const UNICORN_SOCKET = 'tcp://127.0.0.1:8801';
+
     /**
      * SocketClient constructor.
      * @param $socket
      */
-    public function __construct($socket)
+    public function __construct($socket = null)
     {
+        if ($socket == null) $socket = static::UNICORN_SOCKET;
         $this->_setSocket($socket);
     }
 
