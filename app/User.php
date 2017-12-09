@@ -54,6 +54,7 @@ class User extends Authenticatable
                 ])->run();
         } catch (\Exception $e) {
             $response = null;
+            report($e);
         }
 
         if (null != $response && (json_decode($response))->code == 200) {
