@@ -45,7 +45,7 @@ class User extends Authenticatable
         $project = $this->projects()->save($project);
 
         try {
-            $unicorn = new Workhorse('tcp://unicorn:88001');
+            $unicorn = new Workhorse('tcp://unicorn:8801');
             $response = $unicorn
                 ->setAction('git:init:bare')
                 ->setData([
@@ -66,7 +66,7 @@ class User extends Authenticatable
     {
         $this->authorizedKeys()->save($authorizedKey);
 
-        $unicorn = new Workhorse('tcp://unicorn:88001');
+        $unicorn = new Workhorse('tcp://unicorn:8801');
         $response = $unicorn
             ->setAction('security:write:keys')
             ->setData([
@@ -79,7 +79,7 @@ class User extends Authenticatable
     {
         $authorizedKey->delete();
 
-        $unicorn = new Workhorse('tcp://unicorn:88001');
+        $unicorn = new Workhorse('tcp://unicorn:8801');
         $response = $unicorn
             ->setAction('security:write:keys')
             ->setData([
