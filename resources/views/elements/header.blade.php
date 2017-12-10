@@ -10,6 +10,9 @@
               <a class="nav-link" href="/projects">Projects <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="/projects">Spaces <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="/admin/roles">Admin <span class="sr-only">(current)</span></a>
             </li>
           </ul>

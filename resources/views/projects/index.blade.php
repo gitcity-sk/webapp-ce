@@ -15,7 +15,8 @@
     @foreach ($projects as $project)
         <tr>
             <td>
-                <a href="/projects/{{ $project->id }}" style="font-weight: 600">{{ $project->user->name }} / {{ $project->name }}</a><br /><small class="has-emoji">{{ $project->description }}</small>
+                <a href="/projects/{{ $project->id }}" style="font-weight: 600" class="text-dark">{{ $project->user->name }} / {{ $project->name }}</a><br />
+                <small class="has-emoji">{{ $project->description }}</small>
             </td>
             <td>{{ $project->created_at->diffForHumans() }}</td>
         </tr>
