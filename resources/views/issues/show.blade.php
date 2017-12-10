@@ -24,13 +24,19 @@
 <div class="row">
     <div class="col-9">
         <p class="lead has-emoji">{{ $issue->description }}</p>
-        <div>
-            <ul>
-                @foreach ($issue->comments as $comment)
-                    <li class="has-emoji">by <a href="#">{{ $comment->user->name }}</a> at {{ $comment->created_at->diffForHumans() }} {!! $markdown->text($comment->body) !!}</li>
-                @endforeach
-            </ul>
+
+        @foreach ($issue->comments as $comment)
+        <div class="card mb-4">
+            <div class="card-header has-emoji">
+                <a href="#">{{ $comment->user->name }}</a> at {{ $comment->created_at->diffForHumans() }}
+            </div>
+            <div class="card-body has-emoji">
+                {!! $markdown->text($comment->body) !!}
+            </div>
+
         </div>
+        @endforeach
+
     </div>
 
     <div class="col-3">

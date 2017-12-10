@@ -25,7 +25,7 @@
 @endsection
 
 @section ('content')
-<h1 class="display-4">Projects</h1>
+<h1 class="h2" style="font-weight: 300">Projects</h1>
 <div class="row" style="margin-bottom: 10px">
     <div class="col-12 text-right">
     <a href="/projects/create" class="btn btn-success">Create project</a>

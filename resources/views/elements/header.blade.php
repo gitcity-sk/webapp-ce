@@ -1,6 +1,6 @@
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="/">GitCity</a>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark py-0 py-md-0">
+        <a class="navbar-brand" href="/">G</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,13 +14,13 @@
             </li>
           </ul>
           <form class="form-inline mt-2 mt-md-0">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="margin-right: 10px">Search</button>
+            <button class="btn btn-light my-2 my-sm-0" type="submit" style="margin-right: 10px">Search</button>
 
             @if (Route::has('login'))
               @auth
-                  <a class="btn btn-outline-default my-2 my-sm-0" href="{{ url('/dashboard') }}">{{ Auth::user()->name }}</a>
+                  <a class="btn btn-light my-2 my-sm-0" href="{{ url('/dashboard') }}">{{ Auth::user()->name }}</a>
               @else
-                  <a class="btn btn-outline-default my-2 my-sm-0" href="{{ route('login') }}">Login / Register</a>
+                  <a class="btn btn-light my-2 my-sm-0" href="{{ route('login') }}">Login / Register</a>
               @endauth
             @endif
 
