@@ -44,9 +44,10 @@ class ProjectsController extends Controller
             $repo = Repo::open($project->user->name, $project->slug);
 
             if ($repo && (count($repo->getBranches(true)) != 0)) {
-                $tree = $repo->getTree('HEAD');
+                $tree = null;
 
                 try {
+                    $tree = $repo->getTree('HEAD');
                     $readme = $repo->outputRawContent($repo->getTree('HEAD', 'README.md')->getObject(), 'HEAD');
                 } catch (\Exception $e) {
                     // nothing to do
