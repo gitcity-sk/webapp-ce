@@ -24,7 +24,6 @@
     <div class="col-12">
         <p class="lead has-emoji">{{ $project->description }}</p>
     </div>
-
 </div>
 
 <div class="row" style="margin-bottom: 3rem">
