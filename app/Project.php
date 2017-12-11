@@ -19,6 +19,11 @@ class Project extends Model
         return $this->hasMany(Issue::class);
     }
 
+    public function mergeRequests()
+    {
+        return $this->hasMany(MergeRequest::class);
+    }
+
     public function scopePrivate($query)
     {
         return $query->where('private', 1);

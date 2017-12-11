@@ -20,7 +20,7 @@
 </h1>
 
 <div class="row">
-    <div class="col-12"><p class="lead has-emoji">Merge requests <a href="#">Create new</a></p></div>
+    <div class="col-12"><p class="lead has-emoji">Merge requests</p></div>
 </div>
 <div class="row">
     <div class="col-2">
@@ -28,10 +28,20 @@
     </div>
     <div class="col-10">
 
+        <div class="row" style="margin-bottom: 10px">
+            <div class="col-12 text-right">
+            <a href="/projects/{{ $project->id }}/merge-requests/new" class="btn btn-success">Create new request</a>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <table class="table table-vcenter">
-
+                    @foreach ($project->mergeRequests as $mergeRequest)
+                    <tr>
+                        <td>#{{ $mergeRequest->id }} <a href="/merge-requests/{{ $mergeRequest->id }}" style="font-weight: 600" class="text-dark">{{ $mergeRequest->title }}</a> by {{ $mergeRequest->user->name }}</td>
+                    </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

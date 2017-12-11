@@ -27,7 +27,7 @@ Route::get('/', function () {
  */
 Route::get('/projects', 'ProjectsController@index');
 Route::get('/projects/create', 'ProjectsController@create');
-Route::get('/projects/{project}', 'ProjectsController@show');
+Route::get('/projects/{project}', 'ProjectsController@show')->name('project');
 Route::get('/projects/{project}/issues', 'ProjectsController@issues');
 Route::get('/projects/{project}/commits', 'CommitsController@show');
 Route::get('/projects/{project}/branches', 'BranchesController@show');
@@ -36,13 +36,16 @@ Route::get('/projects/{project}/merge-requests', 'ProjectsController@mergeReques
 Route::get('/projects/{project}/merge-requests/new', 'ProjectsController@createMergeRequest');
 Route::get('/projects/{project}/create-on-server', 'ProjectsController@createOnServer');
 Route::post('/projects', 'ProjectsController@store');
-Route::post('/projects/{project}/issues/', 'IssuesController@store');
+Route::post('/projects/{project}/issues', 'IssuesController@store');
+Route::post('/projects/{project}/merge-requests', 'MergeRequestsController@store');
 
 /**
  * Issues
  */
 Route::get('/issues/{issue}', 'IssuesController@show');
 Route::post('/issues/{issue}/comments', 'CommentsController@store');
+
+Route::get('/merge-requests/{mergeRequest}', 'MergeRequestsController@show');
 
 /**
  * Authenticate

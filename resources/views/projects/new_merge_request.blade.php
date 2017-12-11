@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <form action="/projects/{{ $project->id }}/issues" method="post">
+        <form action="/projects/{{ $project->id }}/merge-requests" method="post">
             <div class="row mb-3">
                 <div class="col-6">
                     <div class="card">
@@ -36,7 +36,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Issue title">
+                                    <input type="text" class="form-control" id="title" name="branch_from" placeholder="e.g. 1-my-branch">
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="title" name="title" placeholder="Issue title">
+                                    <input type="text" class="form-control" id="title" name="branch_to" placeholder="e.g. master">
                                 </div>
                             </div>
                         </div>

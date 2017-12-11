@@ -25,6 +25,15 @@
     <div class="col-9">
         <p class="lead has-emoji">{{ $issue->description }}</p>
 
+        <div class="card mb-3">
+            <div class="card-header">
+                To start create new branch
+            </div>
+            <div class="card-body">
+                git checkout -b {{ $issue->id }}-my-new-branch
+            </div>
+        </div>
+
         @foreach ($issue->comments as $comment)
         <div class="card mb-4">
             <div class="card-header has-emoji">
