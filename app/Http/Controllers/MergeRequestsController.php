@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Project;
+use App\Repo;
+use App\Diff;
 use App\MergeRequest;
 
 class MergeRequestsController extends Controller
@@ -19,7 +21,9 @@ class MergeRequestsController extends Controller
 
     public function show(MergeRequest $mergeRequest)
     {
-        return view('merge_requests.show', compact('mergeRequest'));
+        $repo = Repo::open($mergeRequest->project->user->name, $mergeRequest->project->slug);
+        $diff = Diff::getDiffBetween($mergeRequest->branch_from, $mergeRequest->branch_to, $repo);
+        return view('merge_requests.show', compact('mergeRequest', 'diff'));
     }
 
     public function store(Project $project)

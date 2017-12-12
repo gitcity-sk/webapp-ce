@@ -11,10 +11,10 @@ class CommitsController extends Controller
     {
         if (auth()->user()->can('show-project')) {
 
-            $repo = null;
+            //$repo = null;
+            $repo = Repo::open($project->user->name, $project->slug);
 
             if ($repo && (count($repo->getBranches(true)) != 0)) {
-                $repo = Repo::open($project->user->name, $project->slug);
                 $commits = $repo->getLog('HEAD');
             } else {
                 $commits = null;

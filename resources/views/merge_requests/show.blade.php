@@ -34,7 +34,26 @@
             </div>
         </div>
 
-        Diff can be viewed here...
+        <table class="table">
+            @foreach ($diff as $diffObject)
+                <tr>
+                    <td>
+                        <span style="font-weight:600">{{ $diffObject->getOriginalPath() }}</span> {{ $diffObject->getMode() }}
+                        @foreach ($diffObject as $diffChunk)
+                            @if (count($diffChunk) > 0)
+                                {{ count($diffChunk)}} changes from line {{ $diffChunk->getDestStartLine() }} to {{ $diffChunk->getDestEndLine() }}
+                                <ul class="list-group">
+                                    @foreach ($diffChunk as $diffChunkLine)
+                                    <li class="list-group-item">{{ $diffChunkLine->getType() }} {{ $diffChunkLine }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        @endforeach
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+
     </div>
 
     <div class="col-3">
