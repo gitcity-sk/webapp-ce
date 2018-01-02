@@ -42,11 +42,6 @@
                         @foreach ($diffObject as $diffChunk)
                             @if (count($diffChunk) > 0)
                                 {{ count($diffChunk)}} changes from line {{ $diffChunk->getDestStartLine() }} to {{ $diffChunk->getDestEndLine() }}
-                                <ul class="list-group">
-                                    @foreach ($diffChunk as $diffChunkLine)
-                                    <li class="list-group-item">{{ $diffChunkLine->getType() }} {{ $diffChunkLine }}</li>
-                                    @endforeach
-                                </ul>
                             @endif
                         @endforeach
                     </td>
