@@ -48,9 +48,12 @@ build image:
     stage: build
     before_script:
         - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
+        - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
     script:
         - docker build --pull -t "$CI_REGISTRY_IMAGE" .
         - docker push "$CI_REGISTRY_IMAGE"
+        - docker tag "$CI_REGISTRY_IMAGE" maymeow/webapp-ce:latest
+        - docker push maymeow/webapp-ce:latest
     <<: *run-on-do-docker
     only:
         - master
