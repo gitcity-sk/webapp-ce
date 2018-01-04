@@ -1,8 +1,10 @@
 image: registry.gitcity.sk/cakehub/cakeapp:fpm
 
 stages:
+    - prepare
     - test
     - build
+    - deploy
 
 .run-on-do-docker: &run-on-do-docker
     tags:
@@ -25,19 +27,49 @@ stages:
         POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
         POSTGRES_DB: "gitcity-test"
 
-.install-dependencies: &install-dependencies
-    before_script:
+.default-cache: &default-cache
+    key: "cake-app-with-php-7"
+    paths:
+        - vendor/
+
+.push-cache: &push-cache
+    cache:
+        <<: *default-cache
+        policy: push
+
+.pull-cache: &pull-cache
+    cache:
+        <<: *default-cache
+        policy: pull
+
+composer:install-dependencies:
+    <<: *push-cache
+    stage: prepare
+    script:
         - composer self-update
         - composer -V
         - composer install
-        - php artisan migrate
+    <<: *run-on-do-docker
 
-php:postgres-phpunit:
+php:postgres-migrate:
     <<: *postgres-variables
-    <<: *install-dependencies
+    <<: *pull-cache
+    stage: test
     services:
         - postgres
     script:
+        - php artisan migrate
+        - php artisan migrate:status
+    <<: *run-on-do-docker
+
+php:postgres-phpunit:
+    <<: *postgres-variables
+    <<: *pull-cache
+    stage: test
+    services:
+        - postgres
+    script:
+        - php artisan migrate
         - phpunit --coverage-text --colors=never
     <<: *run-on-do-docker
 
@@ -48,10 +80,23 @@ build image:
     stage: build
     before_script:
         - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
-        - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
     script:
         - docker build --pull -t "$CI_REGISTRY_IMAGE" .
         - docker push "$CI_REGISTRY_IMAGE"
+    <<: *run-on-do-docker
+    only:
+        - master
+
+deploy:to-docker-cloud:
+    image: docker:latest
+    services:
+        - docker:dind
+    stage: deploy
+    before_script:
+        - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
+        - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
+    script:
+        - docker pull -t "$CI_REGISTRY_IMAGE" .
         - docker tag "$CI_REGISTRY_IMAGE" maymeow/webapp-ce:latest
         - docker push maymeow/webapp-ce:latest
     <<: *run-on-do-docker
