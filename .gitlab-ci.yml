@@ -2,8 +2,8 @@ image: registry.gitcity.sk/cakehub/cakeapp:fpm
 
 stages:
     - prepare
-    - test
     - build
+    - test
     - deploy
 
 .run-on-do-docker: &run-on-do-docker
@@ -99,7 +99,7 @@ deploy:to-docker-cloud:
         - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
         - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
     script:
-        - docker pull -t "$CI_REGISTRY_IMAGE" .
+        - docker pull "$CI_REGISTRY_IMAGE" .
         - docker tag "$CI_REGISTRY_IMAGE" maymeow/webapp-ce:latest
         - docker push maymeow/webapp-ce:latest
     <<: *run-on-do-docker
