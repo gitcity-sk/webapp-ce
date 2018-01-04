@@ -105,3 +105,20 @@ deploy:to-docker-cloud:
     <<: *run-on-do-docker
     only:
         - master
+
+build image:
+    image: docker:latest
+    services:
+        - docker:dind
+    stage: deploy
+    before_script:
+        - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
+        - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
+    script:
+        - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
+        - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+        - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" maymeow/webapp-ce:"$CI_COMMIT_REF_NAME"
+        - docker push maymeow/webapp-ce:"$CI_COMMIT_REF_NAME"
+    <<: *run-on-do-docker
+    only:
+        - tags
