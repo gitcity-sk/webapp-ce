@@ -43,8 +43,11 @@ stages:
         policy: pull
 
 composer:install-dependencies:
+    <<: *postgres-variables
     <<: *push-cache
     stage: prepare
+    services:
+        - postgres
     script:
         - composer self-update
         - composer -V
