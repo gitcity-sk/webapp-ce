@@ -106,7 +106,7 @@ deploy:to-docker-cloud:
     only:
         - master
 
-build image:
+deploy:tags-to-docker-cloud:
     image: docker:latest
     services:
         - docker:dind
