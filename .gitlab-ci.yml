@@ -4,6 +4,7 @@ stages:
     - prepare
     - build
     - test
+    - post-test
     - deploy
 
 .run-on-do-docker: &run-on-do-docker
@@ -74,6 +75,19 @@ php:postgres-phpunit:
     script:
         - php artisan migrate
         - phpunit --coverage-text --colors=never
+    <<: *run-on-do-docker
+
+php:postgres-phpcs:
+    <<: *postgres-variables
+    <<: *pull-cache
+    stage: post-test
+    services:
+        - postgres
+    script:
+        - composer require cakephp/cakephp-codesniffer:dev-master
+        - chmod +x vendor/bin/phpcs
+        - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
+    allow_failure: true
     <<: *run-on-do-docker
 
 build image:
