@@ -84,7 +84,7 @@ php:postgres-phpcs:
     services:
         - postgres
     script:
-        - composer require cakephp/cakephp-codesniffer:dev-master
+        # - composer require cakephp/cakephp-codesniffer:dev-master
         - chmod +x vendor/bin/phpcs
         - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
     allow_failure: true
