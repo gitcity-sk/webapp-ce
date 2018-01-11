@@ -17,9 +17,9 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();;
             $table->string('name');
-            $table->text('description');
-            $table->string('twitter');
-            $table->string('facebook');
+            $table->text('description')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
             $table->boolean('verified')->default(false);
             $table->timestamps();
         });

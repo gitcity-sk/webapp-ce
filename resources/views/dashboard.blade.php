@@ -6,7 +6,7 @@
 @section('content')
 
 <h1 class="h2" style="font-weight: 300">
-    {{ Auth::user()->name }}
+    {{ Auth::user()->profile->name }} <small>{{ Auth::user()->name }}</small> {{ Auth::user()->profile->verified ? 'verified' : ''}}
 </h1>
 
 <p class="lead">
