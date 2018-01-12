@@ -68,6 +68,9 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * Method addKey
+     */
     public function addKey(AuthorizedKey $authorizedKey)
     {
         $this->authorizedKeys()->save($authorizedKey);
@@ -86,6 +89,9 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * function removeKey
+     */
     public function removeKey(AuthorizedKey $authorizedKey)
     {
         $authorizedKey->delete();
