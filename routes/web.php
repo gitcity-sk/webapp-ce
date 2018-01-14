@@ -84,6 +84,13 @@ Route::get('/settings/authorized-keys', 'AuthorizedKeysController@index');
 Route::post('/settings/authorized-keys', 'AuthorizedKeysController@store');
 Route::get('/settings/authorized-keys/{authorizedKey}/delete', 'AuthorizedKeysController@destroy');
 
+/**
+ * Api
+ */
+
+Route::get('/api/users', 'Api\UsersController@index');
+Route::get('/api/users/{user}', 'Api\UsersController@show');
+
 /*Route::get('/projects', function () {
     $projects = Project::all();
 
