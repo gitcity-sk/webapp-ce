@@ -88,6 +88,11 @@ Route::get('/settings/authorized-keys/{authorizedKey}/delete', 'AuthorizedKeysCo
  * Api
  */
 
+Route::get('/profile', function () {
+
+    return view('profiles.show');
+});
+
 Route::get('/api/users', 'Api\UsersController@index');
 Route::get('/api/users/{user}', 'Api\UsersController@show');
 
