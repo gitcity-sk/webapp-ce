@@ -19,8 +19,6 @@ class BranchesController extends Controller
                     $branches = null;
                 }
 
-            // dd($tree);
-
             return view('projects.branches', compact('project', 'branches'));
         }
 

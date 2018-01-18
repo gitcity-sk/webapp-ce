@@ -17,6 +17,7 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();;
             $table->string('name');
+            $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->string('twitter')->nullable();
             $table->string('facebook')->nullable();
