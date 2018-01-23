@@ -1,3 +1,12 @@
+v 0.0.5
+
+NEW Api for repository files
+NEW Repository files are now loaded via api, basic project info is loaded faster
+NEW Projects are loaded via Api
+NEW new CSS loader instead of text
+UPDATE Bootstrap is update to v4.0.0
+UPDATE New variable GIT_BINARY for ability to change git executable location
+
 v 0.0.4
 
 NEW Project page now including README if this is exists in repository

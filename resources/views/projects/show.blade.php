@@ -68,7 +68,7 @@
 
         <div class="row text-center loading" v-if="loading">
             <div class="col">
-                <h3 style="font-weight: 300">Thinking ...</h3>
+                <div class="loader" style="margin:0 auto;"></div>
             </div>
         </div>
 

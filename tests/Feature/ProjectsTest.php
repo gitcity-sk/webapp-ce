@@ -6,10 +6,13 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Project;
+use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProjectsTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations, DatabaseTransactions;
+    // use DatabaseTransactions;
     /**
      * A basic test example.
      *
@@ -17,42 +20,24 @@ class ProjectsTest extends TestCase
      */
     public function testIndex()
     {
-        $first = factory(Project::class)->create();
+        $user = factory(User::class)->create();
 
-        $projects = Project::all();
-
-        foreach ($projects as $project) {
-            $this->assertInstanceOf(Project::class, $project);
-        }
-
-        $this->assertEquals([
-            [
-                'name' => $first->name,
-                'slug' => str_slug($first->name),
-                'description' => $first->description,
-                'id' => $first->id,
-                'user_id' => $first->user->id,
-                'private' => $first->private,
-                'created' => $first->created,
-                'created_at' => $first->created_at,
-                'updated_at' => $first->updated_at
-            ]
-        ], $projects->toArray());
+        $response = $this->actingAs($user)
+            ->withSession(['asd' => 'dsa'])
+            ->get('/projects');
+        $response->assertStatus(200);
     }
 
-    public function testScopes()
+    public function view()
     {
-        $first = factory(Project::class)->create([
-            'private' => false
-        ]);
-        $second = factory(Project::class)->create([
-            'private' => false
-        ]);
+        $user = factory(User::class)->create();
+        $project = factory(Project::class)->create;
 
-        $projects = Project::public()->get();
-        $privateProjects = Project::private()->get();
+        $response = $this->actingAs($user)
+            ->withSession(['asd' => 'dsa'])
+            ->get('/projects/' . $project->id);
+        $response->assertStatus(200);
 
-        $this->assertCount(2, $projects);
-        $this->assertCount(0, $privateProjects);
+        $response->assertSee($project->name);
     }
 }
