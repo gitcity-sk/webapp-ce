@@ -73,6 +73,7 @@ php:postgres-phpunit:
     stage: test
     services:
         - postgres
+        - maymeow/workhorse
     script:
         - php artisan migrate
         - phpunit --coverage-text --colors=never
