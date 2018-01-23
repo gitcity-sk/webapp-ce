@@ -11,6 +11,7 @@ stages:
     tags:
         - digitalocean
         - docker
+        - a
 
 .default-variables: &default-variables
     DB_CONNECTION: pgsql

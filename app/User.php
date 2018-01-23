@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
     public function authorizedKeys()
     {
         return $this->hasMany(AuthorizedKey::class);
@@ -63,6 +68,9 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * Method addKey
+     */
     public function addKey(AuthorizedKey $authorizedKey)
     {
         $this->authorizedKeys()->save($authorizedKey);
@@ -81,6 +89,9 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * function removeKey
+     */
     public function removeKey(AuthorizedKey $authorizedKey)
     {
         $authorizedKey->delete();

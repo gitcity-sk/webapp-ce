@@ -17,7 +17,20 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('profile-view-component', require('./components/profiles/ProfileViewComponent.vue'));
+Vue.component('projects-table-component', require('./components/projects/ProjectsTableComponent.vue'));
+Vue.component('tree-table-component', require('./components/git/TreeTableComponent.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data () {
+        return {
+            loading: false
+        }
+    },
+    created () {
+        this.$on('pageLoader', function(value) {
+            this.loading = value
+        })
+    }
 });
