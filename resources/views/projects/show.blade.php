@@ -63,67 +63,16 @@
                     <a href="/projects/{{ $project->id }}/create-on-server" class="btn btn-outline-primary">Refresh</a>
                 </div>
             </div>
-        @endif
+        @endif        
 
-        @if (null != $tree)
-        <div class="row">
-            <div class="col-12">
-                <div class="card border-secondary">
-                    <div class="card-header has-emoji">
-                        {{ $tree->getLastCommitMessage() }}
-                    </div>
-                    <table class="table table-hover">
-                       @foreach ($tree as $treeObject)
-                           <tr>
-                           <td>
-                               @if ($treeObject->getType() == 'tree')
-                               <svg class="octicon" width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-                                    <title>file-directory</title>
-                                    <desc>Created with Sketch.</desc>
-                                    <defs></defs>
-                                    <g id="Octicons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                        <g id="file-directory" fill="#000000">
-                                            <path d="M13,4 L7,4 L7,3 C7,2.34 6.69,2 6,2 L1,2 C0.45,2 0,2.45 0,3 L0,13 C0,13.55 0.45,14 1,14 L13,14 C13.55,14 14,13.55 14,13 L14,5 C14,4.45 13.55,4 13,4 L13,4 Z M6,4 L1,4 L1,3 L6,3 L6,4 L6,4 Z" id="Shape"></path>
-                                        </g>
-                                    </g>
-                                </svg>
-                                @else
-                                <svg class="octicon" height="16" width="12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 16">
-                                    <path d="M6 5H2v-1h4v1zM2 8h7v-1H2v1z m0 2h7v-1H2v1z m0 2h7v-1H2v1z m10-7.5v9.5c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V2c0-0.55 0.45-1 1-1h7.5l3.5 3.5z m-1 0.5L8 2H1v12h10V5z" />
-                                </svg>
-                                @endif
 
-                               {{ $treeObject->getName() }}
-                           </td>
-                           <td class="has-emoji">
-                               <strong>{{ $treeObject->getLastCommit()->getAuthor()->getName() }}</strong> {{ $treeObject->getLastCommit()->getMessage() }}
-                           </td>
-                           </tr>
-                       @endforeach
-                   </table>
-                </div>
+        <div class="row text-center loading" v-if="loading">
+            <div class="col">
+                <h3 style="font-weight: 300">Thinking ...</h3>
             </div>
         </div>
-        @else
-        <div class="card">
-            <div class="card-body text-center">
-                <p>Empty project</p>
-                <a href="#" class="btn btn-outline-danger">Delete project</a>
-            </div>
-        </div>
-        @endif
 
-        @if (null != $readme)
-        <div class="card" style="margin-top: 15px">
-            <div class="card-header">
-                README
-            </div>
-            <div class="card-body">
-                {!! $markdown->text($readme) !!}
-            </div>
-        </div>
-        @endif
+        <tree-table-component project-id="{{ $project->id }}"></tree-table-component>
 
     </div>
 </div>
