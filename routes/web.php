@@ -63,7 +63,9 @@ Route::get('/terms', 'PagesController@terms');
  * profiles
  */
 
-Route::get('/profiles', 'ProfilesController@index');
+Route::get('/profiles/{profile}', 'ProfilesController@show');
+Route::get('/profiles/{profile}/edit', 'ProfilesController@edit');
+Route::put('/profiles/{profile}', 'ProfilesController@update');
 
 /**
  * ADMIN
