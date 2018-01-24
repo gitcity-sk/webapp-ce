@@ -9,7 +9,7 @@ use App\Project;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ProjectsTest extends TestCase
+class ProjectsControllerTest extends TestCase
 {
     use DatabaseTransactions;
     // use DatabaseTransactions;
