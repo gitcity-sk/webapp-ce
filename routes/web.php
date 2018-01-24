@@ -99,6 +99,7 @@ Route::get('/settings/authorized-keys/{authorizedKey}/delete', 'AuthorizedKeysCo
 
 Route::group(['namespace' => 'Api'], function()
 {
+    Route::get('/api/issues/{issue}', 'IssuesController@show');
     Route::get('/api/profiles', 'ProfilesController@index');
     Route::get('/api/projects', 'ProjectsController@index');
     Route::get('/api/projects/tree/{project}', 'TreeController@files');

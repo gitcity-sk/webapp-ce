@@ -48,7 +48,7 @@
                         </g>
                     </g>
                 </svg>
-                <a href="#">{{ $comment->user->name }}</a> at {{ $comment->created_at->diffForHumans() }}
+                <a href="#">{{ $comment->user->profile->name }}</a> at {{ $comment->created_at->diffForHumans() }}
             </div>
             <div class="card-body has-emoji">
                 {!! $markdown->text($comment->body) !!}
@@ -65,7 +65,7 @@
                 <p class="h6">Project</p>
                 <a href="/projects/{{ $issue->project->id }}/issues">{{ $issue->project->name }}</a>
                 <p class="h6">User</p>
-                <a href="#">{{ $issue->user->name }}</a>
+                <a href="#">{{ $issue->user->profile->name }}</a>
                 <p class="h6">Created</p>
                 {{ $issue->created_at->diffForHumans() }}
             </div>
