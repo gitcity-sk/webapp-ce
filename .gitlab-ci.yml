@@ -28,6 +28,8 @@ stages:
         DB_USERNAME: postgres
         POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
         POSTGRES_DB: "gitcity-test"
+    services:
+        - postgres
 
 .mysql-variables: &mysql-variables
     variables:
@@ -40,6 +42,8 @@ stages:
         MYSQL_DATABASE: "gitcity-test"
         MYSQL_PASSWORD: "5RGGjwubxdqyF6dL"
         MYSQL_ROOT_PASSWORD: "5RGGjwubxdqyF6dL"
+    services:
+        - mariadb
 
 
 .default-cache: &default-cache
@@ -58,24 +62,32 @@ stages:
         key: "cake-app-with-php-7"
         policy: pull
 
-.push-cache: &push-cache-dev
+.push-cache-dev: &push-cache-dev
     cache:
         <<: *default-cache
         key: "cake-app-with-php-7-dev"
         policy: push
 
-.pull-cache: &pull-cache-dev
+.pull-cache-dev: &pull-cache-dev
     cache:
         <<: *default-cache
         key: "cake-app-with-php-7-dev"
         policy: pull
 
+.migrate-script: &migrate-script
+    script:
+        - php artisan migrate
+        - php artisan migrate:status
+
+.coverage-script: &coverage-script
+    script:
+        - php artisan migrate
+        - phpunit --coverage-text --colors=never
+
 composer:install-dependencies:
     <<: *postgres-variables
     <<: *push-cache
     stage: prepare
-    services:
-        - postgres
     script:
         - composer self-update
         - composer -V
@@ -86,8 +98,6 @@ composer:install-dependencies-dev:
     <<: *postgres-variables
     <<: *push-cache-dev
     stage: prepare
-    services:
-        - postgres
     script:
         - composer self-update
         - composer -V
@@ -95,55 +105,37 @@ composer:install-dependencies-dev:
     <<: *run-on-do-docker
 
 php:postgres-migrate:
+    stage: test
     <<: *postgres-variables
     <<: *pull-cache
-    stage: test
-    services:
-        - postgres
-    script:
-        - php artisan migrate
-        - php artisan migrate:status
+    <<: *migrate-script
     <<: *run-on-do-docker
 
 php:mysql-migrate:
+    stage: test
     <<: *mysql-variables
     <<: *pull-cache
-    stage: test
-    services:
-        - mariadb
-    script:
-        - php artisan migrate
-        - php artisan migrate:status
+    <<: *migrate-script
     <<: *run-on-do-docker
 
 php:postgres-phpunit:
+    stage: test
     <<: *postgres-variables
     <<: *pull-cache-dev
-    stage: test
-    services:
-        - postgres
-    script:
-        - php artisan migrate
-        - phpunit --coverage-text --colors=never
+    <<: *coverage-script
     <<: *run-on-do-docker
 
 php:mysql-phpunit:
+    stage: test
     <<: *mysql-variables
     <<: *pull-cache-dev
-    stage: test
-    services:
-        - mariadb
-    script:
-        - php artisan migrate
-        - phpunit --coverage-text --colors=never
+    <<: *coverage-script
     <<: *run-on-do-docker
 
 php:postgres-phpcs:
     <<: *postgres-variables
     <<: *pull-cache-dev
     stage: post-test
-    services:
-        - postgres
     script:
         # - composer require cakephp/cakephp-codesniffer:dev-master
         - composer install --no-progress
