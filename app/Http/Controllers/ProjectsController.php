@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use App\Repo;
+use App\Tree;
 use App\Repositories\Projects;
 use Illuminate\Support\Facades\Gate;
 
@@ -41,21 +42,13 @@ class ProjectsController extends Controller
 
         if (auth()->user()->can('show-project')) {
 
-            $repo = Repo::open($project->user->name, $project->slug);
+            //$treex = new Tree();
 
-            if ($repo && (count($repo->getBranches(true)) != 0)) {
-                $tree = null;
+            //$tree = $treex->get($project->user->name, $project->slug);
 
-                try {
-                    $tree = $repo->getTree('HEAD');
-                    $readme = $repo->outputRawContent($repo->getTree('HEAD', 'README.md')->getObject(), 'HEAD');
-                } catch (\Exception $e) {
-                    // nothing to do
-                }
-            }
-            // dd($tree);
+            return view('projects.show', compact('project'));
 
-            return view('projects.show', compact('project', 'tree', 'readme'));
+            return $tree->toArray();
         }
 
         return view('pages.403');

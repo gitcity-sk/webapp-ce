@@ -4,25 +4,12 @@
 @section ('layout-body-classes', 'pTop-5rem')
 
 @section ('projects-table')
-<table class="table table-vcenter">
-    <thead class="thead-light">
-        <tr>
-            <th>Name</th>
-            <th>Created</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach ($projects as $project)
-        <tr>
-            <td>
-                <a href="/projects/{{ $project->id }}" style="font-weight: 600" class="text-dark">{{ $project->user->name }} / {{ $project->name }}</a><br />
-                <small class="has-emoji">{{ $project->description }}</small>
-            </td>
-            <td>{{ $project->created_at->diffForHumans() }}</td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+<div class="row text-center loading" v-if="loading">
+    <div class="col">
+        <div class="loader" style="margin:0 auto;"></div>
+    </div>
+</div>
+<projects-table-component></projects-table-component>
 @endsection
 
 @section ('content')
@@ -33,11 +20,10 @@
     </div>
 </div>
 
-<div class="card">
 
-        @yield ('projects-table')
 
-</div>
+@yield ('projects-table')
+
 
 
 @endsection
