@@ -74,7 +74,7 @@ php:postgres-phpunit:
     services:
         - postgres
     script:
-        - composer install --no-progres
+        - composer install --no-progress
         - php artisan migrate
         - phpunit --coverage-text --colors=never
     <<: *run-on-do-docker
@@ -87,7 +87,7 @@ php:postgres-phpcs:
         - postgres
     script:
         # - composer require cakephp/cakephp-codesniffer:dev-master
-        - composer install --no-progres
+        - composer install --no-progress
         - chmod +x vendor/bin/phpcs
         - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
     allow_failure: true
