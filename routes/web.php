@@ -63,7 +63,9 @@ Route::get('/terms', 'PagesController@terms');
  * profiles
  */
 
-Route::get('/profiles', 'ProfilesController@index');
+Route::get('/profiles/{profile}', 'ProfilesController@show');
+Route::get('/profiles/{profile}/edit', 'ProfilesController@edit');
+Route::put('/profiles/{profile}', 'ProfilesController@update');
 
 /**
  * ADMIN
@@ -97,6 +99,7 @@ Route::get('/settings/authorized-keys/{authorizedKey}/delete', 'AuthorizedKeysCo
 
 Route::group(['namespace' => 'Api'], function()
 {
+    Route::get('/api/issues/{issue}', 'IssuesController@show');
     Route::get('/api/profiles', 'ProfilesController@index');
     Route::get('/api/projects', 'ProjectsController@index');
     Route::get('/api/projects/tree/{project}', 'TreeController@files');
