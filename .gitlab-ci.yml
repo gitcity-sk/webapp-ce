@@ -14,11 +14,7 @@ stages:
         - a
 
 .default-variables: &default-variables
-    DB_CONNECTION: pgsql
-    DB_HOST: postgres
-    DB_PORT: 5432
     DB_DATABASE: "gitcity-test"
-    DB_USERNAME: postgres
     DB_PASSWORD: "5RGGjwubxdqyF6dL"
     APP_KEY: "base64:i401pX1nVrGs5i4eWFoxB67N5mkfVhrF9kxqKSkj15o="
     APP_ENV: testing
@@ -26,22 +22,52 @@ stages:
 .postgres-variables: &postgres-variables
     variables:
         <<: *default-variables
+        DB_CONNECTION: pgsql
+        DB_HOST: postgres
+        DB_PORT: 5432
+        DB_USERNAME: postgres
         POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
         POSTGRES_DB: "gitcity-test"
 
+.mysql-variables: &mysql-variables
+    variables:
+        <<: *default-variables
+        DB_CONNECTION: mysql
+        DB_HOST: mariadb
+        DB_PORT: 3306
+        DB_USERNAME: webapp
+        MYSQL_USER: webapp
+        MYSQL_DATABASE: "gitcity-test"
+        MYSQL_PASSWORD: "5RGGjwubxdqyF6dL"
+        MYSQL_ROOT_PASSWORD: "5RGGjwubxdqyF6dL"
+
+
 .default-cache: &default-cache
-    key: "cake-app-with-php-7"
     paths:
         - vendor/
 
 .push-cache: &push-cache
     cache:
         <<: *default-cache
+        key: "cake-app-with-php-7"
         policy: push
 
 .pull-cache: &pull-cache
     cache:
         <<: *default-cache
+        key: "cake-app-with-php-7"
+        policy: pull
+
+.push-cache: &push-cache-dev
+    cache:
+        <<: *default-cache
+        key: "cake-app-with-php-7-dev"
+        policy: push
+
+.pull-cache: &pull-cache-dev
+    cache:
+        <<: *default-cache
+        key: "cake-app-with-php-7-dev"
         policy: pull
 
 composer:install-dependencies:
@@ -56,6 +82,18 @@ composer:install-dependencies:
         - composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
     <<: *run-on-do-docker
 
+composer:install-dependencies-dev:
+    <<: *postgres-variables
+    <<: *push-cache-dev
+    stage: prepare
+    services:
+        - postgres
+    script:
+        - composer self-update
+        - composer -V
+        - composer install --no-progress
+    <<: *run-on-do-docker
+
 php:postgres-migrate:
     <<: *postgres-variables
     <<: *pull-cache
@@ -67,21 +105,42 @@ php:postgres-migrate:
         - php artisan migrate:status
     <<: *run-on-do-docker
 
+php:mysql-migrate:
+    <<: *mysql-variables
+    <<: *pull-cache
+    stage: test
+    services:
+        - mariadb
+    script:
+        - php artisan migrate
+        - php artisan migrate:status
+    <<: *run-on-do-docker
+
 php:postgres-phpunit:
     <<: *postgres-variables
-    <<: *pull-cache
+    <<: *pull-cache-dev
     stage: test
     services:
         - postgres
     script:
-        - composer install --no-progress
+        - php artisan migrate
+        - phpunit --coverage-text --colors=never
+    <<: *run-on-do-docker
+
+php:mysql-phpunit:
+    <<: *mysql-variables
+    <<: *pull-cache-dev
+    stage: test
+    services:
+        - mariadb
+    script:
         - php artisan migrate
         - phpunit --coverage-text --colors=never
     <<: *run-on-do-docker
 
 php:postgres-phpcs:
     <<: *postgres-variables
-    <<: *pull-cache
+    <<: *pull-cache-dev
     stage: post-test
     services:
         - postgres
