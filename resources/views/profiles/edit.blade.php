@@ -52,6 +52,29 @@
             </div>
         </div>
     </form>
+
+    <hr>
+
+    <form action="/profiles/{{ $profile->id }}" method="POST" enctype="multipart/form-data">
+
+        {{ method_field('PUT') }}
+        {{ csrf_field() }}
+
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group row">
+                    <label class="col-12 form-control-label" for="image">Image</label>
+                    <div class="col-12">
+                        <input type="file" class="form-control" id="image" name="image" placeholder="Project name">
+                    </div>
+                </div>
+        <div class="form-group row">
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Update profile</button>
+            </div>
+        </div>
+    </form>
+
     </div>
 </div>
 

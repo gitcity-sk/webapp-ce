@@ -120,3 +120,8 @@ Route::group(['namespace' => 'Api'], function()
 
     return view('projects.show', compact('name', 'age', 'tasks'));
 });*/
+
+Route::get ('/storage/{$filename}', function ($file) {
+    dd($file);
+    return response()->download(storage_path($file), null, [], null);
+});
