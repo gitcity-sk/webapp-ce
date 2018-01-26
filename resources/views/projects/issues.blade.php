@@ -33,7 +33,7 @@
                 <table class="table table-vcenter">
                     @foreach ($project->issues as $issue)
                     <tr>
-                        <td>#{{ $issue->id }} <a href="/issues/{{ $issue->id }}" style="font-weight: 600" class="text-dark">{{ $issue->title }}</a> @ {{ $issue->project->name }} by {{ $issue->user->name }} {{ $issue->created_at->diffForHumans() }}</td>
+                        <td>#{{ $issue->id }} <a href="/issues/{{ $issue->id }}" style="font-weight: 600" class="text-dark">{{ $issue->title }}</a> @ {{ $issue->project->name }} by {{ $issue->user->profile->name }} {{ $issue->created_at->diffForHumans() }}</td>
                     </tr>
                     @endforeach
                 </table>

@@ -31584,8 +31584,8 @@ module.exports = function(module) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-  * Bootstrap v4.0.0 (https://getbootstrap.com)
-  * Copyright 2011-2018 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap v4.0.0-beta.3 (https://getbootstrap.com)
+  * Copyright 2011-2017 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
   */
 (function (global, factory) {
@@ -31639,7 +31639,7 @@ function _inheritsLoose(subClass, superClass) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): util.js
+ * Bootstrap (v4.0.0-beta.3): util.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -31651,7 +31651,7 @@ var Util = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var transition = false;
-  var MAX_UID = 1000000; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
+  var MAX_UID = 1000000; // shoutout AngusCroll (https://goo.gl/pxwQGp)
 
   function toType(obj) {
     return {}.toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase();
@@ -31672,7 +31672,7 @@ var Util = function ($$$1) {
   }
 
   function transitionEndTest() {
-    if (typeof window !== 'undefined' && window.QUnit) {
+    if (window.QUnit) {
       return false;
     }
 
@@ -31706,7 +31706,7 @@ var Util = function ($$$1) {
   }
 
   function escapeId(selector) {
-    // We escape IDs in case of special selectors (selector = '#myId:something')
+    // we escape IDs in case of special selectors (selector = '#myId:something')
     // $.escapeSelector does not exist in jQuery < 3
     selector = typeof $$$1.escapeSelector === 'function' ? $$$1.escapeSelector(selector).substr(1) : selector.replace(/(:|\.|\[|\]|,|=|@)/g, '\\$1');
     return selector;
@@ -31733,7 +31733,7 @@ var Util = function ($$$1) {
 
       if (!selector || selector === '#') {
         selector = element.getAttribute('href') || '';
-      } // If it's an ID
+      } // if it's an ID
 
 
       if (selector.charAt(0) === '#') {
@@ -31743,7 +31743,7 @@ var Util = function ($$$1) {
       try {
         var $selector = $$$1(document).find(selector);
         return $selector.length > 0 ? selector : null;
-      } catch (err) {
+      } catch (error) {
         return null;
       }
     },
@@ -31779,7 +31779,7 @@ var Util = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): alert.js
+ * Bootstrap (v4.0.0-beta.3): alert.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -31791,7 +31791,7 @@ var Alert = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'alert';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.alert';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -31822,12 +31822,12 @@ var Alert = function ($$$1) {
   function () {
     function Alert(element) {
       this._element = element;
-    } // Getters
+    } // getters
 
 
     var _proto = Alert.prototype;
 
-    // Public
+    // public
     _proto.close = function close(element) {
       element = element || this._element;
 
@@ -31845,7 +31845,7 @@ var Alert = function ($$$1) {
     _proto.dispose = function dispose() {
       $$$1.removeData(this._element, DATA_KEY);
       this._element = null;
-    }; // Private
+    }; // private
 
 
     _proto._getRootElement = function _getRootElement(element) {
@@ -31887,7 +31887,7 @@ var Alert = function ($$$1) {
 
     _proto._destroyElement = function _destroyElement(element) {
       $$$1(element).detach().trigger(Event.CLOSED).remove();
-    }; // Static
+    }; // static
 
 
     Alert._jQueryInterface = function _jQueryInterface(config) {
@@ -31951,7 +31951,7 @@ var Alert = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): button.js
+ * Bootstrap (v4.0.0-beta.3): button.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -31963,7 +31963,7 @@ var Button = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'button';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.button';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -31996,12 +31996,12 @@ var Button = function ($$$1) {
   function () {
     function Button(element) {
       this._element = element;
-    } // Getters
+    } // getters
 
 
     var _proto = Button.prototype;
 
-    // Public
+    // public
     _proto.toggle = function toggle() {
       var triggerChangeEvent = true;
       var addAriaPressed = true;
@@ -32049,7 +32049,7 @@ var Button = function ($$$1) {
     _proto.dispose = function dispose() {
       $$$1.removeData(this._element, DATA_KEY);
       this._element = null;
-    }; // Static
+    }; // static
 
 
     Button._jQueryInterface = function _jQueryInterface(config) {
@@ -32114,7 +32114,7 @@ var Button = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): carousel.js
+ * Bootstrap (v4.0.0-beta.3): carousel.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -32126,7 +32126,7 @@ var Carousel = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'carousel';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.carousel';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -32209,12 +32209,12 @@ var Carousel = function ($$$1) {
       this._indicatorsElement = $$$1(this._element).find(Selector.INDICATORS)[0];
 
       this._addEventListeners();
-    } // Getters
+    } // getters
 
 
     var _proto = Carousel.prototype;
 
-    // Public
+    // public
     _proto.next = function next() {
       if (!this._isSliding) {
         this._slide(Direction.NEXT);
@@ -32304,7 +32304,7 @@ var Carousel = function ($$$1) {
       this._isSliding = null;
       this._activeElement = null;
       this._indicatorsElement = null;
-    }; // Private
+    }; // private
 
 
     _proto._getConfig = function _getConfig(config) {
@@ -32330,7 +32330,7 @@ var Carousel = function ($$$1) {
         });
 
         if ('ontouchstart' in document.documentElement) {
-          // If it's a touch-enabled device, mouseenter/leave are fired as
+          // if it's a touch-enabled device, mouseenter/leave are fired as
           // part of the mouse compatibility events on first tap - the carousel
           // would stop cycling until user tapped out of it;
           // here, we listen for touchend, explicitly pause the carousel
@@ -32369,6 +32369,7 @@ var Carousel = function ($$$1) {
           break;
 
         default:
+          return;
       }
     };
 
@@ -32460,7 +32461,7 @@ var Carousel = function ($$$1) {
       }
 
       if (!activeElement || !nextElement) {
-        // Some weirdness is happening, so we bail
+        // some weirdness is happening, so we bail
         return;
       }
 
@@ -32502,7 +32503,7 @@ var Carousel = function ($$$1) {
       if (isCycling) {
         this.cycle();
       }
-    }; // Static
+    }; // static
 
 
     Carousel._jQueryInterface = function _jQueryInterface(config) {
@@ -32526,7 +32527,7 @@ var Carousel = function ($$$1) {
           data.to(config);
         } else if (typeof action === 'string') {
           if (typeof data[action] === 'undefined') {
-            throw new TypeError("No method named \"" + action + "\"");
+            throw new Error("No method named \"" + action + "\"");
           }
 
           data[action]();
@@ -32613,7 +32614,7 @@ var Carousel = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): collapse.js
+ * Bootstrap (v4.0.0-beta.3): collapse.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -32625,7 +32626,7 @@ var Collapse = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'collapse';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.collapse';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -32682,8 +32683,6 @@ var Collapse = function ($$$1) {
         var selector = Util.getSelectorFromElement(elem);
 
         if (selector !== null && $$$1(selector).filter(element).length > 0) {
-          this._selector = selector;
-
           this._triggerArray.push(elem);
         }
       }
@@ -32697,12 +32696,12 @@ var Collapse = function ($$$1) {
       if (this._config.toggle) {
         this.toggle();
       }
-    } // Getters
+    } // getters
 
 
     var _proto = Collapse.prototype;
 
-    // Public
+    // public
     _proto.toggle = function toggle() {
       if ($$$1(this._element).hasClass(ClassName.SHOW)) {
         this.hide();
@@ -32722,15 +32721,15 @@ var Collapse = function ($$$1) {
       var activesData;
 
       if (this._parent) {
-        actives = $$$1.makeArray($$$1(this._parent).find(Selector.ACTIVES).filter("[data-parent=\"" + this._config.parent + "\"]"));
+        actives = $$$1.makeArray($$$1(this._parent).children().children(Selector.ACTIVES));
 
-        if (actives.length === 0) {
+        if (!actives.length) {
           actives = null;
         }
       }
 
       if (actives) {
-        activesData = $$$1(actives).not(this._selector).data(DATA_KEY);
+        activesData = $$$1(actives).data(DATA_KEY);
 
         if (activesData && activesData._isTransitioning) {
           return;
@@ -32745,7 +32744,7 @@ var Collapse = function ($$$1) {
       }
 
       if (actives) {
-        Collapse._jQueryInterface.call($$$1(actives).not(this._selector), 'hide');
+        Collapse._jQueryInterface.call($$$1(actives), 'hide');
 
         if (!activesData) {
           $$$1(actives).data(DATA_KEY, null);
@@ -32757,7 +32756,7 @@ var Collapse = function ($$$1) {
       $$$1(this._element).removeClass(ClassName.COLLAPSE).addClass(ClassName.COLLAPSING);
       this._element.style[dimension] = 0;
 
-      if (this._triggerArray.length > 0) {
+      if (this._triggerArray.length) {
         $$$1(this._triggerArray).removeClass(ClassName.COLLAPSED).attr('aria-expanded', true);
       }
 
@@ -32803,7 +32802,7 @@ var Collapse = function ($$$1) {
       Util.reflow(this._element);
       $$$1(this._element).addClass(ClassName.COLLAPSING).removeClass(ClassName.COLLAPSE).removeClass(ClassName.SHOW);
 
-      if (this._triggerArray.length > 0) {
+      if (this._triggerArray.length) {
         for (var i = 0; i < this._triggerArray.length; i++) {
           var trigger = this._triggerArray[i];
           var selector = Util.getSelectorFromElement(trigger);
@@ -32847,12 +32846,12 @@ var Collapse = function ($$$1) {
       this._element = null;
       this._triggerArray = null;
       this._isTransitioning = null;
-    }; // Private
+    }; // private
 
 
     _proto._getConfig = function _getConfig(config) {
       config = _extends({}, Default, config);
-      config.toggle = Boolean(config.toggle); // Coerce string values
+      config.toggle = Boolean(config.toggle); // coerce string values
 
       Util.typeCheckConfig(NAME, config, DefaultType);
       return config;
@@ -32869,7 +32868,7 @@ var Collapse = function ($$$1) {
       var parent = null;
 
       if (Util.isElement(this._config.parent)) {
-        parent = this._config.parent; // It's a jQuery object
+        parent = this._config.parent; // it's a jQuery object
 
         if (typeof this._config.parent.jquery !== 'undefined') {
           parent = this._config.parent[0];
@@ -32889,11 +32888,11 @@ var Collapse = function ($$$1) {
       if (element) {
         var isOpen = $$$1(element).hasClass(ClassName.SHOW);
 
-        if (triggerArray.length > 0) {
+        if (triggerArray.length) {
           $$$1(triggerArray).toggleClass(ClassName.COLLAPSED, !isOpen).attr('aria-expanded', isOpen);
         }
       }
-    }; // Static
+    }; // static
 
 
     Collapse._getTargetFromElement = function _getTargetFromElement(element) {
@@ -32919,7 +32918,7 @@ var Collapse = function ($$$1) {
 
         if (typeof config === 'string') {
           if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
+            throw new Error("No method named \"" + config + "\"");
           }
 
           data[config]();
@@ -32982,7 +32981,7 @@ var Collapse = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): dropdown.js
+ * Bootstrap (v4.0.0-beta.3): dropdown.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -32994,7 +32993,7 @@ var Dropdown = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'dropdown';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.dropdown';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -33077,12 +33076,12 @@ var Dropdown = function ($$$1) {
       this._inNavbar = this._detectNavbar();
 
       this._addEventListeners();
-    } // Getters
+    } // getters
 
 
     var _proto = Dropdown.prototype;
 
-    // Public
+    // public
     _proto.toggle = function toggle() {
       if (this._element.disabled || $$$1(this._element).hasClass(ClassName.DISABLED)) {
         return;
@@ -33115,10 +33114,10 @@ var Dropdown = function ($$$1) {
          * Popper - https://popper.js.org
          */
         if (typeof Popper === 'undefined') {
-          throw new TypeError('Bootstrap dropdown require Popper.js (https://popper.js.org)');
+          throw new Error('Bootstrap dropdown require Popper.js (https://popper.js.org)');
         }
 
-        var element = this._element; // For dropup with alignment we use the parent as popper container
+        var element = this._element; // for dropup with alignment we use the parent as popper container
 
         if ($$$1(parent).hasClass(ClassName.DROPUP)) {
           if ($$$1(this._menu).hasClass(ClassName.MENULEFT) || $$$1(this._menu).hasClass(ClassName.MENURIGHT)) {
@@ -33134,13 +33133,13 @@ var Dropdown = function ($$$1) {
         }
 
         this._popper = new Popper(element, this._menu, this._getPopperConfig());
-      } // If this is a touch-enabled device we add extra
+      } // if this is a touch-enabled device we add extra
       // empty mouseover listeners to the body's immediate children;
       // only needed because of broken event delegation on iOS
       // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
 
 
-      if ('ontouchstart' in document.documentElement && $$$1(parent).closest(Selector.NAVBAR_NAV).length === 0) {
+      if ('ontouchstart' in document.documentElement && !$$$1(parent).closest(Selector.NAVBAR_NAV).length) {
         $$$1('body').children().on('mouseover', null, $$$1.noop);
       }
 
@@ -33171,7 +33170,7 @@ var Dropdown = function ($$$1) {
       if (this._popper !== null) {
         this._popper.scheduleUpdate();
       }
-    }; // Private
+    }; // private
 
 
     _proto._addEventListeners = function _addEventListeners() {
@@ -33253,7 +33252,7 @@ var Dropdown = function ($$$1) {
         }
       };
       return popperConfig;
-    }; // Static
+    }; // static
 
 
     Dropdown._jQueryInterface = function _jQueryInterface(config) {
@@ -33269,7 +33268,7 @@ var Dropdown = function ($$$1) {
 
         if (typeof config === 'string') {
           if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
+            throw new Error("No method named \"" + config + "\"");
           }
 
           data[config]();
@@ -33311,7 +33310,7 @@ var Dropdown = function ($$$1) {
 
         if (hideEvent.isDefaultPrevented()) {
           continue;
-        } // If this is a touch-enabled device we remove the extra
+        } // if this is a touch-enabled device we remove the extra
         // empty mouseover listeners we added for iOS support
 
 
@@ -33334,8 +33333,7 @@ var Dropdown = function ($$$1) {
       }
 
       return parent || element.parentNode;
-    }; // eslint-disable-next-line complexity
-
+    };
 
     Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(event) {
       // If not input/textarea:
@@ -33372,19 +33370,19 @@ var Dropdown = function ($$$1) {
 
       var items = $$$1(parent).find(Selector.VISIBLE_ITEMS).get();
 
-      if (items.length === 0) {
+      if (!items.length) {
         return;
       }
 
       var index = items.indexOf(event.target);
 
       if (event.which === ARROW_UP_KEYCODE && index > 0) {
-        // Up
+        // up
         index--;
       }
 
       if (event.which === ARROW_DOWN_KEYCODE && index < items.length - 1) {
-        // Down
+        // down
         index++;
       }
 
@@ -33447,7 +33445,7 @@ var Dropdown = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): modal.js
+ * Bootstrap (v4.0.0-beta.3): modal.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -33459,7 +33457,7 @@ var Modal = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'modal';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.modal';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -33528,12 +33526,12 @@ var Modal = function ($$$1) {
       this._ignoreBackdropClick = false;
       this._originalBodyPadding = 0;
       this._scrollbarWidth = 0;
-    } // Getters
+    } // getters
 
 
     var _proto = Modal.prototype;
 
-    // Public
+    // public
     _proto.toggle = function toggle(relatedTarget) {
       return this._isShown ? this.hide() : this.show(relatedTarget);
     };
@@ -33646,7 +33644,7 @@ var Modal = function ($$$1) {
 
     _proto.handleUpdate = function handleUpdate() {
       this._adjustDialog();
-    }; // Private
+    }; // private
 
 
     _proto._getConfig = function _getConfig(config) {
@@ -33661,7 +33659,7 @@ var Modal = function ($$$1) {
       var transition = Util.supportsTransitionEnd() && $$$1(this._element).hasClass(ClassName.FADE);
 
       if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-        // Don't move modal's DOM position
+        // don't move modals dom position
         document.body.appendChild(this._element);
       }
 
@@ -33704,9 +33702,9 @@ var Modal = function ($$$1) {
     _proto._enforceFocus = function _enforceFocus() {
       var _this4 = this;
 
-      $$$1(document).off(Event.FOCUSIN) // Guard against infinite focus loop
+      $$$1(document).off(Event.FOCUSIN) // guard against infinite focus loop
       .on(Event.FOCUSIN, function (event) {
-        if (document !== event.target && _this4._element !== event.target && $$$1(_this4._element).has(event.target).length === 0) {
+        if (document !== event.target && _this4._element !== event.target && !$$$1(_this4._element).has(event.target).length) {
           _this4._element.focus();
         }
       });
@@ -33927,7 +33925,7 @@ var Modal = function ($$$1) {
       var scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
       document.body.removeChild(scrollDiv);
       return scrollbarWidth;
-    }; // Static
+    }; // static
 
 
     Modal._jQueryInterface = function _jQueryInterface(config, relatedTarget) {
@@ -33943,7 +33941,7 @@ var Modal = function ($$$1) {
 
         if (typeof config === 'string') {
           if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
+            throw new Error("No method named \"" + config + "\"");
           }
 
           data[config](relatedTarget);
@@ -33991,7 +33989,7 @@ var Modal = function ($$$1) {
 
     var $target = $$$1(target).one(Event.SHOW, function (showEvent) {
       if (showEvent.isDefaultPrevented()) {
-        // Only register focus restorer if modal will actually get shown
+        // only register focus restorer if modal will actually get shown
         return;
       }
 
@@ -34023,7 +34021,7 @@ var Modal = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): tooltip.js
+ * Bootstrap (v4.0.0-beta.3): tooltip.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -34035,7 +34033,7 @@ var Tooltip = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'tooltip';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.tooltip';
   var EVENT_KEY = "." + DATA_KEY;
   var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -34124,7 +34122,7 @@ var Tooltip = function ($$$1) {
        * Popper - https://popper.js.org
        */
       if (typeof Popper === 'undefined') {
-        throw new TypeError('Bootstrap tooltips require Popper.js (https://popper.js.org)');
+        throw new Error('Bootstrap tooltips require Popper.js (https://popper.js.org)');
       } // private
 
 
@@ -34132,19 +34130,19 @@ var Tooltip = function ($$$1) {
       this._timeout = 0;
       this._hoverState = '';
       this._activeTrigger = {};
-      this._popper = null; // Protected
+      this._popper = null; // protected
 
       this.element = element;
       this.config = this._getConfig(config);
       this.tip = null;
 
       this._setListeners();
-    } // Getters
+    } // getters
 
 
     var _proto = Tooltip.prototype;
 
-    // Public
+    // public
     _proto.enable = function enable() {
       this._isEnabled = true;
     };
@@ -34279,7 +34277,7 @@ var Tooltip = function ($$$1) {
             _this._handlePopperPlacementChange(data);
           }
         });
-        $$$1(tip).addClass(ClassName.SHOW); // If this is a touch-enabled device we add extra
+        $$$1(tip).addClass(ClassName.SHOW); // if this is a touch-enabled device we add extra
         // empty mouseover listeners to the body's immediate children;
         // only needed because of broken event delegation on iOS
         // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
@@ -34342,7 +34340,7 @@ var Tooltip = function ($$$1) {
         return;
       }
 
-      $$$1(tip).removeClass(ClassName.SHOW); // If this is a touch-enabled device we remove the extra
+      $$$1(tip).removeClass(ClassName.SHOW); // if this is a touch-enabled device we remove the extra
       // empty mouseover listeners we added for iOS support
 
       if ('ontouchstart' in document.documentElement) {
@@ -34366,7 +34364,7 @@ var Tooltip = function ($$$1) {
       if (this._popper !== null) {
         this._popper.scheduleUpdate();
       }
-    }; // Protected
+    }; // protected
 
 
     _proto.isWithContent = function isWithContent() {
@@ -34392,7 +34390,7 @@ var Tooltip = function ($$$1) {
       var html = this.config.html;
 
       if (typeof content === 'object' && (content.nodeType || content.jquery)) {
-        // Content is a DOM node or a jQuery
+        // content is a DOM node or a jQuery
         if (html) {
           if (!$$$1(content).parent().is($element)) {
             $element.empty().append(content);
@@ -34413,7 +34411,7 @@ var Tooltip = function ($$$1) {
       }
 
       return title;
-    }; // Private
+    }; // private
 
 
     _proto._getAttachment = function _getAttachment(placement) {
@@ -34602,7 +34600,7 @@ var Tooltip = function ($$$1) {
       this.hide();
       this.show();
       this.config.animation = initConfigAnimation;
-    }; // Static
+    }; // static
 
 
     Tooltip._jQueryInterface = function _jQueryInterface(config) {
@@ -34622,7 +34620,7 @@ var Tooltip = function ($$$1) {
 
         if (typeof config === 'string') {
           if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
+            throw new Error("No method named \"" + config + "\"");
           }
 
           data[config]();
@@ -34688,7 +34686,7 @@ var Tooltip = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): popover.js
+ * Bootstrap (v4.0.0-beta.3): popover.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -34700,7 +34698,7 @@ var Popover = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'popover';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.popover';
   var EVENT_KEY = "." + DATA_KEY;
   var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
@@ -34753,7 +34751,7 @@ var Popover = function ($$$1) {
 
     var _proto = Popover.prototype;
 
-    // Overrides
+    // overrides
     _proto.isWithContent = function isWithContent() {
       return this.getTitle() || this._getContent();
     };
@@ -34768,7 +34766,7 @@ var Popover = function ($$$1) {
     };
 
     _proto.setContent = function setContent() {
-      var $tip = $$$1(this.getTipElement()); // We use append for html objects to maintain js events
+      var $tip = $$$1(this.getTipElement()); // we use append for html objects to maintain js events
 
       this.setElementContent($tip.find(Selector.TITLE), this.getTitle());
 
@@ -34780,7 +34778,7 @@ var Popover = function ($$$1) {
 
       this.setElementContent($tip.find(Selector.CONTENT), content);
       $tip.removeClass(ClassName.FADE + " " + ClassName.SHOW);
-    }; // Private
+    }; // private
 
 
     _proto._getContent = function _getContent() {
@@ -34794,7 +34792,7 @@ var Popover = function ($$$1) {
       if (tabClass !== null && tabClass.length > 0) {
         $tip.removeClass(tabClass.join(''));
       }
-    }; // Static
+    }; // static
 
 
     Popover._jQueryInterface = function _jQueryInterface(config) {
@@ -34814,7 +34812,7 @@ var Popover = function ($$$1) {
 
         if (typeof config === 'string') {
           if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
+            throw new Error("No method named \"" + config + "\"");
           }
 
           data[config]();
@@ -34824,7 +34822,7 @@ var Popover = function ($$$1) {
 
     _createClass(Popover, null, [{
       key: "VERSION",
-      // Getters
+      // getters
       get: function get() {
         return VERSION;
       }
@@ -34881,7 +34879,7 @@ var Popover = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): scrollspy.js
+ * Bootstrap (v4.0.0-beta.3): scrollspy.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -34893,7 +34891,7 @@ var ScrollSpy = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'scrollspy';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.scrollspy';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -34960,16 +34958,16 @@ var ScrollSpy = function ($$$1) {
       this.refresh();
 
       this._process();
-    } // Getters
+    } // getters
 
 
     var _proto = ScrollSpy.prototype;
 
-    // Public
+    // public
     _proto.refresh = function refresh() {
       var _this2 = this;
 
-      var autoMethod = this._scrollElement === this._scrollElement.window ? OffsetMethod.OFFSET : OffsetMethod.POSITION;
+      var autoMethod = this._scrollElement !== this._scrollElement.window ? OffsetMethod.POSITION : OffsetMethod.OFFSET;
       var offsetMethod = this._config.method === 'auto' ? autoMethod : this._config.method;
       var offsetBase = offsetMethod === OffsetMethod.POSITION ? this._getScrollTop() : 0;
       this._offsets = [];
@@ -34988,7 +34986,7 @@ var ScrollSpy = function ($$$1) {
           var targetBCR = target.getBoundingClientRect();
 
           if (targetBCR.width || targetBCR.height) {
-            // TODO (fat): remove sketch reliance on jQuery position/offset
+            // todo (fat): remove sketch reliance on jQuery position/offset
             return [$$$1(target)[offsetMethod]().top + offsetBase, targetSelector];
           }
         }
@@ -35016,7 +35014,7 @@ var ScrollSpy = function ($$$1) {
       this._targets = null;
       this._activeTarget = null;
       this._scrollHeight = null;
-    }; // Private
+    }; // private
 
 
     _proto._getConfig = function _getConfig(config) {
@@ -35120,7 +35118,7 @@ var ScrollSpy = function ($$$1) {
 
     _proto._clear = function _clear() {
       $$$1(this._selector).filter(Selector.ACTIVE).removeClass(ClassName.ACTIVE);
-    }; // Static
+    }; // static
 
 
     ScrollSpy._jQueryInterface = function _jQueryInterface(config) {
@@ -35136,7 +35134,7 @@ var ScrollSpy = function ($$$1) {
 
         if (typeof config === 'string') {
           if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
+            throw new Error("No method named \"" + config + "\"");
           }
 
           data[config]();
@@ -35192,7 +35190,7 @@ var ScrollSpy = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): tab.js
+ * Bootstrap (v4.0.0-beta.3): tab.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -35204,7 +35202,7 @@ var Tab = function ($$$1) {
    * ------------------------------------------------------------------------
    */
   var NAME = 'tab';
-  var VERSION = '4.0.0';
+  var VERSION = '4.0.0-beta.3';
   var DATA_KEY = 'bs.tab';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -35245,12 +35243,12 @@ var Tab = function ($$$1) {
   function () {
     function Tab(element) {
       this._element = element;
-    } // Getters
+    } // getters
 
 
     var _proto = Tab.prototype;
 
-    // Public
+    // public
     _proto.show = function show() {
       var _this = this;
 
@@ -35313,7 +35311,7 @@ var Tab = function ($$$1) {
     _proto.dispose = function dispose() {
       $$$1.removeData(this._element, DATA_KEY);
       this._element = null;
-    }; // Private
+    }; // private
 
 
     _proto._activate = function _activate(element, container, callback) {
@@ -35377,7 +35375,7 @@ var Tab = function ($$$1) {
       if (callback) {
         callback();
       }
-    }; // Static
+    }; // static
 
 
     Tab._jQueryInterface = function _jQueryInterface(config) {
@@ -35392,7 +35390,7 @@ var Tab = function ($$$1) {
 
         if (typeof config === 'string') {
           if (typeof data[config] === 'undefined') {
-            throw new TypeError("No method named \"" + config + "\"");
+            throw new Error("No method named \"" + config + "\"");
           }
 
           data[config]();
@@ -35446,7 +35444,7 @@ var Tab = function ($$$1) {
 
 (function ($$$1) {
   if (typeof $$$1 === 'undefined') {
-    throw new TypeError('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
+    throw new Error('Bootstrap\'s JavaScript requires jQuery. jQuery must be included before Bootstrap\'s JavaScript.');
   }
 
   var version = $$$1.fn.jquery.split(' ')[0].split('.');
