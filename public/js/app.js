@@ -47910,7 +47910,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -47922,7 +47921,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             done: false,
             projects: {
-                projects: []
+                data: []
             },
             errors: []
         };
@@ -47956,17 +47955,27 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.projects.projects, function(project) {
+            _vm._l(_vm.projects.data, function(project) {
               return _c("tr", [
                 _c("td", [
-                  _c("a", { attrs: { href: "/projects/" + project.id } }, [
-                    _vm._v(_vm._s(project.name))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(project.created_at))]),
-                _vm._v(" "),
-                _c("td", [_vm._v(_vm._s(project.user_id))])
+                  _c(
+                    "a",
+                    {
+                      staticClass: "text-dark",
+                      staticStyle: { "font-weight": "600" },
+                      attrs: { href: "/projects/" + project.id }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(project.profile.name) +
+                          " / " +
+                          _vm._s(project.name)
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("small", [_vm._v(_vm._s(project.description))])
+                ])
               ])
             })
           )
@@ -47980,13 +47989,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Created")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("User")])
-      ])
+      _c("tr", [_c("th", { attrs: { scope: "col" } }, [_vm._v("Name")])])
     ])
   }
 ]

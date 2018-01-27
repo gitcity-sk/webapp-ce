@@ -10015,6 +10015,11 @@ a.text-dark:focus {
   fill: currentColor;
 }
 
+.box-shadow {
+  -webkit-box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+
 /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */
 

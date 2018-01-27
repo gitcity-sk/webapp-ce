@@ -16,6 +16,7 @@
     @endif
     @endauth
     </div>
+        <img src="{{ asset('/storage/' . $profile->image) }}" alt="{{ $profile->name }}" class="img-thumbnail rounded-circle" height="120px" width="120px">
         <h2 style="font-weight: 300" class="has-emoji">{{ $profile->name }}</h2>
         {{ $profile->twitter }}
         {{ $profile->facebook }}
@@ -23,5 +24,12 @@
     </div>
 </div>
 
+<div class="row text-center loading" v-if="loading">
+    <div class="col">
+        <div class="loader" style="margin:0 auto;"></div>
+    </div>
+</div>
+
+<projects-table-component></projects-table-component>
 
 @endsection

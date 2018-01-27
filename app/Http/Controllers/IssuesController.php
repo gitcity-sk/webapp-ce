@@ -33,6 +33,6 @@ class IssuesController extends Controller
             'user_id' => auth()->id()
         ]);
 
-        return back();
+        return redirect()->route('projectIssues', [$project]);
     }
 }

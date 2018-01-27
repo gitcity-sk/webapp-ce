@@ -108,4 +108,9 @@ class ProjectsController extends Controller
     {
         return view('projects.new_merge_request', compact('project'));
     }
+
+    public function createIssue(Project $project)
+    {
+        return view('projects.new_issue', compact('project'));
+    }
 }
