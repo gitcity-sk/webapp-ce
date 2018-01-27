@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./emojione-convert');
+require('./fontawesome-all');
 
 window.Vue = require('vue');
 

@@ -3,14 +3,22 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Name</th>
+                    <th scope="col">Project name</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="project in projects.data">
                     <td>
-                        <a class="text-dark" style="font-weight: 600;" :href="'/projects/' + project.id">{{ project.profile.name }} / {{ project.name }}</a>
-                        <small>{{ project.description }}</small>
+                        <div class="d-flex">
+                            <div>
+                                <i class="far fa-bookmark"></i> <a class="text-dark" style="font-weight: 600;" :href="'/projects/' + project.id">{{ project.profile.name }} / {{ project.name }}</a>
+                                <small>{{ project.description }}</small>
+                            </div>
+                            <div class="ml-auto">
+                                <i class="fas fa-code-merge"></i> {{ project.mr_count }} <i class="fas fa-bug"></i> {{ project.issues_count }}
+                            </div>
+                        </div>
+                        
                     </td>
                 </tr>
             </tbody>
