@@ -28,7 +28,8 @@ Route::get('/', function () {
 Route::get('/projects', function () {return view('projects.index');})->middleware('auth');
 Route::get('/projects/create', 'ProjectsController@create');
 Route::get('/projects/{project}', 'ProjectsController@show')->name('project');
-Route::get('/projects/{project}/issues', 'ProjectsController@issues');
+Route::get('/projects/{project}/issues', 'ProjectsController@issues')->name('projectIssues');
+Route::get('/projects/{project}/issues/new', 'ProjectsController@createIssue');
 Route::get('/projects/{project}/commits', 'CommitsController@show');
 Route::get('/projects/{project}/branches', 'BranchesController@show');
 Route::get('/projects/{project}/tags', 'TagsController@show');
@@ -121,7 +122,4 @@ Route::group(['namespace' => 'Api'], function()
     return view('projects.show', compact('name', 'age', 'tasks'));
 });*/
 
-Route::get ('/storage/{$filename}', function ($file) {
-    dd($file);
-    return response()->download(storage_path($file), null, [], null);
-});
+Route::get ('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)');

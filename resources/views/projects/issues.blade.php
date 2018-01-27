@@ -16,7 +16,7 @@
             </g>
         </g>
     </svg>
-    {{ $project->name }}<small> by {{ $project->user->name }}</small>
+    {{ $project->name }}<small> by {{ $project->user->profile->name }}</small>
 </h1>
 
 <div class="row">
@@ -27,6 +27,12 @@
         @include('projects.elements.sidebar')
     </div>
     <div class="col-10">
+
+        <div class="row" style="margin-bottom: 10px">
+            <div class="col-12 text-right">
+            <a href="/projects/{{ $project->id }}/issues/new" class="btn btn-success">Create new issue</a>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-12">
@@ -40,40 +46,7 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <form action="/projects/{{ $project->id }}/issues" method="post">
-
-                            {{ csrf_field() }}
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group row">
-                                        <label class="col-12 form-control-label" for="title">Title</label>
-                                        <div class="col-12">
-                                            <input type="text" class="form-control" id="title" name="title" placeholder="Issue title">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-12 form-control-label" for="description">Description</label>
-                                <div class="col-12">
-                                    <textarea class="form-control" id="descriptiont" name="description" rows="6" placeholder="Content.."></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary">Create issue</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
 
     </div>
 </div>

@@ -1,5 +1,18 @@
+v 0.0.6
+
+NEW Profiles can now have pictures
+NEW File controller
+NEW Profile image upload form
+UPDATE Project show page now showing profile name instead of username in title
+UPDATE Issues now show profile name instead of username
+UPDATE Projects index now showing profile name and description
+UPDATE Move form from issues to new page
+UPDATE UI tweaks on login and register form
+UPDATE more tests
+
 v 0.0.5
 
+NEW Profiles
 NEW Api for repository files
 NEW Repository files are now loaded via api, basic project info is loaded faster
 NEW Projects are loaded via Api

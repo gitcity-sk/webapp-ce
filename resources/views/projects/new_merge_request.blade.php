@@ -18,7 +18,7 @@
                     </g>
                 </g>
             </svg>
-            {{ $project->name }}<small> by {{ $project->user->name }}</small>
+            {{ $project->name }}<small> by {{ $project->user->profile->name }}</small>
         </h1>
         <div class="row">
             <div class="col-12">

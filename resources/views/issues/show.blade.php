@@ -23,7 +23,7 @@
 
 <div class="row">
     <div class="col-9">
-        <p class="lead has-emoji">{{!! $markdown->text($issue->description) !!}}</p>
+        <p class="lead has-emoji">{!! $markdown->text($issue->description) !!}</p>
 
         <div class="card mb-3">
             <div class="card-header">
@@ -48,7 +48,7 @@
                         </g>
                     </g>
                 </svg>
-                <a href="#">{{ $comment->user->profile->name }}</a> at {{ $comment->created_at->diffForHumans() }}
+                <a href="/profiles/{{ $comment->user->profile->id }}">{{ $comment->user->profile->name }}</a> at {{ $comment->created_at->diffForHumans() }}
             </div>
             <div class="card-body has-emoji">
                 {!! $markdown->text($comment->body) !!}

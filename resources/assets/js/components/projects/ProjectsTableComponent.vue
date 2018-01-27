@@ -4,15 +4,14 @@
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">User</th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="project in projects.projects">
-                    <td><a :href="'/projects/' + project.id">{{ project.name }}</a></td>
-                    <td>{{ project.created_at }}</td>
-                    <td>{{ project.user_id }}</td>
+                <tr v-for="project in projects.data">
+                    <td>
+                        <a class="text-dark" style="font-weight: 600;" :href="'/projects/' + project.id">{{ project.profile.name }} / {{ project.name }}</a>
+                        <small>{{ project.description }}</small>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -30,7 +29,7 @@
             return {
                 done: false,
                 projects: {
-                    projects: []
+                    data: []
                 },
                 errors: []
             }

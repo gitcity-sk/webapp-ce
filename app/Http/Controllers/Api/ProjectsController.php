@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Project;
 use App\Repositories\Projects;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProjectResource;
 
 class ProjectsController extends Controller {
 
@@ -17,6 +18,6 @@ class ProjectsController extends Controller {
     {
         $projects = $projects->orderBy('created_at', 'desc');
 
-        return compact('projects');
+        return ProjectResource::collection($projects);
     }
 }

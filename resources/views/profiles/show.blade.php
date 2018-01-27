@@ -16,7 +16,7 @@
     @endif
     @endauth
     </div>
-        <img src="{{ asset('/storage/' . $profile->image) }}" alt="{{ $profile->name }}" class="img-thumbnail">
+        <img src="{{ asset('/storage/' . $profile->image) }}" alt="{{ $profile->name }}" class="img-thumbnail rounded-circle" height="120px" width="120px">
         <h2 style="font-weight: 300" class="has-emoji">{{ $profile->name }}</h2>
         {{ $profile->twitter }}
         {{ $profile->facebook }}
