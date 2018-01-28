@@ -9,14 +9,16 @@ use App\Http\Resources\ProjectResource;
 
 class ProjectsController extends Controller {
 
-    public function __construct()
+    public function __construct(Projects $projects)
     {
         $this->middleware('auth');
+
+        $this->projects = $projects;
     }
 
-    public function index(Projects $projects)
+    public function index()
     {
-        $projects = $projects->orderBy('created_at', 'desc');
+        $projects = $this->projects->orderBy('created_at', 'desc');
 
         return ProjectResource::collection($projects);
     }

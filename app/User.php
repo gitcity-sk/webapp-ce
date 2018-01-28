@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
@@ -66,6 +71,11 @@ class User extends Authenticatable
             $project['created'] = true;
             $this->projects()->save($project);
         }
+    }
+
+    public function publishGroup(Group $group)
+    {
+        return $this->groups()->save($group);
     }
 
     /**

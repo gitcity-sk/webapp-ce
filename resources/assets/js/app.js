@@ -8,6 +8,7 @@
 require('./bootstrap');
 require('./emojione-convert');
 require('./fontawesome-all');
+require('./directives/TooltipDirective');
 
 window.Vue = require('vue');
 
@@ -21,6 +22,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 Vue.component('profile-view-component', require('./components/profiles/ProfileViewComponent.vue'));
 Vue.component('projects-table-component', require('./components/projects/ProjectsTableComponent.vue'));
 Vue.component('tree-table-component', require('./components/git/TreeTableComponent.vue'));
+Vue.component('groups-table-component', require('./components/groups/GroupsTableComponent.vue'));
+Vue.component('group-projects-table-component', require('./components/groups/GroupProjectsTableComponent.vue'));
 
 const app = new Vue({
     el: '#app',

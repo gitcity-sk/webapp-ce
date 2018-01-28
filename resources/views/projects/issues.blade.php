@@ -31,7 +31,7 @@
                     <tr>
                         <td>
                         <div class="d-flex">
-                            <div>#{{ $issue->id }} <a href="/issues/{{ $issue->id }}" style="font-weight: 600" class="text-dark">{{ $issue->title }}</a> @ {{ $issue->project->name }} by {{ $issue->user->profile->name }} {{ $issue->created_at->diffForHumans() }}</div>
+                            <div><i class="far fa-circle"></i> #{{ $issue->id }} <a href="/issues/{{ $issue->id }}" style="font-weight: 600" class="text-dark">{{ $issue->title }}</a> @ {{ $issue->project->name }} by {{ $issue->user->profile->name }} {{ $issue->created_at->diffForHumans() }}</div>
                             <div class="ml-auto"><i class="fas fa-comments"></i> {{ $issue->comments->count() }}</div>
                         </div>
                         </td>

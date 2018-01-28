@@ -6,7 +6,7 @@
 @section ('content')
 <h1 class="h2" style="font-weight: 300">
 <i class="far fa-book"></i>
-    {{ $project->name }}<small> by {{ $project->user->name }}</small>
+    {{ $project->name }}<small> by {{ $project->user->profile->name }}</small>
 </h1>
 
 <div class="row">
