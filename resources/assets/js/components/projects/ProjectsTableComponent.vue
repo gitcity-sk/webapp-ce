@@ -15,7 +15,9 @@
                                 <small>{{ project.description }}</small>
                             </div>
                             <div class="ml-auto">
-                                <i class="fas fa-code-merge"></i> {{ project.mr_count }} <i class="fas fa-bug"></i> {{ project.issues_count }}
+                                <i class="fas fa-folder"></i> {{ project.groups_count }}
+                                <i class="fas fa-code-merge"></i> {{ project.mr_count }}
+                                <i class="fas fa-bug"></i> {{ project.issues_count }}
                             </div>
                         </div>
                         

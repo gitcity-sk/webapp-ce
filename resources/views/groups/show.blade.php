@@ -21,6 +21,15 @@
     </div>
 </div>
 
+<ul class="nav nav-tabs nav-links" style="margin-bottom: 7px">
+    <li class="nav-item">
+    <a class="nav-link active" href="#">Projects</a>
+    </li>
+    <li class="nav-item">
+    <a class="nav-link" href="#">Epics</a>
+    </li>
+</ul>
+
 @auth
 @if (Auth::user()->id == $group->user_id)
 <div class="d-flex flex-row">

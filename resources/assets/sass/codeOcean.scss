@@ -24,3 +24,23 @@
 }
 
 [v-cloak] {display: none}
+
+
+.nav-links.nav-tabs .nav-link:hover,
+.nav-links.nav-tabs .nav-link:focus {
+    border-color: #fff #fff #dee2e6;
+}
+
+.nav-links.nav-tabs .nav-link.active,
+.nav-links.nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border-color: #fff #fff #495057;
+    font-weight: 700;
+}
+
+.nav-links.nav-tabs .nav-link {
+    border: 2px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}

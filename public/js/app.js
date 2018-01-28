@@ -47994,6 +47994,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -48066,8 +48068,18 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "ml-auto" }, [
+                      _c("i", { staticClass: "fas fa-folder" }),
+                      _vm._v(
+                        " " +
+                          _vm._s(project.groups_count) +
+                          "\n                            "
+                      ),
                       _c("i", { staticClass: "fas fa-code-merge" }),
-                      _vm._v(" " + _vm._s(project.mr_count) + " "),
+                      _vm._v(
+                        " " +
+                          _vm._s(project.mr_count) +
+                          "\n                            "
+                      ),
                       _c("i", { staticClass: "fas fa-bug" }),
                       _vm._v(
                         " " +
