@@ -25167,7 +25167,7 @@ module.exports = Vue$3;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(65);
+module.exports = __webpack_require__(68);
 
 
 /***/ }),
@@ -25200,6 +25200,7 @@ Vue.component('projects-table-component', __webpack_require__(53));
 Vue.component('tree-table-component', __webpack_require__(56));
 Vue.component('groups-table-component', __webpack_require__(59));
 Vue.component('group-projects-table-component', __webpack_require__(62));
+Vue.component('user-projects-table-component', __webpack_require__(65));
 
 var app = new Vue({
     el: '#app',
@@ -48768,6 +48769,204 @@ if (false) {
 
 /***/ }),
 /* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(66)
+/* template */
+var __vue_template__ = __webpack_require__(67)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\users\\UserProjectsTableComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-36195d5f", Component.options)
+  } else {
+    hotAPI.reload("data-v-36195d5f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 66 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_emojione__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_emojione___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_emojione__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log('Component ProfilesTable mounted.');
+    },
+
+    props: ['userId'],
+    data: function data() {
+        return {
+            done: false,
+            projects: {
+                data: []
+            },
+            errors: []
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        this.$parent.$emit('pageLoader', true);
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/api/users/' + this.userId + '/projects').then(function (response) {
+            _this.projects = response.data;
+            _this.$parent.$emit('pageLoader', false);
+            _this.done = true;
+        }).catch(function (e) {
+            _this.errors.push(e);
+        });
+    }
+});
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.done
+    ? _c("div", [
+        _c("table", { staticClass: "table" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.projects.data, function(project) {
+              return _c("tr", [
+                _c("td", [
+                  _c("div", { staticClass: "d-flex" }, [
+                    _c("div", [
+                      _c("i", { staticClass: "far fa-bookmark" }),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-dark",
+                          staticStyle: { "font-weight": "600" },
+                          attrs: { href: "/projects/" + project.id }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(project.profile.name) +
+                              " / " +
+                              _vm._s(project.name)
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("small", [_vm._v(_vm._s(project.description))])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "ml-auto" }, [
+                      _c("i", { staticClass: "fas fa-code-merge" }),
+                      _vm._v(" " + _vm._s(project.mr_count) + " "),
+                      _c("i", { staticClass: "fas fa-bug" }),
+                      _vm._v(
+                        " " +
+                          _vm._s(project.issues_count) +
+                          "\n                        "
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            })
+          )
+        ])
+      ])
+    : _vm._e()
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Project name")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-36195d5f", module.exports)
+  }
+}
+
+/***/ }),
+/* 68 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

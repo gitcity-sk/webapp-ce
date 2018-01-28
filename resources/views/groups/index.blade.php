@@ -14,11 +14,13 @@
 
 @section ('content')
 <h1 class="h2" style="font-weight: 300">Groups</h1>
+@auth
 <div class="row" style="margin-bottom: 10px">
     <div class="col-12 text-right">
     <a href="/groups/create" class="btn btn-success">Create group</a>
     </div>
 </div>
+@endauth
 
 @yield ('projects-table')
 

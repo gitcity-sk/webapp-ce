@@ -15,4 +15,9 @@ class PagesController extends Controller
     {
         return view('pages.terms');
     }
+
+    public function pricing()
+    {
+        return view('pages.pricing');
+    }
 }

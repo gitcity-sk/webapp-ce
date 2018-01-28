@@ -30,6 +30,6 @@
     </div>
 </div>
 
-<projects-table-component></projects-table-component>
+<user-projects-table-component user-id="{{ $profile->user_id }}"></user-projects-table-component>
 
 @endsection

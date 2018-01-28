@@ -14,12 +14,13 @@
 
 @section ('content')
 <h1 class="h2" style="font-weight: 300">Projects</h1>
+@auth
 <div class="row" style="margin-bottom: 10px">
     <div class="col-12 text-right">
     <a href="/projects/create" class="btn btn-success">Create project</a>
     </div>
 </div>
-
+@endauth
 
 
 @yield ('projects-table')

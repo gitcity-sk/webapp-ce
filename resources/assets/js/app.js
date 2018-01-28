@@ -24,6 +24,7 @@ Vue.component('projects-table-component', require('./components/projects/Project
 Vue.component('tree-table-component', require('./components/git/TreeTableComponent.vue'));
 Vue.component('groups-table-component', require('./components/groups/GroupsTableComponent.vue'));
 Vue.component('group-projects-table-component', require('./components/groups/GroupProjectsTableComponent.vue'));
+Vue.component('user-projects-table-component', require('./components/users/UserProjectsTableComponent.vue'));
 
 const app = new Vue({
     el: '#app',

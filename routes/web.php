@@ -70,6 +70,7 @@ Route::get('/logout', 'SessionsController@destroy');
  */
 Route::get('/privacy', 'PagesController@privacyPolicy');
 Route::get('/terms', 'PagesController@terms');
+Route::get('/pricing', 'PagesController@pricing');
 
 /**
  * profiles
@@ -113,12 +114,17 @@ Route::group(['namespace' => 'Api'], function()
 {
     Route::get('/api/groups', 'GroupsController@index');
     Route::get('/api/groups/{group}/projects', 'GroupsController@projects');
+
     Route::get('/api/issues/{issue}', 'IssuesController@show');
+
     Route::get('/api/profiles', 'ProfilesController@index');
+
     Route::get('/api/projects', 'ProjectsController@index');
     Route::get('/api/projects/tree/{project}', 'TreeController@files');
+    
     Route::get('/api/users', 'UsersController@index');
     Route::get('/api/users/{user}', 'UsersController@show');
+    Route::get('/api/users/{user}/projects', 'UsersController@projects');
 });
 
 /*Route::get('/projects', function () {
