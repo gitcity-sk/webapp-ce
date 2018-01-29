@@ -30,9 +30,6 @@ services:
       GIT_SSH_KEYS: "/var/opt/gitcity/git-data/.ssh/"
       SPACES_DATA: "/var/opt/gitcity/spaces-data/"
       GITCITY_SHELL_HOOKS: "/var/www/html/embeded/git-shell/hooks"
-      APP_DEBUG: "true"
-      APP_LOG_LEVEL: debug
-
 
   db:
     image: postgres
