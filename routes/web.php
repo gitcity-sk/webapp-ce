@@ -120,7 +120,7 @@ Route::group(['namespace' => 'Api'], function()
     Route::get('/api/profiles', 'ProfilesController@index');
 
     Route::get('/api/projects', 'ProjectsController@index');
-    Route::get('/api/projects/tree/{project}', 'TreeController@files');
+    Route::get('/api/projects/{project}/tree', 'TreeController@files');
     
     Route::get('/api/users', 'UsersController@index');
     Route::get('/api/users/{user}', 'UsersController@show');

@@ -12,9 +12,10 @@ class TreeController extends Controller
 {
     public function files(Project $project)
     {
-        $treex = new Tree();
-        $tree = $treex->get($project->user->name, $project->slug);
+        $treeGit = new Tree();
+        $tree = $treeGit->get($project->user->name, $project->slug);
 
-        return $tree->toArray();
+        //dd($tree);
+        return $tree;
     }
 }

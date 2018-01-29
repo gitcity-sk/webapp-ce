@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api;
+namespace App\Api\Git;
 
 class BaseModel
 {
@@ -12,8 +12,16 @@ class BaseModel
         return get_object_vars($this);
     }
 
+    protected function withClosure()
+    {
+        return [
+            'data' => $this->tree
+        ];
+    }
+
     /**
      * method toArray
+     * @deprecated
      */
     public function toArray()
     {

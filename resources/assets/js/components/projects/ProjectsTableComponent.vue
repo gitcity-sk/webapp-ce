@@ -1,6 +1,6 @@
 <template>
     <div v-if="done">
-        <table class="table">
+        <table v-if="projects.data" class="table">
             <thead>
                 <tr>
                     <th scope="col">Project name</th>
