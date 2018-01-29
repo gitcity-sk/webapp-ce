@@ -33,7 +33,7 @@ stages:
 # Before scripts configuration
 .before-prepare: &before-prepare
     before_script:
-        - cp .env.testing.mysql .env
+        - cp .env.testing.pgsql .env
 
 .before-mysql: &before-mysql
     before_script:
