@@ -13,20 +13,15 @@ stages:
         - docker
         - a
 
-.postgres-variables: &postgres-variables
+# Services configuration
+.postgres-variables: &postgres-service
     variables:
         POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
         POSTGRES_DB: homestead
     services:
         - postgres
-    before_script:
-        - cp .env.testing.mysql .env
-        - php artisan key:generate
-        - php artisan config:cache
-        - php artisan migrate
-        - php artisan db:seed
 
-.mysql-variables: &mysql-variables
+.mysql-variables: &mysql-service
     variables:
         MYSQL_USER: homestead
         MYSQL_DATABASE: homestead
@@ -34,6 +29,13 @@ stages:
         MYSQL_ROOT_PASSWORD: "5RGGjwubxdqyF6dL"
     services:
         - mariadb
+
+# Before scripts configuration
+.before-prepare: &before-prepare
+    before_script:
+        - cp .env.testing.mysql .env
+
+.before-mysql: &before-mysql
     before_script:
         - cp .env.testing.mysql .env
         - php artisan key:generate
@@ -41,6 +43,15 @@ stages:
         - php artisan migrate
         - php artisan db:seed
 
+.before-pgsql: &before-pgsql
+    before_script:
+        - cp .env.testing.pgsql .env
+        - php artisan key:generate
+        - php artisan config:cache
+        - php artisan migrate
+        - php artisan db:seed
+
+# Cache configuration
 .default-cache: &default-cache
     paths:
         - vendor/
@@ -69,6 +80,7 @@ stages:
         key: "cake-app-with-php-7-dev"
         policy: pull
 
+# Scripts Configuration
 .migrate-script: &migrate-script
     script:
         - php artisan migrate:status
@@ -77,9 +89,11 @@ stages:
     script:
         - phpunit --coverage-text --colors=never
 
+# Prepare
 composer:install-dependencies:
-    <<: *postgres-variables
+    <<: *postgres-service
     <<: *push-cache
+    <<: *before-prepare
     stage: prepare
     script:
         - composer self-update
@@ -88,8 +102,9 @@ composer:install-dependencies:
     <<: *run-on-do-docker
 
 composer:install-dependencies-dev:
-    <<: *postgres-variables
+    <<: *postgres-service
     <<: *push-cache-dev
+    <<: *before-prepare
     stage: prepare
     script:
         - composer self-update
@@ -97,46 +112,52 @@ composer:install-dependencies-dev:
         - composer install --no-progress
     <<: *run-on-do-docker
 
+# Tests
 php:postgres-migrate:
     stage: test
-    <<: *postgres-variables
+    <<: *postgres-service
+    <<: *before-pgsql
     <<: *pull-cache
     <<: *migrate-script
     <<: *run-on-do-docker
 
 php:mysql-migrate:
     stage: test
-    <<: *mysql-variables
+    <<: *mysql-service
+    <<: *before-mysql
     <<: *pull-cache
     <<: *migrate-script
     <<: *run-on-do-docker
 
 php:postgres-phpunit:
     stage: test
-    <<: *postgres-variables
+    <<: *postgres-service
+    <<: *before-pgsql
     <<: *pull-cache-dev
     <<: *coverage-script
     <<: *run-on-do-docker
 
 php:mysql-phpunit:
     stage: test
-    <<: *mysql-variables
+    <<: *mysql-service
+    <<: *before-mysql
     <<: *pull-cache-dev
     <<: *coverage-script
     <<: *run-on-do-docker
 
+# Post tests
 php:postgres-phpcs:
-    <<: *postgres-variables
+    <<: *postgres-service
+    <<: *before-pgsql
     <<: *pull-cache-dev
     stage: post-test
     script:
-        # - composer require cakephp/cakephp-codesniffer:dev-master
-        - composer install --no-progress
         - chmod +x vendor/bin/phpcs
         - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
     allow_failure: true
     <<: *run-on-do-docker
 
+# Build
 build image:
     <<: *pull-cache
     image: docker:latest
@@ -152,6 +173,7 @@ build image:
     only:
         - master
 
+# Deploy
 deploy:to-docker-cloud:
     image: docker:latest
     services:
