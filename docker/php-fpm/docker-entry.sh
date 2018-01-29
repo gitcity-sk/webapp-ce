@@ -10,7 +10,7 @@ chmod +x /var/www/html/embeded/git-shell/hooks/update
 if [ ! -f /var/www/html/vendor/autoload.php ]; then
     echo "Autoload file not found! Installing dependencies..."
     composer selfupdate
-    composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
+    composer install --no-ansi --no-dev --no-interaction --no-progress --optimize-autoloader
 fi
 
 echo "Wait until database $DB_HOST:5432 is ready..."
