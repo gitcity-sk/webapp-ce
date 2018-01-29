@@ -9,6 +9,7 @@ require('./bootstrap');
 require('./emojione-convert');
 require('./fontawesome-all');
 require('./directives/TooltipDirective');
+require('./filters/MomentFilter');
 
 window.Vue = require('vue');
 

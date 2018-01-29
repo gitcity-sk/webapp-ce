@@ -18,6 +18,7 @@
                                 <i class="fas fa-folder"></i> {{ project.groups_count }}
                                 <i class="fas fa-code-merge"></i> {{ project.mr_count }}
                                 <i class="fas fa-bug"></i> {{ project.issues_count }}
+                                <small>updated {{ project.created_at.date | moment }}</small>
                             </div>
                         </div>
                         
@@ -31,6 +32,7 @@
 <script>
     import axios from 'axios'
     import emojione from 'emojione'
+    
     export default {
         mounted () {
             console.log('Component ProfilesTable mounted.')
