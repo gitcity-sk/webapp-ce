@@ -71,6 +71,7 @@ Route::get('/logout', 'SessionsController@destroy');
 Route::get('/privacy', 'PagesController@privacyPolicy');
 Route::get('/terms', 'PagesController@terms');
 Route::get('/pricing', 'PagesController@pricing');
+Route::get('/license', 'PagesController@license');
 
 /**
  * profiles
@@ -93,10 +94,14 @@ Route::get('/admin/permissions/create', 'PermissionsController@create');
 Route::get('/admin/users', 'UsersController@index');
 Route::get('/admin/users/{user}', 'UsersController@show');
 
+Route::get('/admin/license', 'ee\LicenseController@show');
+
 Route::post('/admin/permissions', 'PermissionsController@store');
 Route::post('/admin/roles', 'RolesController@store');
 Route::post('/admin/roles/{role}/permissions', 'PermissionsController@assignTo');
 Route::post('/admin/users/{user}/roles', 'RolesController@assignTo');
+
+Route::post('/admin/license/upload', 'ee\LicenseController@store');
 
 /**
  * settings

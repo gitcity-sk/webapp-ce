@@ -68,6 +68,9 @@
                         <input type="file" class="form-control" id="image" name="image" placeholder="Project name">
                     </div>
                 </div>
+            </div>
+        </div>
+        
         <div class="form-group row">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Update profile</button>
