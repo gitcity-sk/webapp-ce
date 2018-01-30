@@ -31,8 +31,13 @@
                     <tr>
                         <td>
                         <div class="d-flex">
-                            <div><i class="far fa-circle"></i> #{{ $issue->id }} <a href="/issues/{{ $issue->id }}" style="font-weight: 600" class="text-dark">{{ $issue->title }}</a> @ {{ $issue->project->name }} by {{ $issue->user->profile->name }} {{ $issue->created_at->diffForHumans() }}</div>
-                            <div class="ml-auto"><i class="fas fa-comments"></i> {{ $issue->comments->count() }}</div>
+                            <div class="mr-2"><i class="far fa-circle"></i></div>
+                            <div><a href="/issues/{{ $issue->id }}" style="font-weight: 600" class="text-dark">{{ $issue->title }}</a>
+                                <div><small>#{{ $issue->id }} @ {{ $issue->project->name }} by {{ $issue->user->profile->name }} {{ $issue->created_at->diffForHumans() }}</small></div>
+                            </div>
+                            <div class="ml-auto text-right"><i class="fas fa-comments"></i> {{ $issue->comments->count() }}
+                                <div><small>{{ $issue->updated_at->diffForHumans() }}</small></div>
+                            </div>
                         </div>
                         </td>
                     </tr>

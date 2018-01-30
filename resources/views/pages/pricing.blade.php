@@ -18,13 +18,14 @@
         <h4 class="my-0 font-weight-normal">Free</h4>
         </div>
         <div class="card-body">
-        <h1 class="card-title pricing-card-title"><i class="fas fa-euro-sign"></i>0 <small class="text-muted">/ mo</small></h1>
+        <h1 class="card-title pricing-card-title"><i class="fas fa-euro-sign"></i>0 <small class="text-muted">per year</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
+            <li>Host on your server</li>
             <li>Projects</li>
             <li>Groups</li>
-            <li>Spaces</li>
+            <li>Issue tracker</li>
         </ul>
-        <button type="button" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</button>
+        <a href="/register" class="btn btn-lg btn-block btn-outline-primary">Sign up for free</a>
         </div>
     </div>
     <div class="card mb-4 box-shadow">
@@ -32,23 +33,24 @@
         <h4 class="my-0 font-weight-normal">Starter</h4>
         </div>
         <div class="card-body">
-        <h1 class="card-title pricing-card-title"><i class="fas fa-euro-sign"></i>1.20 <small class="text-muted">/ mo</small></h1>
+        <h1 class="card-title pricing-card-title"><i class="fas fa-euro-sign"></i>27 <small class="text-muted">per year</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
             <li>All from free plus</li>
-            <li>Epics</li>
+            <li>Multiple boards</lI>
+            <li>Spaces</li>
         </ul>
         <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button>
         </div>
     </div>
     <div class="card mb-4 box-shadow">
         <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Early adopter</h4>
+        <h4 class="my-0 font-weight-normal">Premium</h4>
         </div>
         <div class="card-body">
-        <h1 class="card-title pricing-card-title"><i class="fas fa-euro-sign"></i>57 <small class="text-muted">one time</small></h1>
+        <h1 class="card-title pricing-card-title"><i class="fas fa-euro-sign"></i>54 <small class="text-muted">per year</small></h1>
         <ul class="list-unstyled mt-3 mb-4">
             <li>All from Starter</li>
-            <li>Awailable until august 2018</li>
+            <li>Epics</li>
         </ul>
         <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
         </div>

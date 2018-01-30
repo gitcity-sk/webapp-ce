@@ -10,12 +10,16 @@
                 <tr v-for="project in projects.data">
                     <td>
                         <div class="d-flex">
+                            <div class="mr-2"><i class="far fa-bookmark"></i></div>
                             <div>
-                                <i class="far fa-bookmark"></i> <a class="text-dark" style="font-weight: 600;" :href="'/projects/' + project.id">{{ project.profile.name }} / {{ project.name }}</a>
-                                <small>{{ project.description }}</small>
+                                <a class="text-dark" style="font-weight: 600;" :href="'/projects/' + project.id">{{ project.profile.name }} / {{ project.name }}</a>
+                                <div><small>{{ project.description }}</small></div>
                             </div>
-                            <div class="ml-auto">
-                                <i class="fas fa-code-merge"></i> {{ project.mr_count }} <i class="fas fa-bug"></i> {{ project.issues_count }}
+                            <div class="ml-auto text-right">
+                                <i class="fas fa-folder"></i> {{ project.groups_count }}
+                                <i class="fas fa-code-merge"></i> {{ project.mr_count }}
+                                <i class="fas fa-bug"></i> {{ project.issues_count }}
+                                <div><small>updated {{ project.created_at.date | moment }}</small></div>
                             </div>
                         </div>
                         

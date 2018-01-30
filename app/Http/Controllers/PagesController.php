@@ -25,6 +25,6 @@ class PagesController extends Controller
 
     public function license()
     {
-        return Setting::all();
+        return view('pages.pricing');
     }
 }
