@@ -12,7 +12,7 @@ class LicenseController extends Controller
     public function show()
     {
         $license = License::import();
-        
+
         return view('admin.license.show', compact('license'));
     }
 
@@ -33,5 +33,16 @@ class LicenseController extends Controller
         
 
         return back();
+    }
+
+    public function destroy()
+    {
+        $license = Setting::where('key', License::LICENSE_SETTING_KEY)->first();
+
+        if ($license->delete()) {
+            return response('OK', 200);
+        }
+
+        return response('Something went wrong ...', 404);
     }
 }

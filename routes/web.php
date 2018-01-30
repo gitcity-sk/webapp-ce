@@ -103,6 +103,8 @@ Route::post('/admin/users/{user}/roles', 'RolesController@assignTo');
 
 Route::post('/admin/license/upload', 'ee\LicenseController@store');
 
+Route::delete('/admin/license/delete', 'ee\LicenseController@destroy');
+
 /**
  * settings
  */

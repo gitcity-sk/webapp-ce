@@ -11,6 +11,17 @@ class License
 
     const LICENSE_SETTING_KEY = 'WEBAPP_LICENSE';
 
+    const LICENSE_FEATURES = [
+        'Starter' => [
+            'epics',
+            'groups'
+        ],
+        'Premium' => [
+            'epics',
+            'groups'
+        ]
+    ];
+
     public static function import()
     {
         $licenseString = Setting::where('key', static::LICENSE_SETTING_KEY)->first();
@@ -27,5 +38,20 @@ class License
         }
 
         return false;
+    }
+
+    public static function check($feature)
+    {
+        $license = self::import();
+
+        if (false == $license) return false;
+
+        if ($license->type == 'Trial') return true;
+
+        $featuresByLicense = self::LICENSE_FEATURES[$license->type];
+
+        if (!in_array($feature, $featuresByLicense)) return false;
+
+        return true;
     }
 }

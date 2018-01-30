@@ -13,20 +13,71 @@
     <div class="col-10">
 
         @if ($license)
-            <table>
-            <tr>
-                <td>Started: {{ $license->started_at->diffForHumans()  }}</td>
-            </tr>
-            <tr>
-                <td>Expires in: {{ $license->expires_at->diffForHumans()  }}</td>
-            </tr>
-            <tr><td>Name: <strong>{{ $license->licensee->name }}</strong></td></tr>
-            <tr><td>Email: {{ $license->licensee->email }}</td></tr>
-            <tr><td>Company: {{ $license->licensee->company }}</td></tr>
-            <tr><td>Quantity: {{ $license->max_users_count }}</td></tr>
-            <tr><td>Plan: {{ $license->type }}</td></tr>
-            </table>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    Licensed to
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Name: <strong>{{ $license->licensee->name }}</strong></li>
+                    <li class="list-group-item">Email: <strong>{{ $license->licensee->email }}</strong></li>
+                    <li class="list-group-item">Company: <strong>{{ $license->licensee->company }}</strong></li>
+                </ul>
+            
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    Details
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Plan: <strong>{{ $license->type }}</strong></li>
+                    <li class="list-group-item">Started: <strong>{{ $license->started_at->diffForHumans()  }}</strong></li>
+                    <li class="list-group-item">Expires in: <strong>{{ $license->expires_at->diffForHumans()  }}</strong></li>
+                </ul>
+            
+            </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="card border-danger">
+                <div class="card-header bg-danger text-white">Delete license</div>
+                <div class="card-body">
+                    <p class="card-text">If you remove license Webapp fill falback to free edition and you will not be able to use licensed features</p>
+                    <delete-button url="/admin/license/delete" redirect="/admin/license"></delete-button>
+                </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+            
+            <div class="card">
+                <div class="card-header">
+                    Users in license
+                </div>
+
+                <div class="card-body text-center">
+                    <h5>{{ $license->max_users_count }}</h5>
+                </div>
+            
+            </div>
+
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+        </div>
+
         @else
+
         <form action="/admin/license/upload" method="POST" enctype="multipart/form-data">
 
         {{ csrf_field() }}
@@ -49,6 +100,7 @@
             </div>
 
         </form>
+
         @endif
 
     </div>

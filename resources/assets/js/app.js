@@ -27,6 +27,8 @@ Vue.component('groups-table-component', require('./components/groups/GroupsTable
 Vue.component('group-projects-table-component', require('./components/groups/GroupProjectsTableComponent.vue'));
 Vue.component('user-projects-table-component', require('./components/users/UserProjectsTableComponent.vue'));
 
+Vue.component('delete-button', require('./components/license/LicenseDeleteComponent.vue'));
+
 const app = new Vue({
     el: '#app',
     data () {
