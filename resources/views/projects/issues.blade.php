@@ -26,23 +26,12 @@
 
         <div class="row">
             <div class="col-12">
-                <table class="table table-vcenter">
-                    @foreach ($project->issues as $issue)
-                    <tr>
-                        <td>
-                        <div class="d-flex">
-                            <div class="mr-2"><i class="far fa-circle"></i></div>
-                            <div><a href="/issues/{{ $issue->id }}" style="font-weight: 600" class="text-dark">{{ $issue->title }}</a>
-                                <div><small>#{{ $issue->id }} @ {{ $issue->project->name }} by {{ $issue->user->profile->name }} {{ $issue->created_at->diffForHumans() }}</small></div>
-                            </div>
-                            <div class="ml-auto text-right"><i class="fas fa-comments"></i> {{ $issue->comments->count() }}
-                                <div><small>{{ $issue->updated_at->diffForHumans() }}</small></div>
-                            </div>
-                        </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </table>
+                <div class="row text-center loading" v-if="loading">
+                    <div class="col">
+                        <div class="loader" style="margin:0 auto;"></div>
+                    </div>
+                </div>
+                <project-issues-table-component project-id="{{ $project->id }}"></project-issues-table-component>
             </div>
         </div>
 

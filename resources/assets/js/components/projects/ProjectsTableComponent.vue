@@ -16,9 +16,9 @@
                                 <div><small>{{ project.description }}</small></div>
                             </div>
                             <div class="ml-auto text-right">
-                                <i class="fas fa-folder"></i> {{ project.groups_count }}
-                                <i class="fas fa-code-merge"></i> {{ project.mr_count }}
-                                <i class="fas fa-bug"></i> {{ project.issues_count }}
+                                <span class="mr-2"><i class="fas fa-folder"></i> {{ project.groups_count }}</span>
+                                <span class="mr-2"><i class="fas fa-code-merge"></i> {{ project.mr_count }}</span>
+                                <span><i class="fas fa-bug"></i> {{ project.issues_count }}</span>
                                 <div><small>updated {{ project.created_at.date | moment }}</small></div>
                             </div>
                         </div>

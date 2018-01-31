@@ -6,6 +6,7 @@ use App\Project;
 use App\Repositories\Projects;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\IssueResource;
 
 class ProjectsController extends Controller {
 
@@ -21,5 +22,10 @@ class ProjectsController extends Controller {
         $projects = $this->projects->orderBy('created_at', 'desc');
 
         return ProjectResource::collection($projects);
+    }
+
+    public function issues(Project $project)
+    {
+        return IssueResource::collection($project->issues);
     }
 }

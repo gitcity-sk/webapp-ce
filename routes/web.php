@@ -122,12 +122,14 @@ Route::group(['namespace' => 'Api'], function()
     Route::get('/api/groups', 'GroupsController@index');
     Route::get('/api/groups/{group}/projects', 'GroupsController@projects');
 
+    Route::get('/api/issues', 'IssuesController@index');
     Route::get('/api/issues/{issue}', 'IssuesController@show');
 
     Route::get('/api/profiles', 'ProfilesController@index');
 
     Route::get('/api/projects', 'ProjectsController@index');
     Route::get('/api/projects/{project}/tree', 'TreeController@files');
+    Route::get('/api/projects/{project}/issues', 'ProjectsController@issues');
     
     Route::get('/api/users', 'UsersController@index');
     Route::get('/api/users/{user}', 'UsersController@show');
