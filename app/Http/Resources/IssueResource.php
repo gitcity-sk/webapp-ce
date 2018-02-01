@@ -21,7 +21,8 @@ class IssueResource extends Resource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'comments' => CommentResource::collection($this->comments),
-            'user' => $this->user,
+            'comments_count' => $this->comments->count(),
+            'profile' => $this->user->profile,
             'project' => $this->project
           ];
     }

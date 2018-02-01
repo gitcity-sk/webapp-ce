@@ -15,4 +15,9 @@ class Projects
     {
         return Project::orderBy($field, $method)->get();
     }
+
+    public function findById($id)
+    {
+        return Project::findOrFail($id);
+    }
 }

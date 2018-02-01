@@ -20,7 +20,10 @@ class ProjectResource extends Resource
             'slug' => $this->slug,
             'description' => $this->description,
             'profile' => $this->user->profile,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'issues_count' => $this->issues->count(),
+            'mr_count' => $this->mergeRequests->count(),
+            'groups_count' => $this->groups->count()
         ];
     }
 }

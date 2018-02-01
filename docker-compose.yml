@@ -1,0 +1,75 @@
+version: '2.1'
+
+services:
+  codeocean-source:
+    build: .
+    volumes:
+      - /var/www/html
+      - ./volumes/git-data:/var/opt/gitcity/git-data:rw
+      - ./volumes/spaces-data:/var/opt/gitcity/spaces-data:rw
+      - ./volumes/storage:/var/www/html/storage/app:rw
+
+  php:
+    build: ./docker/php-fpm
+    depends_on:
+      - codeocean-source
+    restart: always
+    volumes_from:
+      - codeocean-source
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_DATABASE: "gitcity-test"
+      DB_USERNAME: postgres
+      DB_PASSWORD: "5RGGjwubxdqyF6dL"
+      APP_KEY: "base64:i401pX1nVrGs5i4eWFoxB67N5mkfVhrF9kxqKSkj15o="
+      APP_ENV: testing
+      GIT_BINARY: git
+      GIT_DATA: "/var/opt/gitcity/git-data/"
+      GIT_SSH_KEYS: "/var/opt/gitcity/git-data/.ssh/"
+      SPACES_DATA: "/var/opt/gitcity/spaces-data/"
+      GITCITY_SHELL_HOOKS: "/var/www/html/embeded/git-shell/hooks"
+
+  db:
+    image: postgres
+    depends_on:
+      - codeocean-source
+    volumes:
+      - ./volumes/db/data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
+      POSTGRES_DB: "gitcity-test"
+
+  nginx:
+    build: ./docker/nginx
+    depends_on:
+      - codeocean-source
+      - php
+      - db
+    restart: always
+    volumes_from:
+      - codeocean-source
+    ports:
+      - "8877:80"
+
+  git:
+    image: maymeow/php:cli-git
+    restart: always
+    depends_on:
+      - codeocean-source
+    volumes_from:
+      - codeocean-source
+    ports:
+      - "2281:22"
+
+  unicorn:
+    image: maymeow/workhorse:latest
+    restart: always
+    depends_on:
+      - codeocean-source
+    volumes_from:
+      - codeocean-source
+    ports:
+      - "8801:8801"

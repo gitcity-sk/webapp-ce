@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section ('layout-main-classes', 'container')
-@section ('layout-body-classes', 'pTop-5rem')
+@section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section ('projects-table')
 <div class="row text-center loading" v-if="loading">
@@ -14,12 +14,13 @@
 
 @section ('content')
 <h1 class="h2" style="font-weight: 300">Projects</h1>
+@auth
 <div class="row" style="margin-bottom: 10px">
     <div class="col-12 text-right">
     <a href="/projects/create" class="btn btn-success">Create project</a>
     </div>
 </div>
-
+@endauth
 
 
 @yield ('projects-table')

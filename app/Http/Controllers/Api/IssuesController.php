@@ -9,6 +9,13 @@ use App\Http\Resources\IssueResource;
 
 class IssuesController extends Controller
 {
+    public function index()
+    {
+        $issues = Issue::all();
+
+        return IssueResource::collection($issues);
+    }
+
     public function show(Issue $issue)
     {
         return new IssueResource($issue);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
 use App\Project;
 use App\Repo;
 use App\Tree;
@@ -15,18 +16,20 @@ class ProjectsController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Projects $projects)
     {
         $this->middleware('auth');
+
+        $this->projects = $projects;
     }
 
     /**
      *
      */
-    public function index(Projects $projects)
+    public function index()
     {
 
-        $projects = $projects->orderBy('created_at', 'desc');
+        $projects = $this->projects->orderBy('created_at', 'DESC');
 
         return view('projects.index', compact('projects'));
     }
@@ -34,21 +37,16 @@ class ProjectsController extends Controller
     /**
      *
      */
-    public function show(Project $project) // Project::find(wildcard) wildcaard is name in routes so project and must be same as in controller
+    public function show($id) // Project::find(wildcard) wildcaard is name in routes so project and must be same as in controller
     {
         // setup required variables
         $tree = null;
         $readme = null;
 
         if (auth()->user()->can('show-project')) {
-
-            //$treex = new Tree();
-
-            //$tree = $treex->get($project->user->name, $project->slug);
+            $project = $this->projects->findById($id);
 
             return view('projects.show', compact('project'));
-
-            return $tree->toArray();
         }
 
         return view('pages.403');
@@ -94,23 +92,35 @@ class ProjectsController extends Controller
     /**
      *
      */
-    public function issues(Project $project)
+    public function issues($id)
     {
+        $project = $this->projects->findById($id);
         return view('projects.issues', compact('project'));
     }
 
-    public function mergeRequests(Project $project)
+    public function mergeRequests($id)
     {
+        $project = $this->projects->findById($id);
         return view('projects.merge_requests', compact('project'));
     }
 
-    public function createMergeRequest(Project $project)
+    public function createMergeRequest($id)
     {
+        $project = $this->projects->findById($id);
         return view('projects.new_merge_request', compact('project'));
     }
 
-    public function createIssue(Project $project)
+    public function createIssue($id)
     {
+        $project = $this->projects->findById($id);
         return view('projects.new_issue', compact('project'));
+    }
+
+    public function assignTo(Group $group)
+    {
+        $project = Project::findOrFail(request('project_id'));
+        $group->attachProject($project);
+
+        return back();
     }
 }

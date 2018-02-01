@@ -17,7 +17,7 @@
 
     @include ('elements.header')
 
-    <main role="main" id="app" class="@yield ('layout-main-classes')">
+    <main role="main" id="app" class="@yield ('layout-main-classes')" v-cloak>
 
       @yield ('content')
 

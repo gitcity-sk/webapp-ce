@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section ('layout-body-classes', 'pTop-Btm-3rem')
+@section ('layout-body-classes', 'mt-5 mb-3')
 
 @section('content')
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -14,9 +14,9 @@
     <img class="first-slide" src="https://images.unsplash.com/photo-1500053857731-701d06fac2fa?auto=format&fit=crop&w=2031&q=60&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" alt="First slide">
     <div class="container">
       <div class="carousel-caption">
-        <h1>0.0.4 Released</h1>
-        <p>With README file in project pages</p>
-        <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+        <h1>0.1 Released</h1>
+        <p>With groups</p>
+        <p><a class="btn btn-lg btn-primary" href="/license" role="button">Try for free</a></p>
       </div>
     </div>
   </div>

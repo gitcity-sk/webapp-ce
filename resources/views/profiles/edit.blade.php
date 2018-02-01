@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section ('layout-main-classes', 'container')
-@section ('layout-body-classes', 'pTop-5rem')
+@section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section ('content')
 
@@ -68,6 +68,9 @@
                         <input type="file" class="form-control" id="image" name="image" placeholder="Project name">
                     </div>
                 </div>
+            </div>
+        </div>
+        
         <div class="form-group row">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Update profile</button>

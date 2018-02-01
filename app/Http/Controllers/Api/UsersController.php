@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\User;
 use App\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ProjectResource;
 
 class UsersController extends Controller
 {
@@ -29,5 +30,10 @@ class UsersController extends Controller
     {
         $roles = Role::all();
         return compact('user', 'roles');
+    }
+
+    public function projects(User $user)
+    {
+        return ProjectResource::collection($user->projects);
     }
 }

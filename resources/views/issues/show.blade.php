@@ -1,28 +1,18 @@
 @extends ('layouts.master')
 
 @section ('layout-main-classes', 'container')
-@section ('layout-body-classes', 'pTop-5rem')
+@section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @inject('markdown', 'Parsedown')
 
 @section ('content')
 <h1 class="h2" style="font-weight: 300">
-    <svg class="octicon" width="28px" height="32px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-        <title>issue-opened</title>
-        <desc>Created with Sketch.</desc>
-        <defs></defs>
-        <g id="Octicons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="issue-opened" fill="#000000">
-                <path d="M7,2.3 C10.14,2.3 12.7,4.86 12.7,8 C12.7,11.14 10.14,13.7 7,13.7 C3.86,13.7 1.3,11.14 1.3,8 C1.3,4.86 3.86,2.3 7,2.3 L7,2.3 Z M7,1 C3.14,1 0,4.14 0,8 C0,11.86 3.14,15 7,15 C10.86,15 14,11.86 14,8 C14,4.14 10.86,1 7,1 L7,1 Z M8,4 L6,4 L6,9 L8,9 L8,4 L8,4 Z M8,10 L6,10 L6,12 L8,12 L8,10 L8,10 Z" id="Shape"></path>
-            </g>
-        </g>
-    </svg>
     #{{ $issue->id }} {{ $issue->title }}
 </h1>
 
 <div class="row">
     <div class="col-9">
+    <span class="badge badge-success">Open</span> opened {{ $issue->created_at->diffForHumans() }} by <a class="text-dark" href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a><hr />
         <p class="lead has-emoji">{!! $markdown->text($issue->description) !!}</p>
 
         <div class="card mb-3">
@@ -37,17 +27,7 @@
         @foreach ($issue->comments as $comment)
         <div class="card mb-4">
             <div class="card-header has-emoji">
-                <svg class="octicon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-                    <title>comment</title>
-                    <desc>Created with Sketch.</desc>
-                    <defs></defs>
-                    <g id="Octicons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="comment" fill="#000000">
-                            <path d="M14,1 L2,1 C1.45,1 1,1.45 1,2 L1,10 C1,10.55 1.45,11 2,11 L4,11 L4,14.5 L7.5,11 L14,11 C14.55,11 15,10.55 15,10 L15,2 C15,1.45 14.55,1 14,1 L14,1 Z M14,10 L7,10 L5,12 L5,10 L2,10 L2,2 L14,2 L14,10 L14,10 Z" id="Shape"></path>
-                        </g>
-                    </g>
-                </svg>
+                <i class="far fa-comment"></i>
                 <a href="/profiles/{{ $comment->user->profile->id }}">{{ $comment->user->profile->name }}</a> at {{ $comment->created_at->diffForHumans() }}
             </div>
             <div class="card-body has-emoji">

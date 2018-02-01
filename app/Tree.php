@@ -3,13 +3,16 @@
 namespace App;
 
 use App\Repositories\Projects;
-use App\Api\BaseModel;
+use App\Http\Resources\Git\TreeResource;
+use App\Api\Git\BaseModel;
 
 class Tree extends BaseModel
 {
     protected $readme;
 
     protected $tree;
+
+    protected $lastCommit;
 
     public function get($userName, $projecSlug)
     {
@@ -22,25 +25,35 @@ class Tree extends BaseModel
                 $tree = $repo->getTree('HEAD');
                 $this->readme = $repo->outputRawContent($repo->getTree('HEAD', 'README.md')->getObject(), 'HEAD');
 
-                $this->serialize($tree);
+                $this->lastCommit = [
+                    'author' => $tree->getLastCommitAuthor()->getName(),
+                    'message' => $tree->getLastCommitMessage()->getShortMessage()
+                ];
+
+                $this->build($tree);
             } catch (\Exception $e) {
                 // nothing to do
             }
         }
 
-        return $this;
+        return $this->withClosure();
     }
 
-    protected function serialize($tree)
+    protected function withClosure()
+    {
+        return [
+            'data' => $this->tree,
+            'last_commit' => $this->lastCommit
+        ];
+    }
+
+    protected function build($tree)
     {
         if (null != $tree)
         {
             foreach ($tree as $treeObject) {
-
-                $treeItem = new TreeItem($treeObject->getName(), $treeObject->getType());
-                $treeItem->getCommit($treeObject->getLastCommit()->getAuthor()->getName(), $treeObject->getLastCommit()->getMessage()->getShortMessage());
-
-                $this->tree[] = $treeItem;
+                $treeItem = new TreeResource($treeObject);
+                $this->tree[] = $treeItem->toArray();
             }
         }
     }

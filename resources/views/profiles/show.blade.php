@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section ('layout-main-classes', 'container')
-@section ('layout-body-classes', 'pTop-5rem')
+@section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @inject('markdown', 'Parsedown')
 
@@ -30,6 +30,6 @@
     </div>
 </div>
 
-<projects-table-component></projects-table-component>
+<user-projects-table-component user-id="{{ $profile->user_id }}"></user-projects-table-component>
 
 @endsection

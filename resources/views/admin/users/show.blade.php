@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section ('layout-main-classes', 'container')
-@section ('layout-body-classes', 'pTop-5rem')
+@section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section('content')
 
@@ -23,7 +23,7 @@
     </table>
 </div>
 
-<div class="card">
+<div class="card" style="margin-bottom: 20px">
     <div class="card-body">
         <form class="" action="/admin/users/{{ $user->id }}/roles" method="post">
 
@@ -48,6 +48,23 @@
                 </div>
             </div>
         </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        Ovner of
+    </div>
+    <div class="card-body">
+        <h4>{{ $user->projects->count() }} Projects</h4>
+        @foreach ($user->projects as $project)
+            <a href="/projects/{{ $project->id }}">{{ $project->name }}</a>
+        @endforeach
+
+        <h4>{{ $user->groups->count() }} Groups</h4>
+        @foreach ($user->groups as $group)
+            <a href="/groups/{{ $group->id }}">{{ $group->name }}</a>
+        @endforeach
     </div>
 </div>
 
