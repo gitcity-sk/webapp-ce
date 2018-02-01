@@ -25,4 +25,10 @@ class PagesTest extends TestCase
         $response = $this->get('/terms');
         $response->assertSee('<div class="card-header">Terms of Service</div>');
     }
+
+    public function testPricingPage()
+    {
+        $response = $this->get('/license');
+        $response->assertSee('<h1 class="card-title pricing-card-title"><i class="fas fa-euro-sign"></i>27 <small class="text-muted">per year</small></h1>');
+    }
 }
