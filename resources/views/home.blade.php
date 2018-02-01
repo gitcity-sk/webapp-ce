@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section ('layout-body-classes', 'pTop-Btm-3rem')
+@section ('layout-body-classes', 'mt-5 mb-3')
 
 @section('content')
 <div id="myCarousel" class="carousel slide" data-ride="carousel">

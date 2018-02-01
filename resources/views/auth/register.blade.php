@@ -1,7 +1,7 @@
 @extends ('layouts.master')
 
 @section ('layout-main-classes', 'container')
-@section ('layout-body-classes', 'pTop-5rem')
+@section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section('content')
     <div class="row justify-content-center">
