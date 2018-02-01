@@ -1,6 +1,6 @@
     <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top flex-md-nowrap p-0" style="background-color: #292961">
-          <a class="navbar-brand ml-2" href="/">CodeOcean</a>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top flex-md-nowrap p-0 bg-dark" style="background-color: #292961">
+          <a class="navbar-brand ml-2" href="/">Webapp</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>

@@ -1,16 +1,19 @@
-@extends ('layouts.master')
+@extends ('layouts.master-with-sidebar')
 
 @section ('layout-main-classes', 'container')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
+@inject('markdown', 'Parsedown')
+
+@section ('sidebar-content')
+@include('admin.sidebar')
+@endsection
+
+
 @section ('content')
 <h1 class="display-4">Create label</h1>
 <div class="row">
-    <div class="col-2">
-        @include('admin.sidebar')
-    </div>
-
-    <div class="col-10">
+    <div class="col-12">
         <form class="" action="/admin/labels" method="post">
 
             {{ csrf_field() }}

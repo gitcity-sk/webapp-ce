@@ -1,7 +1,13 @@
-@extends('layouts.master')
+@extends ('layouts.master-with-sidebar')
 
 @section ('layout-main-classes', 'container')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
+
+@inject('markdown', 'Parsedown')
+
+@section ('sidebar-content')
+@include('admin.sidebar')
+@endsection
 
 @section('content')
 
