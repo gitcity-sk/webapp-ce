@@ -111,14 +111,39 @@ composer:install-dependencies-dev:
 php:postgres-production-migrations:
     stage: test
     <<: *postgres-service
-    <<: *before-pgsql
     <<: *pull-cache
+    script:
+        - cp .env.testing.pgsql .env
+        - php artisan key:generate
+        - php artisan config:cache
+        - php artisan migrate
+        - php artisan db:seed
+    <<: *run-on-do-docker
 
 php:mysql-production-migrations:
     stage: test
     <<: *mysql-service
-    <<: *before-mysql
     <<: *pull-cache
+    script:
+        - cp .env.testing.mysql .env
+        - php artisan key:generate
+        - php artisan config:cache
+        - php artisan migrate
+        - php artisan db:seed
+    <<: *run-on-do-docker
+
+php:dusk:
+    stage: test
+    <<: *mysql-service
+    <<: *pull-cache
+    script:
+        - cp .env.testing.mysql .env
+        - php artisan key:generate
+        - php artisan config:cache
+        - php artisan migrate
+        - php artisan db:seed
+        - php artisan dusk
+    <<: *run-on-do-docker
 
 php:postgres-phpunit:
     stage: test
