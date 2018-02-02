@@ -104,6 +104,7 @@ composer:install-dependencies-dev:
     <<: *push-cache-dev
     stage: prepare
     script:
+        - cp .env.testing.pgsql .env
         - composer self-update
         - composer -V
         - composer install --no-progress
