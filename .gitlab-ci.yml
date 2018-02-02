@@ -102,6 +102,7 @@ composer:install-dependencies:
 
 composer:install-dependencies-dev:
     <<: *push-cache-dev
+    <<: *postgres-service
     stage: prepare
     script:
         - cp .env.testing.pgsql .env
