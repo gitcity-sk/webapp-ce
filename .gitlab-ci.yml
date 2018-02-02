@@ -31,10 +31,6 @@ stages:
         - mariadb
 
 # Before scripts configuration
-.before-prepare: &before-prepare
-    before_script:
-        - cp .env.testing.pgsql .env
-
 .before-mysql: &before-mysql
     before_script:
         - cp .env.testing.mysql .env
@@ -112,6 +108,18 @@ composer:install-dependencies-dev:
     <<: *run-on-do-docker
 
 # tests
+php:postgres-production-migrations:
+    stage: test
+    <<: *postgres-service
+    <<: *before-pgsql
+    <<: *pull-cache
+
+php:mysql-production-migrations:
+    stage: test
+    <<: *mysql-service
+    <<: *before-mysql
+    <<: *pull-cache
+
 php:postgres-phpunit:
     stage: test
     <<: *postgres-service
