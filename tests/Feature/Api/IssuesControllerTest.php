@@ -5,10 +5,12 @@ namespace Tests\Feature\Api;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Issue;
 
 class IssuesControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * A basic test example.
      *

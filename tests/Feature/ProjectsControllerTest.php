@@ -7,7 +7,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Project;
 use App\User;
+use App\Permission;
+use App\Role;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use SebastianBergmann\Comparator\Factory;
 
 class ProjectsControllerTest extends TestCase
 {
@@ -26,6 +29,7 @@ class ProjectsControllerTest extends TestCase
             ->withSession(['asd' => 'dsa'])
             ->get('/projects');
         $response->assertStatus(200);
+        $response->assertSee('Projects');
     }
 
     public function testShow()
@@ -33,9 +37,15 @@ class ProjectsControllerTest extends TestCase
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
 
+        $role = factory(Role::class)->create();
+        $showPerm = factory(Permission::class)->create(['name' => 'show-project']);
+        $delPerm = factory(Permission::class)->create(['name' => 'delete-project']);
+        $role->givePermissionTo($showPerm);
+        $role->givePermissionTo($delPerm);
+        $user->assignRole($role->name);
+
         $response = $this->actingAs($user)
-            ->withSession(['asd' => 'dsa'])
-            ->get('/projects/' . $project->id);
+        ->get('/projects/' . $project->id);
         $response->assertStatus(200);
     }
 
@@ -108,13 +118,7 @@ class ProjectsControllerTest extends TestCase
     public function testCreate()
     {
         $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)
-            ->withSession(['role' => 'show-project'])
-            ->get('/projects/create');
+        $response = $this->actingAs($user)->get('/projects/create');
         $response->assertStatus(200);
-
-        $response->assertSee('<h1 class="display-4">Create</h1>');
-        $response->assertSee('<button type="submit" class="btn btn-primary">Create project</button>');
     }
 }
