@@ -135,7 +135,7 @@ php:mysql-production-migrations:
 php:dusk:
     stage: test
     <<: *mysql-service
-    <<: *pull-cache
+    <<: *pull-cache-dev
     script:
         - cp .env.testing.mysql .env
         - php artisan key:generate
