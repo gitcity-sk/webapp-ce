@@ -47,11 +47,10 @@ class UsersControllerTest extends TestCase
         $project = factory(Project::class)->create();
         $user = factory(User::class)->create();
 
-        // $response = $this->actingAs($user)->get('/api/users/' . $project->user_id . '/projects');
-        $response = $this->actingAs($user)->json('GET', '/api/users/');
+        $response = $this->actingAs($user)->json('GET', '/api/users/' . $project->user_id . '/projects');
         $response->assertStatus(200);
-        $response->assertJson([
-            "name" => $user->name,
-        ]);
+        $response->assertSee($project->name);
+        $response->assertSee($project->description);
+        $response->assertSee($project->user->profile->name);
     }
 }
