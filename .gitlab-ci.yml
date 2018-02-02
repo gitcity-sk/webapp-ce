@@ -87,6 +87,7 @@ stages:
 
 .coverage-script: &coverage-script
     script:
+        - phpunit --version
         - phpunit --coverage-text --colors=never
 
 # Prepare
