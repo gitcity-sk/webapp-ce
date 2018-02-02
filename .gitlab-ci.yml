@@ -92,9 +92,7 @@ stages:
 
 # Prepare
 composer:install-dependencies:
-    <<: *postgres-service
     <<: *push-cache
-    <<: *before-prepare
     stage: prepare
     script:
         - composer self-update
@@ -103,9 +101,7 @@ composer:install-dependencies:
     <<: *run-on-do-docker
 
 composer:install-dependencies-dev:
-    <<: *postgres-service
     <<: *push-cache-dev
-    <<: *before-prepare
     stage: prepare
     script:
         - composer self-update
