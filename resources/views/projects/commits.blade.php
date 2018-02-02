@@ -1,7 +1,11 @@
-@extends ('layouts.master')
+@extends ('layouts.master-with-sidebar')
 
 @section ('layout-main-classes', 'container')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
+
+@section ('sidebar-content')
+@include('projects.elements.sidebar')
+@endsection
 
 @section ('content')
 <h1 class="h2" style="font-weight: 300">
@@ -17,10 +21,7 @@
 </div>
 
 <div class="row" style="margin-bottom: 3rem">
-    <div class="col-2">
-    @include('projects.elements.sidebar')
-    </div>
-    <div class="col-10">
+    <div class="col-12">
 
         @if (null != $commits)
         <div class="row">

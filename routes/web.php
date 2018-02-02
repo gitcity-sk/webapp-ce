@@ -61,6 +61,12 @@ Route::get('/merge-requests/{mergeRequest}', 'MergeRequestsController@show');
 Route::post('/issues/{issue}/comments', 'CommentsController@store');
 
 /**
+ * Labels
+ */
+
+Route::get('/labels', 'LabelsController@index');
+
+/**
  * Authenticate
  */
 Route::get('/logout', 'SessionsController@destroy');
@@ -88,6 +94,9 @@ Route::get('/admin/roles', 'RolesController@index');
 Route::get('/admin/roles/create', 'RolesController@create');
 Route::get('/admin/roles/{role}', 'RolesController@show');
 
+Route::get('/admin/labels', 'Admin\LabelsController@index');
+Route::get('/admin/labels/create', 'Admin\LabelsController@create');
+
 Route::get('/admin/permissions', 'PermissionsController@index');
 Route::get('/admin/permissions/create', 'PermissionsController@create');
 
@@ -102,6 +111,7 @@ Route::post('/admin/roles/{role}/permissions', 'PermissionsController@assignTo')
 Route::post('/admin/users/{user}/roles', 'RolesController@assignTo');
 
 Route::post('/admin/license/upload', 'ee\LicenseController@store');
+Route::post('/admin/labels', 'Admin\LabelsController@store');
 
 Route::delete('/admin/license/delete', 'ee\LicenseController@destroy');
 

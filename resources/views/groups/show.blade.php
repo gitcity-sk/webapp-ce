@@ -1,9 +1,13 @@
-@extends ('layouts.master')
+@extends ('layouts.master-with-sidebar')
 
 @section ('layout-main-classes', 'container')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @inject('markdown', 'Parsedown')
+
+@section ('sidebar-content')
+
+@endsection
 
 @section ('content')
 
@@ -20,15 +24,6 @@
         <p class="lead has-emoji">{{ $group->description }}</p>
     </div>
 </div>
-
-<ul class="nav nav-tabs nav-links" style="margin-bottom: 7px">
-    <li class="nav-item">
-    <a class="nav-link active" href="#">Projects</a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link" href="#">Epics</a>
-    </li>
-</ul>
 
 @auth
 @if (Auth::user()->id == $group->user_id)

@@ -19,6 +19,10 @@ class License
         'Premium' => [
             'epics',
             'groups'
+        ],
+        'Ultimate' => [
+            'epics',
+            'groups'
         ]
     ];
 
