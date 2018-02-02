@@ -1,4 +1,4 @@
-image: registry.gitcity.sk/cakehub/cakeapp:fpm
+image: registry.gitcity.sk/gitcity-sk/gitcity-build-images:php-7.1-fpm
 
 stages:
     - prepare
@@ -112,23 +112,7 @@ composer:install-dependencies-dev:
         - composer install --no-progress
     <<: *run-on-do-docker
 
-# Tests
-php:postgres-migrate:
-    stage: test
-    <<: *postgres-service
-    <<: *before-pgsql
-    <<: *pull-cache
-    <<: *migrate-script
-    <<: *run-on-do-docker
-
-php:mysql-migrate:
-    stage: test
-    <<: *mysql-service
-    <<: *before-mysql
-    <<: *pull-cache
-    <<: *migrate-script
-    <<: *run-on-do-docker
-
+# tests
 php:postgres-phpunit:
     stage: test
     <<: *postgres-service
