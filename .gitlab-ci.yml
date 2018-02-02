@@ -1,4 +1,4 @@
-image: registry.gitcity.sk/gitcity-sk/gitcity-build-images:php-7.1-fpm
+image: registry.gitcity.sk/gitcity-sk/gitcity-build-images:php-7.1-fpm-redis-phpunit-6.5.6
 
 stages:
     - prepare
