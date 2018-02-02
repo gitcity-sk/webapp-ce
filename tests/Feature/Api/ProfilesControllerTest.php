@@ -5,11 +5,13 @@ namespace Tests\Feature\Api;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Profile;
 use App\User;
 
 class ProfilesControllerTest extends TestCase
 {
+    use DatabaseTransactions;
     /**
      * A basic test example.
      *
