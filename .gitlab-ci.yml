@@ -142,7 +142,8 @@ php:dusk:
         - php artisan config:cache
         - php artisan migrate
         - php artisan db:seed
-        - php artisan dusk
+        - php artisan serve &
+        - phpunit --coverage-text --colors=never ./tests/Browser
     <<: *run-on-do-docker
 
 php:postgres-phpunit:
