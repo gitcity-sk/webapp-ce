@@ -60,39 +60,40 @@ stages:
     services:
         - mariadb
 
-# Before script
-.before_script: &before_script
-    before_script:
+# PHP UNIT tests configuration
+.phpunit-tests: &phpunit-tests
+    stage: test
+    script:
         - php artisan key:generate
         - php artisan config:cache
         - php artisan migrate
         - php artisan db:seed
-
-# PHP UNIT tests configuration
-.phpunit-tests: &phpunit-tests
-    stage: test
-    <<: *before_script
+        - phpunit --coverage-text --colors=never
+    artifacts:
+        untracked: true
+        paths:
+            - ./storage/logs
+        when: on_failure
+        expire_in: 1 week
 
 .phpunit-pg-tests: &phpunit-pg-tests
     <<: *postgres-service
     <<: *pull-cache-dev
     <<: *run-on-do-docker
-    script:
+    <<: *phpunit-tests
+    before_script:
         - cp .env.testing.pgsql .env
-        - phpunit --coverage-text --colors=never
         
 .phpunit-mysql-tests: &phpunit-mysql-tests
     <<: *mysql-service
     <<: *pull-cache-dev
     <<: *run-on-do-docker
-    script:
+    <<: *phpunit-tests
+    before_script:
         - cp .env.testing.mysql .env
-        - phpunit --coverage-text --colors=never
 
 # PHPCS configuration
-.phpcs-pgsql-tests: &phpcs-pgsql-tests
-    <<: *postgres-service
-    <<: *before_script
+.phpcs-tests: &phpcs-tests
     <<: *pull-cache-dev
     <<: *run-on-do-docker
     stage: post-test
@@ -129,7 +130,7 @@ phpunit-pg-tests 2 2: *phpunit-pg-tests
 phpunit-mysql-tests 1 2: *phpunit-mysql-tests
 phpunit-mysql-tests 2 2: *phpunit-mysql-tests
 
-phpcs-pgsql-tests 1 1: *phpcs-pgsql-tests
+phpcs-tests 1 1: *phpcs-tests
 
 # Build
 build image:
