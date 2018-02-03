@@ -130,20 +130,6 @@ php:mysql-production-migrations:
         - php artisan db:seed
     <<: *run-on-do-docker
 
-php:dusk:
-    stage: test
-    <<: *mysql-service
-    <<: *pull-cache-dev
-    script:
-        - cp .env.testing.mysql .env
-        - php artisan key:generate
-        - php artisan config:cache
-        - php artisan migrate
-        - php artisan db:seed
-        - php artisan serve &
-        - phpunit --coverage-text --colors=never ./tests/Browser
-    <<: *run-on-do-docker
-
 php:postgres-phpunit:
     stage: test
     <<: *postgres-service
