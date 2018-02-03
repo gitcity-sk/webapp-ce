@@ -98,13 +98,11 @@ composer:install-dependencies:
 
 composer:install-dependencies-dev:
     <<: *push-cache-dev
-    <<: *postgres-service
     stage: prepare
     script:
-        - cp .env.testing.pgsql .env
         - composer self-update
         - composer -V
-        - composer install --no-progress
+        - composer install --no-ansi --no-interaction --no-progress --no-scripts
     <<: *run-on-do-docker
 
 # tests
