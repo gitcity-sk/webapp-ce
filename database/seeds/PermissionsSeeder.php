@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Permission;
+use App\Role;
 
 class PermissionsSeeder extends Seeder
 {
@@ -22,6 +24,15 @@ class PermissionsSeeder extends Seeder
     public function run()
     {
         // projects
-        DB::table('permissions')->insert($this->permissions);
+        $role = factory(Role::class)->create(['name' => 'Administrator']);
+        foreach ($this->permissions as $permission)
+        {
+            $perm = factory(Permission::class)->create([
+                'name' => $permission['name'],
+                'label' => $permission['label']
+            ]);
+
+            $role->givePermissionTo($perm);
+        }
     }
 }

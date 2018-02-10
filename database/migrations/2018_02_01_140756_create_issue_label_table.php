@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIssueLabelsTable extends Migration
+class CreateIssueLabelTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateIssueLabelsTable extends Migration
      */
     public function up()
     {
-        Schema::create('issue_labels', function (Blueprint $table) {
+        Schema::create('issue_label', function (Blueprint $table) {
             //$table->increments('id');
             $table->integer('issue_id')->unsigned()->index();
             $table->foreign('issue_id')->references('id')->on('issues')->ondelete('cascade');

@@ -17,7 +17,7 @@
 
     @include ('elements.header')
 
-    <div id="app" class="wrapper toggled" v-cloak>
+    <div id="app" class="wrapper toggled">
 
       <div class="sidebar-wrapper bg-light nav-sidebar">
         @yield ('sidebar-content')
@@ -25,7 +25,7 @@
 
       <div class="page-content-wrapper @yield ('layout-body-classes')">
 
-        <main role="main" class="@yield ('layout-main-classes')">
+        <main role="main" class="@yield ('layout-main-classes')" v-cloak>
           @yield ('content')
         </main>
 

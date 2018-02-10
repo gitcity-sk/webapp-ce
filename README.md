@@ -1,5 +1,9 @@
 # CodeOcean webapp
 
+[![pipeline status](https://gitcity.sk/gitcity-sk/codeocean/webapp-ce/badges/master/pipeline.svg)](https://gitcity.sk/gitcity-sk/codeocean/webapp-ce/commits/master)
+
+[![coverage report](https://gitcity.sk/gitcity-sk/codeocean/webapp-ce/badges/master/coverage.svg)](https://gitcity.sk/gitcity-sk/codeocean/webapp-ce/commits/master)
+
 Open source software development platform with built-in version control, issue tracking. Build with laravel, self hosted on your own server.
 
 ## Requirements

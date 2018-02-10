@@ -1,4 +1,4 @@
-image: registry.gitcity.sk/cakehub/cakeapp:fpm
+image: registry.gitcity.sk/gitcity-sk/gitcity-build-images:php-7.1-fpm-redis-phpunit-6.5.6
 
 stages:
     - prepare
@@ -7,49 +7,12 @@ stages:
     - post-test
     - deploy
 
+# Tags
 .run-on-do-docker: &run-on-do-docker
     tags:
         - digitalocean
         - docker
         - a
-
-# Services configuration
-.postgres-variables: &postgres-service
-    variables:
-        POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
-        POSTGRES_DB: homestead
-    services:
-        - postgres
-
-.mysql-variables: &mysql-service
-    variables:
-        MYSQL_USER: homestead
-        MYSQL_DATABASE: homestead
-        MYSQL_PASSWORD: "5RGGjwubxdqyF6dL"
-        MYSQL_ROOT_PASSWORD: "5RGGjwubxdqyF6dL"
-    services:
-        - mariadb
-
-# Before scripts configuration
-.before-prepare: &before-prepare
-    before_script:
-        - cp .env.testing.pgsql .env
-
-.before-mysql: &before-mysql
-    before_script:
-        - cp .env.testing.mysql .env
-        - php artisan key:generate
-        - php artisan config:cache
-        - php artisan migrate
-        - php artisan db:seed
-
-.before-pgsql: &before-pgsql
-    before_script:
-        - cp .env.testing.pgsql .env
-        - php artisan key:generate
-        - php artisan config:cache
-        - php artisan migrate
-        - php artisan db:seed
 
 # Cache configuration
 .default-cache: &default-cache
@@ -80,82 +43,94 @@ stages:
         key: "cake-app-with-php-7-dev"
         policy: pull
 
-# Scripts Configuration
-.migrate-script: &migrate-script
-    script:
-        - php artisan migrate:status
+# Services configuration
+.postgres-variables: &postgres-service
+    variables:
+        POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
+        POSTGRES_DB: homestead
+    services:
+        - postgres
 
-.coverage-script: &coverage-script
+.mysql-variables: &mysql-service
+    variables:
+        MYSQL_USER: homestead
+        MYSQL_DATABASE: homestead
+        MYSQL_PASSWORD: "5RGGjwubxdqyF6dL"
+        MYSQL_ROOT_PASSWORD: "5RGGjwubxdqyF6dL"
+    services:
+        - mariadb
+
+# PHP UNIT tests configuration
+.phpunit-tests: &phpunit-tests
+    stage: test
     script:
+        - php artisan key:generate
+        - php artisan config:cache
+        - php artisan migrate
+        - php artisan db:seed
         - phpunit --coverage-text --colors=never
+    artifacts:
+        untracked: true
+        paths:
+            - ./storage/logs
+        when: on_failure
+        expire_in: 1 week
 
-# Prepare
-composer:install-dependencies:
+.phpunit-pg-tests: &phpunit-pg-tests
     <<: *postgres-service
-    <<: *push-cache
-    <<: *before-prepare
-    stage: prepare
-    script:
-        - composer self-update
-        - composer -V
-        - composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
+    <<: *pull-cache-dev
     <<: *run-on-do-docker
-
-composer:install-dependencies-dev:
-    <<: *postgres-service
-    <<: *push-cache-dev
-    <<: *before-prepare
-    stage: prepare
-    script:
-        - composer self-update
-        - composer -V
-        - composer install --no-progress
-    <<: *run-on-do-docker
-
-# Tests
-php:postgres-migrate:
-    stage: test
-    <<: *postgres-service
-    <<: *before-pgsql
-    <<: *pull-cache
-    <<: *migrate-script
-    <<: *run-on-do-docker
-
-php:mysql-migrate:
-    stage: test
+    <<: *phpunit-tests
+    before_script:
+        - cp .env.testing.pgsql .env
+        
+.phpunit-mysql-tests: &phpunit-mysql-tests
     <<: *mysql-service
-    <<: *before-mysql
-    <<: *pull-cache
-    <<: *migrate-script
-    <<: *run-on-do-docker
-
-php:postgres-phpunit:
-    stage: test
-    <<: *postgres-service
-    <<: *before-pgsql
     <<: *pull-cache-dev
-    <<: *coverage-script
     <<: *run-on-do-docker
+    <<: *phpunit-tests
+    before_script:
+        - cp .env.testing.mysql .env
 
-php:mysql-phpunit:
-    stage: test
-    <<: *mysql-service
-    <<: *before-mysql
+# PHPCS configuration
+.phpcs-tests: &phpcs-tests
     <<: *pull-cache-dev
-    <<: *coverage-script
     <<: *run-on-do-docker
-
-# Post tests
-php:postgres-phpcs:
-    <<: *postgres-service
-    <<: *before-pgsql
-    <<: *pull-cache-dev
     stage: post-test
     script:
         - chmod +x vendor/bin/phpcs
         - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
     allow_failure: true
+
+# composer Update
+.composer-install: &composer-install
     <<: *run-on-do-docker
+    stage: prepare
+    before_script:
+        - composer self-update
+        - composer -V
+
+# Prepare
+composer-install: 
+    <<: *composer-install
+    <<: *push-cache-dev
+    script:
+        - composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
+
+composer-install-dev:
+    <<: *composer-install
+    <<: *push-cache-dev
+    script:
+        - composer install --no-ansi --no-interaction --no-progress --no-scripts
+
+# Tests
+phpunit-pg-tests 1 2: *phpunit-pg-tests
+phpunit-pg-tests 2 2: *phpunit-pg-tests
+
+phpunit-mysql-tests 1 2: *phpunit-mysql-tests
+phpunit-mysql-tests 2 2: *phpunit-mysql-tests
+
+phpcs-tests 1 1: *phpcs-tests
 
 # Build
 build image:
