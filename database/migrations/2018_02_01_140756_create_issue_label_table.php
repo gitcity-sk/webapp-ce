@@ -33,6 +33,6 @@ class CreateIssueLabelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('issue_labels');
+        Schema::dropIfExists('issue_label');
     }
 }
