@@ -24,7 +24,7 @@ class PermissionsSeeder extends Seeder
     public function run()
     {
         // projects
-        /*$role = factory(Role::class)->create(['name' => 'Administrator']);
+        $role = factory(Role::class)->create(['name' => 'Administrator']);
         foreach ($this->permissions as $permission)
         {
             $perm = factory(Permission::class)->create([
@@ -33,6 +33,6 @@ class PermissionsSeeder extends Seeder
             ]);
 
             $role->givePermissionTo($perm);
-        }*/
+        }
     }
 }
