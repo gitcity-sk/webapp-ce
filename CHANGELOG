@@ -1,3 +1,18 @@
+v 18.1 (1.0)
+
+First stable releasse. As of version 1.0 we change app versioning. Now version is mage with Year.Release.Patch for example
+Version 1.0 is nov version 18.1 and 2nd patch for this will have verions 18.1.2
+
+NEW Licensing - You need license to use some application features
+NEW Labels
+NEW Sidebar
+NEW Laravel was upgraded to verision 5.6
+NEW Cashier was remoed for now
+UPDATE GitElephat update to v 2018
+UPDATE PHP requirements is no set up to 7.1 and Up
+
+Other - some more UI tweaks for beter usability
+
 v 0.0.6
 
 NEW Profiles can now have pictures
