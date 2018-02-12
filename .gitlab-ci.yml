@@ -66,9 +66,10 @@ stages:
     script:
         - php artisan key:generate
         - php artisan config:cache
-        - php artisan migrate
+        #
         - php artisan db:seed
         - phpunit --coverage-text --colors=never
+    retry: 2
     artifacts:
         untracked: true
         paths:
@@ -124,11 +125,9 @@ composer-install-dev:
         - composer install --no-ansi --no-interaction --no-progress --no-scripts
 
 # Tests
-phpunit-pg-tests 1 2: *phpunit-pg-tests
-phpunit-pg-tests 2 2: *phpunit-pg-tests
+phpunit-pg-tests 1 1: *phpunit-pg-tests
 
-phpunit-mysql-tests 1 2: *phpunit-mysql-tests
-phpunit-mysql-tests 2 2: *phpunit-mysql-tests
+phpunit-mysql-tests 1 1: *phpunit-mysql-tests
 
 phpcs-tests 1 1: *phpcs-tests
 
