@@ -8,18 +8,24 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Label;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class LabelControllerTest extends TestCase
+class LabelsTest extends TestCase
 {
     use DatabaseMigrations;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->label = factory(Label::class)->create();
+        
+    }
 
     /** @test */
     public function administrators_can_see_all_labels()
     {
-        $label = factory(Label::class)->create();
-
         $response = $this->get('/admin/labels');
         $response->assertStatus(200);
-        $response->assertSee($label->title);
+        $response->assertSee($this->label->title);
         $response->assertSee('Labels');
     }
 

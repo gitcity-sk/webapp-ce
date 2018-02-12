@@ -9,21 +9,33 @@ use App\Project;
 use App\User;
 use App\Permission;
 use App\Role;
+use App\Profile;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use SebastianBergmann\Comparator\Factory;
 
-class ProjectsControllerTest extends TestCase
+class ProjectsTest extends TestCase
 {
     use DatabaseMigrations;
     // use DatabaseTransactions;
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        // Pforile belongs to user so lets create user with profile
+        $this->user = factory(User::class)->create();
+        $this->profile = factory(Profile::class)->create(['user_id' => $this->user->id]);
+        
+        // issue belongs to user
+        $this->project = factory(Project::class)->create(['user_id' => $this->user->id]);
+        
+    }
     
 
     /** @test */
     public function users_can_see_all_projects()
     {
-        $user = factory(User::class)->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
             ->get('/projects');
         $response->assertStatus(200);
@@ -33,98 +45,76 @@ class ProjectsControllerTest extends TestCase
     /** @test */
     public function users_can_see_single_project()
     {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-
         $role = factory(Role::class)->create();
         $showPerm = factory(Permission::class)->create(['name' => 'show-project']);
         $delPerm = factory(Permission::class)->create(['name' => 'delete-project']);
         $role->givePermissionTo($showPerm);
         $role->givePermissionTo($delPerm);
-        $user->assignRole($role->name);
+        $this->user->assignRole($role->name);
 
-        $response = $this->actingAs($user)
-        ->get('/projects/' . $project->id);
+        $response = $this->actingAs($this->user)
+        ->get('/projects/' . $this->project->id);
         $response->assertStatus(200);
     }
 
     /** @test */
     public function users_can_see_project_issues()
     {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
-            ->get('/projects/' . $project->id . '/issues');
+            ->get('/projects/' . $this->project->id . '/issues');
         $response->assertStatus(200);
     }
 
     /** @test */
     public function users_can_see_project_commits()
     {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
-            ->get('/projects/' . $project->id . '/commits');
+            ->get('/projects/' . $this->project->id . '/commits');
         $response->assertStatus(200);
     }
 
     /** @test */
     public function users_can_see_project_branches()
     {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
-            ->get('/projects/' . $project->id . '/branches');
+            ->get('/projects/' . $this->project->id . '/branches');
         $response->assertStatus(200);
     }
 
     /** @test */
     public function users_can_see_project_tags()
     {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
-            ->get('/projects/' . $project->id . '/tags');
+            ->get('/projects/' . $this->project->id . '/tags');
         $response->assertStatus(200);
     }
 
     /** @test */
     public function users_can_see_project_merge_requests()
     {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
-            ->get('/projects/' . $project->id . '/merge-requests');
+            ->get('/projects/' . $this->project->id . '/merge-requests');
         $response->assertStatus(200);
     }
 
     /** @test */
     public function users_can_see_project_merge_requests_create_form()
     {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-
-        $response = $this->actingAs($user)
+        $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
-            ->get('/projects/' . $project->id . '/merge-requests/new');
+            ->get('/projects/' . $this->project->id . '/merge-requests/new');
         $response->assertStatus(200);
     }
 
     /** @test */
     public function users_can_see_project_crete_form()
     {
-        $user = factory(User::class)->create();
-        $response = $this->actingAs($user)->get('/projects/create');
+        $response = $this->actingAs($this->user)->get('/projects/create');
         $response->assertStatus(200);
     }
 }
