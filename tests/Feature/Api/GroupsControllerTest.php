@@ -8,10 +8,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Group;
 use App\Project;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class GroupsControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     /**
      * A basic test example.
      *

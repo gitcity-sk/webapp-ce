@@ -6,15 +6,14 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Label;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LabelControllerTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testIndex()
+    use DatabaseMigrations;
+
+    /** @test */
+    public function administrators_can_see_all_labels()
     {
         $label = factory(Label::class)->create();
 
@@ -24,7 +23,8 @@ class LabelControllerTest extends TestCase
         $response->assertSee('Labels');
     }
 
-    public function testCreate()
+    /** @test */
+    public function administrators_can_see_labels_create_form()
     {
         $response = $this->get('/admin/labels/create');
         $response->assertStatus(200);

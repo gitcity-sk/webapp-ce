@@ -8,10 +8,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Profile;
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ProfilesControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     /**
      * A basic test example.
      *

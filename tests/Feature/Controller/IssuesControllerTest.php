@@ -9,10 +9,11 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Issue;
 use App\User;
 use App\Profile;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class IssuesController extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     /**
      * A basic test example.
      *

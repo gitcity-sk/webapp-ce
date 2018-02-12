@@ -14,14 +14,12 @@ use SebastianBergmann\Comparator\Factory;
 
 class ProjectsControllerTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
     // use DatabaseTransactions;
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testIndex()
+    
+
+    /** @test */
+    public function users_can_see_all_projects()
     {
         $user = factory(User::class)->create();
 
@@ -32,7 +30,8 @@ class ProjectsControllerTest extends TestCase
         $response->assertSee('Projects');
     }
 
-    public function testShow()
+    /** @test */
+    public function users_can_see_single_project()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
@@ -49,7 +48,8 @@ class ProjectsControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testIssues()
+    /** @test */
+    public function users_can_see_project_issues()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
@@ -60,7 +60,8 @@ class ProjectsControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testCommits()
+    /** @test */
+    public function users_can_see_project_commits()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
@@ -71,7 +72,8 @@ class ProjectsControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testBranches()
+    /** @test */
+    public function users_can_see_project_branches()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
@@ -82,7 +84,8 @@ class ProjectsControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testTags()
+    /** @test */
+    public function users_can_see_project_tags()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
@@ -93,7 +96,8 @@ class ProjectsControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testMergeRequests()
+    /** @test */
+    public function users_can_see_project_merge_requests()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
@@ -104,7 +108,8 @@ class ProjectsControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testMergeRequestsCreate()
+    /** @test */
+    public function users_can_see_project_merge_requests_create_form()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
@@ -115,7 +120,8 @@ class ProjectsControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testCreate()
+    /** @test */
+    public function users_can_see_project_crete_form()
     {
         $user = factory(User::class)->create();
         $response = $this->actingAs($user)->get('/projects/create');
