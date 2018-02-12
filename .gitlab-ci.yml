@@ -66,8 +66,6 @@ stages:
     script:
         - php artisan key:generate
         - php artisan config:cache
-        #
-        - php artisan db:seed
         - phpunit --coverage-text --colors=never
     retry: 2
     artifacts:
