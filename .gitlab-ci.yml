@@ -124,7 +124,6 @@ composer-install-dev:
 
 # Tests
 phpunit-pg-tests 1 1: *phpunit-pg-tests
-
 phpunit-mysql-tests 1 1: *phpunit-mysql-tests
 
 phpcs-tests 1 1: *phpcs-tests
