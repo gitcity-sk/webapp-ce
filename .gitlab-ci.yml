@@ -137,12 +137,13 @@ phpunit-mysql-tests 1 1: *phpunit-mysql-tests
 phpcs-tests 1 1: *phpcs-tests
 
 # Deploy page
-
 pages:
     <<: *postgres-service
     <<: *pull-cache-dev
     <<: *run-on-do-docker
     <<: *phpunit-html-coverage
+    before_script:
+        - cp .env.testing.pgsql .env
     artifacts:
         paths:
         - public
