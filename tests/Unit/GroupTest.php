@@ -22,10 +22,11 @@ class GroupTest extends TestCase
         $this->assertInstanceOf(User::class, $group->user);
     }
 
+    /** @test */
     public function group_can_have_project()
     {
         $group = factory(Group::class)->create();
-        $group->attachProject(faactory(Project::class)->create);
+        $group->attachProject(factory(Project::class)->create());
 
         foreach ($group->projects as $project) {
             $this->assertInstanceOf(Project::class, $project);
