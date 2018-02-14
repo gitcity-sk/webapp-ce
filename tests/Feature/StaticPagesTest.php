@@ -22,11 +22,4 @@ class StaticPagesTest extends TestCase
         $response = $this->get('/terms');
         $response->assertSee('<div class="card-header">Terms of Service</div>');
     }
-
-    /** @test */
-    public function user_can_see_pricing_page()
-    {
-        $response = $this->get('/license');
-        $response->assertSee('<h1 class="card-title pricing-card-title"><i class="fas fa-euro-sign"></i>27 <small class="text-muted">per year</small></h1>');
-    }
 }
