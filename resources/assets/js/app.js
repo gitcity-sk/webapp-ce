@@ -29,6 +29,7 @@ Vue.component('user-projects-table-component', require('./components/users/UserP
 Vue.component('project-issues-table-component', require('./components/projects/ProjectIssuesTableComponent.vue'));
 
 Vue.component('delete-button', require('./components/license/LicenseDeleteComponent.vue'));
+//Vue.component('monaco-editor', require('./components/webide/MonacoEditorComponent.vue'));
 
 const app = new Vue({
     el: '#app',
