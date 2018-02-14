@@ -45,7 +45,7 @@ class ProjectsTest extends TestCase
     /** @test */
     public function users_can_see_single_project()
     {
-        $role = factory(Role::class)->create();
+        $role = factory(Role::class)->create(['name' => 'administrator']);
         $showPerm = factory(Permission::class)->create(['name' => 'show-project']);
         $delPerm = factory(Permission::class)->create(['name' => 'delete-project']);
         $role->givePermissionTo($showPerm);
@@ -54,7 +54,7 @@ class ProjectsTest extends TestCase
 
         $response = $this->actingAs($this->user)
         ->get('/projects/' . $this->project->id);
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
     /** @test */
@@ -72,7 +72,7 @@ class ProjectsTest extends TestCase
         $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
             ->get('/projects/' . $this->project->id . '/commits');
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
     /** @test */
@@ -81,7 +81,7 @@ class ProjectsTest extends TestCase
         $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
             ->get('/projects/' . $this->project->id . '/branches');
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
     /** @test */
@@ -90,7 +90,7 @@ class ProjectsTest extends TestCase
         $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
             ->get('/projects/' . $this->project->id . '/tags');
-        $response->assertStatus(200);
+        $response->assertStatus(403);
     }
 
     /** @test */

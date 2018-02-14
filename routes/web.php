@@ -79,6 +79,8 @@ Route::get('/terms', 'PagesController@terms');
 Route::get('/pricing', 'PagesController@pricing');
 Route::get('/license', 'PagesController@license');
 
+Route::get('/pages', 'PagesController@index');
+
 /**
  * profiles
  */

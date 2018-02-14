@@ -23,6 +23,6 @@ class TagsController extends Controller
             return view('projects.tags', compact('project', 'tags'));
         }
 
-        return view('pages.403');
+        abort(403);
     }
 }

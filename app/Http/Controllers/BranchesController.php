@@ -22,6 +22,6 @@ class BranchesController extends Controller
             return view('projects.branches', compact('project', 'branches'));
         }
 
-        return view('pages.403');
+        abort(403);
     }
 }
