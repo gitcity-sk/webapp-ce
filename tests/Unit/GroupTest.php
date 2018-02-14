@@ -15,7 +15,7 @@ class GroupTest extends TestCase
     use DatabaseMigrations;
     
     /** @test */
-    public function group_pelongs_to_user()
+    public function group_belongs_to_user()
     {
         $group = factory(Group::class)->create();
 
