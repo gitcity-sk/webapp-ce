@@ -2,7 +2,9 @@
     <!-- Load from webpack (note the srcPath="dist" prop) -->
     <!-- vs-dark -->
     <!--         height="600" -->
-    <Monaco
+    <div style="height: 100%">
+      <css-preloader :loading="done"></css-preloader>
+      <Monaco
         :language="language"
         srcPath="/"
         :code="code"
@@ -13,18 +15,21 @@
         @mounted="onMounted"
         @codeChange="onCodeChange"
         >
-    </Monaco>
+      </Monaco>
+    </div>
 </template>
 
 <script>
-const Monaco = require('./Monaco.vue')
+import cssPreloader from '../vue-shared/css-preloader.vue';
+import Monaco from './Monaco.vue';
 
-module.exports = {
+export default {
   props: ['language'],
   components: {
-    Monaco
+    Monaco,
+    cssPreloader
   },
-  data() {
+  data () {
     return {
       code: '// type your code \n',
       highlightLines: [
@@ -36,31 +41,29 @@ module.exports = {
           number: 0,
           class: 'secondary-highlighted-line'
         }
-      ]
-    };
+      ],
+      done: false
+    }
   },
   methods: {
-    onMounted(editor) {
+    onMounted (editor) {
       console.log('after mount!', editor, editor.getValue(), editor.getModel());
+      this.done = true;
       this.editor = editor;
     },
-    onMounted2(editor) {
-      console.log('after mount!', editor, editor.getValue(), editor.getModel());
-      this.editor2 = editor;
-    },
-    onCodeChange(editor) {
+    onCodeChange (editor) {
       console.log('code changed!', 'code:' + this.editor.getValue());
     },
-    onCodeChange2(editor) {
-      console.log('code changed!', 'code:' + this.editor2.getValue());
-    },
-    clickHandler() {
+    clickHandler () {
       console.log('here is the code:', this.editor.getValue());
     }
   },
-  created() {
+  created () {
     this.options = {
-      selectOnLineNumbers: false
+      selectOnLineNumbers: false,
+      minimap: {
+        enabled: false
+      }
     };
   }
 };
