@@ -10039,6 +10039,10 @@ a.text-dark:focus {
   border-top-right-radius: 0.25rem;
 }
 
+.full-height {
+  min-height: 95vh;
+}
+
 /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */
 
