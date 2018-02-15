@@ -27,11 +27,6 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="row text-center loading" v-if="loading">
-                    <div class="col">
-                        <div class="loader" style="margin:0 auto;"></div>
-                    </div>
-                </div>
                 <project-issues-table-component project-id="{{ $project->id }}"></project-issues-table-component>
             </div>
         </div>

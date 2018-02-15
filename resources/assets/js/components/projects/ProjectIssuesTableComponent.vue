@@ -1,4 +1,6 @@
 <template>
+<div>
+    <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
     <table class="table">
         <thead>
@@ -25,6 +27,7 @@
                 </tr>
             </tbody>
         </table>
+    </div>
     </div>
 </template>
 
