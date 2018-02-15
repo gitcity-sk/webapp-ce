@@ -9,6 +9,10 @@
 @include('admin.sidebar')
 @endsection
 
+@section('javascripts')
+<script src="{{ mix('/js/app.js') }}"></script>
+@endsection
+
 @section('content')
 
 <h1 class="h2" style="font-weight: 300">{{ $user->name }}</h1>

@@ -9,6 +9,10 @@
 @include('admin.sidebar')
 @endsection
 
+@section('javascripts')
+<script src="{{ mix('/js/mix/license/bundle.js') }}"></script>
+@endsection
+
 @section ('content')
 <h1 class="display-4">License</h1>
 <div class="row">

@@ -10,7 +10,7 @@
     <title>GitCity</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
 
   </head>
   <body class="@yield ('layout-body-classes')">
@@ -28,6 +28,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/app.js"></script>
+    <script src="{{ mix('/js/bundle.js') }}"></script>
+    @yield ('javascripts')
   </body>
 </html>

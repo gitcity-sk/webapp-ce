@@ -9,6 +9,10 @@
 @include('admin.sidebar')
 @endsection
 
+@section('javascripts')
+<script src="{{ mix('/js/app.js') }}"></script>
+@endsection
+
 @section ('projects-table')
 <table class="table table-vcenter">
     <thead class="thead-light">

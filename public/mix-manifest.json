@@ -1,5 +1,12 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/css/blog.css": "/css/blog.css"
+    "/js/mix/projects/bundle.js": "/js/mix/projects/bundle.js?id=e53bb33b7d2f60f2ecd3",
+    "/js/mix/groups/bundle.js": "/js/mix/groups/bundle.js?id=9d842202b05504cc5696",
+    "/js/mix/users/bundle.js": "/js/mix/users/bundle.js?id=d609c9ace2b59c0f2593",
+    "/js/bundle.js": "/js/bundle.js?id=71d33136c587ebf350d8",
+    "/js/mix/git/bundle.js": "/js/mix/git/bundle.js?id=5af9f9ba90eeb9d2f90d",
+    "/js/mix/profiles/bundle.js": "/js/mix/profiles/bundle.js?id=1c98b563749c86c7a2c2",
+    "/js/mix/license/bundle.js": "/js/mix/license/bundle.js?id=536dbcee0e21523ebcf1",
+    "/js/app.js": "/js/app.js?id=faf7607952b35fe58e50",
+    "/css/app.css": "/css/app.css?id=967cce110050c56dda25",
+    "/css/blog.css": "/css/blog.css?id=4f9d18c05b97dc7ab8f0"
 }

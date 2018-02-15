@@ -2,6 +2,10 @@
 
 @section ('layout-main-classes', 'container')
 
+@section('javascripts')
+<script src="{{ mix('/js/app.js') }}"></script>
+@endsection
+
 @section ('content')
 
 <div class="row align-items-center" style="min-height: 100vh">
