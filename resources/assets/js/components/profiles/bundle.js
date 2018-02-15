@@ -20,6 +20,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('profile-view-component', require('./ProfileView.vue'));
+Vue.component('user-projects-table-component', require('../users/UserProjectsTableComponent.vue'));
 
 const app = new Vue({
     el: '#app',
