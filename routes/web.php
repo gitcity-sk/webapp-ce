@@ -95,6 +95,12 @@ Route::put('/profiles/{profile}', 'ProfilesController@update');
 Route::get('/-/editor', 'WebideController@index');
 
 /**
+ * Pages
+ */
+
+ Route::get('/-/cms/{project}', 'CmsController@index');
+
+/**
  * ADMIN
  */
 Route::get('/admin/roles', 'RolesController@index');
