@@ -35,6 +35,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/js/app.js"></script>
+    <script src="{{ mix('/js/bundle.js') }}"></script>
+    @yield ('javascripts')
   </body>
 </html>

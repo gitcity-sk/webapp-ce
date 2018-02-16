@@ -1,4 +1,13 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/mix/projects/bundle.js": "/js/mix/projects/bundle.js?id=97022072cae2c589659f",
+    "/js/mix/groups/bundle.js": "/js/mix/groups/bundle.js?id=3e93917b9d12b6a6623c",
+    "/js/mix/users/bundle.js": "/js/mix/users/bundle.js?id=dbbfa3d2ff2c1fde0e2b",
+    "/js/bundle.js": "/js/bundle.js?id=59637d9e7a30ed0a2e10",
+    "/js/mix/profiles/bundle.js": "/js/mix/profiles/bundle.js?id=91971208e0c325baf113",
+    "/js/mix/git/bundle.js": "/js/mix/git/bundle.js?id=e13a91aedb44c5fb07f8",
+    "/js/mix/license/bundle.js": "/js/mix/license/bundle.js?id=891fe56a319f0483faee",
+    "/js/mix/ide/bundle.js": "/js/mix/ide/bundle.js?id=204ca32007ff4ae1adac",
+    "/js/app.js": "/js/app.js?id=faf7607952b35fe58e50",
+    "/css/app.css": "/css/app.css?id=29baae7b1cc846482677",
+    "/css/blog.css": "/css/blog.css?id=0d5ec974f974079d3708"
 }

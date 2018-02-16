@@ -7,6 +7,10 @@
 @include('projects.elements.sidebar')
 @endsection
 
+@section('javascripts')
+<script src="{{ mix('/js/mix/projects/bundle.js') }}"></script>
+@endsection
+
 @section ('content')
 <h1 class="h2" style="font-weight: 300">
 <i class="far fa-book"></i>
@@ -27,11 +31,6 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="row text-center loading" v-if="loading">
-                    <div class="col">
-                        <div class="loader" style="margin:0 auto;"></div>
-                    </div>
-                </div>
                 <project-issues-table-component project-id="{{ $project->id }}"></project-issues-table-component>
             </div>
         </div>

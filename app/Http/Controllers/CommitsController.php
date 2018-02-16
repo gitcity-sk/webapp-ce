@@ -24,6 +24,6 @@ class CommitsController extends Controller
             return view('projects.commits', compact('project', 'commits'));
         }
 
-        return view('pages.403');
+        abort(403);
     }
 }

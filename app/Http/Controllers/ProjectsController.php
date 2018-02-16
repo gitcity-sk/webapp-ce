@@ -49,7 +49,7 @@ class ProjectsController extends Controller
             return view('projects.show', compact('project'));
         }
 
-        return view('pages.403');
+        abort(403);
     }
 
     /**

@@ -75,6 +75,13 @@ stages:
         when: on_failure
         expire_in: 1 week
 
+.phpunit-html-coverage: &phpunit-html-coverage
+    stage: post-test
+    script:
+        - php artisan key:generate
+        - php artisan config:cache
+        - phpunit --coverage-html ./public/coverage
+
 .phpunit-pg-tests: &phpunit-pg-tests
     <<: *postgres-service
     <<: *pull-cache-dev
@@ -126,7 +133,20 @@ composer-install-dev:
 phpunit-pg-tests 1 1: *phpunit-pg-tests
 phpunit-mysql-tests 1 1: *phpunit-mysql-tests
 
+# Post Test
 phpcs-tests 1 1: *phpcs-tests
+
+# Deploy page
+pages:
+    <<: *postgres-service
+    <<: *pull-cache-dev
+    <<: *run-on-do-docker
+    <<: *phpunit-html-coverage
+    before_script:
+        - cp .env.testing.pgsql .env
+    artifacts:
+        paths:
+        - public
 
 # Build
 build image:

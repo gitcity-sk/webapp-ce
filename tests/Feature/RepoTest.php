@@ -8,12 +8,8 @@ use App\Repo;
 
 class RepoTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testPath()
+    /** @test */
+    public function project_has_path_on_disk()
     {
         $namespace = 'project-namespace';
         $name = 'project-name';

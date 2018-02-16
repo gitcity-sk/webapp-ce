@@ -1,12 +1,12 @@
 <template>
     <div v-if="done">
-        <table v-if="projects.data" class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Project name</th>
-                </tr>
-            </thead>
-            <tbody>
+    <table v-if="projects.data" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Project name</th>
+            </tr>
+        </thead>
+        <tbody>
                 <tr v-for="project in projects.data">
                     <td>
                         <div class="d-flex">
@@ -31,10 +31,14 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    import emojione from 'emojione'
+    import axios from 'axios';
+    import emojione from 'emojione';
+    import cssPreloader from '../vue-shared/css-preloader.vue';
     
     export default {
+        components: {
+            cssPreloader
+        },
         mounted () {
             console.log('Component ProfilesTable mounted.')
         },

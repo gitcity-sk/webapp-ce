@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('javascripts')
+<script src="{{ mix('/js/app.js') }}"></script>
+@endsection
+
 @section ('layout-body-classes', 'mt-5 mb-3')
 
 @section('content')

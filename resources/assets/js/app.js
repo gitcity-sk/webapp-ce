@@ -5,11 +5,9 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-require('./emojione-convert');
-require('./fontawesome-all');
-require('./directives/TooltipDirective');
-require('./filters/MomentFilter');
+//require('./fontawesome-all');
+//require('./directives/TooltipDirective');
+//require('./filters/MomentFilter');
 
 window.Vue = require('vue');
 
@@ -19,16 +17,17 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('profile-view-component', require('./components/profiles/ProfileViewComponent.vue'));
-Vue.component('projects-table-component', require('./components/projects/ProjectsTableComponent.vue'));
-Vue.component('tree-table-component', require('./components/git/TreeTableComponent.vue'));
-Vue.component('groups-table-component', require('./components/groups/GroupsTableComponent.vue'));
-Vue.component('group-projects-table-component', require('./components/groups/GroupProjectsTableComponent.vue'));
-Vue.component('user-projects-table-component', require('./components/users/UserProjectsTableComponent.vue'));
-Vue.component('project-issues-table-component', require('./components/projects/ProjectIssuesTableComponent.vue'));
+//Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//Vue.component('profile-view-component', require('./components/profiles/ProfileViewComponent.vue'));
+//Vue.component('projects-table-component', require('./components/projects/ProjectsTableComponent.vue'));
+//Vue.component('tree-table-component', require('./components/git/TreeTableComponent.vue'));
+//Vue.component('groups-table-component', require('./components/groups/GroupsTableComponent.vue'));
+//Vue.component('group-projects-table-component', require('./components/groups/GroupProjectsTableComponent.vue'));
+//Vue.component('user-projects-table-component', require('./components/users/UserProjectsTableComponent.vue'));
+//Vue.component('project-issues-table-component', require('./components/projects/ProjectIssuesTableComponent.vue'));
 
-Vue.component('delete-button', require('./components/license/LicenseDeleteComponent.vue'));
+//Vue.component('delete-button', require('./components/license/LicenseDeleteComponent.vue'));
+//Vue.component('monaco-editor', require('./components/ide/MonacoEditorComponent.vue'));
 
 const app = new Vue({
     el: '#app',

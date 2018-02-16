@@ -13,18 +13,42 @@ class License
 
     const LICENSE_FEATURES = [
         'Starter' => [
-            'epics',
-            'groups'
+            'groups',
+            'projects'
         ],
         'Premium' => [
-            'epics',
-            'groups'
+            'epics'
         ],
         'Ultimate' => [
-            'epics',
-            'groups'
+            'pages'
         ]
     ];
+
+    /**
+     * Do not merge with other licenses
+     */
+    const EARLY_ADOPTER = [
+        'groups',
+        'projects',
+        'epics',
+        'pages'
+    ];
+
+    protected static function featuresByLicense($license)
+    {
+        $starter = static::LICENSE_FEATURES['Starter'];
+        $premium = array_merge($starter, static::LICENSE_FEATURES['Premium']);
+        $ultimate = array_merge($premium, static::LICENSE_FEATURES['Ultimate']);
+
+        $featuresByLicense = [
+            'Starter' => $starter,
+            'Premium' => $premium,
+            'Ultimate' => $ultimate,
+            'EarlyAdopter' => static::EARLY_ADOPTER
+        ];
+
+        return $featuresByLicense[$license];
+    }
 
     public static function import()
     {
@@ -52,7 +76,7 @@ class License
 
         if ($license->type == 'Trial') return true;
 
-        $featuresByLicense = self::LICENSE_FEATURES[$license->type];
+        $featuresByLicense = self::featuresByLicense($license->type);
 
         if (!in_array($feature, $featuresByLicense)) return false;
 

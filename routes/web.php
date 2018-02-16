@@ -77,7 +77,8 @@ Route::get('/logout', 'SessionsController@destroy');
 Route::get('/privacy', 'PagesController@privacyPolicy');
 Route::get('/terms', 'PagesController@terms');
 Route::get('/pricing', 'PagesController@pricing');
-Route::get('/license', 'PagesController@license');
+
+Route::get('/pages', 'PagesController@index');
 
 /**
  * profiles
@@ -86,6 +87,18 @@ Route::get('/license', 'PagesController@license');
 Route::get('/profiles/{profile}', 'ProfilesController@show');
 Route::get('/profiles/{profile}/edit', 'ProfilesController@edit');
 Route::put('/profiles/{profile}', 'ProfilesController@update');
+
+/**
+ * WebIde
+ */
+
+Route::get('/-/editor', 'WebideController@index');
+
+/**
+ * Pages
+ */
+
+ Route::get('/-/cms/{project}', 'CmsController@index');
 
 /**
  * ADMIN

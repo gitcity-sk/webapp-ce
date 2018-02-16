@@ -7,6 +7,10 @@
 @include('projects.elements.sidebar')
 @endsection
 
+@section('javascripts')
+<script src="{{ mix('/js/mix/projects/bundle.js') }}"></script>
+@endsection
+
 @section ('content')
 <h1 class="h2" style="font-weight: 300">
 <i class="far fa-book"></i>
