@@ -27,11 +27,25 @@ class CmsTest extends TestCase
     }
 
     /** @test */
-    public function user_can_create_pages()
+    public function user_can_see_create_page()
     {
         $response = $this->actingAs($this->project->user)->get('/-/cms/' . $this->project->id . '/pages/new');
         $response->assertStatus(200);
         $response->assertSee('New Page');
+    }
+
+    /** @test */
+    public function user_can_create_page()
+    {
+        $data =[
+            'title' => 'TEST',
+            'description' => 'Description'
+        ];
+        $response = $this->actingAs($this->project->user)->post('/-/cms/' . $this->project->id . '/pages', $data);
+        $createdPage = Page::where('title', $data['title'])->where('description', $data['description'])->firstOrFail();
+        $this->assertEquals($data['title'], $createdPage->title);
+        $this->assertEquals($data['description'], $createdPage->description);
+        //dd($createdPage);
     }
 
     /** @test */
