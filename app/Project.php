@@ -29,6 +29,16 @@ class Project extends Model
         return $this->hasMany(MergeRequest::class);
     }
 
+    public function pages()
+    {
+        return $this->hasMany(Page::class);
+    }
+
+    public function createPage(Page $page)
+    {
+        return $this->pages()->save($page);
+    }
+
     public function scopePrivate($query)
     {
         return $query->where('private', 1);

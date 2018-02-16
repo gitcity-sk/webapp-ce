@@ -1,20 +1,23 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Page;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class PagesTest extends TestCase
+class PagesApiTest extends TestCase
 {
     use DatabaseMigrations;
 
     /** @test */
-    public function user_can_see_all_pages()
+    public function api_can_get_pages_by_project()
     {
-        $response = $this->get('/pages');
+        $page = factory(Page::class)->create();
+
+        $response = $this->get('/api/pages/' . $page->project->id);
         $response->assertStatus(200);
     }
 }

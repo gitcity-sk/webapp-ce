@@ -1,3 +1,8 @@
+v 18.2 (2.0)
+
+* NEW Pages - Simple content management system
+* NEW Spaces - Upload binary files (cam be showed on pages)
+
 v 18.1 (1.0)
 
 First stable releasse. As of version 1.0 we change app versioning. Now version is mage with Year.Release.Patch for example

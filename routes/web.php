@@ -99,6 +99,10 @@ Route::get('/-/editor', 'WebideController@index');
  */
 
  Route::get('/-/cms/{project}', 'CmsController@index');
+ Route::get('/-/cms/{project}/pages/new', 'CmsController@create');
+ Route::get('/-/cms/pages/{page}/edit', 'CmsController@edit');
+
+ Route::post('/-/cms/{project}/pages', 'CmsController@store');
 
 /**
  * ADMIN
@@ -144,6 +148,8 @@ Route::group(['namespace' => 'Api'], function()
 {
     Route::get('/api/groups', 'GroupsController@index');
     Route::get('/api/groups/{group}/projects', 'GroupsController@projects');
+
+    Route::get('/api/pages/{project}', 'PagesController@index');
 
     Route::get('/api/issues', 'IssuesController@index');
     Route::get('/api/issues/{issue}', 'IssuesController@show');
