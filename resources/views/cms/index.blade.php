@@ -8,7 +8,7 @@
 @endsection
 
 @section('javascripts')
-<script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/mix/cms/bundle.js') }}"></script>
 @endsection
 
 @section ('content')
@@ -30,7 +30,7 @@
 
 <div class="row" style="margin-bottom: 3rem">
     <div class="col-12">
-
+        <pages-table-component project-id="{{ $project->id }}"></pages-table-component>
     </div>
 </div>
 @endsection

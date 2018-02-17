@@ -149,7 +149,7 @@ Route::group(['namespace' => 'Api'], function()
     Route::get('/api/groups', 'GroupsController@index');
     Route::get('/api/groups/{group}/projects', 'GroupsController@projects');
 
-    Route::get('/api/pages/{project}', 'PagesController@index');
+    Route::get('/api/projects/{project}/pages', 'PagesController@index');
 
     Route::get('/api/issues', 'IssuesController@index');
     Route::get('/api/issues/{issue}', 'IssuesController@show');
