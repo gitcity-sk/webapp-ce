@@ -19,7 +19,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/components/users/bundle.js', 'public/js/mix/users')
     .js('resources/assets/js/components/license/bundle.js', 'public/js/mix/license')
     .js('resources/assets/js/components/git/bundle.js', 'public/js/mix/git')
-    .js('resources/assets/js/components/ide/bundle.js', 'public/js/mix/ide')
+    .js('resources/assets/js/ide/bundle.js', 'public/js/mix/ide')
     .js('resources/assets/js/cms/bundle.js', 'public/js/mix/cms')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .sass('resources/assets/sass/blog.scss', 'public/css').version().sourceMaps();
