@@ -52,6 +52,8 @@ class ProjectsTest extends TestCase
         $role->givePermissionTo($delPerm);
         $this->user->assignRole($role->name);
 
+        //$this->user->hasRole($role->name);
+
         $response = $this->actingAs($this->user)
         ->get('/projects/' . $this->project->id);
         $response->assertStatus(403);

@@ -5,6 +5,10 @@
 
 @inject('markdown', 'Parsedown')
 
+@section('javascripts')
+<script src="{{ mix('/js/app.js') }}"></script>
+@endsection
+
 @section ('content')
 <h1 class="h2" style="font-weight: 300">
     #{{ $issue->id }} {{ $issue->title }}
@@ -13,7 +17,7 @@
 <div class="row">
     <div class="col-9">
     <span class="badge badge-success">Open</span> opened {{ $issue->created_at->diffForHumans() }} by <a class="text-dark" href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a><hr />
-        <p class="lead has-emoji">{!! $markdown->text($issue->description) !!}</p>
+        <p class="lead has-emoji">{!! markdown()->text($issue->description) !!}</p>
 
         <div class="card mb-3">
             <div class="card-header">
