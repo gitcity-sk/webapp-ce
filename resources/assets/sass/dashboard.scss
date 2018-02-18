@@ -1,3 +1,6 @@
+$contextual-sidebar-width: 220px;
+$link-hover-background: rgba(0,0,0,0.04);
+
 body {
     font-size: .875rem;
   }
@@ -21,13 +24,13 @@ body {
   }
   
   .wrapper.toggled {
-    padding-left: 220px;
+    padding-left: $contextual-sidebar-width;
   }
   
   .sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 220px;
+    left: $contextual-sidebar-width;
     width: 0;
     height: 100%;
     margin-left: -220px;
@@ -44,7 +47,7 @@ body {
   }
   
   .wrapper.toggled .sidebar-wrapper {
-    width: 220px;
+    width: $contextual-sidebar-width;
   }
   
   .page-content-wrapper {
@@ -69,14 +72,14 @@ body {
 
    .sidebar-top-level-items>li.active,
    .sidebar-top-level-items>li.active a:hover{
-     background: rgba(0,0,0,0.04);
+     background: $link-hover-background;
    }
 
 
    .sidebar-top-level-items>li a:hover,
    .sidebar-top-level-items>li.active a:hover,
    {
-     background: rgba(0,0,0,0.04);
+     background: $link-hover-background;
      color: #2e2e2e;
    }
 
@@ -156,13 +159,13 @@ body {
       padding-left: 0;
     }
     .wrapper.toggled {
-      padding-left: 220px;
+      padding-left: $contextual-sidebar-width;
     }
     .sidebar-wrapper {
       width: 0;
     }
     .wrapper.toggled .sidebar-wrapper {
-      width: 220px;
+      width: $contextual-sidebar-width;
     }
     .page-content-wrapper {
       //padding: 20px;
@@ -173,3 +176,35 @@ body {
       margin-right: 0;
     }
   }
+
+/*
+ * Header
+ */
+
+.context-header {
+  position: relative;
+  margin-right: 2px;
+  width: $contextual-sidebar-width;
+
+  a {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 10px, 16px, 10px, 10px;
+    color: #000000;
+  }
+
+  &:hover,
+  a:hover {
+    background-color: $link-hover-background;
+  }
+
+  .avatar-container {
+    flex: 0 0 40px;
+  }
+
+  .sidebar-context-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

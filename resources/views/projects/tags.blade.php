@@ -10,6 +10,15 @@
 @inject('markdown', 'Parsedown')
 
 @section ('sidebar-content')
+<div class="context-header">
+<a href="#">
+    <div class="avatar-container" style="min-height: 50px">
+    </div>
+    <div class="sidebar-context-title">
+        {{ $project->name }}
+    </div>
+</a>
+</div>
 @include('projects.elements.sidebar')
 @endsection
 
