@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class LabelTest extends TestCase
 {
     use DatabaseMigrations;
-    
+
     /** @test */
     public function label_can_many_have_issues()
     {
@@ -24,6 +24,5 @@ class LabelTest extends TestCase
         foreach ($label->issues as $issue) {
             $this->assertInstanceOf(Issue::class, $issue);
         }
-        
     }
 }

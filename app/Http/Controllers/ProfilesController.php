@@ -16,7 +16,7 @@ class ProfilesController extends Controller
     }
 
     // GET /profiles/{id}/edit
-    public function edit(Profile $profile) 
+    public function edit(Profile $profile)
     {
         return view('profiles.edit', compact('profile'));
     }
@@ -31,7 +31,7 @@ class ProfilesController extends Controller
                 'image' => $path
             ]);
         }
-        
+
         $profile->update(request(['name', 'description', 'facebook', 'twitter']));
 
         return redirect('/profiles/' . $profile->id);

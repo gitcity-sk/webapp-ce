@@ -57,7 +57,7 @@ class License
 
         if ($licenseString) {
             openssl_public_decrypt(base64_decode($licenseString->value), $decrypted, $decryptionKey);
-            
+
             $license = json_decode($decrypted);
             $license->started_at = Carbon::createFromTimestamp($license->started_at);
             $license->expires_at = Carbon::createFromTimestamp($license->expires_at);
@@ -68,18 +68,54 @@ class License
         return false;
     }
 
+    public static function expired()
+    {
+        $license = self::import();
+
+        // return true if license is expired
+        if ($license->expires_at < Carbon::now()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isValid()
+    {
+        // return false if license is expired
+        if (self::expired()) {
+            return false;
+        }
+
+        return true;
+    }
+
     public static function check($feature)
     {
         $license = self::import();
 
-        if (false == $license) return false;
+        // if there is no license return false
+        if (false == $license) {
+            return false;
+        }
 
-        if ($license->type == 'Trial') return true;
+        // return false if license is expired
+        if ($license->expires_at < Carbon::now()) {
+            return false;
+        }
 
+        // If license is trial
+        if ($license->type == 'Trial') {
+            return true;
+        }
+
+        // Check if license has required features
         $featuresByLicense = self::featuresByLicense($license->type);
+        if (!in_array($feature, $featuresByLicense)) {
+            return false;
+        }
 
-        if (!in_array($feature, $featuresByLicense)) return false;
-
+        // else return true
         return true;
     }
 }

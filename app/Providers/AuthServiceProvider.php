@@ -35,12 +35,11 @@ class AuthServiceProvider extends ServiceProvider
 
         if (Schema::hasTable('permissions')) {
             foreach ($this->getPermissions() as $permission) {
-                Gate::define($permission->name, function($user) use ($permission) {
+                Gate::define($permission->name, function ($user) use ($permission) {
                     return $user->hasRole($permission->roles);
                 });
             }
         }
-
     }
 
     protected function getPermissions()

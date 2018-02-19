@@ -15,6 +15,7 @@ class Repo extends Model
         } catch (\Exception $e) {
             return false;
         }
+
         return $repository;
     }
 

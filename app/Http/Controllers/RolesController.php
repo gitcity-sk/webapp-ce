@@ -29,6 +29,7 @@ class RolesController extends Controller
     {
         if (auth()->user()->can('assign-permissions') or (auth()->id() === 1)) {
             $permissions = Permission::all();
+
             return view('admin.roles.show', compact('role', 'permissions'));
         }
 

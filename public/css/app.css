@@ -10811,3 +10811,41 @@ body {
   }
 }
 
+/*
+ * Header
+ */
+
+.context-header {
+  position: relative;
+  margin-right: 2px;
+  width: 220px;
+}
+
+.context-header a {
+  font-weight: 600;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px, 16px, 10px, 10px;
+  color: #000000;
+}
+
+.context-header:hover,
+.context-header a:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.context-header .avatar-container {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 40px;
+          flex: 0 0 40px;
+}
+
+.context-header .sidebar-context-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

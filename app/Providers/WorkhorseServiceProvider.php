@@ -24,7 +24,7 @@ class WorkhorseServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(Workhorse::class, function() {
+        $this->app->singleton(Workhorse::class, function () {
             return new Workhorse();
         });
     }

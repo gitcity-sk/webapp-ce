@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class ProfileTest extends TestCase
 {
     use DatabaseMigrations;
-    
+
     /** @test */
     public function profile_belongs_to_user()
     {

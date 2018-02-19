@@ -20,7 +20,7 @@ class CreateCommentIssueTable extends Migration
 
             $table->integer('issue_id')->unsigned()->index();
             $table->foreign('issue_id')->references('id')->on('issues')->ondelete('cascade');
-            
+
             $table->timestamps();
         });
     }

@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ProjectResource;
 use App\Http\Resources\IssueResource;
 
-class ProjectsController extends Controller {
+class ProjectsController extends Controller
+{
 
     public function __construct(Projects $projects)
     {

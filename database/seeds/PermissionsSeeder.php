@@ -25,8 +25,7 @@ class PermissionsSeeder extends Seeder
     {
         // projects
         $role = factory(Role::class)->create(['name' => 'Administrator']);
-        foreach ($this->permissions as $permission)
-        {
+        foreach ($this->permissions as $permission) {
             $perm = factory(Permission::class)->create([
                 'name' => $permission['name'],
                 'label' => $permission['label']

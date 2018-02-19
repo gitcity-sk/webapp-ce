@@ -16,7 +16,9 @@ class Workhorse
      */
     public function __construct($socket = null)
     {
-        if ($socket == null) $socket = static::UNICORN_SOCKET;
+        if ($socket == null) {
+            $socket = static::UNICORN_SOCKET;
+        }
         $this->_setSocket($socket);
     }
 
@@ -27,7 +29,7 @@ class Workhorse
     {
         $this->server = stream_socket_client($socket, $errno, $errstr, 30);
 
-        if(!$this->server) {
+        if (!$this->server) {
             echo "$errstr ($errno)";
         }
     }
@@ -78,8 +80,8 @@ class Workhorse
     protected function _read()
     {
         $response = null;
-        while (!feof($this->server)){
-            $response .= fgets($this->server, 1024*8);
+        while (!feof($this->server)) {
+            $response .= fgets($this->server, 1024 * 8);
         }
 
         return $response;

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    protected $fillable = ['title', 'slug', 'description'];
+    protected $fillable = ['title', 'slug', 'description', 'user_id'];
 
     public function author()
     {
@@ -16,5 +16,10 @@ class Page extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+    }
+
+    public function scopeByDateDesc($query)
+    {
+        return $query->orderBy('created_at', 'DESC');
     }
 }

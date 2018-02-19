@@ -23,12 +23,11 @@ class GroupsControllerTest extends TestCase
         // Pforile belongs to user so lets create user with profile
         $this->user = factory(User::class)->create();
         $this->profile = factory(Profile::class)->create(['user_id' => $this->user->id]);
-        
+
         // Group belongs to user
         $this->group = factory(Group::class)->create(['user_id' => $this->user->id]);
-        
     }
-    
+
     /** @test */
     public function api_can_get_all_groups()
     {

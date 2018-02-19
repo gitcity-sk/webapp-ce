@@ -35,8 +35,7 @@ class BaseModel
             // check if its base model
             if ($this->$key instanceof BaseModel) {
                 $newArray[$key] = $this->$key->toArray();
-            }  else if (is_array($this->$key)) {
-                
+            } elseif (is_array($this->$key)) {
                 // check if its array
                 foreach ($this->$key as $id => $item) {
                     //check if item in array is baseModel
@@ -46,7 +45,6 @@ class BaseModel
                         $newArray[$key][$id] = $item;
                     }
                 }
-
             } else {
                 // simple variables just add to array
                 $newArray[$key] = $value;
@@ -55,5 +53,4 @@ class BaseModel
 
         return $newArray;
     }
-
 }

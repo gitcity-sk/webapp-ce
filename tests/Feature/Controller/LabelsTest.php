@@ -17,7 +17,6 @@ class LabelsTest extends TestCase
         parent::setUp();
 
         $this->label = factory(Label::class)->create();
-        
     }
 
     /** @test */
