@@ -20,11 +20,15 @@ public function __construct()
     
     public function index(Project $project)
     {
+        if (license_check('pages') == false) abort(403, 'License required');
+
         return view('cms.index', compact('project'));
     }
 
     public function create(Project $project)
     {
+        if (license_check('pages') == false) abort(403, 'License required');
+
         return view('cms.pages.create', compact('project'));
     }
 
@@ -35,6 +39,8 @@ public function __construct()
 
     public function store(Project $project)
     {
+        if (license_check('pages') == false) abort(403, 'License required');
+        
         $project->createPage(new Page([
             'title' => request('title'),
             'slug' => str_slug(request('title')),

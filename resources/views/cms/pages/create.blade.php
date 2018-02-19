@@ -4,7 +4,16 @@
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section ('sidebar-content')
-@include('projects.elements.sidebar')
+<div class="context-header">
+<a href="/projects/{{ $project->id }}">
+    <div class="avatar-container" style="min-height: 50px">
+    </div>
+    <div class="sidebar-context-title">
+        {{ $project->name }}
+    </div>
+</a>
+</div>
+@include('cms.elements.sidebar')
 @endsection
 
 @section('javascripts')

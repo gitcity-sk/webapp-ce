@@ -8,3 +8,10 @@ if (! function_exists('license_check')) {
         return License::check($license);
     }
 }
+
+if (! function_exists('license_expired')) {
+    function license_expired()
+    {
+        return License::expired();
+    }
+}

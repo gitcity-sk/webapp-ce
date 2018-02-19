@@ -20,4 +20,9 @@ class SpacesController extends Controller
     {
         return view('spaces.create');
     }
+
+    public function getFile($file)
+    {
+        return response()->download(storage_path('app/spaces/'. $file), null, [], null);
+    }
 }

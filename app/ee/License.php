@@ -68,18 +68,42 @@ class License
         return false;
     }
 
+    public static function expired()
+    {
+        $license = self::import();
+
+        // return true if license is expired
+        if ($license->expires_at < Carbon::now()) return true;
+
+        return false;
+    }
+
+    public static function isValid()
+    {
+        // return false if license is expired
+        if (self::expired()) return false;
+
+        return true;
+    }
+
     public static function check($feature)
     {
         $license = self::import();
 
+        // if there is no license return false
         if (false == $license) return false;
 
+        // return false if license is expired
+        if ($license->expires_at < Carbon::now()) return false;
+
+        // If license is trial
         if ($license->type == 'Trial') return true;
 
+        // Check if license has required features
         $featuresByLicense = self::featuresByLicense($license->type);
-
         if (!in_array($feature, $featuresByLicense)) return false;
 
+        // else return true
         return true;
     }
 }

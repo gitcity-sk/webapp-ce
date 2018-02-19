@@ -5,7 +5,7 @@
 
 @section ('sidebar-content')
 <div class="context-header">
-<a href="#">
+<a href="/projects/{{ $project->id }}">
     <div class="avatar-container" style="min-height: 50px">
     </div>
     <div class="sidebar-context-title">
@@ -13,7 +13,7 @@
     </div>
 </a>
 </div>
-@include('projects.elements.sidebar')
+@include('cms.elements.sidebar')
 @endsection
 
 @section('javascripts')

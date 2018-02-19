@@ -17,4 +17,9 @@ class Page extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function scopeByDateDesc($query)
+    {
+        return $query->orderBy('created_at', 'DESC');
+    }
 }

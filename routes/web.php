@@ -79,6 +79,7 @@ Route::get('/terms', 'PagesController@terms');
 Route::get('/pricing', 'PagesController@pricing');
 
 Route::get('/pages', 'PagesController@index');
+Route::get('/pages/{page}', 'PagesController@show');
 
 /**
  * profiles
@@ -180,3 +181,5 @@ Route::group(['namespace' => 'Api'], function()
 });*/
 
 Route::get ('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)');
+
+Route::get ('/spaces/space-name/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
