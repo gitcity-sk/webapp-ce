@@ -43,7 +43,10 @@ class CmsTest extends TestCase
     {
         $data = [
             'title' => 'TEST',
-            'description' => 'Description'
+            'slug' => str_slug('TEST'),
+            'description' => 'Description',
+            'project_id' => $this->project->id,
+            'user_id' => $this->project->user->id
         ];
         $response = $this->actingAs($this->project->user)->post('/-/cms/' . $this->project->id . '/pages', $data);
         $createdPage = Page::where('title', $data['title'])->where('description', 'LIKE' ,$data['description'])->firstOrFail();
