@@ -62,7 +62,7 @@ class Project extends Model
                     'path' => Repo::path($user->name, $this->slug)
                 ])->run();
         } catch (\Exception $e) {
-          dd($e);
+            dd($e);
             $response = null;
             report($e);
         }

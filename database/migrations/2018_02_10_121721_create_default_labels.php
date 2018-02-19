@@ -27,7 +27,9 @@ class CreateDefaultLabels extends Migration
             ],
         ];
 
-        foreach ($labels as $label) Label::create($label);
+        foreach ($labels as $label) {
+            Label::create($label);
+        }
     }
 
     /**

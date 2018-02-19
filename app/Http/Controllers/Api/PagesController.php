@@ -18,7 +18,7 @@ class PagesController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index(Project $project)
     {
         return PageResource::collection($project->pages);

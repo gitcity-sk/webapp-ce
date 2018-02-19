@@ -25,7 +25,7 @@ class ParsedownServiceProvider extends ServiceProvider
     public function register()
     {
         //
-        $this->app->singleton(Parsedown::class, function() {
+        $this->app->singleton(Parsedown::class, function () {
             return new Parsedown();
         });
     }

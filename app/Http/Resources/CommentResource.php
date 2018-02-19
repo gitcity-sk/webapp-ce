@@ -16,7 +16,7 @@ class CommentResource extends Resource
     {
         return [
             'id' => $this->id,
-            'body' => $this->body  
+            'body' => $this->body
         ];
     }
 }

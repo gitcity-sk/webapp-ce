@@ -19,7 +19,6 @@ class PageTest extends TestCase
         parent::setUp();
 
         $this->page = factory(Page::class)->create();
-        
     }
 
     /** @test */

@@ -18,7 +18,7 @@ class UsersController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $users = User::all();
@@ -29,6 +29,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         $roles = Role::all();
+
         return compact('user', 'roles');
     }
 

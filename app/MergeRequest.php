@@ -17,5 +17,4 @@ class MergeRequest extends Model
     {
         return $this->belongsTo(Project::class);
     }
-
 }

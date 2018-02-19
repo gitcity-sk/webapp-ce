@@ -13,7 +13,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 class GroupTest extends TestCase
 {
     use DatabaseMigrations;
-    
+
     /** @test */
     public function group_belongs_to_user()
     {

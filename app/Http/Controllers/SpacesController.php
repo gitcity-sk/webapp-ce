@@ -15,7 +15,7 @@ class SpacesController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function create()
     {
         return view('spaces.create');

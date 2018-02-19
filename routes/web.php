@@ -36,7 +36,9 @@ Route::post('/groups/{group}/projects', 'ProjectsController@assignTo');
 /**
  * Projects
  */
-Route::get('/projects', function () {return view('projects.index');})->middleware('auth');
+Route::get('/projects', function () {
+    return view('projects.index');
+})->middleware('auth');
 Route::get('/projects/create', 'ProjectsController@create');
 Route::get('/projects/{id}', 'ProjectsController@show')->name('project');
 Route::get('/projects/{id}/issues', 'ProjectsController@issues')->name('projectIssues');
@@ -95,9 +97,9 @@ Route::put('/profiles/{profile}', 'ProfilesController@update');
 
 Route::get('/-/editor', 'WebideController@index');
 
-/**
- * Pages
- */
+ /**
+  * Pages
+  */
 
  Route::get('/-/cms/{project}', 'CmsController@index');
  Route::get('/-/cms/{project}/pages/new', 'CmsController@create');
@@ -145,8 +147,7 @@ Route::get('/settings/authorized-keys/{authorizedKey}/delete', 'AuthorizedKeysCo
  * Api
  */
 
-Route::group(['namespace' => 'Api'], function()
-{
+Route::group(['namespace' => 'Api'], function () {
     Route::get('/api/groups', 'GroupsController@index');
     Route::get('/api/groups/{group}/projects', 'GroupsController@projects');
 
@@ -160,7 +161,7 @@ Route::group(['namespace' => 'Api'], function()
     Route::get('/api/projects', 'ProjectsController@index');
     Route::get('/api/projects/{project}/tree', 'TreeController@files');
     Route::get('/api/projects/{project}/issues', 'ProjectsController@issues');
-    
+
     Route::get('/api/users', 'UsersController@index');
     Route::get('/api/users/{user}', 'UsersController@show');
     Route::get('/api/users/{user}/projects', 'UsersController@projects');
@@ -180,6 +181,6 @@ Route::group(['namespace' => 'Api'], function()
     return view('projects.show', compact('name', 'age', 'tasks'));
 });*/
 
-Route::get ('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)');
+Route::get('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)');
 
-Route::get ('/spaces/space-name/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
+Route::get('/spaces/space-name/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');

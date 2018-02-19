@@ -10,7 +10,6 @@ class CommitsController extends Controller
     public function show(Project $project)
     {
         if (auth()->user()->can('show-project')) {
-
             //$repo = null;
             $repo = Repo::open($project->user->name, $project->slug);
 

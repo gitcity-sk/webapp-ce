@@ -10,7 +10,7 @@ use App\User;
 class ExampleTest extends DuskTestCase
 {
     use DatabaseMigrations;
-    
+
     /**
      * A basic browser test example.
      *

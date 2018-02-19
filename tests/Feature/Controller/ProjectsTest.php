@@ -25,12 +25,10 @@ class ProjectsTest extends TestCase
         // Pforile belongs to user so lets create user with profile
         $this->user = factory(User::class)->create();
         $this->profile = factory(Profile::class)->create(['user_id' => $this->user->id]);
-        
+
         // issue belongs to user
         $this->project = factory(Project::class)->create(['user_id' => $this->user->id]);
-        
     }
-    
 
     /** @test */
     public function users_can_see_all_projects()

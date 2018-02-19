@@ -49,8 +49,7 @@ class Tree extends BaseModel
 
     protected function build($tree)
     {
-        if (null != $tree)
-        {
+        if (null != $tree) {
             foreach ($tree as $treeObject) {
                 $treeItem = new TreeResource($treeObject);
                 $this->tree[] = $treeItem->toArray();

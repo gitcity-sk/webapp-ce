@@ -23,6 +23,7 @@ class MergeRequestsController extends Controller
     {
         $repo = Repo::open($mergeRequest->project->user->name, $mergeRequest->project->slug);
         $diff = Diff::getDiffBetween($mergeRequest->branch_from, $mergeRequest->branch_to, $repo);
+
         return view('merge_requests.show', compact('mergeRequest', 'diff'));
     }
 

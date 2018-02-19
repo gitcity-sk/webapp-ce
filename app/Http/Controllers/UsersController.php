@@ -17,6 +17,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         $roles = Role::all();
+
         return view('admin.users.show', compact('user', 'roles'));
     }
 }
