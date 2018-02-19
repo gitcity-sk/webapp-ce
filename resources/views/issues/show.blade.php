@@ -35,7 +35,7 @@
                 <a href="/profiles/{{ $comment->user->profile->id }}">{{ $comment->user->profile->name }}</a> at {{ $comment->created_at->diffForHumans() }}
             </div>
             <div class="card-body has-emoji">
-                {!! $markdown->text($comment->body) !!}
+                {!! markdown()->text($comment->body) !!}
             </div>
 
         </div>
