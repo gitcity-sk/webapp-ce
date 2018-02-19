@@ -10043,6 +10043,10 @@ a.text-dark:focus {
   min-height: 95vh;
 }
 
+.limit-container-width {
+  max-width: 990px;
+}
+
 /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */
 

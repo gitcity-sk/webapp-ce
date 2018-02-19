@@ -1,6 +1,6 @@
 @extends ('layouts.master-with-sidebar')
 
-@section ('layout-main-classes', 'container')
+@section ('layout-main-classes', 'container limit-container-width')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section ('sidebar-content')
