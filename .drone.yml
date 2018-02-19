@@ -1,7 +1,7 @@
 pipeline:
   test:
     image: maymeow/php:fpm
-    command:
+    commands:
       - composer install --no-ansi --no-interaction --no-progress --no-scripts
       - chmod +x vendor/bin/phpcs
       - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
