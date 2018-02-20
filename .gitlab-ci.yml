@@ -111,11 +111,11 @@ stages:
 # Prepare
 composer-install: 
     <<: *run-on-do-docker
-    <<: *push-cache-dev
+    <<: *push-cache
     stage: prepare
     script:
        - chmod +x ./prepare.sh
-       - ./prepare.sh prod psql
+       - ./prepare.sh prod pgsql
 
 composer-install-dev:
     <<: *run-on-do-docker
@@ -123,7 +123,7 @@ composer-install-dev:
     stage: prepare
     script:
         - chmod +x ./prepare.sh
-        - ./prepare.sh dev psql
+        - ./prepare.sh dev pgsql
 
 # Tests
 phpunit-pg-tests 1 1: *phpunit-pg-tests
