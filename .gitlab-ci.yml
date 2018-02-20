@@ -118,16 +118,16 @@ stages:
 
 # Prepare
 composer-install: 
-    <<: *composer-install
     <<: *push-cache-dev
     script:
-        - composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
+       - chmod +x ./prepare.sh
+       - ./prepare.sh prod psql
 
 composer-install-dev:
-    <<: *composer-install
     <<: *push-cache-dev
     script:
-        - composer install --no-ansi --no-interaction --no-progress --no-scripts
+        - chmod +x ./prepare.sh
+        - ./prepare.sh dev psql
 
 # Tests
 phpunit-pg-tests 1 1: *phpunit-pg-tests
