@@ -108,23 +108,19 @@ stages:
         - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
     allow_failure: true
 
-# composer Update
-.composer-install: &composer-install
-    <<: *run-on-do-docker
-    stage: prepare
-    before_script:
-        - composer self-update
-        - composer -V
-
 # Prepare
 composer-install: 
+    <<: *run-on-do-docker
     <<: *push-cache-dev
+    stage: prepare
     script:
        - chmod +x ./prepare.sh
        - ./prepare.sh prod psql
 
 composer-install-dev:
+    <<: *run-on-do-docker
     <<: *push-cache-dev
+    stage: prepare
     script:
         - chmod +x ./prepare.sh
         - ./prepare.sh dev psql
