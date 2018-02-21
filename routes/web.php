@@ -160,6 +160,9 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/api/projects', 'ProjectsController@index');
     Route::get('/api/projects/{project}/tree', 'TreeController@files');
+    Route::get('/api/projects/{project}/commits', 'CommitsController@index');
+    Route::get('/api/projects/{project}/branches', 'BranchesController@index');
+    Route::get('/api/projects/{project}/tags', 'TagsController@index');
     Route::get('/api/projects/{project}/issues', 'ProjectsController@issues');
 
     Route::get('/api/users', 'UsersController@index');
