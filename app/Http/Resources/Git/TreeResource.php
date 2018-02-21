@@ -17,7 +17,8 @@ class TreeResource extends GitResource
                     'name' => $this->entity->getLastCommit()->getAuthor()->getName(),
                     'email' => $this->entity->getLastCommit()->getAuthor()->getEmail(),
                 ],
-                'message' => $this->entity->getLastCommit()->getMessage()->getShortMessage()
+                'message' => $this->entity->getLastCommit()->getMessage()->getShortMessage(),
+                'created_at' => $this->entity->getLastCommit()->getDateTimeAuthor()
             ]
         ];
     }

@@ -10,6 +10,7 @@
                 <tr>
                     <th>File</th>
                     <th>Last Commit</th>
+                    <th>Updated</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +21,10 @@
                     {{ objectItem.name }}
                 </td>
                 <td class="has-emoji" style="max-width: 320px">
-                    <strong>{{ objectItem.last_commit.author }}</strong> {{ objectItem.last_commit.message }}
+                    <strong>{{ objectItem.last_commit.author.name }}</strong> {{ objectItem.last_commit.message }}
+                </td>
+                <td class="has-emoji">
+                    {{ objectItem.last_commit.created_at.date | moment }}
                 </td>
             </tr>
             </tbody>
