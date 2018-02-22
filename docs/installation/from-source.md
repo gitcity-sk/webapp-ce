@@ -1,18 +1,22 @@
 # Installation from source
 
-* GIT + OpenSSH
-* PHP + Composer
-* NGINX
-* Database
-* Redist
+* Create folders where is data stored
+* Install git and GIT + OpenSSH
+* Install PHP + Composer
+* Install NGINX
+* Install and setup Database
+* Install Redist
+* Download and configure WebApp server
+* Download and configure Workhorse
+* Setup swap file
 
 ## data store paths
 
 Create folder where you will have stored data
 
 ```bash
-sudo mkdir -p /var/opt/cakeapp/data/git-data/ /var/opt/cakeapp/data/buckets/ /var/opt/cakeapp/data/certificates/ \
-&& sudo chown -R www-data:www-data /var/opt/cakeapp/data/
+sudo mkdir -p /var/opt/webapp/data/git-data/ /var/opt/webapp/data/buckets/ /var/opt/webapp/data/certificates/ \
+&& sudo chown -R www-data:www-data /var/opt/webapp/data/
 ```
 
 ## Check for update and prerequisites
@@ -24,19 +28,14 @@ sudo apt update \
 
 ## SSH and GIT
 
+Nex create GIT user with folders and add www-data to git group
+
 ```bash
 sudo apt update \
 && sudo apt install openssh-server git \
-&& sudo adduser git --home /var/opt/cakeapp/data/git-data \
-&& sudo chown -R git:git /var/opt/cakeapp/data/git-data \
+&& sudo adduser git --home /var/opt/webapp/data/git-data \
+&& sudo chown -R git:git /var/opt/webapp/data/git-data \
 && sudo usermod -aG www-data git
-```
-
-```bash
-# update user for GIT GIT_SHELL
-chown -R git:git /var/opt/gitcity/embeded/git-shell/ \
-&& chmod +x /var/opt/gitcity/embeded/git-shell/hooks/update \
-&& chmod +x /var/opt/gitcity/embeded/git-shell/hooks/pre-receive
 ```
 
 ## PHP and Dependencies
@@ -48,7 +47,7 @@ sudo apt update \
 && mv composer.phar /usr/local/bin/composer
 ```
 
-### Redis Extension
+### Redis Extension Optional
 
 ```bash
 git clone https://github.com/phpredis/phpredis.git \
@@ -158,13 +157,12 @@ sudo apt update \
 && sudo apt install -y nginx
 ```
 
-## CakeApp Download
+## Webapp Download
 
 ```bash
-sudo git clone https://gitcity.sk/cakeapp-sk/cakeapp-ce.git /opt/gitcity \
-&& sudo chown -R www-data:www-data /opt/gitcity \
-&& cd /opt/gitcity \
-&& composer install
+sudo -u www-data -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-ce.git /opt/webapp/embeded/webapp \
+&& cd /opt/webapp/embeded/webapp \
+&& sudo -u www-data -H composer install
 ```
 
 ## CakeApp Configuration
@@ -181,21 +179,27 @@ include /opt/gitcity/config/gitcity-nginx.conf;
 sudo service nginx reload
 ```
 
+```bash
+# update user for GIT GIT_SHELL
+chown -R git:git /opt/webapp/embeded/webapp/embeded/git-shell/ \
+&& chmod +x /opt/webapp/embeded/webapp/embeded/git-shell/hooks/update \
+&& chmod +x /opt/webapp/embeded/webapp/embeded/git-shell/hooks/pre-receive
+```
+
 ## CakeApp-Workhorse
 
 Workhorse is needed for all git operation ehivh is required write permission. Reading permission has GitCity application at it own.
 
 ```bash
-sudo git clone https://gitcity.sk/cakeapp-sk/cakeapp-workhorse.git /opt/gitcity-workhorse \
-&& sudo chown -R git:git /opt/gitcity-workhorse \
-&& cd /opt/gitcity-workhorse \
-&& composer install
+sudo -u git -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-workhorse.git /opt/webapp/embeded/webapp-workhorse \
+&& cd /opt/webapp/embeded/webapp-workhorse \
+&& sudo -u git -H composer install
 ```
 
 Configure service
 
 ```bash
-sudo touch /lib/systemd/system/gitcity-workhorse.service
+sudo touch /lib/systemd/system/webapp-workhorse.service
 ```
 
 Update file content for your requirements. Git user and groum must remain othervise you dont will lose write acces to git data folder.
@@ -208,8 +212,8 @@ After=network.target
 [Service]
 User=git
 Group=git
-ExecStart=/usr/bin/php /opt/gitcity-workhorse/srv.php
-WorkingDirectory=/var/opt/cakeapp/data/git-data
+ExecStart=/usr/bin/php /opt/webapp/embeded/webapp-workhorse/srv.php
+WorkingDirectory=/var/opt/webapp/data/git-data
 Type=simple
 Restart=always
 RestartSec=10
@@ -228,14 +232,14 @@ sudo systemctl daemon-reload
 Start Service and check status
 
 ```bash
-systemctl start gitcity-workhorse.service \
-&& systemctl status gitcity-workhorse.service
+systemctl start webapp-workhorse.service \
+&& systemctl status webapp-workhorse.service
  ```
 
  If you want service to run after startup run following command
 
  ```bash
- sudo systemctl enable gitcity-workhorse.service
+ sudo systemctl enable webapp-workhorse.service
  ```
 
 # Swap space
