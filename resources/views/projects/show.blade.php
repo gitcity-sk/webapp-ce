@@ -67,14 +67,7 @@
                     <a href="/projects/{{ $project->id }}/create-on-server" class="btn btn-outline-primary">Refresh</a>
                 </div>
             </div>
-        @endif        
-
-
-        <div class="row text-center loading" v-if="loading">
-            <div class="col">
-                <div class="loader" style="margin:0 auto;"></div>
-            </div>
-        </div>
+        @endif 
 
         <tree-table-component project-id="{{ $project->id }}"></tree-table-component>
 

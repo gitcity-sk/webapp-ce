@@ -14,7 +14,9 @@ class CommitResource extends LogResource
                 'email' => $this->entity->getAuthor()->getEmail()
             ],
             'hash' => $this->entity->getSha(),
-            'message' => $this->entity->getMessage()->__toString()
+            'hash_short' => $this->entity->getSha(true),
+            'message' => $this->entity->getMessage()->__toString(),
+            'created_at' => $this->entity->getDateTimeAuthor()
         ];
     }
 }

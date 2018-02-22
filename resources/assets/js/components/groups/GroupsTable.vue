@@ -9,7 +9,7 @@
             <tbody>
                 <tr v-for="group in groups.data">
                     <td>
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                             <div class="mr-2">
                                 <i class="fas fa-folder"></i>
                             </div>

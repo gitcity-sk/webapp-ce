@@ -15,6 +15,8 @@ class GitResource
 
     public static function collection($entity)
     {
+        if (null == $entity) return null;
+        
         if (! $entity instanceof GitObject) throw new \Exception("Entity must be instance of " . GitObject::class);
 
         $array = [];

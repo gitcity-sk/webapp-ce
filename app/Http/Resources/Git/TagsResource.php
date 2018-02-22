@@ -10,7 +10,8 @@ class TagsResource extends GitResource
     {
         return [
             'name' => $this->entity->getName(),
-            'hash' => $this->entity->getSha()
+            'hash' => $this->entity->getSha(),
+            'hash_short' => $this->entity->getSha(true),
         ];
     }
 }

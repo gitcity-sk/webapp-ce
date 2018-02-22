@@ -11,8 +11,10 @@
         <tbody>
             <tr v-for="issue in issues.data">
                 <td>
-                    <div class="d-flex">
-                        <div class="mr-2"><i class="far fa-circle"></i></div>
+                    <div class="d-flex align-items-center">
+                        <div class="mr-2">
+                            <span class="mr-2"><i class="far fa-circle"></i></span>
+                        </div>
                         <div>
                             <a :href="'/issues/' + issue.id" style="font-weight: 600" class="text-dark">{{ issue.title }}</a>
                             <div><small>#{{ issue.id }} opened by {{ issue.profile.name }} {{ issue.created_at.date | moment }}</small></div>

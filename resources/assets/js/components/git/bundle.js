@@ -7,7 +7,7 @@
 //require('../../bootstrap');
 //require('../../emojione-convert');
 //require('../../fontawesome-all');
-//require('../../directives/TooltipDirective');
+require('../../directives/TooltipDirective');
 require('../../filters/MomentFilter');
 
 window.Vue = require('vue');
@@ -19,6 +19,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('tree-table-component', require('./TreeTableComponent.vue'));
+Vue.component('commits-table-component', require('./CommitsTable.vue'));
 
 const app = new Vue({
     el: '#app',

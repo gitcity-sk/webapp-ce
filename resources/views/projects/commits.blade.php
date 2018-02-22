@@ -1,6 +1,6 @@
 @extends ('layouts.master-with-sidebar')
 
-@section ('layout-main-classes', 'container')
+@section ('layout-main-classes', 'container limit-container-width')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section ('sidebar-content')
@@ -17,7 +17,7 @@
 @endsection
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/projects/bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/git/bundle.js') }}"></script>
 @endsection
 
 @section ('content')
@@ -36,31 +36,7 @@
 <div class="row" style="margin-bottom: 3rem">
     <div class="col-12">
 
-        @if (null != $commits)
-        <div class="row">
-            <div class="col-12">
-                <div class="card border-secondary">
-                    <div class="card-header">
-                        Commits
-                    </div>
-                    <table class="table table-hover">
-                       @foreach ($commits as $commit)
-
-                        <tr>
-                            <td>
-                                <strong>{{ $commit->getAuthor()->getName() }}</strong>
-                                <p class="has-emoji">{{ $commit->getMessage()->__toString() }}</p>
-                                <small>SHA: {{ $commit->getSha() }}</small>
-                            </td>
-                        </tr>
-
-
-                       @endforeach
-                   </table>
-                </div>
-            </div>
-        </div>
-        @endif
+    <commits-table-component project-id="{{ $project->id }}"></commits-table-component>
 
     </div>
 </div>

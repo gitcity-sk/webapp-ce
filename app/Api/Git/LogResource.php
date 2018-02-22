@@ -9,6 +9,8 @@ class LogResource extends GitResource
 {
     public static function collection($entity)
     {
+        if (null == $entity) return null;
+
         if (! $entity instanceof Log) throw new \Exception("Entity must be instance of " . Log::class);
 
         $array = [];

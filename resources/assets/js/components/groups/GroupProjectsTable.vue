@@ -9,7 +9,7 @@
             <tbody>
                 <tr v-for="project in projects.data">
                     <td>
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                             <div class="mr-2"><i class="far fa-bookmark"></i></div>
                             <div>
                                 <a class="text-dark" style="font-weight: 600;" :href="'/projects/' + project.id">{{ project.profile.name }} / {{ project.name }}</a>
