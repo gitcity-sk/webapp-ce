@@ -12,6 +12,8 @@ class BranchesResource extends GitResource
             'name' => $this->entity->getName(),
             'hash' => $this->entity->getSha(),
             'hash_short' => $this->entity->getSha(true),
+            'message' => $this->entity->getLastCommit()->getMessage()->getShortMessage(),
+            'created_at' => $this->entity->getLastCommit()->getDateTimeAuthor()
         ];
     }
 }
