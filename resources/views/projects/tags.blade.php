@@ -1,10 +1,10 @@
 @extends ('layouts.master-with-sidebar')
 
-@section ('layout-main-classes', 'container')
+@section ('layout-main-classes', 'container limit-container-width')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/projects/bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/git/bundle.js') }}"></script>
 @endsection
 
 @inject('markdown', 'Parsedown')
@@ -37,32 +37,7 @@
 
 <div class="row" style="margin-bottom: 3rem">
     <div class="col-12">
-
-        @if (null != $tags)
-        <div class="row">
-            <div class="col-12">
-                <div class="card border-secondary">
-                    <div class="card-header">
-                        Tags
-                    </div>
-                    <table class="table table-hover">
-                       @foreach ($tags as $tag)
-
-                        <tr>
-                            <td>
-                                {{ $tag->getName() }}
-                            </td>
-                            <td><a href="#">{{ $tag->getSha() }}</a></td>
-                        </tr>
-
-
-                       @endforeach
-                   </table>
-                </div>
-            </div>
-        </div>
-        @endif
-
+        <tags-table-component project-id="{{ $project->id }}"></tags-table-component>
     </div>
 </div>
 @endsection
