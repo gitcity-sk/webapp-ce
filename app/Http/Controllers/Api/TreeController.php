@@ -26,6 +26,8 @@ class TreeController extends Controller
         $treeGit = new Tree();
         $tree = $treeGit->get($project->user->name, $project->slug);
         
-        return ['data' => TreeResource::collection($tree)];
+        return [
+            'data' => TreeResource::collection($tree)
+        ];
     }
 }

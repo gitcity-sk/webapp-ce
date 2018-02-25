@@ -6,7 +6,7 @@
     <div v-if="done" class="row">
         <div class="col-12">
 
-            <div v-if="tree.last_commit" class="card bg-light" style="margin-bottom: 15px;">
+            <div v-if="tree.last_commit" class="card bg-light mb-3">
                 <div class="card-body"><strong>{{ tree.last_commit.author }}</strong> {{ tree.last_commit.message }}</div>
             </div>
 
