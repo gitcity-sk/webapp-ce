@@ -71,5 +71,5 @@ services:
       - codeocean-source
     volumes_from:
       - codeocean-source
-    ports:
-      - "8801:8801"
+    # ports:
+    #   - "8801:8801"
