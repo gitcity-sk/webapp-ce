@@ -1,7 +1,7 @@
 {
     "/js/mix/projects/bundle.js": "/js/mix/projects/bundle.js?id=f3393e800fdf055a8f83",
     "/js/mix/git/bundle.js": "/js/mix/git/bundle.js?id=6a4835ff82bc7f2e41e7",
-    "/js/mix/groups/bundle.js": "/js/mix/groups/bundle.js?id=3042b0ae9293fcd9568d",
+    "/js/mix/groups/bundle.js": "/js/mix/groups/bundle.js?id=a6a775a9f00537c3665e",
     "/js/mix/cms/bundle.js": "/js/mix/cms/bundle.js?id=0f993eb412343d1e8485",
     "/js/mix/users/bundle.js": "/js/mix/users/bundle.js?id=8c521d82ec4f79a04695",
     "/js/bundle.js": "/js/bundle.js?id=1430287c6cba7313be96",
@@ -9,6 +9,6 @@
     "/js/mix/license/bundle.js": "/js/mix/license/bundle.js?id=f03c873346e13f214d17",
     "/js/mix/ide/bundle.js": "/js/mix/ide/bundle.js?id=2b4c1158b2a3cda1ef2f",
     "/js/app.js": "/js/app.js?id=80d46c0175491a88a923",
-    "/css/app.css": "/css/app.css?id=88002bbf89a9c8b1be69",
+    "/css/app.css": "/css/app.css?id=09fb9d408b4a295ba723",
     "/css/blog.css": "/css/blog.css?id=31080d7797f9945a598e"
 }

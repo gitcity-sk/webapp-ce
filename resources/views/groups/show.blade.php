@@ -6,7 +6,15 @@
 @inject('markdown', 'Parsedown')
 
 @section ('sidebar-content')
-
+<div class="context-header">
+<a href="#">
+    <div class="avatar-container" style="min-height: 50px">
+    </div>
+    <div class="sidebar-context-title">
+        {{ $group->name }}
+    </div>
+</a>
+</div>
 @endsection
 
 @section('javascripts')

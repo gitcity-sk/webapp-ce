@@ -10,6 +10,7 @@
 //require('../../fontawesome-all');
 require('../../directives/TooltipDirective');
 require('../../filters/MomentFilter');
+require('../../filters/EmojiOneFilter');
 
 window.Vue = require('vue');
 
