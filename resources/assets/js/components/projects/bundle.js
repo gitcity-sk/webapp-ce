@@ -10,6 +10,7 @@
 //require('../../fontawesome-all');
 require('../../directives/TooltipDirective');
 require('../../filters/MomentFilter');
+require('../../filters/EmojiOneFilter');
 
 window.Vue = require('vue');
 
@@ -21,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('project-issues-table-component', require('./ProjectIssuesTableComponent.vue'));
 Vue.component('projects-table-component', require('./ProjectsTableComponent.vue'));
+Vue.component('issue-mde', require('./NewIssueForm.vue'));
 
 const app = new Vue({
     el: '#app',

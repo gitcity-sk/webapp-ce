@@ -7,8 +7,8 @@
 //require('../../bootstrap');
 //require('../../emojione-convert');
 //require('../../fontawesome-all');
-//require('../../directives/TooltipDirective');
-//require('../../filters/MomentFilter');
+require('../../directives/TooltipDirective');
+require('../../filters/MomentFilter');
 
 window.Vue = require('vue');
 
@@ -19,6 +19,9 @@ window.Vue = require('vue');
  */
 
 Vue.component('tree-table-component', require('./TreeTableComponent.vue'));
+Vue.component('commits-table-component', require('./CommitsTable.vue'));
+Vue.component('branches-table-component', require('./BranchesTable.vue'));
+Vue.component('tags-table-component', require('./TagsTable.vue'));
 
 const app = new Vue({
     el: '#app',

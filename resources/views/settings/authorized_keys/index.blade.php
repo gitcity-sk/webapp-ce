@@ -3,6 +3,10 @@
 @section ('layout-main-classes', 'container')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
+@section('javascripts')
+<script src="{{ mix('/js/app.js') }}"></script>
+@endsection
+
 @section ('projects-table')
 <table class="table table-vcenter">
     <thead class="thead-light">

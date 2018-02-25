@@ -17,7 +17,7 @@
 <div class="row">
     <div class="col-9">
     <span class="badge badge-success">Open</span> opened {{ $issue->created_at->diffForHumans() }} by <a class="text-dark" href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a><hr />
-        <p class="lead has-emoji">{!! markdown()->text($issue->description) !!}</p>
+        <div class="has-emoji">{!! markdown()->text($issue->description) !!}</div>
 
         <div class="card mb-3">
             <div class="card-header">
@@ -35,7 +35,7 @@
                 <a href="/profiles/{{ $comment->user->profile->id }}">{{ $comment->user->profile->name }}</a> at {{ $comment->created_at->diffForHumans() }}
             </div>
             <div class="card-body has-emoji">
-                {!! $markdown->text($comment->body) !!}
+                {!! markdown()->text($comment->body) !!}
             </div>
 
         </div>

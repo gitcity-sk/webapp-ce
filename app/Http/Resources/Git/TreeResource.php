@@ -9,11 +9,16 @@ class TreeResource extends GitResource
     public function toArray()
     {
         return [
-            'name' => $this->request->getName(),
-            'type' => $this->request->getType(),
+            'name' => $this->entity->getName(),
+            'type' => $this->entity->getType(),
+            'sha' => $this->entity->getSha(),
             'last_commit' => [
-                'author' => $this->request->getLastCommit()->getAuthor()->getName(),
-                'message' => $this->request->getLastCommit()->getMessage()->getShortMessage()
+                'author' => [
+                    'name' => $this->entity->getLastCommit()->getAuthor()->getName(),
+                    'email' => $this->entity->getLastCommit()->getAuthor()->getEmail(),
+                ],
+                'message' => $this->entity->getLastCommit()->getMessage()->getShortMessage(),
+                'created_at' => $this->entity->getLastCommit()->getDateTimeAuthor()
             ]
         ];
     }

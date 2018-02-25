@@ -49,6 +49,7 @@ class CmsTest extends TestCase
             'user_id' => $this->project->user->id
         ];
         $response = $this->actingAs($this->project->user)->post('/-/cms/' . $this->project->id . '/pages', $data);
+        //$response->assertStatus(302);
         // $createdPage = Page::where('title', $data['title'])->where('description', 'LIKE' ,$data['description'])->firstOrFail();
         // $this->assertEquals($data['title'], $createdPage->title);
         // $this->assertEquals($data['description'], $createdPage->description);

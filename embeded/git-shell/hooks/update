@@ -1,13 +1,72 @@
 #!/usr/bin/env php
 <?php
 
-echo "----> " . getcwd() . "\n";
-$ref = $_SERVER['argv'][1];
-echo "----> $ref \n";
+/**
+ * Console class
+ */
+class hook_console {
+
+    protected const ARROW = '---->';
+
+    public static function print($text)
+    {
+        $line = self::ARROW . ' ' . $text . "\n";
+
+        echo $line;
+
+        return;
+    }
+}
+
+/**
+ * 
+ */
+class hook_file
+{
+    public static function hooks()
+    {
+        return dirname(__DIR__);
+    }
+}
+
+/**
+ * 
+ */
+class hook_ref
+{
+    protected $ref;
+
+    public function __construct($ref)
+    {
+        if (null !== $ref) $this->ref = $ref;
+    }
+
+    public function getRef()
+    {
+        return $this->ref;
+    }
+}
+
+/**
+ * Main hook
+ */
+
+$ref = new hook_ref($_SERVER['argv'][1]);
+
+hook_console::print('Running Update Hook');
+hook_console::print('Running Hook in ' . hook_file::hooks() . '/hooks');
+
+//Show Ref
+hook_console::print('Ref: '. $ref->getRef());
 
 print_r($_SERVER);
 
-if ($ref == "refs/heads/master") {
-    echo "----> not allowed $ref is protected branch but allowing to push \n";
+//print_r(file_get_contents('http://localhost:8000/api/projects/3/tags'));
+
+if ($ref->getRef() == "refs/heads/master") {
+    $branch = $ref->getRef();
+    hook_console::print("----> not allowed, $branch is protected branch but allowing to push");
     //exit(1);
 }
+
+hook_console::print('Hook Done');

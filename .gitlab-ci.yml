@@ -1,4 +1,4 @@
-image: registry.gitcity.sk/gitcity-sk/gitcity-build-images:php-7.1-fpm-redis-phpunit-6.5.6
+image: registry.k-systems.sk/gitcity-sk/gitcity-build-images:php-7.1-fpm-redis-phpunit-6.5.6
 
 stages:
     - prepare
@@ -108,26 +108,22 @@ stages:
         - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
     allow_failure: true
 
-# composer Update
-.composer-install: &composer-install
-    <<: *run-on-do-docker
-    stage: prepare
-    before_script:
-        - composer self-update
-        - composer -V
-
 # Prepare
 composer-install: 
-    <<: *composer-install
-    <<: *push-cache-dev
+    <<: *run-on-do-docker
+    <<: *push-cache
+    stage: prepare
     script:
-        - composer install --no-ansi --no-dev --no-interaction --no-progress --no-scripts --optimize-autoloader
+       - chmod +x ./prepare.sh
+       - ./prepare.sh prod pgsql
 
 composer-install-dev:
-    <<: *composer-install
+    <<: *run-on-do-docker
     <<: *push-cache-dev
+    stage: prepare
     script:
-        - composer install --no-ansi --no-interaction --no-progress --no-scripts
+        - chmod +x ./prepare.sh
+        - ./prepare.sh dev pgsql
 
 # Tests
 phpunit-pg-tests 1 1: *phpunit-pg-tests

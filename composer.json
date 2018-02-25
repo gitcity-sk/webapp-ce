@@ -15,7 +15,7 @@
         "laravel/passport": "^5.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "moonlitbc/gitelephant": "^2018.1"
+        "moonlitbc/gitelephant": "~2018.1"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "dev-master",

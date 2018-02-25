@@ -11,7 +11,7 @@
             <tbody>
                 <tr v-for="page in pages.data">
                     <td>
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center">
                             <div class="mr-2">
                                 <i class="far fa-file"></i>
                             </div>
@@ -24,7 +24,6 @@
                                 <div><small>updated {{ page.created_at.date | moment }}</small></div>
                             </div>
                         </div>
-                        
                     </td>
                 </tr>
             </tbody>
