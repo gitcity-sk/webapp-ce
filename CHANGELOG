@@ -1,7 +1,13 @@
+v18.2.1
+
+* UPDATE Tree now showing current branch instead of head
+* UPDATE Branches now showing which branch is set as current
+
 v 18.2 (2.0)
 
 * NEW Pages - Simple content management system
 * NEW Spaces - Upload binary files (cam be showed on pages)
+* Vue app for Commits, branches and tags
 
 v 18.1 (1.0)
 

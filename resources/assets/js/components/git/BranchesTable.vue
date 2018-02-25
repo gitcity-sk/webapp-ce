@@ -21,7 +21,7 @@
                                 </div>
 
                                 <div class="branch-commit">
-                                    <a class="text-dark" style="font-weight: 600;" href="#">{{ branch.name }}</a>
+                                    <a class="text-dark" style="font-weight: 600;" href="#">{{ branch.name }}</a> <span :v-if="branch.is_current" class="badge badge-primary">Current</span>
                                     <div>
                                         <small>
                                             <span class="mr-2"><i class="far fa-code-commit"></i></span><a href="#">{{ branch.commit.hash_short }}</a> {{ branch.commit.message }} {{ branch.commit.created_at.date | moment }}

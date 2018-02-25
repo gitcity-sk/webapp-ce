@@ -13,7 +13,7 @@ class Tree extends BaseModel
         $repo = Repo::open($userName, $projecSlug);
 
         if ($repo && (count($repo->getBranches(true)) != 0)) {
-            return $repo->getTree('HEAD');
+            return $repo->getTree($repo->getMainBranch());
         }
         return null;
     }
