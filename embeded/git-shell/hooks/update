@@ -64,7 +64,8 @@ print_r($_SERVER);
 //print_r(file_get_contents('http://localhost:8000/api/projects/3/tags'));
 
 if ($ref->getRef() == "refs/heads/master") {
-    hook_console::print("----> not allowed $ref is protected branch but allowing to push");
+    $branch = $ref->getRef();
+    hook_console::print("----> not allowed, $branch is protected branch but allowing to push");
     //exit(1);
 }
 
