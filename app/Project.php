@@ -24,6 +24,11 @@ class Project extends Model
         return $this->belongsToMany(Group::class);
     }
 
+    public function milestones()
+    {
+        return $this->hasMany(Milestone::class);
+    }
+
     public function mergeRequests()
     {
         return $this->hasMany(MergeRequest::class);

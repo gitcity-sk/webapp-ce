@@ -17,7 +17,7 @@
 @endsection
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/git/bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/projects/bundle.js') }}"></script>
 @endsection
 
 @section ('content')
@@ -35,6 +35,19 @@
 
 <div class="row" style="margin-bottom: 3rem">
     <div class="col-12">
+
+        <div class="row" style="margin-bottom: 10px">
+            <div class="col-12 text-right">
+                <a href="/projects/{{ $project->id }}/milestones/new" class="btn btn-success">Create new Milestone</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <milestones-table-component project-id="{{ $project->id }}"></milestones-table-component>
+            </div>
+        </div>
+
 
     </div>
 </div>

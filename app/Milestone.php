@@ -17,4 +17,9 @@ class Milestone extends Model
     {
         return $this->belongsTo(Group::class);
     }
+
+    public function issues()
+    {
+        return $this->hasMany(Issue::class);
+    }
 }

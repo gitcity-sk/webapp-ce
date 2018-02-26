@@ -11,6 +11,7 @@ use App\User;
 use App\Issue;
 use App\Profile;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Milestone;
 
 class ProjectsControllerTest extends TestCase
 {
@@ -50,5 +51,15 @@ class ProjectsControllerTest extends TestCase
         $response->assertSee($issues->title);
         $response->assertSee($issues->description);
         $response->assertSee($this->user->profile->name);
+    }
+
+    /** @test */
+    public function api_can_get_project_milestones()
+    {
+        $milestone = factory(Milestone::class)->create(['project_id' => $this->project->id]);
+        $response = $this->actingAs($this->user)->get('/api/projects/' . $this->project->id . '/milestones');
+        $response->assertStatus(200);
+        $response->assertSee($milestone->title);
+        $response->assertSee($milestone->description);
     }
 }

@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('project-issues-table-component', require('./ProjectIssuesTableComponent.vue'));
 Vue.component('projects-table-component', require('./ProjectsTableComponent.vue'));
+Vue.component('milestones-table-component', require('./ProlectMilestonesTable.vue'));
 Vue.component('issue-mde', require('./NewIssueForm.vue'));
 
 const app = new Vue({
