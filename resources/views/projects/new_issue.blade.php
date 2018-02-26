@@ -54,6 +54,21 @@
                                     <textarea class="form-control" id="descriptiont" name="description" rows="6" placeholder="Content.."></textarea>
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label for="permission">Milestone</label>
+                                </div>
+                                <div class="col-9">
+                                    <select class="form-control" name="milestone_id" id="milestone_id">
+                                        <option disabled selected value> select an option </option>
+                                        @foreach ($project->milestones as $milestone)
+                                            <option value="{{ $milestone->id }}">{{ $milestone->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="form-group row">
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary">Create issue</button>

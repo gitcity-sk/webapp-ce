@@ -48,6 +48,10 @@
             <div class="card-body">
                 <p class="h6">Project</p>
                 <a href="/projects/{{ $issue->project->id }}/issues">{{ $issue->project->name }}</a>
+                @if (null !== $issue->milestone)
+                    <p class="h6">Milestone</p>
+                    {{ $issue->milestone->title }}
+                @endif
                 <p class="h6">User</p>
                 <a href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a>
                 <p class="h6">Created</p>

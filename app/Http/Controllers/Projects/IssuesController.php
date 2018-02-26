@@ -42,7 +42,8 @@ class IssuesController extends Controller
             'title' => request('title'),
             'description' => request('description'),
             'project_id' => $project->id,
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
+            'milestone_id' => request('milestone_id')
         ]);
 
         return redirect()->route('projectIssues', [$project]);

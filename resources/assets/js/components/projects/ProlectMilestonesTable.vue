@@ -1,4 +1,6 @@
 <template>
+<div>
+    <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
 
         <div class="card bg-light mb-3">
@@ -13,20 +15,10 @@
                             <div>
                                 <a class="text-dark" style="font-weight: 600;" :href="'/milestones/' + milestone.id">{{ milestone.title }}</a>
                             </div>
-                            
-                            <div class="ml-auto d-flex">
-
-                                <div class="mr-3" style="min-width: 400px">
-                                    <div class="mb-2">
-                                        <div class="progress" style="height: 7px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <a href="">{{ milestone.issues_count }} Issues</a>
-                                    </div>
-                                </div>
-
+                            <div class="ml-auto">
+                                <a href="">{{ milestone.issues_count }} Issues</a>
+                            </div>
+                            <div class="ml-auto">
                                 <div><button type="button" class="btn btn-outline-warning btn-sm">Close milestone</button></div>
                             </div>
                         </div>
@@ -37,12 +29,18 @@
         </div>
 
     </div>
+</div>
 </template>
 
 <script>
     import axios from 'axios'
     import emojione from 'emojione'
+    import cssPreloader from '../vue-shared/css-preloader.vue';
+
     export default {
+        components: {
+            cssPreloader
+        },
         mounted () {
             console.log('Component MilestonesTable mounted.')
         },

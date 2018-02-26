@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Issue extends Model
 {
-    protected $fillable = ['title', 'description', 'user_id', 'project_id'];
+    protected $fillable = ['title', 'description', 'user_id', 'project_id', 'milestone_id'];
 
     public function user()
     {
@@ -21,6 +21,11 @@ class Issue extends Model
     public function comments()
     {
         return $this->belongsToMany(Comment::class)->withTimestamps();
+    }
+
+    public function milestone()
+    {
+        return $this->belongsTo(Milestone::class);
     }
 
     public function addComment(Comment $comment)
