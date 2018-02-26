@@ -10,6 +10,9 @@ $factory->define(App\Issue::class, function (Faker $faker) {
         'project_id' => function () {
             return factory('App\Project')->create()->id;
         },
+        'milestone_id' => function () {
+            return factory('App\Milestone')->create()->id;
+        },
         'title' => $faker->sentence,
         'description' => $faker->paragraph,
         'complete' => false

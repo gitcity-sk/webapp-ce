@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Groups;
 
 use App\Group;
 use Illuminate\Http\Request;
 use App\ee\License;
+use App\Http\Controllers\Controller;
 
-class GroupsController extends Controller
+class ApplicationController extends Controller
 {
     public function index()
     {

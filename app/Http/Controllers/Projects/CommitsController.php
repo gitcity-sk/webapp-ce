@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Projects;
 
 use App\Project;
+use App\Http\Controllers\Controller;
 
 class CommitsController extends Controller
 {

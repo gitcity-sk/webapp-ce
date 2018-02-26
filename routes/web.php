@@ -25,13 +25,24 @@ Route::get('/', function () {
 /**
  * Groups
  */
+Route::group(['namespace' => 'Groups'], function () {
+    Route::get('/groups', 'ApplicationController@index');
+    Route::get('/groups/create', 'ApplicationController@create');
+    Route::get('/groups/{group}', 'ApplicationController@show');
+    Route::get('/projects/{project}/milestones', 'MilestonesController@index');
 
-Route::get('/groups', 'GroupsController@index');
-Route::get('/groups/create', 'GroupsController@create');
-Route::get('/groups/{group}', 'GroupsController@show');
+    Route::post('/groups', 'ApplicationController@store');
+    Route::post('/groups/{group}/projects', 'ProjectsController@store');
+});
 
-Route::post('/groups', 'GroupsController@store');
-Route::post('/groups/{group}/projects', 'ProjectsController@assignTo');
+/**
+ * Groups API
+ */
+
+Route::group(['namespace' => 'Groups\Api'], function () {
+    Route::get('/api/groups', 'GroupsController@index');
+    Route::get('/api/groups/{group}/projects', 'ProjectsController@index');
+});
 
 /**
  * Projects
@@ -39,28 +50,35 @@ Route::post('/groups/{group}/projects', 'ProjectsController@assignTo');
 Route::get('/projects', function () {
     return view('projects.index');
 })->middleware('auth');
-Route::get('/projects/create', 'ProjectsController@create');
-Route::get('/projects/{id}', 'ProjectsController@show')->name('project');
-Route::get('/projects/{id}/issues', 'ProjectsController@issues')->name('projectIssues');
-Route::get('/projects/{id}/issues/new', 'ProjectsController@createIssue');
-Route::get('/projects/{project}/commits', 'CommitsController@show');
-Route::get('/projects/{project}/branches', 'BranchesController@show');
-Route::get('/projects/{project}/tags', 'TagsController@show');
-Route::get('/projects/{id}/merge-requests', 'ProjectsController@mergeRequests');
-Route::get('/projects/{id}/merge-requests/new', 'ProjectsController@createMergeRequest');
-Route::get('/projects/{id}/create-on-server', 'ProjectsController@createOnServer');
+Route::group(['namespace' => 'Projects'], function () {
+    Route::get('/projects/create', 'ApplicationController@create');
+    Route::get('/projects/{id}', 'ApplicationController@show')->name('project');
+    Route::get('/projects/{id}/issues', 'IssuesController@index')->name('projectIssues');
+    Route::get('/projects/{id}/issues/new', 'IssuesController@create');
+    Route::get('/projects/{project}/commits', 'CommitsController@show');
+    Route::get('/projects/{project}/branches', 'BranchesController@show');
+    Route::get('/projects/{project}/tags', 'TagsController@show');
+    Route::get('/projects/{id}/merge-requests', 'ApplicationController@mergeRequests');
+    Route::get('/projects/{id}/merge-requests/new', 'ApplicationController@createMergeRequest');
+    Route::get('/projects/{id}/create-on-server', 'ApplicationController@createOnServer');
+    Route::get('/projects/{project}/milestones', 'MilestonesController@index');
 
-Route::post('/projects', 'ProjectsController@store');
-Route::post('/projects/{project}/issues', 'IssuesController@store');
-Route::post('/projects/{project}/merge-requests', 'MergeRequestsController@store');
+    Route::post('/projects', 'ApplicationController@store');
+    Route::post('/projects/{project}/issues', 'IssuesController@store');
+    Route::post('/projects/{project}/merge-requests', 'MergeRequestsController@store');
+});
 
 /**
  * Issues
  */
-Route::get('/issues/{issue}', 'IssuesController@show');
-Route::get('/merge-requests/{mergeRequest}', 'MergeRequestsController@show');
+Route::group(['namespace' => 'Issues'], function () {
+    Route::get('/issues/{issue}', 'ApplicationController@show');
 
-Route::post('/issues/{issue}/comments', 'CommentsController@store');
+    Route::post('/issues/{issue}/comments', 'CommentsController@store');
+});
+
+
+Route::get('/merge-requests/{mergeRequest}', 'MergeRequestsController@show');
 
 /**
  * Labels
@@ -148,9 +166,6 @@ Route::get('/settings/authorized-keys/{authorizedKey}/delete', 'AuthorizedKeysCo
  */
 
 Route::group(['namespace' => 'Api'], function () {
-    Route::get('/api/groups', 'GroupsController@index');
-    Route::get('/api/groups/{group}/projects', 'GroupsController@projects');
-
     Route::get('/api/projects/{project}/pages', 'PagesController@index');
 
     Route::get('/api/issues', 'IssuesController@index');

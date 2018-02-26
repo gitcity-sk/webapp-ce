@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Issues;
 
 use App\Comment;
 use App\Issue;
+use App\Http\Controllers\Controller;
 
 class CommentsController extends Controller
 {

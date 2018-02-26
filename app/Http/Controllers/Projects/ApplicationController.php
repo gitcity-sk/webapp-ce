@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Projects;
 
 use App\Group;
 use App\Project;
@@ -8,8 +8,9 @@ use App\Repo;
 use App\Tree;
 use App\Repositories\Projects;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Controllers\Controller;
 
-class ProjectsController extends Controller
+class ApplicationController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -60,6 +61,9 @@ class ProjectsController extends Controller
         return view('projects.create');
     }
 
+    /**
+     * 
+     */
     public function createOnServer(Project $project)
     {
         $project->createOnServer();
@@ -91,15 +95,8 @@ class ProjectsController extends Controller
     }
 
     /**
-     *
+     * 
      */
-    public function issues($id)
-    {
-        $project = $this->projects->findById($id);
-
-        return view('projects.issues', compact('project'));
-    }
-
     public function mergeRequests($id)
     {
         $project = $this->projects->findById($id);
@@ -107,25 +104,13 @@ class ProjectsController extends Controller
         return view('projects.merge_requests', compact('project'));
     }
 
+    /**
+     * 
+     */
     public function createMergeRequest($id)
     {
         $project = $this->projects->findById($id);
 
         return view('projects.new_merge_request', compact('project'));
-    }
-
-    public function createIssue($id)
-    {
-        $project = $this->projects->findById($id);
-
-        return view('projects.new_issue', compact('project'));
-    }
-
-    public function assignTo(Group $group)
-    {
-        $project = Project::findOrFail(request('project_id'));
-        $group->attachProject($project);
-
-        return back();
     }
 }

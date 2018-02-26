@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Projects;
 
 use App\Project;
 use App\Repo;
+use App\Http\Controllers\Controller;
 
 class TagsController extends Controller
 {

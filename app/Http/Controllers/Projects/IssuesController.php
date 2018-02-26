@@ -1,27 +1,39 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Projects;
 
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Project;
 use App\Issue;
-use App\Repositories\Issues;
+use App\Repositories\Projects;
 
 class IssuesController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Projects $projects)
     {
         $this->middleware('auth');
+
+        $this->projects = $projects;
     }
 
-    public function show(Issue $issue)
+    public function index($id)
     {
-        return view('issues.show', compact('issue'));
+        $project = $this->projects->findById($id);
+
+        return view('projects.issues', compact('project'));
+    }
+
+    public function create($id)
+    {
+        $project = $this->projects->findById($id);
+
+        return view('projects.new_issue', compact('project'));
     }
 
     public function store(Project $project)
