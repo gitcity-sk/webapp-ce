@@ -47,6 +47,8 @@ sudo apt update \
 && mv composer.phar /usr/local/bin/composer
 ```
 
+If you have php lover than 7.1.3 you have to reinstall it from source
+
 ### Redis Extension Optional
 
 ```bash
@@ -284,3 +286,122 @@ You can check using of your memory with
 ```bash
 free -m
 ```
+
+# Instapp PHP from source
+
+Install Build dependenices
+
+```bash
+sudo apt update \
+&& apt-get install -y --no-install-recommends \
+libargon2-0-dev \
+libcurl4-openssl-dev \
+libedit-dev \
+libsodium-dev \
+libsqlite3-dev \
+libssl-dev \
+libxml2-dev \
+zlib1g-dev \
+build-essential \
+libpq-dev \
+pkg-config \
+libxslt1-dev
+```
+
+Download php source
+
+```bash
+wget -O php.tar.gz "https://secure.php.net/get/php-7.2.2.tar.gz/from/this/mirror" \
+&& tar -xvzf php.tar.gz \
+&& mkdir /usr/src/php \
+&& cp -R ./php-7.2.2/* /usr/src/php
+```
+
+Configure it
+
+```bash
+cd /usr/src/php \
+&& sudo mkdir -p /usr/local/etc/php \
+&& sudo ./configure --with-config-file-path="/usr/local/etc/php" --with-config-file-scan-dir="/usr/local/etc/php/conf.d" --disable-cgi --enable-ftp --enable-mbstring --enable-intl --with-pdo-mysql --with-pdo-pgsql --with-pgsql --enable-mysqlnd --with-password-argon2 --with-sodium --enable-zip --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-openssl --enable-exif --enable-bcmath --with-mhash --enable-sockets --with-curl --with-xmlrpc --with-xsl
+```
+
+Install php
+
+```bash
+sudo make \
+&& sudo make install
+```
+
+```bash
+pecl update-channels; \
+rm -rf /tmp/pear ~/.pearrc
+```
+
+## Configure  it
+
+```bash
+cd /usr/local/etc \
+&& sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null;
+
+cp php-fpm.d/www.conf.default php-fpm.d/www.conf;
+```
+
+## Update PID file config
+
+```bash
+cd /usr/local/etc \
+&& nano php-fpm.conf
+```
+
+update
+
+```
+[...]
+pid = run/php-fpm.pid
+[...]
+```
+
+## FPM port
+
+```bash
+cd /usr/local/etc/php-fpm.d \
+&& nano www.conf
+```
+
+
+## Create Service
+
+Create service and paste following content
+
+```bash
+sudo nano /lib/systemd/system/php-7.2-fpm.service
+```
+
+```bash
+[Unit]
+Description=The PHP 7.2 FastCGI Process Manager
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/usr/local/var/run/php-fpm.pid
+ExecStart=/usr/local/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+```
+
+enable and run service
+
+```bash
+systemctl enable php-7.2-fpm.service
+systemctl daemon-reload
+systemctl start php-7.2-fpm.service
+```
+
+```bash
+./configure --prefix=/opt/php-7.2 --with-pdo-pgsql --with-zlib-dir --with-freetype-dir --enable-mbstring --with-libxml-dir=/usr --enable-soap --enable-calendar --with-curl --with-zlib --with-gd --with-pgsql --disable-rpath --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-sysvsem --enable-sysvshm --enable-pcntl --enable-mbregex --enable-exif --enable-bcmath --with-mhash --enable-zip --with-pcre-regex --with-pdo-mysql --with-mysqli --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-jpeg-dir=/usr --with-png-dir=/usr --with-openssl --with-fpm-user=www-data --with-fpm-group=www-data --with-libdir=/lib/x86_64-linux-gnu --enable-ftp --with-imap --with-imap-ssl --with-kerberos --with-gettext --with-xmlrpc --with-xsl --enable-opcache --enable-fpm
+```
+
+[Url](https://www.howtoforge.com/tutorial/how-to-install-php-7-on-debian/)
