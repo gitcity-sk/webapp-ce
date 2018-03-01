@@ -91,6 +91,7 @@ class User extends Authenticatable
                 ->setAction('security:write:keys')
                 ->setData([
                     'path' => env('GIT_SSH_KEYS'),
+                    'ssh_exec' => env('GITCITY_SSH_EXEC'),
                     'keys' => AuthorizedKey::select(['id', 'public_key'])->get()->toArray()
                 ])->run();
         } catch (\Exception $e) {
