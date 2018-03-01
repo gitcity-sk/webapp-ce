@@ -24,11 +24,18 @@ Git data
 
 * `/var/opt/webapp/data/git-data` - Where all git files are stored owned by GIT:GIT
 
+Create folders
+
+```bash
+sudo mkdir -p /opt/webapp/webapp-ce \
+&& sudo chown -R www-data:www-data /opt/webapp/webapp-ce
+```
+
 ## Check for update and prerequisites
 
 ```bash
 sudo apt update \
-&& sudo apt install curl
+&& sudo apt install -y curl
 ```
 
 ## SSH and GIT
@@ -40,7 +47,7 @@ sudo apt update \
 && sudo mkdir -p /var/opt/webapp/data/git-data/ \
 && sudo apt install openssh-server git \
 && sudo adduser git --home /var/opt/webapp/data/git-data \
-&& sudo chown -R git:git /var/opt/webapp/data/git-data \
+&& sudo chown -R git:git /var/opt/webapp/data/git-data
 ```
 
 ## PHP and Dependencies
@@ -105,7 +112,7 @@ Postgres Installation
 
 ```bash
 sudo apt update \
-&& sudo apt install postgresql postgresql-contrib
+&& sudo apt install -y postgresql postgresql-contrib
 ```
 
 Login as Postgres user
@@ -135,7 +142,7 @@ grant all privileges on database "gitcity-production" to "gitcity-psql" ;
 Update password for user
 
 ```bash
-alter user "gitcity-psql" with encrypted password 'yourPassword';
+alter user "gitcity-psql" with encrypted password 'dLVk7sBcgL9UcFpxS';
 \q
 ```
 
@@ -147,7 +154,7 @@ DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=gitcity-production
 DB_USERNAME=gitcity-psql
-DB_PASSWORD=yourPassword
+DB_PASSWORD=dLVk7sBcgL9UcFpxS
 ```
 
 ## Redis
@@ -168,8 +175,8 @@ sudo apt update \
 ## Webapp Download
 
 ```bash
-sudo -u www-data -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-ce.git /opt/webapp/embeded/webapp \
-&& cd /opt/webapp/embeded/webapp \
+sudo -u www-data -H git clone https://github.com/gitcity-sk/webapp-ce.git /opt/webapp/webapp-ce \
+&& cd /opt/webapp/webapp-ce \
 && sudo -u www-data -H composer install
 ```
 
@@ -349,7 +356,8 @@ rm -rf /tmp/pear ~/.pearrc
 cd /usr/local/etc \
 && sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null;
 
-cp php-fpm.d/www.conf.default php-fpm.d/www.conf;
+cd /usr/local/etc \
+&& cp php-fpm.d/www.conf.default php-fpm.d/www.conf;
 ```
 
 ## Update PID file config
@@ -404,6 +412,7 @@ enable and run service
 systemctl enable php-7.2-fpm.service
 systemctl daemon-reload
 systemctl start php-7.2-fpm.service
+systemctl status php-7.2-fpm.service
 ```
 
 Another possible configuration for php
