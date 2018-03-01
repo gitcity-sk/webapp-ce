@@ -8,7 +8,7 @@ class Workhorse
 
     protected $data;
 
-    protected const UNICORN_SOCKET = 'tcp://unicorn:8801';
+    protected const UNICORN_SOCKET = 'tcp://localhost:8801';
 
     /**
      * SocketClient constructor.

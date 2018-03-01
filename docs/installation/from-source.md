@@ -233,7 +233,8 @@ chown -R git:git /opt/webapp/webapp-ce/embeded/git-shell/ \
 Workhorse is needed for all git operation ehivh is required write permission. Reading permission has GitCity application at it own.
 
 ```bash
-sudo -u git -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-workhorse.git /opt/webapp/webapp-workhorse \
+sudo git clone https://github.com/gitcity-sk/gitcity-workhorse.git /opt/webapp/webapp-workhorse \
+&& sudo chown -R git:git /opt/webapp/webapp-workhorse \
 && cd /opt/webapp/webapp-workhorse \
 && sudo -u git -H composer install
 ```
@@ -241,7 +242,7 @@ sudo -u git -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-workhorse.git /op
 Configure service
 
 ```bash
-sudo touch /lib/systemd/system/webapp-workhorse.service
+sudo nano /lib/systemd/system/webapp-workhorse.service
 ```
 
 Update file content for your requirements. Git user and groum must remain othervise you dont will lose write acces to git data folder.
