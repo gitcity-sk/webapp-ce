@@ -8,16 +8,21 @@
 * Install Redist
 * Download and configure WebApp server
 * Download and configure Workhorse
-* Setup swap file
+* Setup swap file (optional)
 
 ## data store paths
 
 Create folder where you will have stored data
 
-```bash
-sudo mkdir -p /var/opt/webapp/data/git-data/ /var/opt/webapp/data/buckets/ /var/opt/webapp/data/certificates/ \
-&& sudo chown -R www-data:www-data /var/opt/webapp/data/
-```
+Main Application files
+
+* `/opt/webapp/webapp-ce` - Web application files and shell
+* `/opt/webapp/webapp-workhorse` - Workhorse files 
+* `/opt/webapp/webapp-ce/storage` - Users uploaded binary files
+
+Git data
+
+* `/var/opt/webapp/data/git-data` - Where all git files are stored owned by GIT:GIT
 
 ## Check for update and prerequisites
 
@@ -32,10 +37,10 @@ Nex create GIT user with folders and add www-data to git group
 
 ```bash
 sudo apt update \
+&& sudo mkdir -p /var/opt/webapp/data/git-data/ \
 && sudo apt install openssh-server git \
 && sudo adduser git --home /var/opt/webapp/data/git-data \
 && sudo chown -R git:git /var/opt/webapp/data/git-data \
-&& sudo usermod -aG www-data git
 ```
 
 ## PHP and Dependencies
@@ -156,7 +161,8 @@ sudo apt update \
 
 ```bash
 sudo apt update \
-&& sudo apt install -y nginx
+&& sudo apt install -y nginx \
+&& sudo usermod -aG git www-data #Add www-data user to GIT group
 ```
 
 ## Webapp Download
@@ -175,7 +181,7 @@ Edit `nginx.conf` file and add at the end of document right before `}`.
 vi nginx.conf
 
 # press i and documment add:
-include /opt/gitcity/config/gitcity-nginx.conf;
+include /opt/webapp/webapp-ce/config/nginx.conf;
 
 # press ESC, :wq and enter
 sudo service nginx reload
@@ -183,9 +189,9 @@ sudo service nginx reload
 
 ```bash
 # update user for GIT GIT_SHELL
-chown -R git:git /opt/webapp/embeded/webapp/embeded/git-shell/ \
-&& chmod +x /opt/webapp/embeded/webapp/embeded/git-shell/hooks/update \
-&& chmod +x /opt/webapp/embeded/webapp/embeded/git-shell/hooks/pre-receive
+chown -R git:git /opt/webapp/webapp-ce/embeded/git-shell/ \
+&& chmod +x /opt/webapp/webapp-ce/embeded/git-shell/hooks/update \
+&& chmod +x /opt/webapp/webapp-ce/embeded/git-shell/hooks/pre-receive
 ```
 
 ## CakeApp-Workhorse
@@ -193,8 +199,8 @@ chown -R git:git /opt/webapp/embeded/webapp/embeded/git-shell/ \
 Workhorse is needed for all git operation ehivh is required write permission. Reading permission has GitCity application at it own.
 
 ```bash
-sudo -u git -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-workhorse.git /opt/webapp/embeded/webapp-workhorse \
-&& cd /opt/webapp/embeded/webapp-workhorse \
+sudo -u git -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-workhorse.git /opt/webapp/webapp-workhorse \
+&& cd /opt/webapp/webapp-workhorse \
 && sudo -u git -H composer install
 ```
 
@@ -214,7 +220,7 @@ After=network.target
 [Service]
 User=git
 Group=git
-ExecStart=/usr/bin/php /opt/webapp/embeded/webapp-workhorse/srv.php
+ExecStart=/usr/bin/php /opt/webapp/webapp-workhorse/srv.php
 WorkingDirectory=/var/opt/webapp/data/git-data
 Type=simple
 Restart=always
@@ -322,7 +328,7 @@ Configure it
 ```bash
 cd /usr/src/php \
 && sudo mkdir -p /usr/local/etc/php \
-&& sudo ./configure --with-config-file-path="/usr/local/etc/php" --with-config-file-scan-dir="/usr/local/etc/php/conf.d" --disable-cgi --enable-ftp --enable-mbstring --enable-intl --with-pdo-mysql --with-pdo-pgsql --with-pgsql --enable-mysqlnd --with-password-argon2 --with-sodium --enable-zip --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-openssl --enable-exif --enable-bcmath --with-mhash --enable-sockets --with-curl --with-xmlrpc --with-xsl
+&& sudo ./configure --with-config-file-path="/usr/local/etc/php" --with-config-file-scan-dir="/usr/local/etc/php/conf.d" --disable-cgi --enable-ftp --enable-mbstring --enable-intl --with-pdo-mysql --with-pdo-pgsql --with-pgsql --enable-mysqlnd --with-password-argon2 --with-sodium --enable-zip --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-openssl --enable-exif --enable-bcmath --with-mhash --enable-sockets --with-curl --with-xmlrpc --with-xsl --with-zlib
 ```
 
 Install php
@@ -399,6 +405,8 @@ systemctl enable php-7.2-fpm.service
 systemctl daemon-reload
 systemctl start php-7.2-fpm.service
 ```
+
+Another possible configuration for php
 
 ```bash
 ./configure --prefix=/opt/php-7.2 --with-pdo-pgsql --with-zlib-dir --with-freetype-dir --enable-mbstring --with-libxml-dir=/usr --enable-soap --enable-calendar --with-curl --with-zlib --with-gd --with-pgsql --disable-rpath --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-sysvsem --enable-sysvshm --enable-pcntl --enable-mbregex --enable-exif --enable-bcmath --with-mhash --enable-zip --with-pcre-regex --with-pdo-mysql --with-mysqli --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-jpeg-dir=/usr --with-png-dir=/usr --with-openssl --with-fpm-user=www-data --with-fpm-group=www-data --with-libdir=/lib/x86_64-linux-gnu --enable-ftp --with-imap --with-imap-ssl --with-kerberos --with-gettext --with-xmlrpc --with-xsl --enable-opcache --enable-fpm
