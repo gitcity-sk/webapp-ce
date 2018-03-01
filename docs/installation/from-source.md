@@ -8,6 +8,7 @@
 * Install Redist
 * Download and configure WebApp server
 * Download and configure Workhorse
+* Download and configure Shell
 * Setup swap file (optional)
 
 ## data store paths
@@ -18,6 +19,7 @@ Main Application files
 
 * `/opt/webapp/webapp-ce` - Web application files and shell
 * `/opt/webapp/webapp-workhorse` - Workhorse files 
+* `/opt/webapp/webapp-shell` - Workhorse files 
 * `/opt/webapp/webapp-ce/storage` - Users uploaded binary files
 
 Git data
@@ -221,13 +223,6 @@ include /opt/webapp/webapp-ce/config/nginx-ssl.conf;
 sudo service nginx reload
 ```
 
-```bash
-# update user for GIT GIT_SHELL
-chown -R git:git /opt/webapp/webapp-ce/embeded/git-shell/ \
-&& chmod +x /opt/webapp/webapp-ce/embeded/git-shell/hooks/update \
-&& chmod +x /opt/webapp/webapp-ce/embeded/git-shell/hooks/pre-receive
-```
-
 ## CakeApp-Workhorse
 
 Workhorse is needed for all git operation ehivh is required write permission. Reading permission has GitCity application at it own.
@@ -284,6 +279,24 @@ systemctl start webapp-workhorse.service \
  ```bash
  sudo systemctl enable webapp-workhorse.service
  ```
+
+# Webapp Git Shell
+
+```bash
+sudo git clone https://github.com/gitcity-sk/webapp-shell.git /opt/webapp/webapp-shell \
+&& sudo chown -R git:git /opt/webapp/webapp-shell \
+&& cd /opt/webapp/webapp-shell \
+&& sudo -u git -H composer install
+```
+
+
+```bash
+# update user for GIT GIT_SHELL
+chown -R git:git /opt/webapp/webapp-ce/embeded/git-shell/ \
+&& chmod +x /opt/webapp/webapp-shell/hooks/update \
+&& chmod +x /opt/webapp/webapp-shell/hooks/pre-receive \
+&& chmod +x /opt/webapp/webapp-shell/ssh-exec
+```
 
 # Swap space
 
