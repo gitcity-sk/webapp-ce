@@ -21,7 +21,7 @@
 @auth
 <div class="row" style="margin-bottom: 10px">
     <div class="col-12 text-right">
-    <a href="/projects/create" class="btn btn-success">Create project</a>
+    <a href="/projects/create" class="btn btn-success">@lang('messages.create_project')</a>
     </div>
 </div>
 @endauth

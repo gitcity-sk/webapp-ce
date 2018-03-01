@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Milestone;
 
-class MilestonesController extends Controller
+class ProjectMilestonesController extends Controller
 {
     public function index(Project $project)
     {

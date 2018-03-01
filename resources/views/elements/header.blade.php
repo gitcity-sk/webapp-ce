@@ -7,13 +7,13 @@
           <div class="collapse navbar-collapse ml-2 mr-2" id="navbarCollapse">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="/projects">Projects <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/projects">@lang('messages.Projects') <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/groups">Groups <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/groups">@lang('messages.Groups') <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/pages">Pages <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/pages">@lang('messages.Pages') <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/admin/roles"><i class="fas fa-wrench"></i> <span class="sr-only">(current)</span></a>

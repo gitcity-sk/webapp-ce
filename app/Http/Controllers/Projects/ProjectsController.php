@@ -9,8 +9,9 @@ use App\Tree;
 use App\Repositories\Projects;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateProjectRequest;
 
-class ApplicationController extends Controller
+class ProjectsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -74,22 +75,11 @@ class ApplicationController extends Controller
     /**
      *
      */
-    public function store()
+    public function store(CreateProjectRequest $request)
     {
-        $this->validate(request(), [
-            'name' => 'required|min:3',
-            'description' => 'required'
-        ]);
-
         auth()->user()->publish(
             new Project(request(['name', 'description']))
         );
-
-        /*Project::create([
-            'name' => request('name'),
-            'description' => request('description'),
-            'user_id' => auth()->id()
-        ]);*/
 
         return redirect('/projects');
     }

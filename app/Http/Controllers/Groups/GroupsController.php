@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 use App\ee\License;
 use App\Http\Controllers\Controller;
 
-class ApplicationController extends Controller
+class GroupsController extends Controller
 {
     public function index()
     {
         if (license_check('groups') == false) {
-            abort(404);
+            abort(403, 'License required');
         }
 
         return view('groups.index');
@@ -24,7 +24,7 @@ class ApplicationController extends Controller
     public function create()
     {
         if (license_check('groups') == false) {
-            abort(404);
+            abort(403, 'License required');
         }
 
         return view('groups.create');
@@ -33,7 +33,7 @@ class ApplicationController extends Controller
     public function show(Group $group)
     {
         if (license_check('groups') == false) {
-            abort(404);
+            abort(403, 'License required');
         }
 
         return view('groups.show', compact('group'));
@@ -42,7 +42,7 @@ class ApplicationController extends Controller
     public function store()
     {
         if (license_check('groups') == false) {
-            abort(404);
+            abort(403, 'License required');
         }
 
         $this->validate(request(), [

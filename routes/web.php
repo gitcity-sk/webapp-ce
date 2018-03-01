@@ -26,13 +26,13 @@ Route::get('/', function () {
  * Groups
  */
 Route::group(['namespace' => 'Groups'], function () {
-    Route::get('/groups', 'ApplicationController@index');
-    Route::get('/groups/create', 'ApplicationController@create');
-    Route::get('/groups/{group}', 'ApplicationController@show');
-    Route::get('/projects/{project}/milestones', 'MilestonesController@index');
+    Route::get('/groups', 'GroupsController@index');
+    Route::get('/groups/create', 'GroupsController@create');
+    Route::get('/groups/{group}', 'GroupsController@show');
+    Route::get('/projects/{project}/milestones', 'GroupMilestonesController@index');
 
-    Route::post('/groups', 'ApplicationController@store');
-    Route::post('/groups/{group}/projects', 'ProjectsController@store');
+    Route::post('/groups', 'GroupsController@store');
+    Route::post('/groups/{group}/projects', 'GroupProjectsController@store');
 });
 
 /**
@@ -41,7 +41,7 @@ Route::group(['namespace' => 'Groups'], function () {
 
 Route::group(['namespace' => 'Groups\Api'], function () {
     Route::get('/api/groups', 'GroupsController@index');
-    Route::get('/api/groups/{group}/projects', 'ProjectsController@index');
+    Route::get('/api/groups/{group}/projects', 'GroupProjectsController@index');
 });
 
 /**
@@ -52,24 +52,24 @@ Route::get('/projects', function () {
 })->middleware('auth');
 
 Route::group(['namespace' => 'Projects'], function () {
-    Route::get('/projects/create', 'ApplicationController@create');
-    Route::get('/projects/{id}', 'ApplicationController@show')->name('project');
-    Route::get('/projects/{id}/issues', 'IssuesController@index')->name('projectIssues');
-    Route::get('/projects/{id}/issues/new', 'IssuesController@create');
+    Route::get('/projects/create', 'ProjectsController@create');
+    Route::get('/projects/{id}', 'ProjectsController@show')->name('project');
+    Route::get('/projects/{id}/issues', 'ProjectIssuesController@index')->name('projectIssues');
+    Route::get('/projects/{id}/issues/new', 'ProjectIssuesController@create');
     Route::get('/projects/{project}/commits', 'CommitsController@show');
     Route::get('/projects/{project}/branches', 'BranchesController@show');
     Route::get('/projects/{project}/tags', 'TagsController@show');
-    Route::get('/projects/{id}/merge-requests', 'ApplicationController@mergeRequests');
-    Route::get('/projects/{id}/merge-requests/new', 'ApplicationController@createMergeRequest');
-    Route::get('/projects/{id}/create-on-server', 'ApplicationController@createOnServer');
-    Route::get('/projects/{project}/milestones', 'MilestonesController@index')->name('projectMilestones');
-    Route::get('/projects/{project}/milestones/new', 'MilestonesController@create');
+    Route::get('/projects/{id}/merge-requests', 'ProjectsController@mergeRequests');
+    Route::get('/projects/{id}/merge-requests/new', 'ProjectsController@createMergeRequest');
+    Route::get('/projects/{id}/create-on-server', 'ProjectsController@createOnServer');
+    Route::get('/projects/{project}/milestones', 'ProjectMilestonesController@index')->name('projectMilestones');
+    Route::get('/projects/{project}/milestones/new', 'ProjectMilestonesController@create');
 
-    Route::post('/projects', 'ApplicationController@store');
-    Route::post('/projects/{project}/issues', 'IssuesController@store');
+    Route::post('/projects', 'ProjectsController@store');
+    Route::post('/projects/{project}/issues', 'ProjectIssuesController@store');
     Route::post('/projects/{project}/merge-requests', 'MergeRequestsController@store');
 
-    Route::post('/projects/{project}/milestones', 'MilestonesController@store');
+    Route::post('/projects/{project}/milestones', 'ProjectMilestonesController@store');
 });
 
 /**
@@ -79,7 +79,7 @@ Route::group(['namespace' => 'Projects\Api'], function () {
     Route::get('/api/projects', 'ProjectsController@index');
     Route::get('/api/projects/{project}/issues', 'ProjectsController@issues');
 
-    Route::get('/api/projects/{project}/milestones', 'MilestonesController@index');
+    Route::get('/api/projects/{project}/milestones', 'ProjectMilestonesController@index');
 });
 
 /**
@@ -88,7 +88,7 @@ Route::group(['namespace' => 'Projects\Api'], function () {
 Route::group(['namespace' => 'Issues'], function () {
     Route::get('/issues/{issue}', 'ApplicationController@show');
 
-    Route::post('/issues/{issue}/comments', 'CommentsController@store');
+    Route::post('/issues/{issue}/comments', 'IssueCommentsController@store');
 });
 
 

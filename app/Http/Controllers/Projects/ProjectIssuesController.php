@@ -7,8 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Issue;
 use App\Repositories\Projects;
+use App\Http\Requests\CreateProjectIssueRequest;
 
-class IssuesController extends Controller
+class ProjectIssuesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -36,7 +37,7 @@ class IssuesController extends Controller
         return view('projects.new_issue', compact('project'));
     }
 
-    public function store(Project $project)
+    public function store(CreateProjectIssueRequest $request, Project $project)
     {
         Issue::create([
             'title' => request('title'),

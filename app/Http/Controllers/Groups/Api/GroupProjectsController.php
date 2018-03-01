@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Group;
 use App\Http\Resources\ProjectResource;
 
-class ProjectsController extends Controller
+class GroupProjectsController extends Controller
 {
     public function index(Group $group)
     {

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Http\Resources\MilestoneResource;
 
-class MilestonesController extends Controller
+class ProjectMilestonesController extends Controller
 {
     public function __construct()
     {

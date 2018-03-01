@@ -6,7 +6,7 @@ use App\Comment;
 use App\Issue;
 use App\Http\Controllers\Controller;
 
-class CommentsController extends Controller
+class IssueCommentsController extends Controller
 {
     public function store(Issue $issue)
     {

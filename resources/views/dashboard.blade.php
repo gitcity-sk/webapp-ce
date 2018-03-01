@@ -14,7 +14,7 @@
 </h1>
 
 <p class="lead">
-This is your homepage. <a href="/logout">Logout</a>
+@lang('This is your homepage.') <a href="/logout">Logout</a>
 </p>
 
 <a href="/projects">Projects</a>

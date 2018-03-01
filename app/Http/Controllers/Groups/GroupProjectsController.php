@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Project;
 use App\Group;
 
-class ProjectsController extends Controller
+class GroupProjectsController extends Controller
 {
     public function store(Group $group)
     {
