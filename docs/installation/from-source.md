@@ -169,7 +169,30 @@ sudo apt update \
 ```bash
 sudo apt update \
 && sudo apt install -y nginx \
-&& sudo usermod -aG git www-data #Add www-data user to GIT group
+&& sudo usermod -aG git www-data \ #Add www-data user to GIT group
+&& sudo usermod -aG www-data git  #Add git to www-data
+```
+
+## SSL Settings Optional
+
+We are using certificates from LetsEncrypt
+
+Install certboot
+
+```bash
+sudo nano /etc/apt/sources.list.d/backports.list
+deb http://ftp.debian.org/debian stretch-backports main
+
+sudo apt update \
+&& sudo apt-get install -y certbot -t stretch-backports
+```
+
+Sign certificates
+
+```bash
+sudo service nginx stop \
+&& sudo certbot certonly --standalone -d gitcity.sk \
+&& sudo service nginx start
 ```
 
 ## Webapp Download
@@ -185,10 +208,13 @@ sudo -u www-data -H git clone https://github.com/gitcity-sk/webapp-ce.git /opt/w
 Edit `nginx.conf` file and add at the end of document right before `}`.
 
 ```bash
-vi nginx.conf
+sudo nano /etc/nginx/nginx.conf
 
 # press i and documment add:
 include /opt/webapp/webapp-ce/config/nginx.conf;
+
+# for SSL edit paths to certificates and include
+include /opt/webapp/webapp-ce/config/nginx-ssl.conf;
 
 # press ESC, :wq and enter
 sudo service nginx reload
