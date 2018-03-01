@@ -214,6 +214,7 @@ sudo nano /etc/nginx/nginx.conf
 include /opt/webapp/webapp-ce/config/nginx.conf;
 
 # for SSL edit paths to certificates and include
+sudo -u www-data -H nano /opt/webapp/webapp-ce/config/nginx-ssl.conf
 include /opt/webapp/webapp-ce/config/nginx-ssl.conf;
 
 # press ESC, :wq and enter
