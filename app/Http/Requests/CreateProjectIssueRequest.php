@@ -14,7 +14,7 @@ class CreateProjectIssueRequest extends FormRequest
      */
     public function authorize()
     {
-        $project = Project::find($this->route('project'));
+        $project = $this->route('project');
         return $project && $this->user()->can('create-comment');
     }
 
