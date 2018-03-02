@@ -16,4 +16,13 @@ class IssuesController extends Controller
             'complete' => true
         ]);
     }
+
+    public function reopen()
+    {
+        $issue = Issue::find(request('id'));
+
+        $issue->update([
+            'complete' => false
+        ]);
+    }
 }

@@ -1,5 +1,5 @@
 <template>
-    <button v-on:click="closeItem" class="btn btn-danger">Close Issue</button>
+    <button v-on:click.prevent="closeItem" class="btn btn-outline-warning">Close Issue</button>
 </template>
 
 <script>

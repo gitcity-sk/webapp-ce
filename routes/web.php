@@ -113,6 +113,7 @@ Route::group(['namespace' => 'Issues'], function () {
  */
 Route::group(['namespace' => 'Issues\Api'], function () {
     Route::put('/issues/close', 'IssuesController@close');
+    Route::put('/issues/reopen', 'IssuesController@reopen');
 });
 
 

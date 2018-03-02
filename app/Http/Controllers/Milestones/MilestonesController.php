@@ -15,7 +15,10 @@ class MilestonesController extends Controller
     
     public function show(Milestone $milestone)
     {
-        $completed_percentage = floor(($milestone->issues()->closed()->count() / $milestone->issues()->count()) * 100);
+        $completed_percentage = 0;
+        
+        if ($milestone->issues()->count()) $completed_percentage = floor(($milestone->issues()->closed()->count() / $milestone->issues()->count()) * 100);
+
         return view('milestones.show', compact('milestone', 'completed_percentage'));
     }
 }

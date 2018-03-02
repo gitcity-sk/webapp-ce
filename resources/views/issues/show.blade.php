@@ -17,9 +17,9 @@
 <div class="row">
     <div class="col-9">
     @if (false == $issue->complete)
-    <span class="badge badge-success">Open</span>
+    <span class="badge badge-success font-weight-normal px-2 py-2 mr-1" style="font-size: 1em">Open</span>
     @else
-    <span class="badge badge-danger">Closed</span>
+    <span class="badge badge-danger font-weight-normal px-2 py-2 mr-1" style="font-size: 1em">Closed</span>
     @endif 
     opened {{ $issue->created_at->diffForHumans() }} by <a class="text-dark" href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a><hr />
         <div class="has-emoji">{!! markdown()->text($issue->description) !!}</div>
@@ -70,6 +70,7 @@
     <div class="col-9">
         <div class="card">
             <div class="card-body">
+            @if ($issue->complete == false)
                 <form action="/issues/{{ $issue->id }}/comments" method="post">
 
                     {{ csrf_field() }}
@@ -82,13 +83,15 @@
                     <div class="form-group row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Create comment</button>
-                            
+                            <close-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-button>
                         </div>
                     </div>
                 </form>
+            @else
+            <reopen-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-reopen>
+            @endif
             </div>
         </div>
     </div>
 </div>
-<close-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-button>
 @endsection

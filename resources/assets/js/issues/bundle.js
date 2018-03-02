@@ -19,6 +19,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('close-button', require('./CloseButton.vue'));
+Vue.component('reopen-button', require('./ReopenButton.vue'));
 
 const app = new Vue({
     el: '#app',
