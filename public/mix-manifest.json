@@ -1,14 +1,16 @@
 {
-    "/js/mix/projects/bundle.js": "/js/mix/projects/bundle.js?id=08d06bb4d203fa1c9898",
-    "/js/mix/git/bundle.js": "/js/mix/git/bundle.js?id=6a4835ff82bc7f2e41e7",
-    "/js/mix/groups/bundle.js": "/js/mix/groups/bundle.js?id=a6a775a9f00537c3665e",
-    "/js/mix/cms/bundle.js": "/js/mix/cms/bundle.js?id=0f993eb412343d1e8485",
-    "/js/mix/users/bundle.js": "/js/mix/users/bundle.js?id=8c521d82ec4f79a04695",
-    "/js/bundle.js": "/js/bundle.js?id=1430287c6cba7313be96",
-    "/js/mix/profiles/bundle.js": "/js/mix/profiles/bundle.js?id=caeb7080f6493ae0b53e",
-    "/js/mix/license/bundle.js": "/js/mix/license/bundle.js?id=f03c873346e13f214d17",
-    "/js/mix/ide/bundle.js": "/js/mix/ide/bundle.js?id=2b4c1158b2a3cda1ef2f",
-    "/js/app.js": "/js/app.js?id=80d46c0175491a88a923",
-    "/css/app.css": "/css/app.css?id=09fb9d408b4a295ba723",
-    "/css/blog.css": "/css/blog.css?id=31080d7797f9945a598e"
+    "/js/mix/projects/bundle.js": "/js/mix/projects/bundle.js?id=1027665ee881d54bbd80",
+    "/js/mix/git/bundle.js": "/js/mix/git/bundle.js?id=a072a03a5cf0c1e3ca4b",
+    "/js/mix/milestones/bundle.js": "/js/mix/milestones/bundle.js?id=d8088cfbaa45ab1d9617",
+    "/js/mix/groups/bundle.js": "/js/mix/groups/bundle.js?id=210f3cb419c6ecc46859",
+    "/js/mix/cms/bundle.js": "/js/mix/cms/bundle.js?id=bde6740a425299cb3817",
+    "/js/mix/users/bundle.js": "/js/mix/users/bundle.js?id=fc9112252e10d4367e14",
+    "/js/bundle.js": "/js/bundle.js?id=1a584fc338cebf089ef1",
+    "/js/mix/profiles/bundle.js": "/js/mix/profiles/bundle.js?id=8384b7d6cad477249631",
+    "/js/mix/issues/bundle.js": "/js/mix/issues/bundle.js?id=d6c7b8484ef30bffcd1c",
+    "/js/mix/license/bundle.js": "/js/mix/license/bundle.js?id=8cea414312abb371dfc8",
+    "/js/mix/ide/bundle.js": "/js/mix/ide/bundle.js?id=ad45df1a5aee9f194233",
+    "/js/app.js": "/js/app.js?id=a35525b84aeefa6f6319",
+    "/css/app.css": "/css/app.css?id=9756192ff4e4f1657250",
+    "/css/blog.css": "/css/blog.css?id=cdc405ce6cc0d9da6aa5"
 }

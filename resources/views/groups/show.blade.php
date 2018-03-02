@@ -15,6 +15,7 @@
     </div>
 </a>
 </div>
+@include('groups.elements.sidebar')
 @endsection
 
 @section('javascripts')

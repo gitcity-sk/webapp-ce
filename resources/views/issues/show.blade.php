@@ -6,7 +6,7 @@
 @inject('markdown', 'Parsedown')
 
 @section('javascripts')
-<script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/mix/issues/bundle.js') }}"></script>
 @endsection
 
 @section ('content')
@@ -16,7 +16,12 @@
 
 <div class="row">
     <div class="col-9">
-    <span class="badge badge-success">Open</span> opened {{ $issue->created_at->diffForHumans() }} by <a class="text-dark" href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a><hr />
+    @if (false == $issue->complete)
+    <span class="badge badge-success">Open</span>
+    @else
+    <span class="badge badge-danger">Closed</span>
+    @endif 
+    opened {{ $issue->created_at->diffForHumans() }} by <a class="text-dark" href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a><hr />
         <div class="has-emoji">{!! markdown()->text($issue->description) !!}</div>
 
         <div class="card mb-3">
@@ -77,6 +82,7 @@
                     <div class="form-group row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Create comment</button>
+                            
                         </div>
                     </div>
                 </form>
@@ -84,4 +90,5 @@
         </div>
     </div>
 </div>
+<close-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-button>
 @endsection

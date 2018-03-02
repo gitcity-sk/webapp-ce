@@ -2,9 +2,9 @@
 
 return [
 
-    'Projects' => 'Projects',
-    'Groups' => 'Groups',
-    'Pages' => 'Pages',
+    'projects' => 'Projects',
+    'groups' => 'Groups',
+    'pages' => 'Pages',
 
     'create_project' => 'Create Project',
 ];

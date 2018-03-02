@@ -21,6 +21,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/components/git/bundle.js', 'public/js/mix/git')
     .js('resources/assets/js/ide/bundle.js', 'public/js/mix/ide')
     .js('resources/assets/js/cms/bundle.js', 'public/js/mix/cms')
+    .js('resources/assets/js/milestones/bundle.js', 'public/js/mix/milestones')
+    .js('resources/assets/js/issues/bundle.js', 'public/js/mix/issues')
    .sass('resources/assets/sass/app.scss', 'public/css')
    .sass('resources/assets/sass/blog.scss', 'public/css').version().sourceMaps();
 
