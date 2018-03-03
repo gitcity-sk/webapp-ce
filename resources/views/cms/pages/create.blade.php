@@ -17,7 +17,7 @@
 @endsection
 
 @section('javascripts')
-<script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/mix/app.js') }}"></script>
 @endsection
 
 @section ('content')

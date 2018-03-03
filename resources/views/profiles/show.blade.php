@@ -4,7 +4,7 @@
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/profiles/bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/profiles.js') }}"></script>
 @endsection
 
 @inject('markdown', 'Parsedown')

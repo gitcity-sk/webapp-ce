@@ -1,0 +1,2 @@
+webpackJsonp([12],{0:function(n,o,e){e("sV/x"),e("xZZD"),n.exports=e("CeYZ")},CeYZ:function(n,o){},"sV/x":function(n,o,e){window.Vue=e("I3G/");new Vue({el:"#app",data:function(){return{loading:!1}},created:function(){this.$on("pageLoader",function(n){this.loading=n})}})},xZZD:function(n,o){}},[0]);
+//# sourceMappingURL=app.js.map

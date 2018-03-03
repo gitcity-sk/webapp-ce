@@ -6,7 +6,7 @@
 @inject('markdown', 'Parsedown')
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/issues/bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/issues.js') }}"></script>
 @endsection
 
 @section ('content')

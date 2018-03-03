@@ -3,6 +3,10 @@
 @section ('layout-main-classes', 'container')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
+@section('javascripts')
+<script src="{{ mix('/js/mix/app.js') }}"></script>
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">

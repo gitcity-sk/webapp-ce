@@ -28,7 +28,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ mix('/js/bundle.js') }}"></script>
+    <script src="{{ mix('/js/mix/manifest.js') }}"></script>
+    <script src="{{ mix('/js/mix/vendor.js') }}"></script>
+    <script src="{{ mix('/js/mix/assets.js') }}"></script>
     @yield ('javascripts')
   </body>
 </html>

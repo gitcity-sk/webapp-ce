@@ -38,7 +38,7 @@
 <script>
     import axios from 'axios';
     import emojione from 'emojione';
-    import cssPreloader from '../../components/vue-shared/css-preloader.vue';
+    import cssPreloader from '../../vue/shared-components/css-preloader.vue';
 
     export default {
         components: {
