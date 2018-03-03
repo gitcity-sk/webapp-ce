@@ -52,8 +52,8 @@
 
     <div class="form-group row">
         <label class="col-12 form-control-label" for="description">Body</label>
-        <div class="col-12">
-            <textarea class="form-control" id="descriptiont" name="description" rows="6" placeholder="Content.."></textarea>
+        <div class="col-9">
+            <markdown-ed model-name="description"></markdown-ed>
         </div>
     </div>
 
@@ -64,8 +64,6 @@
     </div>
 
     </form>
-
-
 
     </div>
 </div>

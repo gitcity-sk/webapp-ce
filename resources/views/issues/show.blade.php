@@ -68,30 +68,33 @@
 
 <div class="row">
     <div class="col-9">
-        <div class="card">
-            <div class="card-body">
-            @if ($issue->complete == false)
-                <form action="/issues/{{ $issue->id }}/comments" method="post">
 
-                    {{ csrf_field() }}
+        @if ($issue->complete == false)
+            <form action="/issues/{{ $issue->id }}/comments" method="post">
 
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <textarea class="form-control" id="descriptiont" name="body" rows="6" placeholder="Comment body..."></textarea>
-                        </div>
+                {{ csrf_field() }}
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <!--<textarea class="form-control" id="descriptiont" name="body" rows="6" placeholder="Comment body..."></textarea>-->
+                        <markdown-ed model-name="body"></markdown-ed>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Create comment</button>
-                            <close-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-button>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Create comment</button>
+                        <close-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-button>
                     </div>
-                </form>
-            @else
-            <reopen-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-reopen>
-            @endif
+                </div>
+            </form>
+        @else
+            <div class="card">
+                <div class="card-body">
+                    <reopen-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-reopen>
+                </div>
             </div>
-        </div>
+        @endif
+
     </div>
 </div>
 @endsection
