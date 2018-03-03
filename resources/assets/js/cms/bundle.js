@@ -10,6 +10,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('pages-table-component', require('./components/PagesTable.vue'));
+Vue.component('markdown-editor', require('../vue/shared-components/SimpleMde.vue'));
 
 const app = new Vue({
     el: '#app',

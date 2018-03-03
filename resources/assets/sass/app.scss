@@ -7,9 +7,11 @@
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
-@import "~simplemde/src/css/simplemde";
 @import "codeOcean";
 @import "carousel";
 @import "loader";
 @import "fa-svg-with-js";
 @import "dashboard";
+
+// Simplemde
+@import "~maymeow-simplemde-fa5/src/css/simplemde";

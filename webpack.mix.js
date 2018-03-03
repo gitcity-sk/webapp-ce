@@ -31,3 +31,4 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
 
 // Copy files/directories
 mix.copyDirectory('node_modules/monaco-editor/dev/vs', 'public/js/monaco-editor/vs');
+mix.copy('node_modules/maymeow-simplemde-fa5/dist/simplemde.min.css', 'public/css/simplemde.min.css');

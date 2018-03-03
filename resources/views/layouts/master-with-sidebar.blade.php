@@ -10,8 +10,8 @@
     <title>GitCity</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="/css/app.css" rel="stylesheet">
-
+    <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+    @yield ('stylesheets')
   </head>
   <body>
 

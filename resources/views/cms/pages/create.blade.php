@@ -17,7 +17,7 @@
 @endsection
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/app.js') }}"></script>
+<script src="{{ mix('/js/mix/cms.js') }}"></script>
 @endsection
 
 @section ('content')
@@ -62,6 +62,7 @@
             <button type="submit" class="btn btn-primary">Create page</button>
         </div>
     </div>
+
     </form>
 
 
