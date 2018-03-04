@@ -3,7 +3,7 @@
 @section ('layout-main-classes', 'container-fluid')
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/ide.js') }}"></script>
+<script src="{{ mix('/js/mix/ide.bundle.js') }}"></script>
 @endsection
 
 @section ('content')

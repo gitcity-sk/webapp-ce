@@ -19,7 +19,7 @@
 @endsection
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/groups.js') }}"></script>
+<script src="{{ mix('/js/mix/groups.bundle.js') }}"></script>
 @endsection
 
 @section ('content')
