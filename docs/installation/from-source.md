@@ -300,10 +300,10 @@ chown -R git:git /opt/webapp/webapp-ce/embeded/git-shell/ \
 
 # Swap space
 
-Minimum ram is to running is 1GB + 3GB swap
+Minimum ram is to running is 1GB + 2GB swap. For x GB i recomend to have x+1 GB swap file
 
 ```bash
-sudo fallocate -l 3G /swapfile \
+sudo fallocate -l 2G /swapfile \
 && sudo chmod 600 /swapfile \
 && ls -lh /swapfile \
 && sudo mkswap /swapfile \
@@ -455,6 +455,17 @@ systemctl daemon-reload
 systemctl start php-7.2-fpm.service
 systemctl status php-7.2-fpm.service
 ```
+
+## Memory Limits 
+
+If you want to use project management you have to update memory limits for PHP (sometimes git diff eat a lot of memory) to avoid crashes.
+
+```bash
+/usr/local/etc/php/conf.d \
+&& nano memory.ini
+```
+
+then add to file `memory_limit = 2G` or 1G is enough for most situations.
 
 Another possible configuration for php
 
