@@ -17,7 +17,7 @@ class MergeRequestsController extends Controller
 
     public function show(MergeRequest $mergeRequest)
     {
-        $repo = Repo::open($mergeRequest->project->user->username, $mergeRequest->project->slug);
+        $repo = Repo::open($mergeRequest->project->user->name, $mergeRequest->project->slug);
         $diff = Diff::getDiffBetween($mergeRequest->branch_from, $mergeRequest->branch_to, $repo);
         dd([
             'repo' => $repo,
