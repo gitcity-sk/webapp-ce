@@ -5,6 +5,10 @@
 
 @inject('markdown', 'Parsedown')
 
+@section('javascripts')
+<script src="{{ mix('/js/mix/app.js') }}"></script>
+@endsection
+
 @section ('content')
 <h1 class="h2" style="font-weight: 300">
     <svg class="octicon" width="24px" height="32px" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
