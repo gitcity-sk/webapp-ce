@@ -116,8 +116,12 @@ Route::group(['namespace' => 'Issues\Api'], function () {
     Route::put('/issues/reopen', 'IssuesController@reopen');
 });
 
-
-Route::get('/merge-requests/{mergeRequest}', 'MergeRequestsController@show');
+/**
+ * Merge requests
+ */
+Route::group(['namespace' => 'MergeRequests'], function () {
+    Route::get('/merge-requests/{mergeRequest}', 'MergeRequestsController@show');
+});
 
 /**
  * Labels
