@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Projects;
 
+use App\Http\Controllers\Controller;
 use App\Project;
 use App\Repo;
 use App\Diff;
