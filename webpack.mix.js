@@ -27,7 +27,13 @@ mix.js('resources/assets/js/app.js', 'public/js/mix/app.js')
 
 // CSS
 mix.sass('resources/assets/sass/app.scss', 'public/css')
-   .sass('resources/assets/sass/blog.scss', 'public/css').version().sourceMaps();
+    .sass('resources/assets/sass/codebase/main.scss', 'public/css/codebase.css')
+    .sass('resources/assets/sass/codebase/codebase/themes/corporate.scss', 'public/css/codebase.theme.corporate.css')
+    .sass('resources/assets/sass/codebase/codebase/themes/earth.scss', 'public/css/codebase.theme.earth.css')
+    .sass('resources/assets/sass/codebase/codebase/themes/elegance.scss', 'public/css/codebase.theme.elegance.css')
+    .sass('resources/assets/sass/codebase/codebase/themes/flat.scss', 'public/css/codebase.theme.flat.css')
+    .sass('resources/assets/sass/codebase/codebase/themes/pulse.scss', 'public/css/codebase.theme.pulse.css')
+    .sass('resources/assets/sass/blog.scss', 'public/css').version().sourceMaps();
 
 // Copy files/directories
 mix.copyDirectory('node_modules/monaco-editor/dev/vs', 'public/js/monaco-editor/vs');
