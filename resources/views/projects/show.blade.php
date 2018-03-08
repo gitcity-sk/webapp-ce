@@ -4,7 +4,7 @@
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/git/bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/git.bundle.js') }}"></script>
 @endsection
 
 @inject('markdown', 'Parsedown')
@@ -41,7 +41,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon3">ssh:</span>
                     </div>
-                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="ssh://localhost:8080/~/{{ $project->user->name }}/{{ $project->slug }}.git">
+                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="ssh://git{{ '@' }}{{ config('webapp.url') }}:{{ config('webapp.ssh_port') }}/~/{{ $project->user->name }}/{{ $project->slug }}.git">
                 </div>
             </div>
         </div>

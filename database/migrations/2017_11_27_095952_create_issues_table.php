@@ -17,6 +17,7 @@ class CreateIssuesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('project_id');
+            $table->integer('milestone_id')->nullable(); // 2018_02_26_121037_create_milestones_table
             $table->string('title');
             $table->text('description');
             $table->boolean('complete')->default(false);

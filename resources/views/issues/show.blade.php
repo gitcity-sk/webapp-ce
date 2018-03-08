@@ -6,7 +6,7 @@
 @inject('markdown', 'Parsedown')
 
 @section('javascripts')
-<script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/mix/issues.bundle.js') }}"></script>
 @endsection
 
 @section ('content')
@@ -16,7 +16,12 @@
 
 <div class="row">
     <div class="col-9">
-    <span class="badge badge-success">Open</span> opened {{ $issue->created_at->diffForHumans() }} by <a class="text-dark" href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a><hr />
+    @if (false == $issue->complete)
+    <span class="badge badge-success font-weight-normal px-2 py-2 mr-1" style="font-size: 1em">Open</span>
+    @else
+    <span class="badge badge-danger font-weight-normal px-2 py-2 mr-1" style="font-size: 1em">Closed</span>
+    @endif 
+    opened {{ $issue->created_at->diffForHumans() }} by <a class="text-dark" href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a><hr />
         <div class="has-emoji">{!! markdown()->text($issue->description) !!}</div>
 
         <div class="card mb-3">
@@ -48,6 +53,10 @@
             <div class="card-body">
                 <p class="h6">Project</p>
                 <a href="/projects/{{ $issue->project->id }}/issues">{{ $issue->project->name }}</a>
+                @if (null !== $issue->milestone)
+                    <p class="h6">Milestone</p>
+                    {{ $issue->milestone->title }}
+                @endif
                 <p class="h6">User</p>
                 <a href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a>
                 <p class="h6">Created</p>
@@ -59,25 +68,33 @@
 
 <div class="row">
     <div class="col-9">
-        <div class="card">
-            <div class="card-body">
-                <form action="/issues/{{ $issue->id }}/comments" method="post">
 
-                    {{ csrf_field() }}
+        @if ($issue->complete == false)
+            <form action="/issues/{{ $issue->id }}/comments" method="post">
 
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <textarea class="form-control" id="descriptiont" name="body" rows="6" placeholder="Comment body..."></textarea>
-                        </div>
+                {{ csrf_field() }}
+
+                <div class="form-group row">
+                    <div class="col-12">
+                        <!--<textarea class="form-control" id="descriptiont" name="body" rows="6" placeholder="Comment body..."></textarea>-->
+                        <markdown-ed model-name="body"></markdown-ed>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">Create comment</button>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Create comment</button>
+                        <close-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-button>
                     </div>
-                </form>
+                </div>
+            </form>
+        @else
+            <div class="card">
+                <div class="card-body">
+                    <reopen-button issue-id="{{ $issue->id }}" redirect="/issues/{{ $issue->id }}"></close-reopen>
+                </div>
             </div>
-        </div>
+        @endif
+
     </div>
 </div>
 @endsection

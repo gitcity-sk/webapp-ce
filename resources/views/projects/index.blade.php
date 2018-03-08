@@ -4,7 +4,7 @@
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/projects/bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/projects.bundle.js') }}"></script>
 @endsection
 
 @section ('projects-table')
@@ -21,7 +21,7 @@
 @auth
 <div class="row" style="margin-bottom: 10px">
     <div class="col-12 text-right">
-    <a href="/projects/create" class="btn btn-success">Create project</a>
+    <a href="/projects/create" class="btn btn-success">@lang('messages.create_project')</a>
     </div>
 </div>
 @endauth

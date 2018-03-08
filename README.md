@@ -6,6 +6,8 @@
 
 Open source software development platform with built-in version control, issue tracking. Build with laravel, self hosted on your own server.
 
+[![](/resources/images/Discord-Logo-Wordmark-Color-sm.png)](https://discord.gg/hXukBug)
+
 ## Requirements
 
 * PHP >= 7.0

@@ -17,7 +17,7 @@
 @endsection
 
 @section('javascripts')
-<script src="{{ mix('/js/app.js') }}"></script>
+<script src="{{ mix('/js/mix/cms.bundle.js') }}"></script>
 @endsection
 
 @section ('content')
@@ -52,8 +52,8 @@
 
     <div class="form-group row">
         <label class="col-12 form-control-label" for="description">Body</label>
-        <div class="col-12">
-            <textarea class="form-control" id="descriptiont" name="description" rows="6" placeholder="Content.."></textarea>
+        <div class="col-9">
+            <markdown-ed model-name="description"></markdown-ed>
         </div>
     </div>
 
@@ -62,9 +62,8 @@
             <button type="submit" class="btn btn-primary">Create page</button>
         </div>
     </div>
+
     </form>
-
-
 
     </div>
 </div>

@@ -8,22 +8,36 @@
 * Install Redist
 * Download and configure WebApp server
 * Download and configure Workhorse
-* Setup swap file
+* Download and configure Shell
+* Setup swap file (optional)
 
 ## data store paths
 
 Create folder where you will have stored data
 
+Main Application files
+
+* `/opt/webapp/webapp-ce` - Web application files and shell
+* `/opt/webapp/webapp-workhorse` - Workhorse files 
+* `/opt/webapp/webapp-shell` - Workhorse files 
+* `/opt/webapp/webapp-ce/storage` - Users uploaded binary files
+
+Git data
+
+* `/var/opt/webapp/data/git-data` - Where all git files are stored owned by GIT:GIT
+
+Create folders
+
 ```bash
-sudo mkdir -p /var/opt/webapp/data/git-data/ /var/opt/webapp/data/buckets/ /var/opt/webapp/data/certificates/ \
-&& sudo chown -R www-data:www-data /var/opt/webapp/data/
+sudo mkdir -p /opt/webapp/webapp-ce \
+&& sudo chown -R www-data:www-data /opt/webapp/webapp-ce
 ```
 
 ## Check for update and prerequisites
 
 ```bash
 sudo apt update \
-&& sudo apt install curl
+&& sudo apt install -y curl
 ```
 
 ## SSH and GIT
@@ -32,10 +46,10 @@ Nex create GIT user with folders and add www-data to git group
 
 ```bash
 sudo apt update \
+&& sudo mkdir -p /var/opt/webapp/data/git-data/ \
 && sudo apt install openssh-server git \
 && sudo adduser git --home /var/opt/webapp/data/git-data \
-&& sudo chown -R git:git /var/opt/webapp/data/git-data \
-&& sudo usermod -aG www-data git
+&& sudo chown -R git:git /var/opt/webapp/data/git-data
 ```
 
 ## PHP and Dependencies
@@ -46,6 +60,8 @@ sudo apt update \
 && curl -sSL https://getcomposer.org/installer | php \
 && mv composer.phar /usr/local/bin/composer
 ```
+
+If you have php lover than 7.1.3 you have to reinstall it from source
 
 ### Redis Extension Optional
 
@@ -98,7 +114,7 @@ Postgres Installation
 
 ```bash
 sudo apt update \
-&& sudo apt install postgresql postgresql-contrib
+&& sudo apt install -y postgresql postgresql-contrib
 ```
 
 Login as Postgres user
@@ -128,7 +144,7 @@ grant all privileges on database "gitcity-production" to "gitcity-psql" ;
 Update password for user
 
 ```bash
-alter user "gitcity-psql" with encrypted password 'yourPassword';
+alter user "gitcity-psql" with encrypted password 'dLVk7sBcgL9UcFpxS';
 \q
 ```
 
@@ -140,7 +156,7 @@ DB_HOST=127.0.0.1
 DB_PORT=5432
 DB_DATABASE=gitcity-production
 DB_USERNAME=gitcity-psql
-DB_PASSWORD=yourPassword
+DB_PASSWORD=dLVk7sBcgL9UcFpxS
 ```
 
 ## Redis
@@ -154,14 +170,38 @@ sudo apt update \
 
 ```bash
 sudo apt update \
-&& sudo apt install -y nginx
+&& sudo apt install -y nginx \
+&& sudo usermod -aG git www-data \ #Add www-data user to GIT group
+&& sudo usermod -aG www-data git  #Add git to www-data
+```
+
+## SSL Settings Optional
+
+We are using certificates from LetsEncrypt
+
+Install certboot
+
+```bash
+sudo nano /etc/apt/sources.list.d/backports.list
+deb http://ftp.debian.org/debian stretch-backports main
+
+sudo apt update \
+&& sudo apt-get install -y certbot -t stretch-backports
+```
+
+Sign certificates
+
+```bash
+sudo service nginx stop \
+&& sudo certbot certonly --standalone -d gitcity.sk \
+&& sudo service nginx start
 ```
 
 ## Webapp Download
 
 ```bash
-sudo -u www-data -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-ce.git /opt/webapp/embeded/webapp \
-&& cd /opt/webapp/embeded/webapp \
+sudo -u www-data -H git clone https://github.com/gitcity-sk/webapp-ce.git /opt/webapp/webapp-ce \
+&& cd /opt/webapp/webapp-ce \
 && sudo -u www-data -H composer install
 ```
 
@@ -170,20 +210,17 @@ sudo -u www-data -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-ce.git /opt/
 Edit `nginx.conf` file and add at the end of document right before `}`.
 
 ```bash
-vi nginx.conf
+sudo nano /etc/nginx/nginx.conf
 
 # press i and documment add:
-include /opt/gitcity/config/gitcity-nginx.conf;
+include /opt/webapp/webapp-ce/config/nginx.conf;
+
+# for SSL edit paths to certificates and include
+sudo -u www-data -H nano /opt/webapp/webapp-ce/config/nginx-ssl.conf
+include /opt/webapp/webapp-ce/config/nginx-ssl.conf;
 
 # press ESC, :wq and enter
 sudo service nginx reload
-```
-
-```bash
-# update user for GIT GIT_SHELL
-chown -R git:git /opt/webapp/embeded/webapp/embeded/git-shell/ \
-&& chmod +x /opt/webapp/embeded/webapp/embeded/git-shell/hooks/update \
-&& chmod +x /opt/webapp/embeded/webapp/embeded/git-shell/hooks/pre-receive
 ```
 
 ## CakeApp-Workhorse
@@ -191,15 +228,16 @@ chown -R git:git /opt/webapp/embeded/webapp/embeded/git-shell/ \
 Workhorse is needed for all git operation ehivh is required write permission. Reading permission has GitCity application at it own.
 
 ```bash
-sudo -u git -H git clone https://gitcity.sk/cakeapp-sk/cakeapp-workhorse.git /opt/webapp/embeded/webapp-workhorse \
-&& cd /opt/webapp/embeded/webapp-workhorse \
+sudo git clone https://github.com/gitcity-sk/gitcity-workhorse.git /opt/webapp/webapp-workhorse \
+&& sudo chown -R git:git /opt/webapp/webapp-workhorse \
+&& cd /opt/webapp/webapp-workhorse \
 && sudo -u git -H composer install
 ```
 
 Configure service
 
 ```bash
-sudo touch /lib/systemd/system/webapp-workhorse.service
+sudo nano /lib/systemd/system/webapp-workhorse.service
 ```
 
 Update file content for your requirements. Git user and groum must remain othervise you dont will lose write acces to git data folder.
@@ -212,7 +250,7 @@ After=network.target
 [Service]
 User=git
 Group=git
-ExecStart=/usr/bin/php /opt/webapp/embeded/webapp-workhorse/srv.php
+ExecStart=/usr/bin/php /opt/webapp/webapp-workhorse/srv.php
 WorkingDirectory=/var/opt/webapp/data/git-data
 Type=simple
 Restart=always
@@ -242,12 +280,30 @@ systemctl start webapp-workhorse.service \
  sudo systemctl enable webapp-workhorse.service
  ```
 
-# Swap space
-
-Minimum ram is to running is 1GB + 3GB swap
+# Webapp Git Shell
 
 ```bash
-sudo fallocate -l 3G /swapfile \
+sudo git clone https://github.com/gitcity-sk/webapp-shell.git /opt/webapp/webapp-shell \
+&& sudo chown -R git:git /opt/webapp/webapp-shell \
+&& cd /opt/webapp/webapp-shell \
+&& sudo -u git -H composer install
+```
+
+
+```bash
+# update user for GIT GIT_SHELL
+chown -R git:git /opt/webapp/webapp-ce/embeded/git-shell/ \
+&& chmod +x /opt/webapp/webapp-shell/hooks/update \
+&& chmod +x /opt/webapp/webapp-shell/hooks/pre-receive \
+&& chmod +x /opt/webapp/webapp-shell/ssh-exec
+```
+
+# Swap space
+
+Minimum ram is to running is 1GB + 2GB swap. For x GB i recomend to have x+1 GB swap file
+
+```bash
+sudo fallocate -l 2G /swapfile \
 && sudo chmod 600 /swapfile \
 && ls -lh /swapfile \
 && sudo mkswap /swapfile \
@@ -284,3 +340,137 @@ You can check using of your memory with
 ```bash
 free -m
 ```
+
+# Instapp PHP from source
+
+Install Build dependenices
+
+```bash
+sudo apt update \
+&& apt-get install -y --no-install-recommends \
+libargon2-0-dev \
+libcurl4-openssl-dev \
+libedit-dev \
+libsodium-dev \
+libsqlite3-dev \
+libssl-dev \
+libxml2-dev \
+zlib1g-dev \
+build-essential \
+libpq-dev \
+pkg-config \
+libxslt1-dev
+```
+
+Download php source
+
+```bash
+wget -O php.tar.gz "https://secure.php.net/get/php-7.2.2.tar.gz/from/this/mirror" \
+&& tar -xvzf php.tar.gz \
+&& mkdir /usr/src/php \
+&& cp -R ./php-7.2.2/* /usr/src/php
+```
+
+Configure it
+
+```bash
+cd /usr/src/php \
+&& sudo mkdir -p /usr/local/etc/php \
+&& sudo ./configure --with-config-file-path="/usr/local/etc/php" --with-config-file-scan-dir="/usr/local/etc/php/conf.d" --disable-cgi --enable-ftp --enable-mbstring --enable-intl --with-pdo-mysql --with-pdo-pgsql --with-pgsql --enable-mysqlnd --with-password-argon2 --with-sodium --enable-zip --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-openssl --enable-exif --enable-bcmath --with-mhash --enable-sockets --with-curl --with-xmlrpc --with-xsl --with-zlib
+```
+
+Install php
+
+```bash
+sudo make \
+&& sudo make install
+```
+
+```bash
+pecl update-channels; \
+rm -rf /tmp/pear ~/.pearrc
+```
+
+## Configure  it
+
+```bash
+cd /usr/local/etc \
+&& sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null;
+
+cd /usr/local/etc \
+&& cp php-fpm.d/www.conf.default php-fpm.d/www.conf;
+```
+
+## Update PID file config
+
+```bash
+cd /usr/local/etc \
+&& nano php-fpm.conf
+```
+
+update
+
+```
+[...]
+pid = run/php-fpm.pid
+[...]
+```
+
+## FPM port
+
+```bash
+cd /usr/local/etc/php-fpm.d \
+&& nano www.conf
+```
+
+
+## Create Service
+
+Create service and paste following content
+
+```bash
+sudo nano /lib/systemd/system/php-7.2-fpm.service
+```
+
+```bash
+[Unit]
+Description=The PHP 7.2 FastCGI Process Manager
+After=network.target
+
+[Service]
+Type=simple
+PIDFile=/usr/local/var/run/php-fpm.pid
+ExecStart=/usr/local/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+```
+
+enable and run service
+
+```bash
+systemctl enable php-7.2-fpm.service
+systemctl daemon-reload
+systemctl start php-7.2-fpm.service
+systemctl status php-7.2-fpm.service
+```
+
+## Memory Limits 
+
+If you want to use project management you have to update memory limits for PHP (sometimes git diff eat a lot of memory) to avoid crashes.
+
+```bash
+/usr/local/etc/php/conf.d \
+&& nano memory.ini
+```
+
+then add to file `memory_limit = 2G` or 1G is enough for most situations.
+
+Another possible configuration for php
+
+```bash
+./configure --prefix=/opt/php-7.2 --with-pdo-pgsql --with-zlib-dir --with-freetype-dir --enable-mbstring --with-libxml-dir=/usr --enable-soap --enable-calendar --with-curl --with-zlib --with-gd --with-pgsql --disable-rpath --enable-inline-optimization --with-bz2 --with-zlib --enable-sockets --enable-sysvsem --enable-sysvshm --enable-pcntl --enable-mbregex --enable-exif --enable-bcmath --with-mhash --enable-zip --with-pcre-regex --with-pdo-mysql --with-mysqli --with-mysql-sock=/var/run/mysqld/mysqld.sock --with-jpeg-dir=/usr --with-png-dir=/usr --with-openssl --with-fpm-user=www-data --with-fpm-group=www-data --with-libdir=/lib/x86_64-linux-gnu --enable-ftp --with-imap --with-imap-ssl --with-kerberos --with-gettext --with-xmlrpc --with-xsl --enable-opcache --enable-fpm
+```
+
+[Url](https://www.howtoforge.com/tutorial/how-to-install-php-7-on-debian/)

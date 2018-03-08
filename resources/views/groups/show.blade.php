@@ -6,11 +6,20 @@
 @inject('markdown', 'Parsedown')
 
 @section ('sidebar-content')
-
+<div class="context-header">
+<a href="#">
+    <div class="avatar-container" style="min-height: 50px">
+    </div>
+    <div class="sidebar-context-title">
+        {{ $group->name }}
+    </div>
+</a>
+</div>
+@include('groups.elements.sidebar')
 @endsection
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/groups/bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/groups.bundle.js') }}"></script>
 @endsection
 
 @section ('content')

@@ -24,6 +24,11 @@ class Project extends Model
         return $this->belongsToMany(Group::class);
     }
 
+    public function milestones()
+    {
+        return $this->hasMany(Milestone::class);
+    }
+
     public function mergeRequests()
     {
         return $this->hasMany(MergeRequest::class);
@@ -59,7 +64,7 @@ class Project extends Model
                 ->setAction('git:init:bare')
                 ->setData([
                     'hooks' => Repo::hooks(),
-                    'path' => Repo::path($user->name, $this->slug)
+                    'path' => Repo::path($user->username, $this->slug)
                 ])->run();
         } catch (\Exception $e) {
             dd($e);

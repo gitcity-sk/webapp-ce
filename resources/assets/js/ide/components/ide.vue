@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import cssPreloader from '../../components/vue-shared/css-preloader.vue';
+import cssPreloader from '../../vue/shared-components/css-preloader.vue';
 import Monaco from './Monaco.vue';
 
 export default {
