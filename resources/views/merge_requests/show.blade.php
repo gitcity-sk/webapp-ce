@@ -42,10 +42,11 @@
             @foreach ($diff as $diffObject)
             <table class="table table-sm">
                 <tr>
-                <td>{{ $diffObject->getOriginalPath() }}</td>
-                <td>{{ $diffObject->count() }} changes</td>
+                    <td>{{ $diffObject->getMode() }}</td>
+                    <td>{{ $diffObject->getOriginalPath() }}</td>
+                    <td>{{ $diffObject->count() }} changes</td>
                 </tr>
-            </div>
+            </table>
             @endforeach
         
 
