@@ -38,20 +38,23 @@
             </div>
         </div>
 
-        <table class="table">
+        
             @foreach ($diff as $diffObject)
-                <tr>
-                    <td>
-                        <span style="font-weight:600">{{ $diffObject->getOriginalPath() }}</span> {{ $diffObject->getMode() }}
-                        @foreach ($diffObject as $diffChunk)
-                            @if (count($diffChunk) > 0)
-                                {{ count($diffChunk)}} changes from line {{ $diffChunk->getDestStartLine() }} to {{ $diffChunk->getDestEndLine() }}
-                            @endif
+            <div class="card">
+                <div class="card-tlte">{{ $diffObject->getOriginalPath() }}</div>
+                <table class="table">
+                    @foreach ($diffObject->chunks as $diffChunk)
+                        @foreach ($diffChunk->lines as $line)
+                            <tr>
+                                <td>{{ $line->number }}</td>
+                                <td>{{ $line->content }}</td>
+                            </tr>
                         @endforeach
-                    </td>
-                </tr>
+                    @endforeach
+                </table>
+            </div>
             @endforeach
-        </table>
+        
 
     </div>
 
