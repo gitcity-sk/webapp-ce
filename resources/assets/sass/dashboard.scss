@@ -71,7 +71,9 @@ body {
    }
 
    .sidebar-top-level-items>li.active,
-   .sidebar-top-level-items>li.active a:hover{
+   .sidebar-top-level-items>li.active a:hover,
+   .sidebar-sub-level-items>li.active,
+   .sidebar-sub-level-items>li.active a:hover {
      background: $link-hover-background;
    }
 

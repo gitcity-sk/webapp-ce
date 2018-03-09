@@ -71,11 +71,12 @@ Route::get('/projects', function () {
 Route::group(['namespace' => 'Projects'], function () {
     Route::get('/projects/create', 'ProjectsController@create');
     Route::get('/projects/{id}', 'ProjectsController@show')->name('project');
+    Route::get('/projects/{id}/files', 'ProjectsController@show')->name('project.files');
     Route::get('/projects/{id}/issues', 'IssuesController@index')->name('projectIssues');
     Route::get('/projects/{id}/issues/new', 'IssuesController@create');
-    Route::get('/projects/{project}/commits', 'CommitsController@show');
-    Route::get('/projects/{project}/branches', 'BranchesController@show');
-    Route::get('/projects/{project}/tags', 'TagsController@show');
+    Route::get('/projects/{project}/commits', 'CommitsController@show')->name('project.commits');
+    Route::get('/projects/{project}/branches', 'BranchesController@show')->name('project.branches');
+    Route::get('/projects/{project}/tags', 'TagsController@show')->name('project.tags');
     Route::get('/projects/{id}/merge-requests', 'ProjectsController@mergeRequests');
     Route::get('/projects/{id}/merge-requests/new', 'ProjectsController@createMergeRequest');
     Route::get('/projects/{id}/create-on-server', 'ProjectsController@createOnServer');
