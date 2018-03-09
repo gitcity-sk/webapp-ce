@@ -40,18 +40,11 @@
 
         
             @foreach ($diff as $diffObject)
-            <div class="card">
-                <div class="card-tlte">{{ $diffObject->getOriginalPath() }}</div>
-                <table class="table">
-                    @foreach ($diffObject->chunks as $diffChunk)
-                        @foreach ($diffChunk->lines as $line)
-                            <tr>
-                                <td>{{ $line->number }}</td>
-                                <td>{{ $line->content }}</td>
-                            </tr>
-                        @endforeach
-                    @endforeach
-                </table>
+            <table class="table table-sm">
+                <tr>
+                <td>{{ $diffObject->getOriginalPath() }}</td>
+                <td>{{ $diffObject->count() }} changes</td>
+                </tr>
             </div>
             @endforeach
         
