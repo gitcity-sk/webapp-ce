@@ -41,8 +41,8 @@
         
             @foreach ($diff as $diffObject)
             <table class="table table-sm">
-                <tr>
-                    <td class="{{ $diffObject->getMode() == 'new_file' ?? 'table-success' }}{{ $diffObject->getMode() == 'deleted_file' ?? 'table-danger' }}">{{ $diffObject->getOriginalPath() }}</td>
+                <tr class="{{ $diffObject->getMode() == 'new_file' ?? 'table-success' }}{{ $diffObject->getMode() == 'deleted_file' ?? 'table-danger' }}">
+                    <td>{{ $diffObject->getOriginalPath() }}</td>
                     <td>{{ $diffObject->count() }} changes</td>
                 </tr>
             </table>
