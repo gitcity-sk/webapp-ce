@@ -38,15 +38,17 @@
             </div>
         </div>
 
-        
-            @foreach ($diff as $diffObject)
-            <table class="table table-sm">
+
+        <table class="table table-sm">
+            @foreach ($diff as $diffObject)    
                 <tr class="{{ $diffObject->getMode() == 'new_file' ? 'table-success' : '' }}{{ $diffObject->getMode() == 'deleted_file' ? 'table-danger' : '' }}">
-                    <td>{{ $diffObject->getOriginalPath() }}</td>
-                    <td>{{ $diffObject->count() }} changes</td>
+                    <div class="d-flex align-items-center">
+                        <div>{{ $diffObject->getOriginalPath() }}</div>
+                        <div class="ml-auto text-right">{{ $diffObject->count() }} changes</div>
+                    </div>
                 </tr>
-            </table>
             @endforeach
+        </table>
         
 
     </div>
