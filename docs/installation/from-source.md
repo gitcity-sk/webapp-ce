@@ -212,9 +212,11 @@ sudo -u www-data -H git clone https://github.com/gitcity-sk/webapp-ce.git /opt/w
 
 ## CakeApp Configuration
 
+Copy defautl configuration into nginx conf file
+
 ```
 cd /opt/webapp/webapp-ce/config \
-&& udo -u www-data -H cp nginx.conf.default nginx.conf
+&& sudo -u www-data -H cp nginx.conf.default nginx.conf
 ```
 
 Edit `nginx.conf` file and add at the end of document right before `}`.
@@ -260,7 +262,7 @@ After=network.target
 [Service]
 User=git
 Group=git
-ExecStart=/usr/bin/php /opt/webapp/webapp-workhorse/srv.php
+ExecStart=/usr/local/bin/php /opt/webapp/webapp-workhorse/srv.php
 WorkingDirectory=/var/opt/webapp/data/git-data
 Type=simple
 Restart=always
@@ -280,8 +282,8 @@ sudo systemctl daemon-reload
 Start Service and check status
 
 ```bash
-systemctl start webapp-workhorse.service \
-&& systemctl status webapp-workhorse.service
+sudo systemctl start webapp-workhorse.service \
+&& sudo systemctl status webapp-workhorse.service
  ```
 
  If you want service to run after startup run following command
@@ -302,10 +304,10 @@ sudo git clone https://github.com/gitcity-sk/webapp-shell.git /opt/webapp/webapp
 
 ```bash
 # update user for GIT GIT_SHELL
-chown -R git:git /opt/webapp/webapp-ce/embeded/git-shell/ \
-&& chmod +x /opt/webapp/webapp-shell/hooks/update \
-&& chmod +x /opt/webapp/webapp-shell/hooks/pre-receive \
-&& chmod +x /opt/webapp/webapp-shell/ssh-exec
+# chown -R git:git /opt/webapp/webapp-ce/embeded/git-shell/ \
+sudo -u git -H chmod +x /opt/webapp/webapp-shell/hooks/update \
+&& sudo -u git -H chmod +x /opt/webapp/webapp-shell/hooks/pre-receive \
+&& sudo -u git -H chmod +x /opt/webapp/webapp-shell/ssh-exec
 ```
 
 # Swap space

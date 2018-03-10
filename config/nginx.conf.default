@@ -8,7 +8,7 @@ server {
         internal;
     }
 
-    root   /opt/webapp/webapp-ce;
+    root   /opt/webapp/webapp-ce/public/;
     index  index.php;
 
     location / {
