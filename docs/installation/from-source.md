@@ -61,7 +61,12 @@ sudo apt update \
 && mv composer.phar /usr/local/bin/composer
 ```
 
-If you have php lover than 7.1.3 you have to reinstall it from source
+If you have php lover than 7.1.3 you have to reinstall it from source and install composer
+
+```bash
+curl -sSL https://getcomposer.org/installer | sudo php \
+&& sudo mv composer.phar /usr/local/bin/composer
+```
 
 ### Redis Extension Optional
 
@@ -207,6 +212,11 @@ sudo -u www-data -H git clone https://github.com/gitcity-sk/webapp-ce.git /opt/w
 
 ## CakeApp Configuration
 
+```
+cd /opt/webapp/webapp-ce/config \
+&& udo -u www-data -H cp nginx.conf.default nginx.conf
+```
+
 Edit `nginx.conf` file and add at the end of document right before `}`.
 
 ```bash
@@ -347,7 +357,7 @@ Install Build dependenices
 
 ```bash
 sudo apt update \
-&& apt-get install -y --no-install-recommends \
+&& sudo apt install -y --no-install-recommends \
 libargon2-0-dev \
 libcurl4-openssl-dev \
 libedit-dev \
@@ -366,9 +376,9 @@ Download php source
 
 ```bash
 wget -O php.tar.gz "https://secure.php.net/get/php-7.2.2.tar.gz/from/this/mirror" \
-&& tar -xvzf php.tar.gz \
-&& mkdir /usr/src/php \
-&& cp -R ./php-7.2.2/* /usr/src/php
+&& sudo tar -xvzf php.tar.gz \
+&& sudo mkdir /usr/src/php \
+&& sudo cp -R ./php-7.2.2/* /usr/src/php
 ```
 
 Configure it
@@ -382,30 +392,31 @@ cd /usr/src/php \
 Install php
 
 ```bash
-sudo make \
+cd /usr/src/php \
+&& sudo make \
 && sudo make install
 ```
 
 ```bash
-pecl update-channels; \
-rm -rf /tmp/pear ~/.pearrc
+sudo pecl update-channels; \
+sudo rm -rf /tmp/pear ~/.pearrc
 ```
 
 ## Configure  it
 
 ```bash
 cd /usr/local/etc \
-&& sed 's!=NONE/!=!g' php-fpm.conf.default | tee php-fpm.conf > /dev/null;
+&& sudo sed 's!=NONE/!=!g' php-fpm.conf.default | sudo tee php-fpm.conf > /dev/null;
 
 cd /usr/local/etc \
-&& cp php-fpm.d/www.conf.default php-fpm.d/www.conf;
+&& sudo cp php-fpm.d/www.conf.default php-fpm.d/www.conf;
 ```
 
 ## Update PID file config
 
 ```bash
 cd /usr/local/etc \
-&& nano php-fpm.conf
+&& sudo nano php-fpm.conf
 ```
 
 update
@@ -420,7 +431,7 @@ pid = run/php-fpm.pid
 
 ```bash
 cd /usr/local/etc/php-fpm.d \
-&& nano www.conf
+&& sudo nano www.conf
 ```
 
 
@@ -450,10 +461,10 @@ WantedBy=multi-user.target
 enable and run service
 
 ```bash
-systemctl enable php-7.2-fpm.service
-systemctl daemon-reload
-systemctl start php-7.2-fpm.service
-systemctl status php-7.2-fpm.service
+sudo systemctl enable php-7.2-fpm.service
+sudo systemctl daemon-reload
+sudo systemctl start php-7.2-fpm.service
+sudo systemctl status php-7.2-fpm.service
 ```
 
 ## Memory Limits 
@@ -461,8 +472,8 @@ systemctl status php-7.2-fpm.service
 If you want to use project management you have to update memory limits for PHP (sometimes git diff eat a lot of memory) to avoid crashes.
 
 ```bash
-/usr/local/etc/php/conf.d \
-&& nano memory.ini
+cd /usr/local/etc/php/conf.d \
+&& sudo nano memory.ini
 ```
 
 then add to file `memory_limit = 2G` or 1G is enough for most situations.
