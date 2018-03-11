@@ -205,6 +205,8 @@ Route::post('/admin/labels', 'Admin\LabelsController@store');
 
 Route::delete('/admin/license/delete', 'ee\LicenseController@destroy');
 
+Route::get('/admin/api/testing', 'Admin\ApiController@testing');
+
 /**
  * settings
  */
@@ -233,6 +235,10 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/api/users', 'UsersController@index');
     Route::get('/api/users/{user}', 'UsersController@show');
     Route::get('/api/users/{user}/projects', 'UsersController@projects');
+
+    Route::get('/api/session/configure', 'TestController@configure');
+
+    Route::post('/api/test', 'TestController@index');
 });
 
 /*Route::get('/projects', function () {
