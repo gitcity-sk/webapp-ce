@@ -98,6 +98,7 @@ Route::group(['namespace' => 'Projects\Api'], function () {
     Route::get('/api/projects/{project}/issues', 'ProjectsController@issues');
 
     Route::get('/api/projects/{project}/milestones', 'MilestonesController@index');
+    Route::get('/api/projects/{project}/merge-requests', 'MergeRequestsController@index');
 });
 
 /**
@@ -122,6 +123,13 @@ Route::group(['namespace' => 'Issues\Api'], function () {
  */
 Route::group(['namespace' => 'MergeRequests'], function () {
     Route::get('/merge-requests/{mergeRequest}', 'MergeRequestsController@show');
+});
+
+/**
+ * Merge requests API
+ */
+Route::group(['namespace' => 'MergeRequests\Api'], function () {
+    Route::get('/api/diff/{project}/{sourceBranch}/{targetBranch}', 'DiffController@index');
 });
 
 /**
