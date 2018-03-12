@@ -21,8 +21,10 @@
                 <tbody>
                     <tr v-for="objectItem in tree.data">
                         <td style="max-width: 320px">
-                            <i v-if="objectItem.type === 'tree'" class="fas fa-folder"></i>
-                            <i v-else class="far fa-file"></i>
+                            <span class="mr-2">
+                                <i v-if="objectItem.type === 'tree'" class="fas fa-folder"></i>
+                                <i v-else class="far fa-file"></i>
+                            </span>
                             {{ objectItem.name }}
                         </td>
                         <td class="has-emoji" style="max-width: 320px">
@@ -48,7 +50,7 @@
     import cssPreloader from '../vue/shared-components/css-preloader.vue';
 
     export default {
-        props: ['projectId'],
+        props: ['projectId', 'repoPath'],
         components: {
             cssPreloader
         },
@@ -66,15 +68,32 @@
         },
         created () {
             this.$parent.$emit('pageLoader', true)
-            axios.get('/api/projects/' + this.projectId + '/tree')
-            .then(response => {
-                this.tree = response.data
-                this.$parent.$emit('pageLoader', false)
-                this.done = true
-            })
-            .catch(e => {
-                this.errors.push(e)
-            })
+            if (this.repoPath !== null) {
+
+                axios.get('/api/projects/' + this.projectId + '/tree/' + this.repoPath)
+                .then(response => {
+                    this.tree = response.data
+                    this.$parent.$emit('pageLoader', false)
+                    this.done = true
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+
+            } else {
+
+                axios.get('/api/projects/' + this.projectId + '/tree')
+                .then(response => {
+                    this.tree = response.data
+                    this.$parent.$emit('pageLoader', false)
+                    this.done = true
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+
+            }
+            
         }
     }
 </script>

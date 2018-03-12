@@ -71,7 +71,7 @@ Route::get('/projects', function () {
 Route::group(['namespace' => 'Projects'], function () {
     Route::get('/projects/create', 'ProjectsController@create');
     Route::get('/projects/{id}', 'ProjectsController@show')->name('project');
-    Route::get('/projects/{id}/files', 'ProjectsController@show')->name('project.files');
+    Route::get('/projects/{id}/files/{path?}', 'ProjectsController@show')->where('path', '(.*)')->name('project.files');
     Route::get('/projects/{id}/issues', 'IssuesController@index')->name('projectIssues');
     Route::get('/projects/{id}/issues/new', 'IssuesController@create');
     Route::get('/projects/{project}/commits', 'CommitsController@show')->name('project.commits');
@@ -227,7 +227,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/api/profiles', 'ProfilesController@index');
 
-    Route::get('/api/projects/{project}/tree', 'TreeController@files');
+    Route::get('/api/projects/{project}/tree/{path?}', 'TreeController@files')->where('path', '(.*)');
     Route::get('/api/projects/{project}/commits', 'CommitsController@index');
     Route::get('/api/projects/{project}/branches', 'BranchesController@index');
     Route::get('/api/projects/{project}/tags', 'TagsController@index');

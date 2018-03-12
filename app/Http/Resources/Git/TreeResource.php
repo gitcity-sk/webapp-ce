@@ -12,6 +12,7 @@ class TreeResource extends GitResource
             'name' => $this->entity->getName(),
             'type' => $this->entity->getType(),
             'sha' => $this->entity->getSha(),
+            'path' => $this->entity->getPath(),
             'last_commit' => [
                 'author' => [
                     'name' => $this->entity->getLastCommit()->getAuthor()->getName(),

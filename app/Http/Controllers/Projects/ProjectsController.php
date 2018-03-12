@@ -39,7 +39,7 @@ class ProjectsController extends Controller
     /**
      *
      */
-    public function show($id) // Project::find(wildcard) wildcaard is name in routes so project and must be same as in controller
+    public function show($id, $path = null) // Project::find(wildcard) wildcaard is name in routes so project and must be same as in controller
     {
         // setup required variables
         $tree = null;
@@ -48,7 +48,7 @@ class ProjectsController extends Controller
         if (auth()->user()->can('show-project')) {
             $project = $this->projects->findById($id);
 
-            return view('projects.show', compact('project'));
+            return view('projects.show', compact('project', 'path'));
         }
 
         abort(403);
