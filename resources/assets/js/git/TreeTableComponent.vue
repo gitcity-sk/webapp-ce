@@ -97,8 +97,11 @@
         },
         methods: {
             nextPath: function(path, fileName) {
-                if (path == null) return '/' + fileName;
-                if (path != null) return '/' + path + '/' + fileName;
+                // for root paths return filename with slash
+                if (path == "") return '/' + fileName;
+
+                //for all other paths return current path + filename
+                if (path != "") return '/' + path + '/' + fileName;
             }
         }
     }
