@@ -25,7 +25,8 @@
                                 <i v-if="objectItem.type === 'tree'" class="fas fa-folder"></i>
                                 <i v-else class="far fa-file"></i>
                             </span>
-                            {{ objectItem.name }}
+                            <span v-if="objectItem.type === 'tree'"><a :href="'/projects/' + projectId + '/files/' + objectItem.path + '/' + objectItem.name">{{ objectItem.name }}</a></span>
+                            <span>{{ objectItem.name }}</span>
                         </td>
                         <td class="has-emoji" style="max-width: 320px">
                             <strong>{{ objectItem.last_commit.author.name }}</strong> {{ objectItem.last_commit.message }}
