@@ -1,3 +1,12 @@
+v18.3
+
+* NEW Merge requests
+* NEW Pagination for projects
+* NEW API testing link
+* UPDATE Sidebar now showing subitems
+* UPDATE VueJS app for projects
+* FIX branches now showing correct commit on branches list
+
 v18.2
 
 * UPDATE New design for Group projects table

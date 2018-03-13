@@ -63,18 +63,22 @@
             }
         },
         created () {
-            this.$parent.$emit('pageLoader', true)
-            axios.get('/api/projects')
-            .then(response => {
-                this.projects = response.data
-                this.$parent.$emit('pageLoader', false)
-                this.done = true
-            })
-            .catch(e => {
-                this.errors.push(e)
-            })
+            this.$parent.$emit('pageLoader', true);
+            this.loadData();
         },
         methods: {
+            loadData: function() {
+                axios.get('/api/projects')
+                .then(response => {
+                    this.projects = response.data
+                    this.$parent.$emit('pageLoader', false)
+                    this.done = true
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+            },
+
             prev: function() {
                 this.done = false
                 axios.get(this.projects.links.prev)
