@@ -64,11 +64,8 @@ Route::group(['namespace' => 'Milestones\Api'], function () {
 /**
  * Projects
  */
-Route::get('/projects', function () {
-    return view('projects.index');
-})->middleware('auth');
-
 Route::group(['namespace' => 'Projects'], function () {
+    Route::get('/projects', 'ProjectsController@index');
     Route::get('/projects/create', 'ProjectsController@create');
     Route::get('/projects/{id}', 'ProjectsController@show')->name('project');
     Route::get('/projects/{id}/files/{path?}', 'ProjectsController@show')->where('path', '(.*)')->name('project.files');

@@ -8,11 +8,6 @@
 @endsection
 
 @section ('projects-table')
-<div class="row text-center loading" v-if="loading">
-    <div class="col">
-        <div class="loader" style="margin:0 auto;"></div>
-    </div>
-</div>
 <projects-table-component></projects-table-component>
 @endsection
 

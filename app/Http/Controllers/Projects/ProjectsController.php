@@ -30,10 +30,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-
-        $projects = $this->projects->orderBy('created_at', 'DESC');
-
-        return view('projects.index', compact('projects'));
+        return view('projects.index');
     }
 
     /**

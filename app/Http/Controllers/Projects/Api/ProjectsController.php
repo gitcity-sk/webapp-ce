@@ -27,6 +27,6 @@ class ProjectsController extends Controller
 
     public function issues(Project $project)
     {
-        return IssueResource::collection($project->issues);
+        return IssueResource::collection($project->issues()->paginate());
     }
 }

@@ -1,4 +1,6 @@
 <template>
+<div>
+    <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
     <table v-if="projects.data" class="table">
         <thead>
@@ -29,7 +31,14 @@
                 </tr>
             </tbody>
         </table>
+        <div class="text-center mt-3">
+            <div class="btn-group" role="group" aria-label="Pagination">
+                <button v-if="projects.links.prev" v-on:click="prev" class="btn btn-light">Previous</button>
+                <button v-if="projects.links.next" v-on:click="next" class="btn btn-light">Next</button>
+            </div>
+        </div>
     </div>
+</div>
 </template>
 
 <script>
@@ -64,6 +73,33 @@
             .catch(e => {
                 this.errors.push(e)
             })
+        },
+        methods: {
+            prev: function() {
+                this.done = false
+                axios.get(this.projects.links.prev)
+                .then(response => {
+                    this.projects = response.data
+                    this.$parent.$emit('pageLoader', false)
+                    this.done = true
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+            },
+
+            next: function() {
+                this.done = false
+                axios.get(this.projects.links.next)
+                .then(response => {
+                    this.projects = response.data
+                    this.$parent.$emit('pageLoader', false)
+                    this.done = true
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+            }
         }
     }
 </script>
