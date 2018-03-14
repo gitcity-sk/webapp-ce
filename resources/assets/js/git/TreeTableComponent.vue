@@ -28,12 +28,7 @@
                             <span v-if="objectItem.type === 'tree'"><a :href="'/projects/' + projectId + '/files' + nextPath(objectItem.path, objectItem.name)">{{ objectItem.name }}</a></span>
                             <span v-else>{{ objectItem.name }}</span>
                         </td>
-                        <td class="has-emoji" style="max-width: 320px">
-                            <strong>{{ objectItem.last_commit.author.name }}</strong> {{ objectItem.last_commit.message }}
-                        </td>
-                        <td class="has-emoji">
-                            {{ objectItem.last_commit.created_at.date | moment }}
-                        </td>
+                        <commit :commit-sha="objectItem.last_commit.sha" :project-id="projectId"></commit>
                     </tr>
                 </tbody>
             </table>
@@ -49,11 +44,12 @@
     import axios from 'axios'
     import emojione from 'emojione'
     import cssPreloader from '../vue/shared-components/css-preloader.vue';
+    import commit from './Commit.vue';
 
     export default {
         props: ['projectId', 'repoPath'],
         components: {
-            cssPreloader
+            cssPreloader, commit
         },
         mounted () {
             console.log('Component TreeTableComponent mounted.')
@@ -62,7 +58,7 @@
             return {
                 done: false,
                 tree: {
-                    tree: []
+                    data: []
                 },
                 errors: []
             }
@@ -93,7 +89,11 @@
                     this.errors.push(e)
                 })
 
-            }    
+            }
+
+            this.tree.data.forEach(data => {
+                console.log(data);
+            });   
         },
         methods: {
             nextPath: function(path, fileName) {

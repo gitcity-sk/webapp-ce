@@ -16,4 +16,14 @@ class Commit extends BaseModel
         }
         return null;
     }
+
+    public function getSingle($userName, $projecSlug, $sha)
+    {
+        $repo = Repo::open($userName, $projecSlug);
+
+        if ($repo && (count($repo->getBranches(true)) != 0)) {
+            return $repo->getCommit($sha);
+        }
+        return null;
+    }
 }

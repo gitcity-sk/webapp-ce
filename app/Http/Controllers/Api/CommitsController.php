@@ -29,4 +29,16 @@ class CommitsController extends Controller
             'data' => CommitResource::collection($commits)
         ];
     }
+
+    /**
+     * Show single commit by sha
+     */
+    public function show(Project $project, $sha)
+    {
+        $gitLog = new Commit();
+        $commit = $gitLog->getSingle($project->user->name, $project->slug, $sha);
+        return [
+            'data' => (new CommitResource($commit))->toArray()
+        ];
+    }
 }
