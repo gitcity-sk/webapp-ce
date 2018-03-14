@@ -19,17 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="objectItem in tree.data">
-                        <td style="max-width: 320px">
-                            <span class="mr-2">
-                                <i v-if="objectItem.type === 'tree'" class="fas fa-folder"></i>
-                                <i v-else class="far fa-file"></i>
-                            </span>
-                            <span v-if="objectItem.type === 'tree'"><a :href="'/projects/' + projectId + '/files' + nextPath(objectItem.path, objectItem.name)">{{ objectItem.name }}</a></span>
-                            <span v-else>{{ objectItem.name }}</span>
-                        </td>
-                        <commit :commit-sha="objectItem.last_commit.sha" :project-id="projectId"></commit>
-                    </tr>
+                    <commit v-for="objectItem in tree.data" :commit-sha="objectItem.last_commit.sha" :project-id="projectId" :tree-item="objectItem"></commit>
                 </tbody>
             </table>
 
@@ -94,15 +84,6 @@
             this.tree.data.forEach(data => {
                 console.log(data);
             });   
-        },
-        methods: {
-            nextPath: function(path, fileName) {
-                // for root paths return filename with slash
-                if (path == "") return '/' + fileName;
-
-                //for all other paths return current path + filename
-                if (path != "") return '/' + path + '/' + fileName;
-            }
         }
     }
 </script>
