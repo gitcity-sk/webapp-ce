@@ -226,7 +226,7 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/api/projects/{project}/tree/{path?}', 'TreeController@files')->where('path', '(.*)');
     Route::get('/api/projects/{project}/commits', 'CommitsController@index');
-    Route::get('/api/projects/{project}/commits/{sha}', 'CommitsController@show');
+    Route::get('/api/projects/{projectId}/commits/{sha}', 'CommitsController@show');
     Route::get('/api/projects/{project}/branches', 'BranchesController@index');
     Route::get('/api/projects/{project}/tags', 'TagsController@index');
 
