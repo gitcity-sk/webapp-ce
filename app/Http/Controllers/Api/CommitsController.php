@@ -38,7 +38,7 @@ class CommitsController extends Controller
     {
         $gitLog = new Commit();
 
-        $key = $projectId . '-' . $sha;
+        $key = 'commit-' . $projectId . '-' . $sha;
 
         // Load from Cache if key exists
         $commit = Cache::remember($key, 10, function() use ($gitLog, $projectId, $sha) {
