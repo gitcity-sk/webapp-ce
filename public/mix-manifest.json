@@ -1,10 +1,10 @@
 {
     "/js/mix/git.bundle.js": "/js/mix/git.bundle.js?id=799d4a7ede77fa9266cd",
     "/js/mix/git.bundle.js.map": "/js/mix/git.bundle.js.map?id=bb223c71d3c61b1dd407",
-    "/js/mix/projects.bundle.js": "/js/mix/projects.bundle.js?id=5ea621163a7f9afb19fe",
-    "/js/mix/projects.bundle.js.map": "/js/mix/projects.bundle.js.map?id=4ba885b351bf377ee9b3",
-    "/js/mix/spaces.bundle.js": "/js/mix/spaces.bundle.js?id=823150733a96a76f578d",
-    "/js/mix/spaces.bundle.js.map": "/js/mix/spaces.bundle.js.map?id=d6f66d968cf35f1fe3a8",
+    "/js/mix/spaces.bundle.js": "/js/mix/spaces.bundle.js?id=1f4f0ddd32ebcc891e25",
+    "/js/mix/spaces.bundle.js.map": "/js/mix/spaces.bundle.js.map?id=115fad94bf82ec4e162f",
+    "/js/mix/projects.bundle.js": "/js/mix/projects.bundle.js?id=72ab662883a3e71eb943",
+    "/js/mix/projects.bundle.js.map": "/js/mix/projects.bundle.js.map?id=23b3cbe53e38260aa1c4",
     "/js/mix/milestones.bundle.js": "/js/mix/milestones.bundle.js?id=a9d792161a785c38ccc4",
     "/js/mix/milestones.bundle.js.map": "/js/mix/milestones.bundle.js.map?id=65235b349052ae1c5c7d",
     "/js/mix/cms.bundle.js": "/js/mix/cms.bundle.js?id=b46e44980088691485e8",
@@ -43,7 +43,7 @@
     "/css/blog.css.map": "/css/blog.css.map?id=4670ab7d4291fccb99a1",
     "/js/mix/vendor.js": "/js/mix/vendor.js?id=322290c66a9755d4e69b",
     "/js/mix/vendor.js.map": "/js/mix/vendor.js.map?id=ba62defb74a908d565c9",
-    "/js/mix/manifest.js": "/js/mix/manifest.js?id=19554c62cc5bf87ab050",
-    "/js/mix/manifest.js.map": "/js/mix/manifest.js.map?id=6f51b920bade9525ab9d",
+    "/js/mix/manifest.js": "/js/mix/manifest.js?id=d2f9c8f4c9cf46398d74",
+    "/js/mix/manifest.js.map": "/js/mix/manifest.js.map?id=b171b4e8168d054acb74",
     "/css/simplemde.min.css": "/css/simplemde.min.css?id=a05b3887adbfe27da1f2"
 }

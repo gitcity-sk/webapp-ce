@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Space;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\File;
 
 class SpacesController extends Controller
 {
@@ -33,5 +34,43 @@ class SpacesController extends Controller
         });
 
         return $size;
+    }
+
+    public function files(Space $space, $path = null)
+    {
+        $files = [];
+        $currentPath = str_finish('spaces/' . $space->slug . '/' . $path, '/');
+        $filesRaw = Storage::files($currentPath);
+
+        foreach ($filesRaw as $file) {
+            $currentFile = new File(storage_path('app/'.$file));
+            $files[] = [
+                'path' => $file,
+                'name' => $currentFile->getBasename(),
+                'type' => $currentFile->getExtension(),
+                'size' => size_for_humans(Storage::size($file))
+            ];
+        }
+
+        return ['data' => $files];
+    }
+
+    public function directories(Space $space, $path = null)
+    {
+        $directories = [];
+        $currentPath = str_finish('spaces/' . $space->slug . '/' . $path, '/');
+
+        $directoriesRaw = Storage::directories($currentPath);
+
+        foreach ($directoriesRaw as $directory) {
+            $directories[] = [
+                'name' => basename($directory),
+                'path' => $directory
+            ];
+        }
+
+        return ['data' => [
+            'directories' => $directories
+        ]];
     }
 }

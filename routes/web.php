@@ -264,11 +264,21 @@ Route::get('/storage/{filename?}', 'FileController@getFile')->where('filename', 
 Route::get('/projects/{project}/spaces/create', 'SpacesController@create');
 
 // Retrieving file from spaces
-Route::get('/spaces/{space}/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
+Route::get('/spaces/{space}/file/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
+
+
+/**
+ * Spaces
+ */
+Route::group(['namespace' => 'Spaces'], function () {
+    Route::get('/spaces/{space}/{path?}', 'SpacesController@show')->where('path', '(.*)');
+});
 
 /**
  * Spaces API
  */
 Route::group(['namespace' => 'Spaces\Api'], function () {
     Route::get('/api/spaces/{space}/size', 'SpacesController@getSize');
+    Route::get('/api/spaces/{space}/files/{path?}', 'SpacesController@files')->where('path', '(.*)');
+    Route::get('/api/spaces/{space}/directories/{path?}', 'SpacesController@directories')->where('path', '(.*)');
 });
