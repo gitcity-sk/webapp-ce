@@ -2,7 +2,7 @@
 <div>
     <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
-    <table class="table">
+    <table class="table table-hover">
         <thead class="bg-light">
             <tr>
                 <th scope="col">Name</th>
@@ -10,6 +10,10 @@
             </tr>
         </thead>
             <tbody>
+                <tr v-if="parentPath">
+                    <td class="text-secondary"><a :href="parentPath">..</a></td>
+                    <td></td>
+                </tr>
                 <directory-row v-for="directory in directories.data" :directory-data="directory"></directory-row>
                 <tr v-if="doneFiles == false">
                     <td class="text-secondary"><i class="far fa-spinner-third fa-spin"></i> Files are loading...</td>
@@ -38,7 +42,7 @@
         mounted () {
             console.log('Component ProjectIssuesTable mounted.')
         },
-        props: ['spaceId', 'path'],
+        props: ['spaceId', 'path', 'parentPath'],
         data () {
             return {
                 done: false,

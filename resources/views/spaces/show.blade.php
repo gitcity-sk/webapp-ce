@@ -8,7 +8,7 @@
 @endsection
 
 @section ('projects-table')
-<space-browser space-id="{{ $space->id }}" path="{{ $path }}"></space-browser>
+<space-browser space-id="{{ $space->id }}" path="{{ $path }}" parent-path="{{ $path == '' ? null : dirname(Request::url()) }}"></space-browser>
 @endsection
 
 @section ('content')
