@@ -79,12 +79,15 @@ Route::group(['namespace' => 'Projects'], function () {
     Route::get('/projects/{id}/create-on-server', 'ProjectsController@createOnServer');
     Route::get('/projects/{project}/milestones', 'MilestonesController@index')->name('projectMilestones');
     Route::get('/projects/{project}/milestones/new', 'MilestonesController@create');
-
+    Route::get('/projects/{project}/spaces', 'SpacesController@index');
+    
     Route::post('/projects', 'ProjectsController@store');
     Route::post('/projects/{project}/issues', 'IssuesController@store');
     Route::post('/projects/{project}/merge-requests', 'MergeRequestsController@store');
 
     Route::post('/projects/{project}/milestones', 'MilestonesController@store');
+
+    Route::post('/projects/{project}/spaces', 'SpacesController@store');
 });
 
 /**
@@ -96,6 +99,8 @@ Route::group(['namespace' => 'Projects\Api'], function () {
 
     Route::get('/api/projects/{project}/milestones', 'MilestonesController@index');
     Route::get('/api/projects/{project}/merge-requests', 'MergeRequestsController@index');
+
+    Route::get('/api/projects/{project}/spaces', 'SpacesController@index');
 });
 
 /**
@@ -253,6 +258,17 @@ Route::group(['namespace' => 'Api'], function () {
     return view('projects.show', compact('name', 'age', 'tasks'));
 });*/
 
+// Retrieving file from storage
 Route::get('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)');
 
-Route::get('/spaces/space-name/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
+Route::get('/projects/{project}/spaces/create', 'SpacesController@create');
+
+// Retrieving file from spaces
+Route::get('/spaces/{space}/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
+
+/**
+ * Spaces API
+ */
+Route::group(['namespace' => 'Spaces\Api'], function () {
+    Route::get('/api/spaces/{space}/size', 'SpacesController@getSize');
+});
