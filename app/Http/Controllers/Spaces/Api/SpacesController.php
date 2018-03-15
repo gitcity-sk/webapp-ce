@@ -19,7 +19,7 @@ class SpacesController extends Controller
     public function getSize(Space $space)
     {
         // remember into cache
-        $size = Cache::remember($space->slug, 10, function() use ($space) {
+        $size = Cache::remember('space-size-for' . $space->slug, 10, function() use ($space) {
             //get size for all files
             $files =  Storage::allFiles('spaces/' . $space->slug);
             foreach ($files as $file)
@@ -36,41 +36,27 @@ class SpacesController extends Controller
         return $size;
     }
 
-    public function files(Space $space, $path = null)
+    /**
+     * Return size for space
+     */
+    public function sizeOf($path)
     {
-        $files = [];
-        $currentPath = str_finish('spaces/' . $space->slug . '/' . $path, '/');
-        $filesRaw = Storage::files($currentPath);
+        // remember into cache
+        $size = Cache::remember($path, 10, function() use ($path) {
+            //get size for all files
+            $files =  Storage::allFiles($path);
+            foreach ($files as $file)
+            {
+                $this->totalSpaceSize += Storage::size($file);
+            }
+            
+            return ['data' => [
+                'size' => $this->totalSpaceSize,
+                'human_readable_size' => size_for_humans($this->totalSpaceSize)
+            ]];
+        });
 
-        foreach ($filesRaw as $file) {
-            $currentFile = new File(storage_path('app/'.$file));
-            $files[] = [
-                'path' => $file,
-                'name' => $currentFile->getBasename(),
-                'type' => $currentFile->getExtension(),
-                'size' => size_for_humans(Storage::size($file))
-            ];
-        }
-
-        return ['data' => $files];
+        return $size;
     }
 
-    public function directories(Space $space, $path = null)
-    {
-        $directories = [];
-        $currentPath = str_finish('spaces/' . $space->slug . '/' . $path, '/');
-
-        $directoriesRaw = Storage::directories($currentPath);
-
-        foreach ($directoriesRaw as $directory) {
-            $directories[] = [
-                'name' => basename($directory),
-                'path' => $directory
-            ];
-        }
-
-        return ['data' => [
-            'directories' => $directories
-        ]];
-    }
 }

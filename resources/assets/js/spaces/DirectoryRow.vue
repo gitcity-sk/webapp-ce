@@ -1,7 +1,10 @@
 <template>
 <tr>
-    <td> <a :href="'/spaces/' + spaceData.slug" style="font-weight: 600" class="text-dark">{{ spaceData.name }}</a></td>
-    <td><span v-if="done"> {{ space.data.human_readable_size }} </span></td>
+    <td><span class="mr-2"><i class="fas fa-folder"></i></span><a :href="'/' + directoryData.path" style="font-weight: 600" class="text-dark">{{ directoryData.name }}</a></td>
+    <td>
+        <span v-if="done">{{ directory.data.human_readable_size }}</span>
+        <span class="text-secondary" v-else><i class="far fa-spinner-third fa-spin"></i></span>
+    </td>
 </tr>
 </template>
 
@@ -13,18 +16,18 @@
         mounted () {
             console.log('Component ProjectIssuesTable mounted.')
         },
-        props: ['spaceData'],
+        props: ['directoryData'],
         data () {
             return {
                 done: false,
-                space: null,
+                directory: null,
                 errors: []
             }
         },
         created () {
-            axios.get('/api/spaces/' + this.spaceData.id + '/size')
+            axios.get('/api/spaces/size-of/' + this.directoryData.path)
             .then(response => {
-                this.space = response.data
+                this.directory = response.data
                 this.done = true
             })
             .catch(e => {
