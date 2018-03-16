@@ -2,6 +2,8 @@ v 18.3.1
 
 * NEW Spaces browser in beta with client side Pagination
 * NEW You can now redirect Home page
+* NEW You can disable register page
+* REMOVE admin link for nonlogged user
 
 Known issues
 

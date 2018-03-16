@@ -23,6 +23,7 @@
                 </div>
 
                 <div class="card-body">
+                    @if (config('webapp.allow_registration'))
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
@@ -87,6 +88,9 @@
                             </div>
                         </div>
                     </form>
+                    @else
+                    Registration disabled
+                    @endif
                 </div>
             </div>
         </div>
