@@ -16,7 +16,9 @@
                   <a class="nav-link" href="/pages">@lang('messages.pages') <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/admin/roles"><i class="fas fa-wrench"></i> <span class="sr-only">(current)</span></a>
+                  @auth
+                    <a class="nav-link" href="/admin/roles"><i class="fas fa-wrench"></i> <span class="sr-only">(current)</span></a>
+                  @endauth
                 </li>
               </ul>
               <form class="form-inline mt-2 mt-md-0">

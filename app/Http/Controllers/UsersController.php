@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Role;
+use App\Traits\RequireAuthenticationTrait;
 
 class UsersController extends Controller
 {
+    use RequireAuthenticationTrait;
+    
     public function index()
     {
         $users = User::all();

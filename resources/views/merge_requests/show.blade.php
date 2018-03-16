@@ -38,20 +38,20 @@
             </div>
         </div>
 
-        <table class="table">
-            @foreach ($diff as $diffObject)
-                <tr>
+
+        <table class="table table-sm">
+            @foreach ($diff as $diffObject)    
+                <tr class="{{ $diffObject->getMode() == 'new_file' ? 'table-success' : '' }}{{ $diffObject->getMode() == 'deleted_file' ? 'table-danger' : '' }}">
                     <td>
-                        <span style="font-weight:600">{{ $diffObject->getOriginalPath() }}</span> {{ $diffObject->getMode() }}
-                        @foreach ($diffObject as $diffChunk)
-                            @if (count($diffChunk) > 0)
-                                {{ count($diffChunk)}} changes from line {{ $diffChunk->getDestStartLine() }} to {{ $diffChunk->getDestEndLine() }}
-                            @endif
-                        @endforeach
+                        <div class="d-flex align-items-center">
+                            <div>{{ $diffObject->getOriginalPath() }}</div>
+                            <div class="ml-auto text-right">{{ $diffObject->count() }} changes</div>
+                        </div>
                     </td>
                 </tr>
             @endforeach
         </table>
+        
 
     </div>
 

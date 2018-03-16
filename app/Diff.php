@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @deprecated Use DiffObject instead of Diff
+ */
 class Diff extends Model
 {
     public static function getDiffBetween($sourceBranch, $targetBranch, $repository)

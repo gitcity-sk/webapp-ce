@@ -37,7 +37,7 @@ class Markdown extends \Parsedown
         return $Inline;
     }
 
-    protected function blockListComplete($block)
+    protected function blockListComplete(array $block)
     {
         if (null === $block) {
             return null;

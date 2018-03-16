@@ -23,7 +23,8 @@ mix.js('resources/assets/js/app.js', 'public/js/mix/app.js')
     .js('resources/assets/js/ide/bundle.js', 'public/js/mix/ide.bundle.js')
     .js('resources/assets/js/cms/bundle.js', 'public/js/mix/cms.bundle.js')
     .js('resources/assets/js/milestones/bundle.js', 'public/js/mix/milestones.bundle.js')
-    .js('resources/assets/js/issues/bundle.js', 'public/js/mix/issues.bundle.js').version().sourceMaps().extract(['vue', 'emojione']);
+    .js('resources/assets/js/issues/bundle.js', 'public/js/mix/issues.bundle.js')
+    .js('resources/assets/js/spaces/index.js', 'public/js/mix/spaces.bundle.js').version().sourceMaps().extract(['vue', 'emojione']);
 
 // CSS
 mix.sass('resources/assets/sass/app.scss', 'public/css')

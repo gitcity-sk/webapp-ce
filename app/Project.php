@@ -29,6 +29,11 @@ class Project extends Model
         return $this->hasMany(Milestone::class);
     }
 
+    public function spaces()
+    {
+        return $this->hasMany(Space::class);
+    }
+
     public function mergeRequests()
     {
         return $this->hasMany(MergeRequest::class);

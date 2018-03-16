@@ -19,19 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="objectItem in tree.data">
-                        <td style="max-width: 320px">
-                            <i v-if="objectItem.type === 'tree'" class="fas fa-folder"></i>
-                            <i v-else class="far fa-file"></i>
-                            {{ objectItem.name }}
-                        </td>
-                        <td class="has-emoji" style="max-width: 320px">
-                            <strong>{{ objectItem.last_commit.author.name }}</strong> {{ objectItem.last_commit.message }}
-                        </td>
-                        <td class="has-emoji">
-                            {{ objectItem.last_commit.created_at.date | moment }}
-                        </td>
-                    </tr>
+                    <commit v-for="objectItem in tree.data" :commit-sha="objectItem.last_commit.sha" :project-id="projectId" :tree-item="objectItem"></commit>
                 </tbody>
             </table>
 
@@ -46,11 +34,12 @@
     import axios from 'axios'
     import emojione from 'emojione'
     import cssPreloader from '../vue/shared-components/css-preloader.vue';
+    import commit from './Commit.vue';
 
     export default {
-        props: ['projectId'],
+        props: ['projectId', 'repoPath'],
         components: {
-            cssPreloader
+            cssPreloader, commit
         },
         mounted () {
             console.log('Component TreeTableComponent mounted.')
@@ -59,22 +48,42 @@
             return {
                 done: false,
                 tree: {
-                    tree: []
+                    data: []
                 },
                 errors: []
             }
         },
         created () {
             this.$parent.$emit('pageLoader', true)
-            axios.get('/api/projects/' + this.projectId + '/tree')
-            .then(response => {
-                this.tree = response.data
-                this.$parent.$emit('pageLoader', false)
-                this.done = true
-            })
-            .catch(e => {
-                this.errors.push(e)
-            })
+            if (this.repoPath !== null) {
+
+                axios.get('/api/projects/' + this.projectId + '/tree/' + this.repoPath)
+                .then(response => {
+                    this.tree = response.data
+                    this.$parent.$emit('pageLoader', false)
+                    this.done = true
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+
+            } else {
+
+                axios.get('/api/projects/' + this.projectId + '/tree')
+                .then(response => {
+                    this.tree = response.data
+                    this.$parent.$emit('pageLoader', false)
+                    this.done = true
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+
+            }
+
+            this.tree.data.forEach(data => {
+                console.log(data);
+            });   
         }
     }
 </script>

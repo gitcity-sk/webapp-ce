@@ -13,7 +13,7 @@ class Projects
 
     public function orderBy($field, $method)
     {
-        return Project::orderBy($field, $method)->get();
+        return Project::orderBy($field, $method)->paginate(15);
     }
 
     public function findById($id)

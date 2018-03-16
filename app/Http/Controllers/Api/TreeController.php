@@ -21,10 +21,12 @@ class TreeController extends Controller
         $this->middleware('auth');
     }
     
-    public function files(Project $project)
+    public function files(Project $project, $path = null)
     {
         $treeGit = new Tree();
-        $tree = $treeGit->get($project->user->name, $project->slug);
+        $tree = $treeGit->get($project->user->name, $project->slug, [
+            'path' => $path
+        ]);
         
         return [
             'data' => TreeResource::collection($tree)

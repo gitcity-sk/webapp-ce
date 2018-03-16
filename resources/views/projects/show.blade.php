@@ -68,7 +68,7 @@
             </div>
         @endif 
 
-        <tree-table-component project-id="{{ $project->id }}"></tree-table-component>
+        <tree-table-component project-id="{{ $project->id }}" repo-path="{{ $path }}"></tree-table-component>
 
     </div>
 </div>

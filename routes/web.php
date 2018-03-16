@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
-
+    if (config('webapp.redirect_home_page')) return redirect(config('webapp.redirect_home_page'));
     return view('home')->with('name', 'CodeOcean');
 });
 
@@ -64,29 +64,30 @@ Route::group(['namespace' => 'Milestones\Api'], function () {
 /**
  * Projects
  */
-Route::get('/projects', function () {
-    return view('projects.index');
-})->middleware('auth');
-
 Route::group(['namespace' => 'Projects'], function () {
+    Route::get('/projects', 'ProjectsController@index');
     Route::get('/projects/create', 'ProjectsController@create');
     Route::get('/projects/{id}', 'ProjectsController@show')->name('project');
+    Route::get('/projects/{id}/files/{path?}', 'ProjectsController@show')->where('path', '(.*)')->name('project.files');
     Route::get('/projects/{id}/issues', 'IssuesController@index')->name('projectIssues');
     Route::get('/projects/{id}/issues/new', 'IssuesController@create');
-    Route::get('/projects/{project}/commits', 'CommitsController@show');
-    Route::get('/projects/{project}/branches', 'BranchesController@show');
-    Route::get('/projects/{project}/tags', 'TagsController@show');
+    Route::get('/projects/{project}/commits', 'CommitsController@show')->name('project.commits');
+    Route::get('/projects/{project}/branches', 'BranchesController@show')->name('project.branches');
+    Route::get('/projects/{project}/tags', 'TagsController@show')->name('project.tags');
     Route::get('/projects/{id}/merge-requests', 'ProjectsController@mergeRequests');
     Route::get('/projects/{id}/merge-requests/new', 'ProjectsController@createMergeRequest');
     Route::get('/projects/{id}/create-on-server', 'ProjectsController@createOnServer');
     Route::get('/projects/{project}/milestones', 'MilestonesController@index')->name('projectMilestones');
     Route::get('/projects/{project}/milestones/new', 'MilestonesController@create');
-
+    Route::get('/projects/{project}/spaces', 'SpacesController@index');
+    
     Route::post('/projects', 'ProjectsController@store');
     Route::post('/projects/{project}/issues', 'IssuesController@store');
     Route::post('/projects/{project}/merge-requests', 'MergeRequestsController@store');
 
     Route::post('/projects/{project}/milestones', 'MilestonesController@store');
+
+    Route::post('/projects/{project}/spaces', 'SpacesController@store');
 });
 
 /**
@@ -97,6 +98,9 @@ Route::group(['namespace' => 'Projects\Api'], function () {
     Route::get('/api/projects/{project}/issues', 'ProjectsController@issues');
 
     Route::get('/api/projects/{project}/milestones', 'MilestonesController@index');
+    Route::get('/api/projects/{project}/merge-requests', 'MergeRequestsController@index');
+
+    Route::get('/api/projects/{project}/spaces', 'SpacesController@index');
 });
 
 /**
@@ -121,6 +125,13 @@ Route::group(['namespace' => 'Issues\Api'], function () {
  */
 Route::group(['namespace' => 'MergeRequests'], function () {
     Route::get('/merge-requests/{mergeRequest}', 'MergeRequestsController@show');
+});
+
+/**
+ * Merge requests API
+ */
+Route::group(['namespace' => 'MergeRequests\Api'], function () {
+    Route::get('/api/diff/{project}/{sourceBranch}/{targetBranch}', 'DiffController@index');
 });
 
 /**
@@ -196,6 +207,8 @@ Route::post('/admin/labels', 'Admin\LabelsController@store');
 
 Route::delete('/admin/license/delete', 'ee\LicenseController@destroy');
 
+Route::get('/admin/api/testing', 'Admin\ApiController@testing');
+
 /**
  * settings
  */
@@ -216,14 +229,19 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/api/profiles', 'ProfilesController@index');
 
-    Route::get('/api/projects/{project}/tree', 'TreeController@files');
+    Route::get('/api/projects/{project}/tree/{path?}', 'TreeController@files')->where('path', '(.*)');
     Route::get('/api/projects/{project}/commits', 'CommitsController@index');
+    Route::get('/api/projects/{projectId}/commits/{sha}', 'CommitsController@show');
     Route::get('/api/projects/{project}/branches', 'BranchesController@index');
     Route::get('/api/projects/{project}/tags', 'TagsController@index');
 
     Route::get('/api/users', 'UsersController@index');
     Route::get('/api/users/{user}', 'UsersController@show');
     Route::get('/api/users/{user}/projects', 'UsersController@projects');
+
+    Route::get('/api/session/configure', 'TestController@configure');
+
+    Route::post('/api/test', 'TestController@index');
 });
 
 /*Route::get('/projects', function () {
@@ -240,6 +258,29 @@ Route::group(['namespace' => 'Api'], function () {
     return view('projects.show', compact('name', 'age', 'tasks'));
 });*/
 
+// Retrieving file from storage
+// Show all files that are located in storage folder :)
 Route::get('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)');
 
-Route::get('/spaces/space-name/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
+Route::get('/projects/{project}/spaces/create', 'SpacesController@create');
+
+// Retrieving file from spaces
+//Route::get('/spaces/{space}/file/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
+
+
+/**
+ * Spaces
+ */
+Route::group(['namespace' => 'Spaces'], function () {
+    Route::get('/spaces/{slug}/{path?}', 'SpacesController@show')->where('path', '(.*)');
+});
+
+/**
+ * Spaces API
+ */
+Route::group(['namespace' => 'Spaces\Api'], function () {
+    Route::get('/api/spaces/size-of/{path?}', 'SpacesController@sizeOf')->where('path', '(.*)');
+    Route::get('/api/spaces/{space}/size', 'SpacesController@getSize');
+    Route::get('/api/spaces/{space}/files/{path?}', 'FilesController@index')->where('path', '(.*)');
+    Route::get('/api/spaces/{space}/directories/{path?}', 'DirectoriesController@index')->where('path', '(.*)');
+});
