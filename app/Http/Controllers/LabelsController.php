@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Label;
+use App\Traits\RequireAuthenticationTrait;
 
 class LabelsController extends Controller
-{
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+{   
+    use RequireAuthenticationTrait;
     
     public function index()
     {

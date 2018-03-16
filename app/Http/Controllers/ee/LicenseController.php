@@ -6,13 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\ee\License;
 use App\Setting;
+use App\Traits\RequireAuthenticationTrait;
 
 class LicenseController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    use RequireAuthenticationTrait;
     
     public function show()
     {
