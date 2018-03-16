@@ -1,5 +1,16 @@
+v 18.3.1
+
+* NEW Spaces browser in beta with client side Pagination
+* NEW You can now redirect Home page
+
+Known issues
+
+* Missing button for create new space
+* Some files from last page can Missing
+
 v18.3
 
+* NEW Spaces
 * NEW Merge requests
 * NEW Pagination for projects
 * NEW API testing link

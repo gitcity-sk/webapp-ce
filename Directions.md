@@ -1,5 +1,14 @@
 # Directions
 
+## 18.4
+
+[ ] Private spaces
+
+## 18.3
+
+[x] Spaces with spaces browser
+[x] Home page redirection
+
 ## Part 0
 
 *[x] Authentication
@@ -42,7 +51,7 @@ Comments belongs to users and profiles
 
 Simpe blogging platform to publision information. Im not decided yet if its belongs to project or not.
 
-*[ ] Posts
+*[x] Posts (18.2)
 *[ ] Comments
 *[ ] Tags
 *[x] Labels
@@ -54,10 +63,12 @@ Posts has many labels
 
 ## Future
 
-*[ ] Deleting models
-*[ ] Epics (EE)
+* [ ] Deleting models
+* [ ] Epics (EE)
+* [x] Spaces (18.3)
+* [x] Private spaces (EE) 
 
-*[ ] Issue has many labels
-*[ ] Users can close issues
-*[ ] Users can mention other user in issues and posts
-*[ ] Users can mention projects in posts and issues
+* [ ] Issue has many labels
+* [ ] Users can close issues
+* [ ] Users can mention other user in issues and posts
+* [ ] Users can mention projects in posts and issues

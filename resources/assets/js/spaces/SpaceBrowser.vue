@@ -19,12 +19,18 @@
                     <td class="text-secondary"><i class="far fa-spinner-third fa-spin"></i> Files are loading...</td>
                     <td></td>
                 </tr>
-                <tr v-for="file in files.data">
+                <tr v-for="file in currentPage">
                     <td><span class="mr-2"><i class="far fa-file"></i></span><a :href="file.url">{{ file.name }}</a></td>
                     <td>{{ file.size }}</td>
                 </tr>
             </tbody>
         </table>
+        <div class="text-center mt-3">
+            <div class="btn-group" role="group" aria-label="Pagination">
+                <button v-if="page > 1" v-on:click="prevPage" class="btn btn-light">Previous</button>
+                <button v-if="page < totalPages" v-on:click="nextPage" class="btn btn-light">Next</button>
+            </div>
+        </div>
     </div>
     </div>
 </template>
@@ -49,7 +55,9 @@
                 doneFiles: false,
                 files: { data: null },
                 directories: { data: null },
-                errors: []
+                errors: [],
+                page: 1,
+                perPage: 100
             }
         },
         created () {
@@ -86,7 +94,46 @@
                 .catch(e => {
                     this.errors.push(e)
                 })
+            },
+
+            nextPage: function() {
+                console.log('Showing data from ' + this.start + ' to ' + this.stop)
+                this.page++;
+            },
+
+            prevPage: function() {
+                console.log('Showing data from ' + this.start + ' to ' + this.stop)
+                if (this.page > 1) {
+                    this.page--;
+                }
             }
+        },
+        computed: {
+            start: function() {
+                if (this.page == 1) return 0;
+                return ((this.page - 1) * this.perPage) + 1;
+            },
+
+            stop: function() {
+                if (this.page * this.perPage > this.files.data.length) this.perPage = this.files.data.length;
+                return this.page * this.perPage
+            },
+
+            currentPage: function() {
+                if (null !== this.files.data) {
+                    return this.files.data.slice(this.start, this.stop)
+                }
+
+                return null;
+            },
+
+            totalPages: function()
+            {
+                if (null !== this.files.data) {
+                    return Math.floor(this.files.data.length / this.perPage);
+                }
+            },
+            
         }
     }
 </script>

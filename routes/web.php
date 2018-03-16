@@ -18,7 +18,7 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
-
+    if (config('webapp.redirect_home_page')) return redirect(config('webapp.redirect_home_page'));
     return view('home')->with('name', 'CodeOcean');
 });
 

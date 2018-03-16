@@ -17,7 +17,7 @@ class SpacesController extends Controller
      */
     public function __construct(Spaces $spaces)
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
 
         $this->spaces = $spaces;
     }
@@ -25,6 +25,9 @@ class SpacesController extends Controller
     public function show($slug, $path = null)
     {
         $space = $this->spaces->findBySlug($slug);
+
+        // check if space is private
+        if($space->private) abort(404);
 
         return view('spaces.show', compact(['space', 'path']));
     }
