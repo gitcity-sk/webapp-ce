@@ -12,7 +12,6 @@ stages:
     tags:
         - digitalocean
         - docker
-        - a
 
 # Cache configuration
 .default-cache: &default-cache
