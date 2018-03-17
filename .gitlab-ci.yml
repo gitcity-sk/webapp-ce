@@ -1,4 +1,4 @@
-image: registry.k-systems.sk/gitcity-sk/gitcity-build-images:php-7.1-fpm-redis-phpunit-6.5.6
+image: registry.gitcity.eu/gitcity-sk/gitcity-build-images:php-7.1-fpm-redis-phpunit-6.5.6
 
 stages:
     - prepare
@@ -12,7 +12,6 @@ stages:
     tags:
         - digitalocean
         - docker
-        - a
 
 # Cache configuration
 .default-cache: &default-cache
