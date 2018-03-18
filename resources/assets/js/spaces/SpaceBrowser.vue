@@ -99,6 +99,7 @@
             nextPage: function() {
                 console.log('Showing data from ' + this.start + ' to ' + this.stop)
                 this.page++;
+                window.scrollTo(0,0)
             },
 
             prevPage: function() {
@@ -106,6 +107,7 @@
                 if (this.page > 1) {
                     this.page--;
                 }
+                window.scrollTo(0,0)
             }
         },
         computed: {

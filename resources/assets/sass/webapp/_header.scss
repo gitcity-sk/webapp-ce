@@ -1,0 +1,31 @@
+/*
+* Header
+*/
+
+.context-header {
+    position: relative;
+    margin-right: 2px;
+    width: $contextual-sidebar-width;
+
+    a {
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        padding: 10px, 16px, 10px, 10px;
+        color: #000000;
+    }
+
+    &:hover,
+    a:hover {
+        background-color: $link-hover-background;
+    }
+
+    .avatar-container {
+        flex: 0 0 40px;
+    }
+
+    .sidebar-context-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

@@ -3,16 +3,26 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
-@import "variables";
-// @import "codebase/codebase/variables";
+@import "webapp/variables";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
 @import "codeOcean";
-@import "carousel";
-@import "loader";
+
+// Webapp
+@import "webapp/carousel";
+@import "webapp/loader";
+
+// Webapp dashboard
+@import "webapp/dashboard";
+@import "webapp/sidebar";
+@import "webapp/navbar";
+@import "webapp/utilities";
+@import "webapp/header";
+@import "webapp/tables";
+
+// Vendor
 @import "fa-svg-with-js";
-@import "dashboard";
 
 // Simplemde
 @import "~maymeow-simplemde-fa5/src/css/simplemde";
