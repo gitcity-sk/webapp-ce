@@ -1,3 +1,17 @@
+v 18.3.2
+
+* NEW Users can now set your own application name
+* NEW Showing logo in application header
+* UPDATE Hover color in all tables
+* UPDATE Clicking on pagin buttons in space browser now scroll page to start
+* UPDATE Added php docs comment for fuctions
+* UPDATE Javascript and PHP dependencies was updated
+* FIX added missing button to create spaces from spaces project page
+
+Known issues
+
+* When you create space you will be redirected to project index page
+
 v 18.3.1
 
 * NEW Spaces browser in beta with client side Pagination

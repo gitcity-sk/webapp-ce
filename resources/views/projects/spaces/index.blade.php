@@ -30,7 +30,12 @@
     <div class="col-12">
         <p class="lead has-emoji">{{ $project->description }}</p>
     </div>
+</div>
 
+<div class="row" style="margin-bottom: 10px">
+    <div class="col-12 text-right">
+    <a href="/projects/{{ $project->id }}/spaces/new" class="btn btn-success">Create new space</a>
+    </div>
 </div>
 
 <div class="row" style="margin-bottom: 3rem">
