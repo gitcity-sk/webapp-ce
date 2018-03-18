@@ -19,7 +19,11 @@ class TagsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
+    /**
+     * @param Project $project
+     * @return array
+     */
     public function index(Project $project)
     {
         $gitTags = new Tag();

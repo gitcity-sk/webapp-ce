@@ -8,6 +8,11 @@ use App\Api\Git\BaseModel;
 
 class Branch extends BaseModel
 {
+    /**
+     * @param $userName
+     * @param $projecSlug
+     * @return array|null
+     */
     public function get($userName, $projecSlug)
     {
         $repo = Repo::open($userName, $projecSlug);

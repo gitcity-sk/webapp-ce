@@ -9,6 +9,10 @@ use App\Profile;
 class ProfilesController extends Controller
 {
     // GET /profiles/{id}
+    /**
+     * @param Profile $profile
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Profile $profile)
     {
         //dd(Storage::get($profile->image));
@@ -16,12 +20,22 @@ class ProfilesController extends Controller
     }
 
     // GET /profiles/{id}/edit
+
+    /**
+     * @param Profile $profile
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Profile $profile)
     {
         return view('profiles.edit', compact('profile'));
     }
 
     // PUT/PATCH /profiles/{id}
+
+    /**
+     * @param Profile $profile
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(Profile $profile)
     {
         if (request()->file()) {

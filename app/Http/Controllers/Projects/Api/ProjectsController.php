@@ -11,6 +11,10 @@ use App\Http\Resources\IssueResource;
 class ProjectsController extends Controller
 {
 
+    /**
+     * ProjectsController constructor.
+     * @param Projects $projects
+     */
     public function __construct(Projects $projects)
     {
         $this->middleware('auth');
@@ -18,6 +22,9 @@ class ProjectsController extends Controller
         $this->projects = $projects;
     }
 
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function index()
     {
         $projects = $this->projects->orderBy('created_at', 'desc');
@@ -25,6 +32,10 @@ class ProjectsController extends Controller
         return ProjectResource::collection($projects);
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function issues(Project $project)
     {
         return IssueResource::collection($project->issues()->paginate());

@@ -11,7 +11,10 @@ use App\Traits\RequireAuthenticationTrait;
 class LicenseController extends Controller
 {
     use RequireAuthenticationTrait;
-    
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show()
     {
         $license = License::import();
@@ -19,6 +22,9 @@ class LicenseController extends Controller
         return view('admin.license.show', compact('license'));
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store()
     {
         if (request()->file()) {
@@ -35,6 +41,9 @@ class LicenseController extends Controller
         return back();
     }
 
+    /**
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function destroy()
     {
         $license = Setting::where('key', License::LICENSE_SETTING_KEY)->first();

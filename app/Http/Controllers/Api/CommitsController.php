@@ -20,7 +20,12 @@ class CommitsController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
+    /**
+     * @param Project $project
+     * @return array
+     * @throws \Exception
+     */
     public function index(Project $project)
     {
         $gitLog = new Commit();
@@ -32,7 +37,9 @@ class CommitsController extends Controller
     }
 
     /**
-     * Show single commit by sha
+     * @param $projectId
+     * @param $sha
+     * @return array
      */
     public function show($projectId, $sha)
     {

@@ -29,26 +29,41 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function projects() //$user->project->name
     {
         return $this->hasMany(Project::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function groups()
     {
         return $this->hasMany(Group::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function authorizedKeys()
     {
         return $this->hasMany(AuthorizedKey::class);
     }
 
+    /**
+     * @param Project $project
+     */
     public function publish(Project $project)
     {
         $project['slug'] = str_slug($project['name']);
@@ -73,13 +88,17 @@ class User extends Authenticatable
         }
     }
 
+    /**
+     * @param Group $group
+     * @return false|\Illuminate\Database\Eloquent\Model
+     */
     public function publishGroup(Group $group)
     {
         return $this->groups()->save($group);
     }
 
     /**
-     * Method addKey
+     * @param AuthorizedKey $authorizedKey
      */
     public function addKey(AuthorizedKey $authorizedKey)
     {
@@ -101,7 +120,8 @@ class User extends Authenticatable
     }
 
     /**
-     * function removeKey
+     * @param AuthorizedKey $authorizedKey
+     * @throws \Exception
      */
     public function removeKey(AuthorizedKey $authorizedKey)
     {

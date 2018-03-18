@@ -7,6 +7,11 @@ use App\Api\Git\BaseModel;
 
 class Commit extends BaseModel
 {
+    /**
+     * @param $userName
+     * @param $projecSlug
+     * @return \GitElephant\Objects\Log|null
+     */
     public function get($userName, $projecSlug)
     {
         $repo = Repo::open($userName, $projecSlug);
@@ -17,6 +22,12 @@ class Commit extends BaseModel
         return null;
     }
 
+    /**
+     * @param $userName
+     * @param $projecSlug
+     * @param $sha
+     * @return \GitElephant\Objects\Commit|null
+     */
     public function getSingle($userName, $projecSlug, $sha)
     {
         $repo = Repo::open($userName, $projecSlug);

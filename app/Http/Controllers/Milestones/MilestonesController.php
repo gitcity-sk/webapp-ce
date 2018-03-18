@@ -8,11 +8,18 @@ use App\Milestone;
 
 class MilestonesController extends Controller
 {
+    /**
+     * MilestonesController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
+    /**
+     * @param Milestone $milestone
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Milestone $milestone)
     {
         $completed_percentage = 0;

@@ -11,6 +11,11 @@ use Illuminate\Http\File;
 
 class FilesController extends Controller
 {
+    /**
+     * @param Space $space
+     * @param null $path
+     * @return array
+     */
     public function index(Space $space, $path = null)
     {
         $path == null ? $key = $space->slug . 'root-folder' : $key = $space->slug . $path;

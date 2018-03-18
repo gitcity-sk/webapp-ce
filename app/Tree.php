@@ -8,6 +8,12 @@ use App\Api\Git\BaseModel;
 
 class Tree extends BaseModel
 {
+    /**
+     * @param $userName
+     * @param $projecSlug
+     * @param null $options
+     * @return \GitElephant\Objects\Tree|null
+     */
     public function get($userName, $projecSlug, $options = null)
     {
         if ($options !== null) $this->_configure($options);

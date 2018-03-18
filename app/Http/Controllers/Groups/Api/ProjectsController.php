@@ -9,6 +9,10 @@ use App\Http\Resources\ProjectResource;
 
 class ProjectsController extends Controller
 {
+    /**
+     * @param Group $group
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function index(Group $group)
     {
         return ProjectResource::collection($group->projects);

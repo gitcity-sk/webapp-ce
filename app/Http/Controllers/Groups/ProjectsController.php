@@ -9,6 +9,10 @@ use App\Group;
 
 class ProjectsController extends Controller
 {
+    /**
+     * @param Group $group
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Group $group)
     {
         $project = Project::findOrFail(request('project_id'));

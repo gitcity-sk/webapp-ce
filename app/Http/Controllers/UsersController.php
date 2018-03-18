@@ -9,7 +9,10 @@ use App\Traits\RequireAuthenticationTrait;
 class UsersController extends Controller
 {
     use RequireAuthenticationTrait;
-    
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $users = User::all();
@@ -17,6 +20,10 @@ class UsersController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
+    /**
+     * @param User $user
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(User $user)
     {
         $roles = Role::all();

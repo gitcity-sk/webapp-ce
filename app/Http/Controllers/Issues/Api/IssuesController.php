@@ -8,6 +8,9 @@ use App\Issue;
 
 class IssuesController extends Controller
 {
+    /**
+     *
+     */
     public function close()
     {
         $issue = Issue::find(request('id'));
@@ -17,6 +20,9 @@ class IssuesController extends Controller
         ]);
     }
 
+    /**
+     *
+     */
     public function reopen()
     {
         $issue = Issue::find(request('id'));

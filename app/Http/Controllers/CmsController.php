@@ -18,6 +18,10 @@ class CmsController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Project $project)
     {
         if (license_check('pages') == false) {
@@ -27,6 +31,10 @@ class CmsController extends Controller
         return view('cms.index', compact('project'));
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create(Project $project)
     {
         if (license_check('pages') == false) {
@@ -36,11 +44,19 @@ class CmsController extends Controller
         return view('cms.pages.create', compact('project'));
     }
 
+    /**
+     * @param Page $page
+     * @return string
+     */
     public function edit(Page $page)
     {
         return ('cms.pages.edit');
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Project $project)
     {
         if (license_check('pages') == false) {

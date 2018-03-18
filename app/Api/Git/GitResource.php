@@ -7,12 +7,20 @@ use GitElephant\Objects\GitObject;
 
 class GitResource
 {
-
+    /**
+     * GitResource constructor.
+     * @param $entity
+     */
     public function __construct($entity)
     {
         $this->entity  = $entity;
     }
 
+    /**
+     * @param $entity
+     * @return array|null
+     * @throws \Exception
+     */
     public static function collection($entity)
     {
         if (null == $entity) return null;

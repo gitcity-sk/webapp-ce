@@ -7,6 +7,11 @@ use GitElephant\Objects\Log;
 
 class LogResource extends GitResource
 {
+    /**
+     * @param $entity
+     * @return array|null
+     * @throws \Exception
+     */
     public static function collection($entity)
     {
         if (null == $entity) return null;

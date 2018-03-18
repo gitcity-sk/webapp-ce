@@ -18,6 +18,10 @@ class RolesController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @param Role $role
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Role $role)
     {
         $roles = Role::all();
@@ -25,6 +29,10 @@ class RolesController extends Controller
         return view('admin.roles.index', compact('roles'));
     }
 
+    /**
+     * @param Role $role
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Role $role)
     {
         if (auth()->user()->can('assign-permissions') or (auth()->id() === 1)) {
@@ -36,11 +44,18 @@ class RolesController extends Controller
         return view('pages.403');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('admin.roles.create');
     }
 
+    /**
+     * @param Role $role
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(Role $role)
     {
         // dd(request());
@@ -52,6 +67,10 @@ class RolesController extends Controller
         return redirect('/admin/roles');
     }
 
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function assignTo(User $user)
     {
         // dd(request('role_id'));

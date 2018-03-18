@@ -42,6 +42,9 @@ class AuthServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     protected function getPermissions()
     {
         return Permission::with('roles')->get();

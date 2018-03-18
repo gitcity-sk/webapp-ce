@@ -22,6 +22,11 @@ class SpacesController extends Controller
         $this->spaces = $spaces;
     }
 
+    /**
+     * @param $slug
+     * @param null $path
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($slug, $path = null)
     {
         $space = $this->spaces->findBySlug($slug);

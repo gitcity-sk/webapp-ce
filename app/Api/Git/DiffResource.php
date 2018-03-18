@@ -6,12 +6,19 @@ use GitElephant\Objects\Diff\Diff;
 
 class DiffResource
 {
-
+    /**
+     * DiffResource constructor.
+     * @param $entity
+     */
     public function __construct($entity)
     {
         $this->entity  = $entity;
     }
 
+    /**
+     * @param Diff $entity
+     * @return array|null
+     */
     public static function collection(Diff $entity)
     {
         if (null == $entity) return null;

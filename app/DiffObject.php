@@ -7,6 +7,13 @@ use App\Api\Git\BaseModel;
 
 class DiffObject extends BaseModel
 {
+    /**
+     * @param $userName
+     * @param $projecSlug
+     * @param $sourceBranch
+     * @param $targetBranch
+     * @return \GitElephant\Objects\Diff\Diff|null
+     */
     public function get($userName, $projecSlug, $sourceBranch, $targetBranch)
     {
         $repo = Repo::open($userName, $projecSlug);

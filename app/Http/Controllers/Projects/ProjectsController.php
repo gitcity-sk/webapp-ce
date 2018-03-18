@@ -14,9 +14,8 @@ use App\Http\Requests\CreateProjectRequest;
 class ProjectsController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
+     * ProjectsController constructor.
+     * @param Projects $projects
      */
     public function __construct(Projects $projects)
     {
@@ -26,7 +25,7 @@ class ProjectsController extends Controller
     }
 
     /**
-     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -34,7 +33,9 @@ class ProjectsController extends Controller
     }
 
     /**
-     *
+     * @param $id
+     * @param null $path
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id, $path = null) // Project::find(wildcard) wildcaard is name in routes so project and must be same as in controller
     {
@@ -52,7 +53,7 @@ class ProjectsController extends Controller
     }
 
     /**
-     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -60,7 +61,8 @@ class ProjectsController extends Controller
     }
 
     /**
-     * 
+     * @param Project $project
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function createOnServer(Project $project)
     {
@@ -70,7 +72,8 @@ class ProjectsController extends Controller
     }
 
     /**
-     *
+     * @param CreateProjectRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(CreateProjectRequest $request)
     {
@@ -82,7 +85,8 @@ class ProjectsController extends Controller
     }
 
     /**
-     * 
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function mergeRequests($id)
     {
@@ -92,7 +96,8 @@ class ProjectsController extends Controller
     }
 
     /**
-     * 
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function createMergeRequest($id)
     {

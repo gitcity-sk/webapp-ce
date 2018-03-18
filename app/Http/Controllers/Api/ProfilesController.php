@@ -14,6 +14,9 @@ class ProfilesController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @return array
+     */
     public function index()
     {
         $users = Profile::all();

@@ -8,6 +8,11 @@ use GitElephant\GitBinary;
 
 class Repo extends Model
 {
+    /**
+     * @param $namespace
+     * @param $name
+     * @return bool|Repository
+     */
     public static function open($namespace, $name)
     {
         try {
@@ -19,11 +24,19 @@ class Repo extends Model
         return $repository;
     }
 
+    /**
+     * @param $namespace
+     * @param $name
+     * @return string
+     */
     public static function path($namespace, $name)
     {
         return env('GIT_DATA') . $namespace . DIRECTORY_SEPARATOR . $name . '.git';
     }
 
+    /**
+     * @return mixed
+     */
     public static function hooks()
     {
         return env('GITCITY_SHELL_HOOKS');

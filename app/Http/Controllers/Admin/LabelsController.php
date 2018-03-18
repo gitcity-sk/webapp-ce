@@ -8,6 +8,9 @@ use App\Label;
 
 class LabelsController extends BaseController
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Database\Eloquent\Collection|\Illuminate\View\View|static[]
+     */
     public function index()
     {
         $labels =  Label::all();
@@ -15,11 +18,17 @@ class LabelsController extends BaseController
         return view('admin.labels.index', compact('labels'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         return view('admin.labels.create');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store()
     {
         $this->validate(request(), [

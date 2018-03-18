@@ -10,6 +10,9 @@ use App\Http\Resources\GroupResource;
 
 class GroupsController extends Controller
 {
+    /**
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function index()
     {
         $groups = Group::all();
