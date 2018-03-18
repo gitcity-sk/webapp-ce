@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>GitCity</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
