@@ -10,11 +10,19 @@ use Illuminate\Support\Facades\Storage;
 
 class SpacesController extends Controller
 {
+    /**
+     * @param Project $project
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Project $project)
     {
         return view('projects.spaces.index', compact('project'));
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(Project $project)
     {
         // dd(config('webapp.spaces.path'));

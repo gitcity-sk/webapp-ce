@@ -23,6 +23,10 @@ class IssuesController extends Controller
         $this->projects = $projects;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index($id)
     {
         $project = $this->projects->findById($id);
@@ -30,6 +34,10 @@ class IssuesController extends Controller
         return view('projects.issues', compact('project'));
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create($id)
     {
         $project = $this->projects->findById($id);
@@ -37,6 +45,11 @@ class IssuesController extends Controller
         return view('projects.new_issue', compact('project'));
     }
 
+    /**
+     * @param CreateProjectIssueRequest $request
+     * @param Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(CreateProjectIssueRequest $request, Project $project)
     {
         Issue::create([

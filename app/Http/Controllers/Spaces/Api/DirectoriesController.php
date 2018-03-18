@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class DirectoriesController extends Controller
 {
+    /**
+     * @param Space $space
+     * @param null $path
+     * @return array
+     */
     public function index(Space $space, $path = null)
     {
         $directories = [];

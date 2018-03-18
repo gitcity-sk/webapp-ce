@@ -9,6 +9,9 @@ use App\Issue;
  */
 class issues
 {
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function all()
     {
         return Issue::all();

@@ -6,11 +6,18 @@ use App\Role;
 
 trait RolesTrait
 {
+    /**
+     * @return mixed
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
+    /**
+     * @param $role
+     * @return mixed
+     */
     public function assignRole($role)
     {
         return $this->roles()->save(
@@ -18,6 +25,10 @@ trait RolesTrait
         );
     }
 
+    /**
+     * @param $role
+     * @return bool
+     */
     public function hasRole($role)
     {
         if (is_string($role)) {

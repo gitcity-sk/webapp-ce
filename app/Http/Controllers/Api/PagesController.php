@@ -19,6 +19,10 @@ class PagesController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function index(Project $project)
     {
         return PageResource::collection($project->pages);

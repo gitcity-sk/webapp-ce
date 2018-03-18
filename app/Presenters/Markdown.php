@@ -4,6 +4,10 @@ namespace App\Presenters;
 
 class Markdown extends \Parsedown
 {
+    /**
+     * @param $Excerpt
+     * @return array|void
+     */
     protected function inlineImage($Excerpt)
     {
         if (! isset($Excerpt['text'][1]) or $Excerpt['text'][1] !== '[') {
@@ -37,6 +41,10 @@ class Markdown extends \Parsedown
         return $Inline;
     }
 
+    /**
+     * @param array $block
+     * @return array|null
+     */
     protected function blockListComplete(array $block)
     {
         if (null === $block) {

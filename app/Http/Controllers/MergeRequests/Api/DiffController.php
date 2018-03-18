@@ -20,6 +20,12 @@ class DiffController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @param Project $project
+     * @param $sourceBranch
+     * @param $targetBranch
+     * @return array
+     */
     public function index(Project $project, $sourceBranch, $targetBranch)
     {
         $diffObjects = new DiffObject();

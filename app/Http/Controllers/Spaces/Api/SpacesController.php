@@ -14,7 +14,8 @@ class SpacesController extends Controller
     protected $totalSpaceSize = 0;
 
     /**
-     * Return size for space
+     * @param Space $space
+     * @return mixed
      */
     public function getSize(Space $space)
     {
@@ -37,7 +38,8 @@ class SpacesController extends Controller
     }
 
     /**
-     * Return size for space
+     * @param $path
+     * @return mixed
      */
     public function sizeOf($path)
     {

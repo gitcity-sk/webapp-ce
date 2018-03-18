@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GitElephant\Repository;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -9,6 +10,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Diff extends Model
 {
+    /**
+     * @param $sourceBranch
+     * @param $targetBranch
+     * @param Repository $repository
+     * @return null
+     */
     public static function getDiffBetween($sourceBranch, $targetBranch, $repository)
     {
         if ($repository && (count($repository->getBranches(true)) != 0)) {

@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 
 class GroupsController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         if (license_check('groups') == false) {
@@ -19,7 +22,7 @@ class GroupsController extends Controller
     }
 
     /**
-     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -30,6 +33,10 @@ class GroupsController extends Controller
         return view('groups.create');
     }
 
+    /**
+     * @param Group $group
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Group $group)
     {
         if (license_check('groups') == false) {
@@ -39,6 +46,9 @@ class GroupsController extends Controller
         return view('groups.show', compact('group'));
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store()
     {
         if (license_check('groups') == false) {

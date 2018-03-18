@@ -20,6 +20,10 @@ class IssuesController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @param Issue $issue
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Issue $issue)
     {
         return view('issues.show', compact('issue'));

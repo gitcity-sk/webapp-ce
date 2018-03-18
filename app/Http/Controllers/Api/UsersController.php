@@ -19,6 +19,9 @@ class UsersController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @return array
+     */
     public function index()
     {
         $users = User::all();
@@ -26,6 +29,10 @@ class UsersController extends Controller
         return compact('users');
     }
 
+    /**
+     * @param User $user
+     * @return array
+     */
     public function show(User $user)
     {
         $roles = Role::all();
@@ -33,6 +40,10 @@ class UsersController extends Controller
         return compact('user', 'roles');
     }
 
+    /**
+     * @param User $user
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function projects(User $user)
     {
         return ProjectResource::collection($user->projects);

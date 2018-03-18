@@ -7,10 +7,19 @@ use Carbon\Carbon;
 
 class License
 {
+    /**
+     *
+     */
     const ENCRYPTION_KEY = '.license_encryption_key.pub';
 
+    /**
+     *
+     */
     const LICENSE_SETTING_KEY = 'WEBAPP_LICENSE';
 
+    /**
+     *
+     */
     const LICENSE_FEATURES = [
         'Starter' => [
             'groups',
@@ -34,6 +43,10 @@ class License
         'pages'
     ];
 
+    /**
+     * @param $license
+     * @return mixed
+     */
     protected static function featuresByLicense($license)
     {
         $starter = static::LICENSE_FEATURES['Starter'];
@@ -50,6 +63,9 @@ class License
         return $featuresByLicense[$license];
     }
 
+    /**
+     * @return bool|mixed
+     */
     public static function import()
     {
         $licenseString = Setting::where('key', static::LICENSE_SETTING_KEY)->first();
@@ -68,6 +84,9 @@ class License
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public static function expired()
     {
         $license = self::import();
@@ -80,6 +99,9 @@ class License
         return false;
     }
 
+    /**
+     * @return bool
+     */
     public static function isValid()
     {
         // return false if license is expired
@@ -90,6 +112,10 @@ class License
         return true;
     }
 
+    /**
+     * @param $feature
+     * @return bool
+     */
     public static function check($feature)
     {
         $license = self::import();

@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 
 class CommentsController extends Controller
 {
+    /**
+     * @param Issue $issue
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Issue $issue)
     {
         $comment = Comment::create([

@@ -20,7 +20,13 @@ class TreeController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
+    /**
+     * @param Project $project
+     * @param null $path
+     * @return array
+     * @throws \Exception
+     */
     public function files(Project $project, $path = null)
     {
         $treeGit = new Tree();

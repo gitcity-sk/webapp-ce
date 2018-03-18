@@ -20,6 +20,10 @@ class MergeRequestsController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * @param Project $project
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Project $project)
     {
         MergeRequest::create([

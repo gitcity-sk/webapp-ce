@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 
 class TestController extends Controller
 {
+    /**
+     * @return array
+     */
     public function index()
     {
         return [
@@ -18,6 +21,9 @@ class TestController extends Controller
         ];
     }
 
+    /**
+     * @return mixed
+     */
     public function configure()
     {
         return request()->session()->get('key');
