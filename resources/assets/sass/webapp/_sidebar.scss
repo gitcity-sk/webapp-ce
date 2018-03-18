@@ -1,0 +1,114 @@
+.feather {
+    width: 16px;
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+/*
+* Sidebar
+*/
+
+.wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.wrapper.toggled {
+    padding-left: $contextual-sidebar-width;
+}
+
+.sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: $contextual-sidebar-width;
+    width: 0;
+    height: 100%;
+    margin-left: -220px;
+    overflow-y: auto;
+    //background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.nav-sidebar {
+    box-shadow: inset -1px 0 0 rgba(0,0,0,.1);
+}
+
+.wrapper.toggled .sidebar-wrapper {
+    width: $contextual-sidebar-width;
+}
+
+.page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    //padding: 15px;
+}
+
+.wrapper.toggled .page-content-wrapper {
+    position: absolute;
+    margin-right: -220px;
+}
+
+/*
+* Sidebar styles
+*/
+
+.nav-sidebar ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.sidebar-top-level-items>li.active,
+.sidebar-top-level-items>li.active a:hover,
+.sidebar-sub-level-items>li.active,
+.sidebar-sub-level-items>li.active a:hover {
+    background: $link-hover-background;
+}
+
+
+.sidebar-top-level-items>li a:hover,
+.sidebar-top-level-items>li.active a:hover,
+{
+    background: $link-hover-background;
+    color: #2e2e2e;
+}
+
+.nav-sidebar li.active {
+    box-shadow: inset 4px 0 0 #007bff;
+}
+
+.nav-sidebar li {
+    white-space: nowrap;
+}
+
+.nav-sidebar li.active>a {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.sidebar-top-level-items>li.active>a {
+    margin-left: 4px;
+    padding-left: 11px;
+}
+
+.nav-sidebar li a {
+    font-weight: 500;
+    transition: paadding 0.3s;
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    color: #333;
+}
+
+.nav-sidebar a {
+    text-decoration: none;
+}
+
+.sidebar-sub-level-items {
+    padding-bottom: 8px;
+}

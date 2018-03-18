@@ -1,14 +1,9 @@
-$black: #4E535A;
-$silver: #CFD7E6;
-$border: 2px;
-$size: 29px;
-
 .loader {
-    border: $border solid $silver;
+    border: $loader-border solid $loader-border-top-color;
     border-radius: 50%;
-    border-top: $border solid $black;
-    width: $size;
-    height: $size;
+    border-top: $loader-border solid $loader-border-color;
+    width: $loader-size;
+    height: $loader-size;
     -webkit-animation: spin 1s linear infinite; /* Safari */
     animation: spin 1s linear infinite;
   }

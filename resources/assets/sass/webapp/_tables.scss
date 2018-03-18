@@ -1,0 +1,12 @@
+.table-hover {
+    tbody tr {
+            @include hover {
+            background-color: $blue-50;
+            
+            td {
+                border-top: 1px solid $blue-l30 !important;
+                border-bottom: 1px solid $blue-l30 !important;
+            }
+        }
+    }
+  }

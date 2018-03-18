@@ -3,12 +3,17 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
-@import "variables";
+@import "webapp/variables";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+
 @import "codeOcean";
-@import "carousel";
-@import "loader";
+
+// WebApp
+@import "webapp/carousel";
+@import "webapp/loader";
+
+// Vendor
 @import "fa-svg-with-js";
 @import "blog-layout";

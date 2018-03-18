@@ -1,0 +1,130 @@
+/*
+ * Color schema
+ */
+ $darken-normal-factor: 7%;
+ $darken-dark-factor: 10%;
+ $darken-border-factor: 5%;
+ $darken-border-dashed-factor: 25%;
+ 
+ $white-light: #fff;
+ $white-normal: #f0f0f0;
+ $white-dark: #eaeaea;
+ 
+ $gray-lightest: #fdfdfd;
+ $gray-light: #fafafa;
+ $gray-lighter: #f9f9f9;
+ $gray-normal: #f5f5f5;
+ $gray-dark: darken($gray-light, $darken-dark-factor);
+ $gray-darker: #eee;
+ $gray-darkest: #c4c4c4;
+ 
+ $green-50: #f1fdf6;
+ $green-100: #dcf5e7;
+ $green-200: #b3e6c8;
+ $green-300: #75d09b;
+ $green-400: #37b96d;
+ $green-500: #1aaa55;
+ $green-600: #168f48;
+ $green-700: #12753a;
+ $green-800: #0e5a2d;
+ $green-900: #0a4020;
+ $green-950: #072b15;
+ 
+ $blue-50: #f6fafe;
+ $blue-100: #e4f0fb;
+ $blue-200: #b8d6f4;
+ $blue-300: #73afea;
+ $blue-400: #2e87e0;
+ $blue-500: #1f78d1;
+ $blue-600: #1b69b6;
+ $blue-700: #17599c;
+ $blue-800: #134a81;
+ $blue-900: #0f3b66;
+ $blue-950: #0a2744;
+ $blue-l20: #33AEFF;
+ $blue-l30: #99caff;
+ 
+ $orange-50: #fffaf4;
+ $orange-100: #fff1de;
+ $orange-200: #fed69f;
+ $orange-300: #fdbc60;
+ $orange-400: #fca121;
+ $orange-500: #fc9403;
+ $orange-600: #de7e00;
+ $orange-700: #c26700;
+ $orange-800: #a35200;
+ $orange-900: #853c00;
+ $orange-950: #592800;
+ 
+ $red-50: #fef6f5;
+ $red-100: #fbe5e1;
+ $red-200: #f2b4a9;
+ $red-300: #e67664;
+ $red-400: #e05842;
+ $red-500: #db3b21;
+ $red-600: #c0341d;
+ $red-700: #a62d19;
+ $red-800: #8b2615;
+ $red-900: #711e11;
+ $red-950: #4b140b;
+ 
+ // themes
+ 
+ $indigo-50: #f7f7ff;
+ $indigo-100: #ebebfa;
+ $indigo-200: #d1d1f0;
+ $indigo-300: #a6a6de;
+ $indigo-400: #7c7ccc;
+ $indigo-500: #6666c4;
+ $indigo-600: #5b5bbd;
+ $indigo-700: #4b4ba3;
+ $indigo-800: #393982;
+ $indigo-900: #292961;
+ $indigo-950: #1a1a40;
+ 
+ $theme-gray-50: #fafafa;
+ $theme-gray-100: #f2f2f2;
+ $theme-gray-200: #dfdfdf;
+ $theme-gray-300: #cccccc;
+ $theme-gray-400: #bababa;
+ $theme-gray-500: #a7a7a7;
+ $theme-gray-600: #949494;
+ $theme-gray-700: #707070;
+ $theme-gray-800: #4f4f4f;
+ $theme-gray-900: #2e2e2e;
+ $theme-gray-950: #1f1f1f;
+ 
+ $theme-blue-50: #f4f8fc;
+ $theme-blue-100: #e6edf5;
+ $theme-blue-200: #c8d7e6;
+ $theme-blue-300: #97b3cf;
+ $theme-blue-400: #648cb4;
+ $theme-blue-500: #4a79a8;
+ $theme-blue-600: #3e6fa0;
+ $theme-blue-700: #305c88;
+ $theme-blue-800: #25496e;
+ $theme-blue-900: #1a3652;
+ $theme-blue-950: #0f2235;
+ 
+ $theme-green-50: #f2faf6;
+ $theme-green-100: #e4f3ea;
+ $theme-green-200: #c0dfcd;
+ $theme-green-300: #8ac2a1;
+ $theme-green-400: #52a274;
+ $theme-green-500: #35935c;
+ $theme-green-600: #288a50;
+ $theme-green-700: #1c7441;
+ $theme-green-800: #145d33;
+ $theme-green-900: #0d4524;
+ $theme-green-950: #072d16;
+
+
+// Loader
+$loader-border-top-color: #4E535A;
+$loader-border-color: #CFD7E6;
+$loader-border: 2px;
+$loader-size: 29px;
+
+// Sidebar (dashboard)
+$contextual-sidebar-width: 220px;
+$link-hover-background: rgba(0,0,0,0.04);
