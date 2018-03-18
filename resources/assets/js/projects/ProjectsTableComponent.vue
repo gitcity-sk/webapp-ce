@@ -2,7 +2,7 @@
 <div>
     <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
-    <table v-if="projects.data" class="table">
+    <table v-if="projects.data" class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Project name</th>
