@@ -262,7 +262,7 @@ Route::group(['namespace' => 'Api'], function () {
 // Show all files that are located in storage folder :)
 Route::get('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)');
 
-Route::get('/projects/{project}/spaces/create', 'SpacesController@create');
+Route::get('/projects/{project}/spaces/new', 'SpacesController@create');
 
 // Retrieving file from spaces
 //Route::get('/spaces/{space}/file/{filename?}', 'SpacesController@getFile')->where('filename', '(.*)');
