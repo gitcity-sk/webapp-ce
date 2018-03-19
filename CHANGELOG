@@ -1,3 +1,8 @@
+v 18.3.3
+
+* FIX Space browser now showing last page correct
+* FIX Create space now redirect to correct path
+
 v 18.3.2
 
 * NEW Users can now set your own application name

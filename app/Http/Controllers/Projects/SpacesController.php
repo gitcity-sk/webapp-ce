@@ -35,6 +35,6 @@ class SpacesController extends Controller
 
         if($space) Storage::makeDirectory('spaces/' . $space->slug);
 
-        return redirect('/projects');
+        return redirect()->route('project.spaces', [$project]);
     }
 }

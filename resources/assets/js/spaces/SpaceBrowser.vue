@@ -117,7 +117,8 @@
             },
 
             stop: function() {
-                if (this.page * this.perPage > this.files.data.length) this.perPage = this.files.data.length;
+                // if stop is larger then data length return length - 1
+                if (this.page * this.perPage > this.files.data.length) return this.files.data.length - 1;
                 return this.page * this.perPage
             },
 
@@ -132,7 +133,7 @@
             totalPages: function()
             {
                 if (null !== this.files.data) {
-                    return Math.floor(this.files.data.length / this.perPage);
+                    return Math.ceil(this.files.data.length / this.perPage);
                 }
             },
             
