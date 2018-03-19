@@ -2,7 +2,7 @@
 <tr>
     <td><span class="mr-2"><i class="fas fa-folder"></i></span><a :href="'/' + directoryData.path" style="font-weight: 600" class="text-dark">{{ directoryData.name }}</a></td>
     <td> - </td>
-    <td>
+    <td class="text-right">
         <span v-if="done">{{ directory.data.human_readable_size }}</span>
         <span class="text-secondary" v-else><i class="far fa-spinner-third fa-spin"></i></span>
     </td>
