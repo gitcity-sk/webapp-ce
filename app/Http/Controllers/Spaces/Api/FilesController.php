@@ -8,6 +8,7 @@ use App\Space;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\File;
+use Carbon\Carbon;
 
 class FilesController extends Controller
 {
@@ -32,7 +33,8 @@ class FilesController extends Controller
                     'path' => $file,
                     'url' => Storage::url($file),
                     'name' => $currentFile->getBasename(),
-                    'type' => $currentFile->getExtension(),
+                    'type' => $currentFile->getMimeType(),
+                    'created_at' => Carbon::createFromTimestamp(Storage::lastModified($file)),
                     'size' => size_for_humans(Storage::size($file))
                 ];
             }
