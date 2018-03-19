@@ -6,6 +6,7 @@
         <thead class="bg-light">
             <tr>
                 <th scope="col">Name</th>
+                <th scope="col">Created at</th>
                 <th scope="col">Size</th>
             </tr>
         </thead>
@@ -13,14 +14,17 @@
                 <tr v-if="parentPath">
                     <td class="text-secondary"><a :href="parentPath">..</a></td>
                     <td></td>
+                    <td></td>
                 </tr>
                 <directory-row v-for="directory in directories.data" :directory-data="directory"></directory-row>
                 <tr v-if="doneFiles == false">
                     <td class="text-secondary"><i class="far fa-spinner-third fa-spin"></i> Files are loading...</td>
                     <td></td>
+                    <td></td>
                 </tr>
                 <tr v-for="file in currentPage">
-                    <td><span class="mr-2"><i class="far fa-file"></i></span><a :href="file.url">{{ file.name }}</a></td>
+                    <td><span class="mr-2"><i class="far fa-file"></i></span><a :href="file.url" class="text-dark">{{ file.name }}</a></td>
+                    <td>{{ file.created_at.date | moment }}</td>
                     <td>{{ file.size }}</td>
                 </tr>
             </tbody>

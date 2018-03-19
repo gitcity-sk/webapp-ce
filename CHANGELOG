@@ -2,6 +2,8 @@ v 18.3.3
 
 * FIX Space browser now showing last page correct
 * FIX Create space now redirect to correct path
+* UPDATE Space browser now showing last modified date on files
+* UPDATE Relative date are showing for files newer than 1 month
 
 v 18.3.2
 
