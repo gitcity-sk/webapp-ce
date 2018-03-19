@@ -7,7 +7,7 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Created at</th>
-                <th scope="col">Size</th>
+                <th scope="col" class="text-right">Size</th>
             </tr>
         </thead>
             <tbody>
@@ -25,7 +25,7 @@
                 <tr v-for="file in currentPage">
                     <td><span class="mr-2"><i class="far fa-file"></i></span><a :href="file.url" class="text-dark">{{ file.name }}</a></td>
                     <td>{{ file.created_at.date | moment }}</td>
-                    <td>{{ file.size }}</td>
+                    <td class="text-right">{{ file.size }}</td>
                 </tr>
             </tbody>
         </table>

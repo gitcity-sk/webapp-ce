@@ -6,10 +6,11 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\RolesTrait;
 use App\Services\Workhorse;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use Notifiable, RolesTrait;
+    use Notifiable, RolesTrait, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.

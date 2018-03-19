@@ -13,6 +13,16 @@ use Carbon\Carbon;
 class FilesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['cors', 'throttle:200,1']);
+    }
+
+    /**
      * @param Space $space
      * @param null $path
      * @return array

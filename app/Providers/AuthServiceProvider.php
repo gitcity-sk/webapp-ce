@@ -9,6 +9,7 @@ use App\Project;
 use App\Permission;
 use App\Role;
 use Illuminate\Support\Facades\Schema;
+use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -40,6 +41,8 @@ class AuthServiceProvider extends ServiceProvider
                 });
             }
         }
+
+        Passport::routes();
     }
 
     /**
