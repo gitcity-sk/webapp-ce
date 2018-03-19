@@ -79,7 +79,7 @@ Route::group(['namespace' => 'Projects'], function () {
     Route::get('/projects/{id}/create-on-server', 'ProjectsController@createOnServer');
     Route::get('/projects/{project}/milestones', 'MilestonesController@index')->name('projectMilestones');
     Route::get('/projects/{project}/milestones/new', 'MilestonesController@create');
-    Route::get('/projects/{project}/spaces', 'SpacesController@index');
+    Route::get('/projects/{project}/spaces', 'SpacesController@index')->name('project.spaces');
     
     Route::post('/projects', 'ProjectsController@store');
     Route::post('/projects/{project}/issues', 'IssuesController@store');
