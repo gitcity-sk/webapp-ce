@@ -2,5 +2,5 @@
 
 Application APIs
 
-* [Groups](/docs/apis/Group-Apis.md)
-* [Spaces](/docs/apis/Spaces-Apis.md)
+* [Groups](/docs/apis/Groups-Api.md)
+* [Spaces](/docs/apis/Spaces-Api.md)
