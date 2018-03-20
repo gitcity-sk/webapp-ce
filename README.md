@@ -8,6 +8,12 @@ Open source software development platform with built-in version control, issue t
 
 [![](/resources/images/Discord-Logo-Wordmark-Color-sm.png)](https://discord.gg/hXukBug)
 
+## Docummentation
+
+* [Installation](/docs/installation/from-source.md)
+* [Configuration](/docs/configuration/Index.md)
+* [Api](/docs/apis/Index.md)
+
 ## Requirements
 
 * PHP >= 7.0
