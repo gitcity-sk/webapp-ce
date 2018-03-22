@@ -16,7 +16,7 @@
                     <td></td>
                     <td></td>
                 </tr>
-                <directory-row v-for="directory in directories.data" :directory-data="directory"></directory-row>
+                <directory-row v-if="page == 1" v-for="directory in directories.data" :directory-data="directory"></directory-row>
                 <tr v-if="doneFiles == false">
                     <td class="text-secondary"><i class="far fa-spinner-third fa-spin"></i> Files are loading...</td>
                     <td></td>
@@ -122,7 +122,7 @@
 
             stop: function() {
                 // if stop is larger then data length return length - 1
-                if (this.page * this.perPage > this.files.data.length) return this.files.data.length - 1;
+                if (this.page * this.perPage > this.files.data.length) return this.files.data.length;
                 return this.page * this.perPage
             },
 

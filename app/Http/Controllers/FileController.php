@@ -12,6 +12,10 @@ class FileController extends Controller
      */
     public function getFile($file)
     {
+        if (! request()->hasValidSignature()) {
+            abort(401);
+        }
+        
         return response()->download(storage_path('app/'. $file), null, [], null);
     }
 }
