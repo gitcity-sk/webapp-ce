@@ -14,10 +14,6 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        if (license_check('groups') == false) {
-            abort(403, 'License required');
-        }
-
         return view('groups.index');
     }
 
@@ -26,10 +22,6 @@ class GroupsController extends Controller
      */
     public function create()
     {
-        if (license_check('groups') == false) {
-            abort(403, 'License required');
-        }
-
         return view('groups.create');
     }
 
@@ -39,11 +31,7 @@ class GroupsController extends Controller
      */
     public function show(Group $group)
     {
-        if (license_check('groups') == false) {
-            abort(403, 'License required');
-        }
-
-        return view('groups.show', compact('group'));
+         return view('groups.show', compact('group'));
     }
 
     /**
@@ -51,10 +39,6 @@ class GroupsController extends Controller
      */
     public function store()
     {
-        if (license_check('groups') == false) {
-            abort(403, 'License required');
-        }
-
         $this->validate(request(), [
             'name' => 'required|min:3',
             'description' => 'required'

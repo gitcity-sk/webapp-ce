@@ -68,6 +68,10 @@ class SpacesController extends Controller
      */
     public function temporaryUrlFor($path)
     {
+        if (license_check('temporary_sharing_links') == false) {
+            abort(403, 'License required');
+        }
+
         return [
             'data' => Url::temporarySignedRoute('storage.file', now()->addMinutes(1), ['filename' => $path])
         ];

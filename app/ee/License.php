@@ -22,14 +22,14 @@ class License
      */
     const LICENSE_FEATURES = [
         'Starter' => [
-            'groups',
-            'projects'
+            'private_spaces',
+            'temporary_sharing_links'
         ],
         'Premium' => [
             'epics'
         ],
         'Ultimate' => [
-            'pages'
+            
         ]
     ];
 
@@ -37,10 +37,9 @@ class License
      * Do not merge with other licenses
      */
     const EARLY_ADOPTER = [
-        'groups',
-        'projects',
-        'epics',
-        'pages'
+        'private_spaces',
+        'temporary_sharing_links',
+        'epics'
     ];
 
     /**

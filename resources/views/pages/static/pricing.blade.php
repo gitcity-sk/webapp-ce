@@ -3,6 +3,10 @@
 @section ('layout-main-classes', 'container')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
+@section('javascripts')
+<script src="{{ mix('/js/mix/app.js') }}"></script>
+@endsection
+
 @section('content')
 
 <div class="row">
@@ -54,6 +58,144 @@
         </ul>
         <button type="button" class="btn btn-lg btn-block btn-primary">Contact us</button>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Projects</h4>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <td>Private git repositories</td>
+                <td class="text-right">
+                <span class="badge badge-success">Free</span>
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Git repository browser</td>
+                <td class="text-right">
+                <span class="badge badge-success">Free</span>
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Issues tracker</td>
+                <td class="text-right">
+                <span class="badge badge-success">Free</span>
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Merge requests preview</td>
+                <td class="text-right">
+                <span class="badge badge-success">Free</span>
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Spaces</h4>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <td>Public Spaces</td>
+                <td class="text-right">
+                <span class="badge badge-success">Free</span>
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Web space browser</td>
+                <td class="text-right">
+                    <span class="badge badge-success">Free</span>
+                    <span class="badge badge-primary">Starter</span>
+                    <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Secure files links</td>
+                <td class="text-right">
+                <span class="badge badge-success">Free</span>
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Filtering files by extension</td>
+                <td class="text-right">
+                <span class="badge badge-success">Free</span>
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Private Spaces</td>
+                <td class="text-right">
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Temporary files links for sharing</td>
+                <td class="text-right">
+                    <span class="badge badge-primary">Starter</span>
+                    <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Groups</h4>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <td>Public groups with projects</td>
+                <td class="text-right">
+                <span class="badge badge-success">Free</span>
+                <span class="badge badge-primary">Starter</span>
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Epics</td>
+                <td class="text-right">
+                <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Pages</h4>
+        </div>
+        <table class="table table-hover">
+            <tr>
+                <td>Create pages</td>
+                <td class="text-right">
+                    <span class="badge badge-success">Free</span>
+                    <span class="badge badge-primary">Starter</span>
+                    <span class="badge badge-dark">Premium</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
     </div>
 </div>
 

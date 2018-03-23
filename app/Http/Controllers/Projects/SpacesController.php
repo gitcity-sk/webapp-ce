@@ -25,7 +25,8 @@ class SpacesController extends Controller
      */
     public function store(Project $project)
     {
-        // dd(config('webapp.spaces.path'));
+        if (license_check('private_spaces') == false && request('private') == true) abort(403, 'License required');
+
         $spaceName = request('name');
         $space =  $project->spaces()->save(new Space([
             'name' => $spaceName,
