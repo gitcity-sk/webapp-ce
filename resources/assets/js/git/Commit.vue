@@ -1,19 +1,21 @@
 <template>
 
-<tr>
+<tr :class="'tree-item-' + treeItem.sha">
     <td style="max-width: 320px">
         <span class="mr-2">
             <i v-if="treeItem.type === 'tree'" class="fas fa-folder"></i>
             <i v-else class="far fa-file"></i>
         </span>
-        <span v-if="treeItem.type === 'tree'"><a :href="'/projects/' + projectId + '/files' + nextPath(treeItem.path, treeItem.name)">{{ treeItem.name }}</a></span>
+        <span v-if="treeItem.type === 'tree'"><a :href="'/projects/' + projectId + '/files' + nextPath(treeItem.path, treeItem.name)" class="text-dark">{{ treeItem.name }}</a></span>
         <span v-else>{{ treeItem.name }}</span>
     </td>
-    <td class="has-emoji" style="max-width: 320px">
-        <span v-if="done"><strong>{{ commit.data.author.name }}</strong> {{ commit.data.message }}</span>
+    <td :class="'has-emoji'" style="max-width: 320px">
+        <span v-if="done" :class="'commit-' + commit.data.hash">
+            <span v-tooltip:top="commit.data.author.name">{{ commit.data.message }}</span>
+        </span>
     </td>
-    <td class="has-emoji">
-        <span v-if="done">{{ commit.data.created_at.date | moment }}</span>
+    <td class="has-emoji text-right">
+        <span v-if="done" v-tooltip:top="commit.data.created_at.date">{{ commit.data.created_at.date | moment }}</span>
     </td>
 </tr>
 
