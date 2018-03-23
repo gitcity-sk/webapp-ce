@@ -1,3 +1,9 @@
+v 18.3.5
+
+* ADD Envoy script
+* ADD Api to create temporary signed urls
+* UPDATE Link color for git folders
+
 v 18.3.4
 
 * NEW Now to get file from storage you need signature

@@ -75,6 +75,7 @@ Route::group(['namespace' => 'Spaces\Api'], function () {
     Route::get('/spaces/{space}/size', 'SpacesController@getSize');
     Route::get('/spaces/{space}/files/{path?}', 'FilesController@index')->where('path', '(.*)');
     Route::get('/spaces/{space}/directories/{path?}', 'DirectoriesController@index')->where('path', '(.*)');
+    Route::get('/spaces/temp-url/{path?}', 'SpacesController@temporaryUrlFor')->where('path', '(.*)');
 });
 
 /**
