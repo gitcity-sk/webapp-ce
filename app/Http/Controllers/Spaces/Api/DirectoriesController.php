@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\Storage;
 class DirectoriesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['cors', 'throttle:60,1']);
+    }
+    
+    /**
      * @param Space $space
      * @param null $path
      * @return array

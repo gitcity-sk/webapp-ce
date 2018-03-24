@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
     <link href="/css/blog.css" rel="stylesheet">
 </head>
@@ -86,7 +87,7 @@
     </div>-->
 
 
-    <main role="main" class="container">
+    <main role="main" class="container" id="app" v-cloak>
       <div class="row">
         <div class="col-md-8 blog-main">
           @yield('content')
@@ -130,6 +131,9 @@
 
     </main>
 
-
+    <script src="{{ mix('/js/mix/manifest.js') }}"></script>
+    <script src="{{ mix('/js/mix/vendor.js') }}"></script>
+    <script src="{{ mix('/js/mix/pages.assets.bundle.js') }}"></script>
+    @yield ('javascripts')
 </body>
 </html>

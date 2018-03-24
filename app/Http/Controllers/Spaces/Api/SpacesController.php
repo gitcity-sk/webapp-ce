@@ -8,6 +8,7 @@ use App\Space;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\File;
+use \Illuminate\Support\Facades\Url;
 
 class SpacesController extends Controller
 {
@@ -59,6 +60,21 @@ class SpacesController extends Controller
         });
 
         return $size;
+    }
+
+    /**
+     * @param $path
+     * @return mixed
+     */
+    public function temporaryUrlFor($path)
+    {
+        if (license_check('temporary_sharing_links') == false) {
+            abort(403, 'License required');
+        }
+
+        return [
+            'data' => Url::temporarySignedRoute('storage.file', now()->addMinutes(1), ['filename' => $path])
+        ];
     }
 
 }

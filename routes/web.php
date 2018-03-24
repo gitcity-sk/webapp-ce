@@ -187,7 +187,7 @@ Route::get('/settings/authorized-keys/{authorizedKey}/delete', 'AuthorizedKeysCo
 
 // Retrieving file from storage
 // Show all files that are located in storage folder :)
-Route::get('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)');
+Route::get('/storage/{filename?}', 'FileController@getFile')->where('filename', '(.*)')->name('storage.file');
 
 Route::get('/projects/{project}/spaces/new', 'SpacesController@create');
 

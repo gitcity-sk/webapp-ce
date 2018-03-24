@@ -35,27 +35,32 @@
 
 <div class="row" style="margin-bottom: 3rem">
     <div class="col-12">
+
         <div class="row justify-content-md-center mb-3">
-            <div class="col-6">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body py-1 px-1">
+                    <ul class="nav nav-fill">
+                        <li class="nav-item">
+                            <a class="nav-link active text-secondary" href="#">Created <span class="badge badge-pill badge-secondary">{{ $project->created_at->diffForHumans() }}</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="/projects/{{ $project->id }}/issues">Issues <span class="badge badge-pill badge-secondary">{{ $project->issues->count() }}</span></a>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-md-end mb-3">
+            <div class="col-4">
                 <div class="input-group input-group-sm">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon3">ssh:</span>
                     </div>
                     <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="ssh://git{{ '@' }}{{ config('webapp.url') }}:{{ config('webapp.ssh_port') }}/~/{{ $project->user->name }}/{{ $project->slug }}.git">
                 </div>
-            </div>
-        </div>
-
-        <div class="row justify-content-md-center mb-3 border-bottom">
-            <div class="col-12">
-                <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                        <a class="nav-link active text-secondary" href="#">Created <span class="badge badge-pill badge-secondary">{{ $project->created_at->diffForHumans() }}</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-secondary" href="/projects/{{ $project->id }}/issues">Issues <span class="badge badge-pill badge-secondary">{{ $project->issues->count() }}</span></a>
-                    </li>
-                </ul>
             </div>
         </div>
 

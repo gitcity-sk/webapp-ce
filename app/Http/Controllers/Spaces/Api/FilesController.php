@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\File;
 use Carbon\Carbon;
+use \Illuminate\Support\Facades\Url;
 
 class FilesController extends Controller
 {
@@ -19,7 +20,7 @@ class FilesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['cors', 'throttle:200,1']);
+        $this->middleware(['cors', 'throttle:60,1']);
     }
 
     /**
@@ -41,9 +42,10 @@ class FilesController extends Controller
                 $currentFile = new File(storage_path('app/'.$file));
                 $files[] = [
                     'path' => $file,
-                    'url' => Storage::url($file),
+                    'url' => Url::signedRoute('storage.file', ['filename' => $file]),
                     'name' => $currentFile->getBasename(),
                     'type' => $currentFile->getMimeType(),
+                    'extension' => $currentFile->getExtension(),
                     'created_at' => Carbon::createFromTimestamp(Storage::lastModified($file)),
                     'size' => size_for_humans(Storage::size($file))
                 ];
@@ -53,6 +55,23 @@ class FilesController extends Controller
 
         });
 
+        if (request()->has('type')) $filesData = $this->_filter($filesData, request('type'));
+
         return ['data' => $filesData];
+    }
+
+    /**
+     * @param null $filesData
+     * @param null $type
+     * @return array
+     */
+    protected function _filter($filesData, $type)
+    {
+        foreach ($filesData as $key => $file)
+        {
+            if ($file['extension'] != $type) unset($filesData[$key]);
+        }
+
+        return $filesData;
     }
 }

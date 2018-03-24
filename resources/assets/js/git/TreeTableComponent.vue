@@ -15,7 +15,7 @@
                     <tr>
                         <th>File</th>
                         <th>Last Commit</th>
-                        <th>Updated</th>
+                        <th class="text-right">Updated</th>
                     </tr>
                 </thead>
                 <tbody>

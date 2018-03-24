@@ -29,6 +29,18 @@
                 </div>
             </div>
         </div>
+
+        @if(license_check('private_spaces'))
+        <div class="row mb-2">
+            <div class="col-6">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="private"  name="private">
+                    <label class="form-check-label" for="private">Private</label>
+                </div>
+            </div>
+        </div>
+        @endif()
+
         <div class="form-group row">
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Create space</button>

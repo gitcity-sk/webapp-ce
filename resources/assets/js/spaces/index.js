@@ -22,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('project-spaces-table-component', require('./ProjectSpacesTable.vue'));
 Vue.component('space-browser', require('./SpaceBrowser.vue'));
+Vue.component('images-browser', require('./ImageBrowser.vue'));
 
 // Vue.component('issue-mde', require('./NewIssueForm.vue'));
 
