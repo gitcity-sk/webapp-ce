@@ -26,6 +26,9 @@ class IssuesController extends Controller
      */
     public function show(Issue $issue)
     {
-        return view('issues.show', compact('issue'));
+        // substitution because is using sidebar for projects
+        $project = $issue->project;
+
+        return view('issues.show', compact('issue', 'project'));
     }
 }

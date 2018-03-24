@@ -27,6 +27,14 @@ Route::group(['namespace' => 'Groups\Api'], function () {
 });
 
 /**
+ * Labels API
+ */
+
+Route::group(['namespace' => 'Labels\Api'], function () {
+    Route::get('/labels', 'LabelsController@index');
+});
+
+/**
  * Milestones API
  */
 
