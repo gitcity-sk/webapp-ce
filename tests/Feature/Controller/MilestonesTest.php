@@ -11,7 +11,7 @@ use App\User;
 use App\Profile;
 use App\Project;
 
-class MilestonesControllerTest extends TestCase
+class MilestonesTest extends TestCase
 {
     use DatabaseMigrations;
 
