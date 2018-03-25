@@ -62,6 +62,7 @@ class SpacesTest extends TestCase
     {
         $spaceName = 'My Space';
 
+        $this->startSession();
         $response = $this->actingAs($this->user)->post('/projects/' . $this->project->id . '/spaces', [
             'name' =>  $spaceName
         ]);
@@ -73,6 +74,7 @@ class SpacesTest extends TestCase
     {
         $spaceName = 'My Private Space';
 
+        $this->startSession();
         $response = $this->actingAs($this->user)->post('/projects/' . $this->project->id . '/spaces', [
             'name' =>  $spaceName,
             'private' => true

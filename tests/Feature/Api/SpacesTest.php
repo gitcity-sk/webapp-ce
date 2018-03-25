@@ -27,6 +27,7 @@ class SpacesTest extends TestCase
 
         $this->spaceName = 'My Space ' . time();
 
+        $this->startSession();
         $this->actingAs($this->user)->post('/projects/' . $this->project->id . '/spaces', [
             'name' =>  $this->spaceName
         ]);
