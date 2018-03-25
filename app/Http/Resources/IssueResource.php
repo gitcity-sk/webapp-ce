@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
+use App\Http\Resources\Label\LabelResource;
 
 class IssueResource extends Resource
 {
@@ -23,7 +24,8 @@ class IssueResource extends Resource
             'comments' => CommentResource::collection($this->comments),
             'comments_count' => $this->comments->count(),
             'profile' => $this->user->profile,
-            'project' => $this->project
+            'project' => $this->project,
+            'labels' => LabelResource::collection($this->labels)
           ];
     }
 }

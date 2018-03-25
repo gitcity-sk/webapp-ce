@@ -44,22 +44,7 @@
         </div>
     </div>
 
-    <div class="mb-3 border-bottom">
-        <div class="d-flex flex-row">
-            <div><p class="h6">Labels</p></div>
-            <div class="ml-auto"><labels-dropdown></labels-dropdown></div>
-        </div>
-        <div class="mb-1">
-            <span class="badge badge-primary">Primary</span>
-            <span class="badge badge-secondary">Secondary</span>
-            <span class="badge badge-success">Success</span>
-            <span class="badge badge-danger">Danger</span>
-            <span class="badge badge-warning">Warning</span>
-            <span class="badge badge-info">Info</span>
-            <span class="badge badge-light">Light</span>
-            <span class="badge badge-dark">Dark</span>
-        </div>
-    </div>
+    <labels-viewer issue-id="{{ $issue->id }}"></labels-viewer>
 
     <div class="mb-3 border-bottom">
         <div class="d-flex flex-row">

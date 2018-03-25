@@ -22,7 +22,7 @@
             closeItem: function() {
                 console.log(this.url)
 
-                axios.put('/issues/reopen', {
+                axios.put('/api/issues/reopen', {
                     id: this.issueId
                 })
                 .then(response => {

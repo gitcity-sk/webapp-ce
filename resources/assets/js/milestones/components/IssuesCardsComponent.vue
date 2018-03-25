@@ -18,6 +18,7 @@
                             <div>
                                 <a :href="'/issues/' + issue.id" style="font-weight: 600" class="text-dark">{{ issue.title }}</a>
                                 <div><small>#{{ issue.id }} opened by {{ issue.profile.name }} {{ issue.created_at.date | moment }}</small></div>
+                                <span v-for="label in issue.labels" :class="'badge ' + label.color + ' mr-1'">{{ label.text }}</span>
                             </div>
                             <div class="ml-auto text-right">
                                 <span v-tooltip:top="issue.project.name" class="mr-2"><i class="far fa-bookmark"></i></span>

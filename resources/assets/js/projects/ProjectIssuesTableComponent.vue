@@ -2,7 +2,7 @@
 <div>
     <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Issue</th>
@@ -17,7 +17,10 @@
                         </div>
                         <div>
                             <a :href="'/issues/' + issue.id" style="font-weight: 600" class="text-dark">{{ issue.title }}</a>
-                            <div><small>#{{ issue.id }} opened by {{ issue.profile.name }} {{ issue.created_at.date | moment }}</small></div>
+                            <div>
+                                <small class="mr-2">#{{ issue.id }} opened by {{ issue.profile.name }} {{ issue.created_at.date | moment }}</small>
+                                <span v-for="label in issue.labels" :class="'badge ' + label.color + ' mr-1'">{{ label.text }}</span>
+                            </div>
                         </div>
                         <div class="ml-auto text-right">
                             <span v-tooltip:top="issue.project.name" class="mr-2"><i class="far fa-bookmark"></i></span>

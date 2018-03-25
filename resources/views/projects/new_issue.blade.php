@@ -68,8 +68,6 @@
                                     </select>
                                 </div>
                             </div>
-                            
-                            <labels-list-select></labels-list-select>
 
                             <div class="form-group row">
                                 <div class="col-12">

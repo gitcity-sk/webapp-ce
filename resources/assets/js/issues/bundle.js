@@ -22,7 +22,7 @@ Vue.component('close-button', require('./CloseButton.vue'));
 Vue.component('reopen-button', require('./ReopenButton.vue'));
 Vue.component('markdown-ed', require('../vue/shared-components/MarkdownEd.vue'));
 Vue.component('labels-list-select', require('../labels/LabelSelect.vue'));
-Vue.component('labels-dropdown', require('../labels/LabelDropdown.vue'));
+Vue.component('labels-viewer', require('./LabelsViewer.vue'));
 
 const app = new Vue({
     el: '#app',
