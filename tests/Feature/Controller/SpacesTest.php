@@ -62,9 +62,9 @@ class SpacesTest extends TestCase
     {
         $spaceName = 'My Space';
 
-        $this->startSession();
-        $response = $this->actingAs($this->user)->post('/projects/' . $this->project->id . '/spaces', [
-            'name' =>  $spaceName
+        $response = $this->actingAs($this->user)->withSession(['_token' => 'test'])->post('/projects/' . $this->project->id . '/spaces', [
+            'name' =>  $spaceName,
+            '_token' => 'test'
         ]);
         $response->assertRedirect('/projects/' . $this->project->id . '/spaces');
     }
@@ -74,10 +74,10 @@ class SpacesTest extends TestCase
     {
         $spaceName = 'My Private Space';
 
-        $this->startSession();
-        $response = $this->actingAs($this->user)->post('/projects/' . $this->project->id . '/spaces', [
+        $response = $this->actingAs($this->user)->withSession(['_token' => 'test'])->post('/projects/' . $this->project->id . '/spaces', [
             'name' =>  $spaceName,
-            'private' => true
+            'private' => true,
+            '_token' => 'test'
         ]);
         $response->assertStatus(403);
         $response->assertSee('License required');
@@ -92,9 +92,10 @@ class SpacesTest extends TestCase
 
         $spaceName = 'My Private Space';
 
-        $response = $this->actingAs($this->user)->post('/projects/' . $this->project->id . '/spaces', [
+        $response = $this->actingAs($this->user)->withSession(['_token' => 'test'])->post('/projects/' . $this->project->id . '/spaces', [
             'name' =>  $spaceName,
-            'private' => true
+            'private' => true,
+            '_token' => 'test'
         ]);
         $response->assertRedirect('/projects/' . $this->project->id . '/spaces');
     }

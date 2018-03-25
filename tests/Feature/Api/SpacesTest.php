@@ -27,9 +27,9 @@ class SpacesTest extends TestCase
 
         $this->spaceName = 'My Space ' . time();
 
-        $this->startSession();
-        $this->actingAs($this->user)->post('/projects/' . $this->project->id . '/spaces', [
-            'name' =>  $this->spaceName
+        $this->actingAs($this->user)->withSession(['_token' => 'test'])->post('/projects/' . $this->project->id . '/spaces', [
+            'name' =>  $this->spaceName,
+            '_token' => 'test'
         ]);
     }
 
