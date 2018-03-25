@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Storage;
 class SpacesController extends Controller
 {
     /**
+     * ProjectsController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * @param Project $project
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
