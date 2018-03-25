@@ -14,7 +14,7 @@ if [ "$1" == "dev" ]; then
 echo "----> Setting up testing environment"
 echo "----> copying .env.testing.$2 to .env"
 echo "----> Running composer install"
-composer install --no-ansi --no-interaction --no-progress --no-scripts
+composer install --no-ansi --no-interaction --no-progress #--no-scripts
 echo "----> Done"
 fi
 

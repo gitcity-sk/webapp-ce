@@ -17,6 +17,7 @@ stages:
 .default-cache: &default-cache
     paths:
         - vendor/
+        - storage/
 
 .push-cache: &push-cache
     cache:
