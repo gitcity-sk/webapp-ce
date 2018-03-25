@@ -11,6 +11,19 @@
 |
 */
 
+/**
+ * Standards
+ * -------------------------------------------------
+ * Method - action name /path controller.action
+ * GET - INDEX /photo photo.index
+ * GET - CREATE /photo/create photo.create
+ * POST - STORE /photo photo.store
+ * GET - SHOW /photo/{photo} photo.show
+ * GET - EDIT /photo/{photo}/edit photo.edit
+ * PUT/PATCH - UPDATE /photo/{photo} photo.update
+ * DELETE - DESTROY /photo/{photo} photo.destroy
+ */
+
 use App\Project;
 
 Auth::routes();

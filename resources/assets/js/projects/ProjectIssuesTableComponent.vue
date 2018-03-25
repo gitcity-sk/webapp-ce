@@ -2,7 +2,7 @@
 <div>
     <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
-    <table class="table">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Issue</th>
@@ -13,11 +13,17 @@
                 <td>
                     <div class="d-flex align-items-center">
                         <div class="mr-2">
-                            <span class="mr-2"><i class="far fa-circle"></i></span>
+                            <span class="mr-2">
+                                <i v-if="issue.complete == false" class="far fa-circle"></i>
+                                <i v-else class="far fa-check-circle"></i>
+                            </span>
                         </div>
                         <div>
                             <a :href="'/issues/' + issue.id" style="font-weight: 600" class="text-dark">{{ issue.title }}</a>
-                            <div><small>#{{ issue.id }} opened by {{ issue.profile.name }} {{ issue.created_at.date | moment }}</small></div>
+                            <div>
+                                <small class="mr-2">#{{ issue.id }} opened by {{ issue.profile.name }} {{ issue.created_at.date | moment }}</small>
+                                <span v-for="label in issue.labels" :class="'badge ' + label.color + ' mr-1'">{{ label.text }}</span>
+                            </div>
                         </div>
                         <div class="ml-auto text-right">
                             <span v-tooltip:top="issue.project.name" class="mr-2"><i class="far fa-bookmark"></i></span>

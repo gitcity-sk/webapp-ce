@@ -13,6 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
+/**
+ * Standards
+ * -------------------------------------------------
+ * Method - action name /path controller.action
+ * GET - INDEX /photo photo.index
+ * GET - CREATE /photo/create photo.create
+ * POST - STORE /photo photo.store
+ * GET - SHOW /photo/{photo} photo.show
+ * GET - EDIT /photo/{photo}/edit photo.edit
+ * PUT/PATCH - UPDATE /photo/{photo} photo.update
+ * DELETE - DESTROY /photo/{photo} photo.destroy
+ */
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -24,6 +37,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'Groups\Api'], function () {
     Route::get('/groups', 'GroupsController@index');
     Route::get('/groups/{group}/projects', 'ProjectsController@index');
+});
+
+/**
+ * Labels API
+ */
+
+Route::group(['namespace' => 'Labels\Api'], function () {
+    Route::get('/labels', 'LabelsController@index');
 });
 
 /**
@@ -53,9 +74,18 @@ Route::group(['namespace' => 'Projects\Api'], function () {
  * Issues API
  */
 Route::group(['namespace' => 'Issues\Api'], function () {
-    // PUT
+    // GET
+    Route::get('/issues/{issue}/labels', 'LabelsController@index');
+
+    // POST -> CREATE
+    Route::post('/issues/{issue}/labels/{id}', 'LabelsController@store');
+
+    // PUT -> UPDATE
     Route::put('/issues/close', 'IssuesController@close');
     Route::put('/issues/reopen', 'IssuesController@reopen');
+
+    // DELETE
+    Route::delete('/issues/{issue}/labels/{id}', 'LabelsController@destroy');
 });
 
 /**

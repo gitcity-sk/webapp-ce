@@ -44,12 +44,38 @@ class Issue extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function labels()
+    {
+        return $this->belongsToMany(Label::class)->withTimestamps();
+    }
+
+    /**
      * @param Comment $comment
      * @return Model
      */
     public function addComment(Comment $comment)
     {
         return $this->comments()->save($comment);
+    }
+
+    /**
+     * @param Label $label
+     * @return Model
+     */
+    public function addLabel($labelId)
+    {
+        return $this->labels()->attach($labelId);
+    }
+
+    /**
+     * @param Label $label
+     * @return Model
+     */
+    public function removeLabel($labelId)
+    {
+        return $this->labels()->attach($labelId);
     }
 
     /**

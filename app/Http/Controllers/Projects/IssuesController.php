@@ -52,6 +52,7 @@ class IssuesController extends Controller
      */
     public function store(CreateProjectIssueRequest $request, Project $project)
     {
+        //dd(request());
         Issue::create([
             'title' => request('title'),
             'description' => request('description'),

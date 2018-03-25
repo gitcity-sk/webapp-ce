@@ -4,7 +4,7 @@
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @section('javascripts')
-<script src="{{ mix('/js/mix/projects.bundle.js') }}"></script>
+<script src="{{ mix('/js/mix/issues.bundle.js') }}"></script>
 @endsection
 
 @section ('content')

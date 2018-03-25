@@ -1,13 +1,64 @@
-@extends ('layouts.master')
+@extends ('layouts.master-with-both-sidebars')
 
-@section ('layout-main-classes', 'container')
+@section ('layout-main-classes', 'container limit-container-width')
 @section ('layout-body-classes', 'mt-5 pt-3 mb-3')
 
 @inject('markdown', 'Parsedown')
 
+@section ('sidebar-content')
+<div class="context-header">
+<a href="#">
+    <div class="avatar-container" style="min-height: 50px">
+    </div>
+    <div class="sidebar-context-title">
+        {{ $project->name }}
+    </div>
+</a>
+</div>
+@include('projects.elements.sidebar')
+@endsection
+
 @section('javascripts')
 <script src="{{ mix('/js/mix/issues.bundle.js') }}"></script>
 @endsection
+
+@section('right-sidebar-content')
+<div class="p-4">
+    <div class="mb-3 border-bottom">
+        <div class="d-flex flex-row">
+            <div><p class="h6">Project</p></div>
+        </div>
+        <div class="mb-1">
+            <a href="/projects/{{ $issue->project->id }}/issues">{{ $issue->project->name }}</a>
+        </div>
+    </div>
+
+    <div class="mb-3 border-bottom">
+        <div class="d-flex flex-row">
+            <div><p class="h6" style="font-weight: 400">Milestone</p></div>
+        </div>
+        <div class="mb-1">
+            @if (null !== $issue->milestone)
+                {{ $issue->milestone->title }}
+            @endif
+        </div>
+    </div>
+
+    <labels-viewer issue-id="{{ $issue->id }}"></labels-viewer>
+
+    <div class="mb-3 border-bottom">
+        <div class="d-flex flex-row">
+            <div><p class="h6">User</p></div>
+        </div>
+        <div class="mb-1">
+            <a href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a>
+        </div>
+    </div>
+
+    <a href="/projects/{{ $issue->project->id }}/issues" class="btn btn-block btn-light mt-3">Show all issues</a>
+</div>
+@endsection
+
 
 @section ('content')
 <h1 class="h2" style="font-weight: 300">
@@ -15,7 +66,7 @@
 </h1>
 
 <div class="row">
-    <div class="col-9">
+    <div class="col-12">
     @if (false == $issue->complete)
     <span class="badge badge-success font-weight-normal px-2 py-2 mr-1" style="font-size: 1em">Open</span>
     @else
@@ -48,26 +99,10 @@
 
     </div>
 
-    <div class="col-3">
-        <div class="card">
-            <div class="card-body">
-                <p class="h6">Project</p>
-                <a href="/projects/{{ $issue->project->id }}/issues">{{ $issue->project->name }}</a>
-                @if (null !== $issue->milestone)
-                    <p class="h6">Milestone</p>
-                    {{ $issue->milestone->title }}
-                @endif
-                <p class="h6">User</p>
-                <a href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a>
-                <p class="h6">Created</p>
-                {{ $issue->created_at->diffForHumans() }}
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="row">
-    <div class="col-9">
+    <div class="col-12">
 
         @if ($issue->complete == false)
             <form action="/issues/{{ $issue->id }}/comments" method="post">
