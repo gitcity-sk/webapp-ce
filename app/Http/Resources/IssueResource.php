@@ -25,7 +25,8 @@ class IssueResource extends Resource
             'comments_count' => $this->comments->count(),
             'profile' => $this->user->profile,
             'project' => $this->project,
-            'labels' => LabelResource::collection($this->labels)
+            'labels' => LabelResource::collection($this->labels),
+            'complete' => $this->complete
           ];
     }
 }

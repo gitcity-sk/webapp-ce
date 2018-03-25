@@ -9,9 +9,11 @@
             <div class="form-group p-3 mb-2">
                 <input type="email" class="form-control form-control-sm" id="exampleDropdownFormEmail1" placeholder="search">
             </div>
-            <a v-for="label in labels.data" class="dropdown-item border-top" href="#" @click.prevent="attachLabel(label.id)">
-                <span :class="'badge ' + label.color + ' mr-2'"><i class="far fa-tag"></i></span> {{ label.text }}
-            </a>
+            <div class="badges-dropdown-list">
+                <a v-for="label in labels.data" class="dropdown-item border-top" href="#" @click.prevent="attachLabel(label.id)">
+                    <span :class="'badge ' + label.color + ' mr-2'"><i class="far fa-tag"></i></span> {{ label.text }}
+                </a>
+            </div>
             <div class="dropdown-divider"></div>
         </div>
     </div>

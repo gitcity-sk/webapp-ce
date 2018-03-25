@@ -13,7 +13,10 @@
                 <td>
                     <div class="d-flex align-items-center">
                         <div class="mr-2">
-                            <span class="mr-2"><i class="far fa-circle"></i></span>
+                            <span class="mr-2">
+                                <i v-if="issue.complete == false" class="far fa-circle"></i>
+                                <i v-else class="far fa-check-circle"></i>
+                            </span>
                         </div>
                         <div>
                             <a :href="'/issues/' + issue.id" style="font-weight: 600" class="text-dark">{{ issue.title }}</a>
