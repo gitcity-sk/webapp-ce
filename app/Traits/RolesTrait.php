@@ -34,7 +34,7 @@ trait RolesTrait
         if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
-
+        
         return !! $role->intersect($this->roles)->count();
     }
 }

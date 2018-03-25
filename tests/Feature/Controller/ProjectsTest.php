@@ -69,14 +69,7 @@ class ProjectsTest extends TestCase
     /** @test */
     public function users_can_see_project_commits()
     {
-        $role = factory(Role::class)->create(['name' => 'administrator']);
-        $showPerm = factory(Permission::class)->create(['name' => 'show-project']);
-        $delPerm = factory(Permission::class)->create(['name' => 'delete-project']);
-        $role->givePermissionTo($showPerm);
-        //$role->givePermissionTo($delPerm);
-        $this->user->assignRole($role->name);
-
-        //$this->assertTrue($this->user->can('show-project'));
+        $this->user->assignRole('administrator');
 
         $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])

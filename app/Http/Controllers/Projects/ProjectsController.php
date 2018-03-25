@@ -49,7 +49,7 @@ class ProjectsController extends Controller
             return view('projects.show', compact('project', 'path'));
         }
 
-        abort(403);
+        abort(403, 'Not enough permission');
     }
 
     /**
