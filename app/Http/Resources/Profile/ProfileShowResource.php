@@ -4,7 +4,7 @@ namespace App\Http\Resources\Profile;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\User\UserResource;
-use \Illuminate\Support\Facades\Url;
+use Illuminate\Support\Facades\Url;
 
 class ProfileShowResource extends JsonResource
 {

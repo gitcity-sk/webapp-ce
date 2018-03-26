@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Profile;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use \Illuminate\Support\Facades\Url;
+use Illuminate\Support\Facades\Url;
 
 class ProfileResource extends JsonResource
 {
