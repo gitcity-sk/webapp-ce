@@ -12,6 +12,7 @@ use App\Issue;
 use App\Profile;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Milestone;
+use App\MergeRequest;
 
 class ProjectsControllerTest extends TestCase
 {
@@ -61,5 +62,14 @@ class ProjectsControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($milestone->title);
         $response->assertSee($milestone->description);
+    }
+
+    /** @test */
+    public function api_can_get_merge_requests()
+    {
+        $mr = factory(MergeRequest::class)->create(['user_id' => $this->user->id, 'project_id' => $this->project->id]);
+        $response = $this->actingAs($this->user)->get('/api/projects/' . $this->project->id . '/merge-requests');
+        $response->assertStatus(200);
+        $response->assertSee($mr->title);
     }
 }

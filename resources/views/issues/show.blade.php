@@ -25,19 +25,21 @@
 @section('right-sidebar-content')
 <div class="p-4">
     <div class="mb-3 border-bottom">
-        <div class="d-flex flex-row">
-            <div><p class="h6">Project</p></div>
+        <div class="d-flex flex-row mb-1">
+            <div>
+                <span>Project</span>
+            </div>
         </div>
-        <div class="mb-1">
+        <div class="mb-3">
             <a href="/projects/{{ $issue->project->id }}/issues">{{ $issue->project->name }}</a>
         </div>
     </div>
 
     <div class="mb-3 border-bottom">
-        <div class="d-flex flex-row">
-            <div><p class="h6" style="font-weight: 400">Milestone</p></div>
+        <div class="d-flex flex-row mb-1">
+            <div><span>Milestone</span></div>
         </div>
-        <div class="mb-1">
+        <div class="mb-3">
             @if (null !== $issue->milestone)
                 {{ $issue->milestone->title }}
             @endif
@@ -47,10 +49,10 @@
     <labels-viewer issue-id="{{ $issue->id }}"></labels-viewer>
 
     <div class="mb-3 border-bottom">
-        <div class="d-flex flex-row">
-            <div><p class="h6">User</p></div>
+        <div class="d-flex flex-row mb-1">
+            <div><span>User</span></div>
         </div>
-        <div class="mb-1">
+        <div class="mb-3">
             <a href="/profiles/{{ $issue->user->profile->id }}">{{ $issue->user->profile->name }}</a>
         </div>
     </div>

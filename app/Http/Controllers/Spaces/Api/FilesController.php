@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\File;
 use Carbon\Carbon;
-use \Illuminate\Support\Facades\Url;
+use Illuminate\Support\Facades\Url;
 
 class FilesController extends Controller
 {

@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Projects\Api;
 use App\Project;
 use App\Repositories\Projects;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProjectResource;
 use App\Http\Resources\IssueResource;
+use App\Http\Resources\Project\ProjectIndexResource;
 
 class ProjectsController extends Controller
 {
@@ -29,7 +29,7 @@ class ProjectsController extends Controller
     {
         $projects = $this->projects->orderBy('created_at', 'desc');
 
-        return ProjectResource::collection($projects);
+        return ProjectIndexResource::collection($projects);
     }
 
     /**

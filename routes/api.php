@@ -109,6 +109,15 @@ Route::group(['namespace' => 'Spaces\Api'], function () {
 });
 
 /**
+ * Profiles
+ */
+Route::group(['namespace' => 'Profiles\Api'], function () {
+    // GET
+    Route::get('/profiles', 'ProfilesController@index');
+    Route::get('/profiles/{profile}', 'ProfilesController@show');
+});
+
+/**
  * Other Api
  */
 
@@ -118,8 +127,6 @@ Route::group(['namespace' => 'Api'], function () {
 
     Route::get('/issues', 'IssuesController@index');
     Route::get('/issues/{issue}', 'IssuesController@show');
-
-    Route::get('/profiles', 'ProfilesController@index');
 
     Route::get('/projects/{project}/tree/{path?}', 'TreeController@files')->where('path', '(.*)');
     Route::get('/projects/{project}/commits', 'CommitsController@index');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Groups\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Group;
-use App\Http\Resources\ProjectResource;
+use App\Http\Resources\Project\ProjectIndexResource;
 
 class ProjectsController extends Controller
 {
@@ -15,6 +15,6 @@ class ProjectsController extends Controller
      */
     public function index(Group $group)
     {
-        return ProjectResource::collection($group->projects);
+        return ProjectIndexResource::collection($group->projects);
     }
 }

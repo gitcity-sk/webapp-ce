@@ -69,6 +69,8 @@ class ProjectsTest extends TestCase
     /** @test */
     public function users_can_see_project_commits()
     {
+        $this->user->assignRole('administrator');
+
         $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
             ->get('/projects/' . $this->project->id . '/commits');
@@ -115,6 +117,15 @@ class ProjectsTest extends TestCase
     public function users_can_see_project_crete_form()
     {
         $response = $this->actingAs($this->user)->get('/projects/create');
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function users_can_view_issue_create_page()
+    {
+        $response = $this->actingAs($this->user)
+            ->withSession(['asd' => 'dsa'])
+            ->get('/projects/' . $this->project->id . '/issues/new');
         $response->assertStatus(200);
     }
 }
