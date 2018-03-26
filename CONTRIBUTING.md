@@ -2,6 +2,19 @@
 
 Working on it
 
+## API resources
+
+When building an API, you may need a transformation layer that sits between your Eloquent models and the JSON responses that are actually returned to your application's users. Laravel's resource classes allow you to expressively and easily transform your models and model collections into JSON. (Laravel)
+
+To create resource you can use `php artisan make:resource UserResource`
+
+Resource Naming
+|Name|Description|
+|---|---|
+|ModelResource|Base model resource **without** any relations
+|ModelShowResource / ModelIndexResource|Are resource that can contains relations. Each ot them have in name function name where it is required. UserShowResource is used in `show()` function
+
+
 ## Workflow labels
 
 To allow for asynchronous issue handling, we use [milestones][milestones-page]

@@ -1,10 +1,10 @@
 <template>
     <div class="mb-3 border-bottom">
-        <div class="d-flex flex-row">
-            <div><p class="h6">Labels</p></div>
+        <div class="d-flex flex-row mb-1">
+            <div><span>Labels</span></div>
             <div class="ml-auto"><labels-dropdown :issue-id="issueId" :parent-labels="labels.data"></labels-dropdown></div>
         </div>
-        <div class="mb-1">
+        <div class="mb-3">
             <span v-if="done" v-for="label in labels.data" :class="'badge ' + label.color + ' mr-1'">{{ label.text }}</span>
         </div>
     </div>

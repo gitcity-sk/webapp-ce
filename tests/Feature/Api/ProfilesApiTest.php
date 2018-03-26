@@ -24,12 +24,23 @@ class ProfilesControllerTest extends TestCase
     }
 
     /** @test */
-    public function api_can_get_user_profile()
+    public function api_can_get_user_profiles()
     {
         $response = $this->actingAs($this->user)->get('/api/profiles');
         $response->assertStatus(200);
         $response->assertSee($this->profile->name);
         $response->assertSee($this->profile->facebook);
         $response->assertSee($this->profile->twitter);
+    }
+
+    /** @test */
+    public function api_can_get_one_user_profiles()
+    {
+        $response = $this->actingAs($this->user)->get('/api/profiles/' . $this->profile->id);
+        $response->assertStatus(200);
+        $response->assertSee($this->profile->name);
+        $response->assertSee($this->profile->facebook);
+        $response->assertSee($this->profile->twitter);
+        $response->assertSee($this->user->email);
     }
 }
