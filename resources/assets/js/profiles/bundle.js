@@ -10,6 +10,7 @@
 //require('../../fontawesome-all');
 //require('../../directives/TooltipDirective');
 require('../filters/MomentFilter');
+require('../filters/EmojiOneFilter');
 
 window.Vue = require('vue');
 
@@ -19,7 +20,7 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('profile-view-component', require('./ProfileView.vue'));
+Vue.component('profile-view', require('./ProfileView.vue'));
 Vue.component('user-projects-table-component', require('../users/UserProjectsTableComponent.vue'));
 
 const app = new Vue({
