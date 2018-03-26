@@ -26,7 +26,6 @@ class ProfilesTest extends TestCase
         $response = $this->actingAs($this->profileOne->user)
             ->get('/profiles/' . $this->profileOne->id);
         $response->assertStatus(200);
-        $response->assertSee($this->profileOne->name);
 
         // can edit own profile
         $response->assertSee('Edit</a>');
@@ -38,7 +37,6 @@ class ProfilesTest extends TestCase
         $response = $this->actingAs($this->profileTwo->user)
             ->get('/profiles/' . $this->profileOne->id);
         $response->assertStatus(200);
-        $response->assertSee($this->profileOne->name);
 
         // cant edit profile that is not owned
         $response->assertDontSee('Edit</a>');
