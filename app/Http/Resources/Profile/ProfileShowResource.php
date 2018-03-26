@@ -20,7 +20,7 @@ class ProfileShowResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'image' => function () {
-                Url::signedRoute('storage.file', ['filename' => $this->image]);
+                return Url::signedRoute('storage.file', ['filename' => $this->image]);
             },
             'description' => $this->description,
             'twitter' => $this->twitter,
