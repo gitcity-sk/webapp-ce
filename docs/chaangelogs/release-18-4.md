@@ -6,3 +6,4 @@ Labels for issues and bug fixes
 * ADD New field 'complete' in issues API
 * UPDATE issues now showing check near completed issues
 * UPDATE Issues api now returning labels
+* FIX Not showing picture in profiles

@@ -1,7 +1,10 @@
 <template>
     <div class="mb-3 border-bottom">
         <div class="d-flex flex-row mb-1">
-            <div><span>Labels</span></div>
+            <div>
+                <span class="mr-2">Labels</span>
+                <span v-if="done == false"><i class="far fa-spinner fa-spin"></i></span>
+            </div>
             <div class="ml-auto"><labels-dropdown :issue-id="issueId" :parent-labels="labels.data"></labels-dropdown></div>
         </div>
         <div class="mb-3">
@@ -45,6 +48,8 @@ export default {
 
     methods: {
         onBadgesUpdated: function () {
+            this.done = false
+            
             axios.get('/api/issues/' + this.issueId + '/labels')
             .then(response => {
                 this.labels = response.data;
