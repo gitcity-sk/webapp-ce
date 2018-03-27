@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Url;
 
 class FilesController extends Controller
 {
+    protected $fileTypes = [
+        'images' => [
+            'jpg', 'png'
+        ]
+    ];
+
     /**
      * Create a new controller instance.
      *
@@ -67,9 +73,11 @@ class FilesController extends Controller
      */
     protected function _filter($filesData, $type)
     {
-        foreach ($filesData as $key => $file)
-        {
-            if ($file['extension'] != $type) unset($filesData[$key]);
+        // if given type dont exists in array then return empty array
+        if(!array_key_exists($type, $this->fileTypes)) return [];
+
+        foreach ($filesData as $key => $file) {
+            if (!in_array(strtolower($file['extension']), $this->fileTypes[$type])) unset($filesData[$key]);
         }
 
         return $filesData;

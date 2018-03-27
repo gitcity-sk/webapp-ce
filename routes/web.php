@@ -209,5 +209,6 @@ Route::get('/projects/{project}/spaces/new', 'SpacesController@create');
  */
 Route::group(['namespace' => 'Spaces'], function () {
     // GET
+    Route::get('/spaces/photos/{slug}/{path?}', 'PhotosController@show')->where('path', '(.*)');
     Route::get('/spaces/{slug}/{path?}', 'SpacesController@show')->where('path', '(.*)');
 });
