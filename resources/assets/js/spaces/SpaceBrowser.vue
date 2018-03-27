@@ -2,6 +2,12 @@
 <div>
     <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
+
+    <div class="d-flex mb-3">
+        <div class="ml-auto">
+            <a :href="'/spaces/photos/' + space.data.slug + nextPath(path)" class="btn btn-light"><i class="fal fa-camera-retro"></i> Photogallery</a>
+        </div>
+    </div>
     <table class="table table-hover">
         <thead class="bg-light">
             <tr>
@@ -59,6 +65,7 @@
                 doneFiles: false,
                 files: { data: null },
                 directories: { data: null },
+                space: {data: null},
                 errors: [],
                 page: 1,
                 perPage: 100
@@ -66,6 +73,7 @@
         },
         created () {
             this.$parent.$emit('pageLoader', true);
+            this.getSpaceInfo();
             this.loadDirecotries();
             this.loadFiles();
         },
@@ -112,7 +120,17 @@
                     this.page--;
                 }
                 window.scrollTo(0,0)
-            }
+            },
+
+            getSpaceInfo: function() {
+                axios.get('/api/spaces/' + this.spaceId)
+                .then(response => {
+                    this.space = response.data
+                })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+            },
         },
         computed: {
             start: function() {

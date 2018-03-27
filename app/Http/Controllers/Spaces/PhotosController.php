@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Controllers\Spaces;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Space;
+use App\Repositories\Spaces;
+use Illuminate\Support\Facades\Storage;
+
+class PhotosController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(Spaces $spaces)
+    {
+        //$this->middleware('auth');
+
+        $this->spaces = $spaces;
+    }
+
+    /**
+     * @param $slug
+     * @param null $path
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($slug, $path = null)
+    {
+        $space = $this->spaces->findBySlug($slug);
+
+        //dd([$slug, $path]);
+
+        // check if space is private
+        if($space->private) abort(404);;
+
+        return view('spaces.photos', compact(['space', 'path']));
+    }
+}

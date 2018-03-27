@@ -36,21 +36,28 @@ class SpacesTest extends TestCase
     /** @test */
     public function api_can_get_files()
     {
-        $response = $this->actingAs($this->user)->get('/spaces/' . str_slug($this->spaceName) . '/files');
+        $response = $this->actingAs($this->user)->get('/api/spaces/' . $this->space->id . '/files');
         $response->assertStatus(200);
     }
 
     /** @test */
     public function api_can_get_directories()
     {
-        $response = $this->actingAs($this->user)->get('/spaces/' . str_slug($this->spaceName) . '/directories');
+        $response = $this->actingAs($this->user)->get('/api/spaces/' . $this->space->id . '/directories');
         $response->assertStatus(200);
     }
 
     /** @test */
     public function api_can_get_space_size()
     {
-        $response = $this->actingAs($this->user)->get('/spaces/' . str_slug($this->spaceName) . '/size');
+        $response = $this->actingAs($this->user)->get('/api/spaces/' . $this->space->id . '/size');
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function api_can_get_space_information()
+    {
+        $response = $this->actingAs($this->user)->get('/api/spaces/' . $this->space->id);
         $response->assertStatus(200);
     }
 }

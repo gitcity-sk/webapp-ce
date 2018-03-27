@@ -106,4 +106,12 @@ class SpacesTest extends TestCase
         $response = $this->actingAs($this->user)->get('/projects/' . $this->project->id . '/spaces');
         $response->assertStatus(200);
     }
+
+    /** @test */
+    public function user_can_see_photogallery()
+    {
+        $response = $this->get('/spaces/photos/' . $this->space->slug);
+        $response->assertStatus(200);
+        $response->assertSee($this->space->name);
+    }
 }

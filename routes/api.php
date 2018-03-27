@@ -101,6 +101,7 @@ Route::group(['namespace' => 'MergeRequests\Api'], function () {
  */
 Route::group(['namespace' => 'Spaces\Api'], function () {
     // GET
+    Route::get('/spaces/{space}', 'SpacesController@show');
     Route::get('/spaces/size-of/{path?}', 'SpacesController@sizeOf')->where('path', '(.*)');
     Route::get('/spaces/{space}/size', 'SpacesController@getSize');
     Route::get('/spaces/{space}/files/{path?}', 'FilesController@index')->where('path', '(.*)');

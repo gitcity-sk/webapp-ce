@@ -2,8 +2,10 @@
 <div>
     <css-preloader :loading="done"></css-preloader>
     <div v-if="done">
-        <img :src="currentPage.url" class="img-fluid mb-1" alt="Responsive image">
-        <small>Image browser! <span class="badge badge-danger">beta</span> {{ totalPages }} photos total.</small>
+        <div class="image-viewer">
+            <img :src="currentPage.url" class="img-fluid mb-1 d-block mx-auto" alt="Responsive image">
+        </div>
+        <small>Image browser <span class="badge badge-danger">beta</span> {{ page }} of {{ totalPages }} photos total.</small>
         <div class="text-center mt-3">
             <div class="btn-group" role="group" aria-label="Pagination">
                 <button v-if="page > 1" v-on:click="prevPage" class="btn btn-light"><i class="far fa-chevron-left"></i></button>
@@ -18,16 +20,15 @@
     import axios from 'axios';
     import emojione from 'emojione';
     import cssPreloader from '../vue/shared-components/css-preloader.vue';
-    import directoryRow from './DirectoryRow.vue'
 
     export default {
         components: {
-            cssPreloader, directoryRow
+            cssPreloader
         },
         mounted () {
             console.log('Component ProjectIssuesTable mounted.')
         },
-        props: ['spaceId', 'path', 'parentPath'],
+        props: ['spaceId', 'path'],
         data () {
             return {
                 done: false,
@@ -50,7 +51,7 @@
             },
 
             loadFiles: function() {
-                axios.get(this.path)
+                axios.get('/api/spaces/' + this.spaceId + '/files' + this.nextPath(this.path) + '?type=images')
                 .then(response => {
                     this.files = response.data
                     this.$parent.$emit('pageLoader', false)
@@ -95,7 +96,7 @@
             totalPages: function()
             {
                 if (null !== this.files.data) {
-                    return this.files.data.length - 1; // total items -1 because zero at start
+                    return this.files.data.length; // total items -1 because zero at start
                 }
             },
             
