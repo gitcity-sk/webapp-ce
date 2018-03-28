@@ -65,6 +65,7 @@ Route::group(['namespace' => 'Projects\Api'], function () {
     Route::get('/projects/{project}/issues', 'ProjectsController@issues');
 
     Route::get('/projects/{project}/readme', 'ReadmeController@show')->name('api.projects.readme');
+    Route::get('/projects/{project}/blob/{path?}', 'BlobController@show')->where('path', '(.*)')->name('api.projects.blob');
 
     Route::get('/projects/{project}/milestones', 'MilestonesController@index');
     Route::get('/projects/{project}/merge-requests', 'MergeRequestsController@index');

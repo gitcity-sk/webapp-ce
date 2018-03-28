@@ -9,12 +9,25 @@ use App\Project;
 
 class ReadmeController extends Controller
 {
-    public function show(Project $project, $path = null)
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'throttle:60,1']);
+    }
+
+    public function show(Project $project)
     {
         $blob = new Blob();
 
-        return $blob->get($project->user->name, $project->slug, [
-            'path' => 'README.md'
-        ]);
+        return [
+            'data' => $blob->get($project->user->name, $project->slug, [
+                'branch' => 'master',
+                'path' => 'README.md'
+            ])
+        ];
     }
 }

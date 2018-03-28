@@ -8,6 +8,8 @@ use App\Api\Git\BaseModel;
 
 class Tree extends BaseModel
 {
+    protected $branch = 'master';
+
     /**
      * @param $userName
      * @param $projecSlug
@@ -19,9 +21,11 @@ class Tree extends BaseModel
         if ($options !== null) $this->_configure($options);
 
         $repo = Repo::open($userName, $projecSlug);
+        $branch = $repo->getBranch($this->branch);
 
-        if ($repo && (count($repo->getBranches(true)) != 0)) {
-            return $repo->getTree($this->branch, $this->path);
+        if ($repo && (null !== $branch)) {
+
+            return $repo->getTree($branch, $this->path);
         }
         return null;
     }

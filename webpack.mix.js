@@ -25,6 +25,7 @@ mix.js('resources/assets/js/app.js', 'public/js/mix/app.js')
     .js('resources/assets/js/milestones/bundle.js', 'public/js/mix/milestones.bundle.js')
     .js('resources/assets/js/issues/bundle.js', 'public/js/mix/issues.bundle.js')
     .js('resources/assets/js/passport/index.js', 'public/js/mix/passport.bundle.js')
+    .js('resources/assets/js/blob-viewer/index.js', 'public/js/mix/blob-viewer.bundle.js')
     .js('resources/assets/js/spaces/index.js', 'public/js/mix/spaces.bundle.js').version().sourceMaps().extract(['vue', 'emojione']);
 
 // CSS
@@ -40,3 +41,4 @@ mix.sass('resources/assets/sass/app.scss', 'public/css')
 // Copy files/directories
 mix.copyDirectory('node_modules/monaco-editor/dev/vs', 'public/js/monaco-editor/vs');
 mix.copy('node_modules/maymeow-simplemde-fa5/dist/simplemde.min.css', 'public/css/simplemde.min.css');
+mix.copy('node_modules/highlight.js/styles/atom-one-light.css', 'public/css/highlight.atom-one-light.css');
