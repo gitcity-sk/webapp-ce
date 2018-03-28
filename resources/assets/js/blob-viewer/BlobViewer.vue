@@ -1,15 +1,13 @@
 <template>
 <div>
     <css-preloader :loading="done"></css-preloader>
-    <div class="card" v-if="done">
+    <div class="card blob-viewer" v-if="done">
         <div class="card-header">
             <span class="mr-2"><i class="fal fa-file-alt"></i></span>
             {{ blob.data.name }} <small class="text-secondary">{{ blob.data.size }}</small>
         </div>
-        <div class="card-body p-1">
-            <pre v-highlightjs>
-                <code>{{ blob.data.content }}</code>
-            </pre>
+        <div class="card-body p-0 blob-content">
+            <pre v-highlightjs><code>{{ blob.data.content }}</code></pre>
         </div>
     </div>
 </div>
