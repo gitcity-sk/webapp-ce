@@ -24,5 +24,7 @@ return [
     /**
      * Enable or disable registration
      */
-    'allow_registration' => env('WEBAPP_ALLOW_REGISTRATION', '')
+    'allow_registration' => env('WEBAPP_ALLOW_REGISTRATION', ''),
+
+    'shell_secret' => env('WEBAPP_SHELL_SECRET', ''),
 ];

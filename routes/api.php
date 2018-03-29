@@ -122,6 +122,14 @@ Route::group(['namespace' => 'Profiles\Api'], function () {
 });
 
 /**
+ * Profiles
+ */
+Route::group(['namespace' => 'Git\Api'], function () {
+    // GET
+    Route::get('/git/project', 'HooksController@project');
+});
+
+/**
  * Other Api
  */
 

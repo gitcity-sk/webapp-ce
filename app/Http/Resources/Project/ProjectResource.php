@@ -18,6 +18,7 @@ class ProjectResource extends Resource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
+            'user_id' => $this->user_id,
             'description' => $this->description,
             'created_at' => $this->created_at,
         ];
