@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Project;
+use App\User;
 
 class Projects
 {
@@ -31,5 +32,18 @@ class Projects
     public function findById($id)
     {
         return Project::findOrFail($id);
+    }
+
+    /**
+     * @param null|string $projectPath
+     */
+    public function findFromPath($projectPath)
+    {
+        $matches = explode('/', $projectPath);
+        $user = User::where('name', $matches[0])->firstOrFail();
+
+        if ($user) return $user->projects()->where('slug', $matches[1])->firstOrFail();
+
+        return null;
     }
 }
