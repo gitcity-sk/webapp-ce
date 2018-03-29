@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Resources\User\UserResource;
-use App\Http\Resources\ProjectResource;
+use App\Http\Resources\Project\ProjectResource;
 use App\Git\Shell;
 
 class HooksController extends Controller
