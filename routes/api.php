@@ -127,6 +127,7 @@ Route::group(['namespace' => 'Profiles\Api'], function () {
 Route::group(['namespace' => 'Git\Api'], function () {
     // GET
     Route::get('/git/update', 'HooksController@update');
+    Route::get('/git/key', 'HooksController@key');
 });
 
 /**

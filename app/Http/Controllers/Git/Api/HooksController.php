@@ -9,6 +9,8 @@ use App\Http\Resources\User\UserResource;
 use App\Http\Resources\Project\ProjectResource;
 use App\Git\Shell;
 use App\Repositories\Projects;
+use App\AuthorizedKey;
+use App\Http\Resources\AuthorizedKeyResource;
 
 class HooksController extends Controller
 {
@@ -27,5 +29,16 @@ class HooksController extends Controller
         $project = $this->projects->findFromPath(request('project'));
         
         return new ProjectResource($project);
+    }
+
+    public function key()
+    {
+        if (!Shell::isAllowed(request('shell_secret_key'))) abort(404);
+        
+        $keyData = AuthorizedKey::find(request('key_id'));
+
+        if(null == $keyData) abort (404);
+        
+        return new AuthorizedKeyResource($keyData);
     }
 }
