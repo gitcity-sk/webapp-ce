@@ -86,7 +86,7 @@ class License
     /**
      * @return bool
      */
-    public static function expired()
+    public static function expired() :bool
     {
         $license = self::import();
 
@@ -101,7 +101,7 @@ class License
     /**
      * @return bool
      */
-    public static function isValid()
+    public static function isValid() : bool
     {
         // return false if license is expired
         if (self::expired()) {
@@ -115,7 +115,7 @@ class License
      * @param $feature
      * @return bool
      */
-    public static function check($feature)
+    public static function check($feature) : bool
     {
         $license = self::import();
 

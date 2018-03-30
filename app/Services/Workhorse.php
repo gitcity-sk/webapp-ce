@@ -38,7 +38,7 @@ class Workhorse
      * @param null $action
      * @return $this
      */
-    public function setAction($action = null)
+    public function setAction($action = null) : Workhorse
     {
         $this->data['action'] = $action;
 
@@ -49,7 +49,7 @@ class Workhorse
      * @param null $data
      * @return $this
      */
-    public function setData($data = null)
+    public function setData($data = null) : Workhorse
     {
         $this->data['data'] = $data;
 

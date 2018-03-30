@@ -41,20 +41,23 @@ class ProjectsTest extends TestCase
     }
 
     /** @test */
-    public function users_can_see_single_project()
+    public function users_can_see_single_project_no_permission()
     {
-        $role = factory(Role::class)->create(['name' => 'administrator']);
-        $showPerm = factory(Permission::class)->create(['name' => 'show-project']);
-        $delPerm = factory(Permission::class)->create(['name' => 'delete-project']);
-        $role->givePermissionTo($showPerm);
-        $role->givePermissionTo($delPerm);
-        $this->user->assignRole($role->name);
-
-        //$this->user->hasRole($role->name);
-
         $response = $this->actingAs($this->user)
-        ->get('/projects/' . $this->project->id);
+            ->get('/projects/' . $this->project->id);
         $response->assertStatus(403);
+    }
+
+    /** @test */
+    public function users_can_see_single_project_with_permission()
+    {
+        $userWithPermission = $this->createUserWithPermissionTo('show-project');
+        $this->assertTrue($userWithPermission->can('show-project'));
+
+        // can see with permission
+        $response = $this->actingAs($userWithPermission)
+            ->get('/projects/' . $this->project->id);
+        $response->assertStatus(200);
     }
 
     /** @test */
@@ -67,10 +70,8 @@ class ProjectsTest extends TestCase
     }
 
     /** @test */
-    public function users_can_see_project_commits()
+    public function users_can_see_project_commits_no_permission()
     {
-        $this->user->assignRole('administrator');
-
         $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
             ->get('/projects/' . $this->project->id . '/commits');
@@ -78,7 +79,20 @@ class ProjectsTest extends TestCase
     }
 
     /** @test */
-    public function users_can_see_project_branches()
+    public function users_can_see_project_commits_with_permission()
+    {
+        $userWithPermission = $this->createUserWithPermissionTo('show-project');
+        $this->assertTrue($userWithPermission->can('show-project'));
+
+        $response = $this->actingAs($userWithPermission)
+            ->withSession(['asd' => 'dsa'])
+            ->get('/projects/' . $this->project->id . '/commits');
+        $response->assertStatus(200);
+    }
+
+
+    /** @test */
+    public function users_can_see_project_branches_no_permission()
     {
         $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
@@ -87,12 +101,36 @@ class ProjectsTest extends TestCase
     }
 
     /** @test */
-    public function users_can_see_project_tags()
+    public function users_can_see_project_branches_with_permission()
+    {
+        $userWithPermission = $this->createUserWithPermissionTo('show-project');
+        $this->assertTrue($userWithPermission->can('show-project'));
+
+        $response = $this->actingAs($userWithPermission)
+            ->withSession(['asd' => 'dsa'])
+            ->get('/projects/' . $this->project->id . '/branches');
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function users_can_see_project_tags_no_permission()
     {
         $response = $this->actingAs($this->user)
             ->withSession(['asd' => 'dsa'])
             ->get('/projects/' . $this->project->id . '/tags');
         $response->assertStatus(403);
+    }
+
+    /** @test */
+    public function users_can_see_project_tags_with_permission()
+    {
+        $userWithPermission = $this->createUserWithPermissionTo('show-project');
+        $this->assertTrue($userWithPermission->can('show-project'));
+
+        $response = $this->actingAs($userWithPermission)
+            ->withSession(['asd' => 'dsa'])
+            ->get('/projects/' . $this->project->id . '/tags');
+        $response->assertStatus(200);
     }
 
     /** @test */

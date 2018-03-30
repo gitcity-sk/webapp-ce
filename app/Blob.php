@@ -12,9 +12,10 @@ class Blob extends BaseModel
     protected $branch = 'master';
 
     /**
-     * @param string $userName
-     * @param string $projectSlug
-     * @param array|null $options
+     * @param $userName
+     * @param $projectSlug
+     * @param null $options
+     * @return array|null
      */
     public function get($userName, $projectSlug, $options = null)
     {

@@ -10,6 +10,7 @@ use App\Repositories\Projects;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProjectRequest;
+use Illuminate\View\View;
 
 class ProjectsController extends Controller
 {
@@ -55,7 +56,7 @@ class ProjectsController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function create() : View
     {
         return view('projects.create');
     }

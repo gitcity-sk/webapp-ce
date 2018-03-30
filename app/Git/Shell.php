@@ -4,7 +4,13 @@ namespace App\Git;
 
 class Shell
 {
-    public static function isAllowed($secretKey)
+    /**
+     * Return if shell secret is allowed to get information trough API
+     *
+     * @param $secretKey
+     * @return bool
+     */
+    public static function isAllowed($secretKey) : bool
     {
         if (null == $secretKey) return false;
 

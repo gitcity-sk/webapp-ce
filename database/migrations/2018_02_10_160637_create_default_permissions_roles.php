@@ -24,7 +24,7 @@ class CreateDefaultPermissionsRoles extends Migration
      */
     public function up()
     {
-        $role = Role::create(['name' => 'administrator', 'title' => 'server-administrator']);
+        $role = Role::create(['name' => 'administrator', 'label' => 'server-administrator']);
 
         foreach ($this->permissions as $permission) {
             $permission = Permission::create($permission);

@@ -32,17 +32,17 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Passport::routes();
+
         //Gate::define('show:project', 'App\Policies\ProjectPolicy@view');
 
-        if (Schema::hasTable('permissions')) {
+        if (app()->environment() !== 'testing') {
             foreach ($this->getPermissions() as $permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
                     return $user->hasRole($permission->roles);
                 });
             }
         }
-
-        Passport::routes();
     }
 
     /**

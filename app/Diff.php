@@ -13,7 +13,7 @@ class Diff extends Model
     /**
      * @param $sourceBranch
      * @param $targetBranch
-     * @param Repository $repository
+     * @param $repository
      * @return null
      */
     public static function getDiffBetween($sourceBranch, $targetBranch, $repository)
