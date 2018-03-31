@@ -38,6 +38,23 @@ class UsersTest extends TestCase
     }
 
     /** @test */
+    public function non_admin_cannot_see_one_users()
+    {
+        $response = $this->actingAs($this->nonAdminUser)->get('/admin/users/' . $this->nonAdminUser->id);
+        $response->assertStatus(403);
+    }
+
+    /** @test */
+    public function admin_can_see_one_users()
+    {
+        $adminUser = $this->createUserWithPermissionTo('do:admin:actions');
+
+        $respone = $this->actingAs($adminUser)->get('/admin/users/' . $this->nonAdminUser->id);
+        $respone->assertStatus(200);
+        $respone->assertSee($this->nonAdminUser->name);
+    }
+
+    /** @test */
     public function logged_in_user_can_see_dashboard()
     {
         factory(Profile::class)->create(['user_id' => $this->nonAdminUser]);
