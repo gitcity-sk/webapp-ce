@@ -65,6 +65,9 @@ class SpacesTest extends TestCase
             '_token' => 'test'
         ]);
         $response->assertRedirect('/projects/' . $this->project->id . '/spaces');
+
+        $space = Space::where('name', $spaceName)->first();
+        $this->assertEquals($spaceName, $space->name);
     }
 
     /** @test */

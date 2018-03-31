@@ -88,6 +88,10 @@ class RolesTest extends TestCase
         ]);
         $response->assertRedirect('/admin/roles');
         $response->assertDontSee('You do not have permission to see this page');
+
+        // Check if role has been created in database
+        $role = Role::where('name', $roleName)->first();
+        $this->assertEquals($roleName, $role->name);
     }
 
     /** @test */

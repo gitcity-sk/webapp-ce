@@ -122,4 +122,13 @@ class Project extends Model
             $this->save();
         }
     }
+
+    /**
+     * @param Space $space
+     * @return false|Model
+     */
+    public function createSpace(Space $space) : ?Model
+    {
+        return $this->spaces()->save($space);
+    }
 }
