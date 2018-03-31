@@ -175,4 +175,34 @@ class ProjectsTest extends TestCase
             ->get('/projects/' . $this->project->id . '/blob/path/to/blob');
         $response->assertStatus(200);
     }
+
+    /** @test */
+    public function user_can_create_project_without_rights()
+    {
+        $projectName = 'My Project';
+
+        $response = $this->actingAs($this->user)->withSession(['_token' => 'test'])->post('/projects', [
+            'name' =>  $projectName,
+            'description' => 'Hello world',
+            '_token' => 'test'
+        ]);
+        $response->assertStatus(403);
+    }
+
+    /** @test */
+    public function user_can_create_project_with_rights()
+    {
+        $projectName = 'My Project';
+        $userWithRights = $this->createUserWithPermissionTo('create-project');
+
+        $response = $this->actingAs($userWithRights)->withSession(['_token' => 'test'])->post('/projects', [
+            'name' =>  $projectName,
+            'description' => 'Hello world',
+            '_token' => 'test'
+        ]);
+        $response->assertRedirect('/projects');
+
+        $project = Project::where('name', $projectName)->first();
+        $this->assertEquals($projectName, $project->name);
+    }
 }

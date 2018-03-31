@@ -13,7 +13,7 @@ class Tag extends BaseModel
      * @param $projecSlug
      * @return array|null
      */
-    public function get($userName, $projecSlug)
+    public function get($userName, $projecSlug) : ?array
     {
         $repo = Repo::open($userName, $projecSlug);
 

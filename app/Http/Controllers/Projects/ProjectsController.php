@@ -7,6 +7,7 @@ use App\Project;
 use App\Repo;
 use App\Tree;
 use App\Repositories\Projects;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProjectRequest;
@@ -74,7 +75,7 @@ class ProjectsController extends Controller
 
     /**
      * @param CreateProjectRequest $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse|Redirector
      */
     public function store(CreateProjectRequest $request)
     {

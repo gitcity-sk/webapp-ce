@@ -27,10 +27,14 @@ class Workhorse
      */
     protected function _setSocket($socket)
     {
-        $this->server = stream_socket_client($socket, $errno, $errstr, 30);
+        try {
+            $this->server = stream_socket_client($socket, $errno, $errstr, 30);
+        } catch (\Exception $e) {
+            $this->server = null;
+        }
 
         if (!$this->server) {
-            echo "$errstr ($errno)";
+            //echo "$errstr ($errno)";
         }
     }
 

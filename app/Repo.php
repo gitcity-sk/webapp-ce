@@ -13,7 +13,7 @@ class Repo extends Model
      * @param $name
      * @return bool|Repository
      */
-    public static function open($namespace, $name)
+    public static function open($namespace, $name) : Repository
     {
         try {
             $repository = Repository::open(env('GIT_DATA') . $namespace . DIRECTORY_SEPARATOR . $name . '.git', new GitBinary(env('GIT_BINARY')));
@@ -29,7 +29,7 @@ class Repo extends Model
      * @param $name
      * @return string
      */
-    public static function path($namespace, $name)
+    public static function path($namespace, $name) : string
     {
         return env('GIT_DATA') . $namespace . DIRECTORY_SEPARATOR . $name . '.git';
     }

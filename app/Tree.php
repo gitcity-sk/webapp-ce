@@ -16,7 +16,7 @@ class Tree extends BaseModel
      * @param null $options
      * @return \GitElephant\Objects\Tree|null
      */
-    public function get($userName, $projecSlug, $options = null)
+    public function get($userName, $projecSlug, $options = null) : ?\GitElephant\Objects\Tree
     {
         if ($options !== null) $this->_configure($options);
 
