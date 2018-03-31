@@ -166,4 +166,13 @@ class ProjectsTest extends TestCase
             ->get('/projects/' . $this->project->id . '/issues/new');
         $response->assertStatus(200);
     }
+
+    /** @test */
+    public function users_can_view_blob_page()
+    {
+        $response = $this->actingAs($this->user)
+            ->withSession(['asd' => 'dsa'])
+            ->get('/projects/' . $this->project->id . '/blob/path/to/blob');
+        $response->assertStatus(200);
+    }
 }

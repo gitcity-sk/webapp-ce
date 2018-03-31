@@ -24,6 +24,8 @@ class RolesController extends Controller
      */
     public function index(Role $role)
     {
+        if (!auth()->user()->can('do:admin:actions')) abort (403, 'You do not have permission to see this page');
+
         $roles = Role::all();
 
         return view('admin.roles.index', compact('roles'));
@@ -35,7 +37,7 @@ class RolesController extends Controller
      */
     public function show(Role $role)
     {
-        if (auth()->user()->can('assign-permissions') or (auth()->id() === 1)) {
+        if (auth()->user()->can('assign-permissions') or (auth()->id() === 1) or auth()->user()->can('do:admin:actions')) {
             $permissions = Permission::all();
 
             return view('admin.roles.show', compact('role', 'permissions'));
@@ -49,6 +51,8 @@ class RolesController extends Controller
      */
     public function create()
     {
+        if (!auth()->user()->can('do:admin:actions')) abort (403, 'You do not have permission to see this page');
+
         return view('admin.roles.create');
     }
 
@@ -58,6 +62,7 @@ class RolesController extends Controller
      */
     public function store(Role $role)
     {
+        // Todo this is admin action?
         // dd(request());
         Role::create([
             'name' => request('name'),
@@ -73,6 +78,7 @@ class RolesController extends Controller
      */
     public function assignTo(User $user)
     {
+        // TODO this is admin action?
         // dd(request('role_id'));
         $user->assignRole(request('role_name'));
 
