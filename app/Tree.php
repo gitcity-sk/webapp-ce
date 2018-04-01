@@ -18,15 +18,18 @@ class Tree extends BaseModel
      */
     public function get($userName, $projecSlug, $options = null) : ?\GitElephant\Objects\Tree
     {
+        // initialize null branch
+        $branch = null;
+
         if ($options !== null) $this->_configure($options);
 
         $repo = Repo::open($userName, $projecSlug);
-        $branch = $repo->getBranch($this->branch);
+        if ($repo) $branch = $repo->getBranch($this->branch);
 
-        if ($repo && (null !== $branch)) {
-
+        if (null !== $branch) {
             return $repo->getTree($branch, $this->path);
         }
+
         return null;
     }
 }

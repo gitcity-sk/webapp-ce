@@ -5,8 +5,11 @@ namespace Tests;
 
 use App\Permission;
 use App\User;
+use GitElephant\GitBinary;
+use GitElephant\Repository;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -32,5 +35,19 @@ abstract class TestCase extends BaseTestCase
     protected function getTestingLicense()
     {
         return $this->testingLicense;
+    }
+
+
+    protected function createEmptyBareRepository(string $userName, string $repositoryName)
+    {
+        $path = 'git/' . str_slug($userName) . DIRECTORY_SEPARATOR . str_slug($repositoryName) . '.git';
+        if (Storage::makeDirectory($path)) {
+            $repo = new Repository(storage_path('app/' . $path), new GitBinary(config('webapp.git.binary')));
+            $repo->init(true);
+
+            return $repo;
+        }
+
+        return false;
     }
 }

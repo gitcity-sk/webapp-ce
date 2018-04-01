@@ -1,6 +1,7 @@
 <?php 
 /**
  * Webapp config file
+ * Each of this can be added  into .env file, just copy key and set them there
  */
 return [
 
@@ -27,4 +28,27 @@ return [
     'allow_registration' => env('WEBAPP_ALLOW_REGISTRATION', ''),
 
     'shell_secret' => env('WEBAPP_SHELL_SECRET', ''),
+
+    /**
+     * GIT module Configuration
+     * Paths to folders required for GIT module
+     */
+    'git' => [
+        /**
+         * Standard git path
+         * If you want use your own binary change this to /path/to/git where git is binary file
+         */
+        'binary' => env('GIT_BINARY', 'git'),
+
+        /**
+         * Where git repositories are stored
+         */
+        'path' => env('GIT_DATA', '/var/opt/webapp/data/git-data/'),
+
+        'ssh_keys' => env('GIT_SSH_KEYS', '/var/opt/webapp/data/git-data/.ssh/'),
+
+        'shell_hooks' => env('GITCITY_SHELL_HOOKS', '/opt/webapp/webapp-shell/hooks'),
+
+        'ssh_exec' => env('GITCITY_SSH_EXEC', '/opt/webapp/webapp-shell/ssh-exec')
+    ],
 ];

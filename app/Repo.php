@@ -13,7 +13,7 @@ class Repo extends Model
      * @param $name
      * @return bool|Repository
      */
-    public static function open($namespace, $name) : Repository
+    public static function open($namespace, $name)
     {
         try {
             $repository = Repository::open(env('GIT_DATA') . $namespace . DIRECTORY_SEPARATOR . $name . '.git', new GitBinary(env('GIT_BINARY')));
