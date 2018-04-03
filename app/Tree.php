@@ -5,6 +5,7 @@ namespace App;
 use App\Repositories\Projects;
 use App\Http\Resources\Git\TreeResource;
 use App\Api\Git\BaseModel;
+use GitElephant\Objects\Tree as GitTree;
 
 class Tree extends BaseModel
 {
@@ -14,9 +15,9 @@ class Tree extends BaseModel
      * @param $userName
      * @param $projecSlug
      * @param null $options
-     * @return \GitElephant\Objects\Tree|null
+     * @return GitTree|null
      */
-    public function get($userName, $projecSlug, $options = null) : ?\GitElephant\Objects\Tree
+    public function get($userName, $projecSlug, $options = null) : ?GitTree
     {
         // initialize null branch
         $branch = null;
