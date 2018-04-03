@@ -16,7 +16,7 @@ class ProfilesController extends Controller
     }
 
     /**
-     * @return array
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -25,7 +25,11 @@ class ProfilesController extends Controller
         return ProfileResource::collection($users);
     }
 
-    public function show(Profile $profile)
+    /**
+     * @param Profile $profile
+     * @return ProfileShowResource
+     */
+    public function show(Profile $profile) : ProfileShowResource
     {
         return new ProfileShowResource($profile);
     }

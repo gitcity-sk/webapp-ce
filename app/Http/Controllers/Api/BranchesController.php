@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Traits\EmptyDataTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Project;
@@ -10,6 +11,7 @@ use App\Http\Resources\Git\BranchesResource;
 
 class BranchesController extends Controller
 {
+    use EmptyDataTrait;
     /**
      * Create a new controller instance.
      *
@@ -28,6 +30,8 @@ class BranchesController extends Controller
     {
         $gitBranches = new Branch();
         $branches = $gitBranches->get($project->user->name, $project->slug);
+
+        if (!$branches) return $this->returnEmptyData();
 
         // branches returns array of gitObject
         $array = [];

@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\RolesTrait;
@@ -33,7 +36,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function projects() //$user->project->name
+    public function projects() : HasMany //$user->project->name
     {
         return $this->hasMany(Project::class);
     }
@@ -41,7 +44,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function groups()
+    public function groups() : HasMany
     {
         return $this->hasMany(Group::class);
     }
@@ -49,7 +52,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function profile()
+    public function profile() : HasOne
     {
         return $this->hasOne(Profile::class);
     }
@@ -57,15 +60,16 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function authorizedKeys()
+    public function authorizedKeys() : HasMany
     {
         return $this->hasMany(AuthorizedKey::class);
     }
 
     /**
      * @param Project $project
+     * @return Project|false|Model
      */
-    public function publish(Project $project)
+    public function publish(Project $project) : ?Project
     {
         $project['slug'] = str_slug($project['name']);
         $project = $this->projects()->save($project);
@@ -87,13 +91,15 @@ class User extends Authenticatable
             $project['created'] = true;
             $this->projects()->save($project);
         }
+
+        return $project;
     }
 
     /**
      * @param Group $group
      * @return false|\Illuminate\Database\Eloquent\Model
      */
-    public function publishGroup(Group $group)
+    public function publishGroup(Group $group) : Model
     {
         return $this->groups()->save($group);
     }
@@ -101,7 +107,7 @@ class User extends Authenticatable
     /**
      * @param AuthorizedKey $authorizedKey
      */
-    public function addKey(AuthorizedKey $authorizedKey)
+    public function addKey(AuthorizedKey $authorizedKey) : void
     {
         $this->authorizedKeys()->save($authorizedKey);
 
@@ -124,7 +130,7 @@ class User extends Authenticatable
      * @param AuthorizedKey $authorizedKey
      * @throws \Exception
      */
-    public function removeKey(AuthorizedKey $authorizedKey)
+    public function removeKey(AuthorizedKey $authorizedKey) : void
     {
         $authorizedKey->delete();
 

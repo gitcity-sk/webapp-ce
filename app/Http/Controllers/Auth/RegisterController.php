@@ -73,6 +73,8 @@ class RegisterController extends Controller
         $profile->name = $data['name'];
         $user->profile()->save($profile);
 
+        if ($user->id == 1) $user->assignRole('administrator');
+
         return $user;
     }
 }

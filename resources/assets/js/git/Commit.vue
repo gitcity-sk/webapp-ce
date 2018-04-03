@@ -7,7 +7,7 @@
             <i v-else class="far fa-file"></i>
         </span>
         <span v-if="treeItem.type === 'tree'"><a :href="'/projects/' + projectId + '/files' + nextPath(treeItem.path, treeItem.name)" class="text-dark">{{ treeItem.name }}</a></span>
-        <span v-else>{{ treeItem.name }}</span>
+        <span v-else><a :href="'/projects/' + projectId + '/blob' + nextPath(treeItem.path, treeItem.name)" class="text-dark">{{ treeItem.name }}</a></span>
     </td>
     <td :class="'has-emoji'" style="max-width: 320px">
         <span v-if="done" :class="'commit-' + commit.data.hash">

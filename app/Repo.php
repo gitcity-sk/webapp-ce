@@ -29,7 +29,7 @@ class Repo extends Model
      * @param $name
      * @return string
      */
-    public static function path($namespace, $name)
+    public static function path($namespace, $name) : string
     {
         return env('GIT_DATA') . $namespace . DIRECTORY_SEPARATOR . $name . '.git';
     }

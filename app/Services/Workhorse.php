@@ -27,10 +27,14 @@ class Workhorse
      */
     protected function _setSocket($socket)
     {
-        $this->server = stream_socket_client($socket, $errno, $errstr, 30);
+        try {
+            $this->server = stream_socket_client($socket, $errno, $errstr, 30);
+        } catch (\Exception $e) {
+            $this->server = null;
+        }
 
         if (!$this->server) {
-            echo "$errstr ($errno)";
+            //echo "$errstr ($errno)";
         }
     }
 
@@ -38,7 +42,7 @@ class Workhorse
      * @param null $action
      * @return $this
      */
-    public function setAction($action = null)
+    public function setAction($action = null) : Workhorse
     {
         $this->data['action'] = $action;
 
@@ -49,7 +53,7 @@ class Workhorse
      * @param null $data
      * @return $this
      */
-    public function setData($data = null)
+    public function setData($data = null) : Workhorse
     {
         $this->data['data'] = $data;
 

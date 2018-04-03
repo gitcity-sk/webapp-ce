@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Services\Workhorse;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Project extends Model
 {
@@ -15,7 +18,7 @@ class Project extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user() // $project->user->name
+    public function user() : BelongsTo // $project->user->name
     {
         return $this->belongsTo(User::class);
     }
@@ -23,7 +26,7 @@ class Project extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function issues()
+    public function issues() : HasMany
     {
         return $this->hasMany(Issue::class);
     }
@@ -31,7 +34,7 @@ class Project extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function groups()
+    public function groups() : BelongsToMany
     {
         return $this->belongsToMany(Group::class);
     }
@@ -39,7 +42,7 @@ class Project extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function milestones()
+    public function milestones() : HasMany
     {
         return $this->hasMany(Milestone::class);
     }
@@ -47,7 +50,7 @@ class Project extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function spaces()
+    public function spaces() : HasMany
     {
         return $this->hasMany(Space::class);
     }
@@ -55,7 +58,7 @@ class Project extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function mergeRequests()
+    public function mergeRequests() : HasMany
     {
         return $this->hasMany(MergeRequest::class);
     }
@@ -63,7 +66,7 @@ class Project extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function pages()
+    public function pages() : HasMany
     {
         return $this->hasMany(Page::class);
     }
@@ -72,7 +75,7 @@ class Project extends Model
      * @param Page $page
      * @return false|Model
      */
-    public function createPage(Page $page)
+    public function createPage(Page $page) : ?Model
     {
         return $this->pages()->save($page);
     }
@@ -100,7 +103,7 @@ class Project extends Model
     /**
      *
      */
-    public function createOnServer()
+    public function createOnServer() : void
     {
         $user = User::find($this->user_id);
         try {
@@ -121,5 +124,14 @@ class Project extends Model
             $this->created = true;
             $this->save();
         }
+    }
+
+    /**
+     * @param Space $space
+     * @return false|Model
+     */
+    public function createSpace(Space $space) : ?Model
+    {
+        return $this->spaces()->save($space);
     }
 }

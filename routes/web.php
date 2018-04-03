@@ -73,6 +73,7 @@ Route::group(['namespace' => 'Projects'], function () {
     Route::get('/projects/create', 'ProjectsController@create');
     Route::get('/projects/{id}', 'ProjectsController@show')->name('project');
     Route::get('/projects/{id}/files/{path?}', 'ProjectsController@show')->where('path', '(.*)')->name('project.files');
+    Route::get('/projects/{project}/blob/{path?}', 'BlobController@show')->where('path', '(.*)')->name('project.blob');
     Route::get('/projects/{id}/issues', 'IssuesController@index')->name('projectIssues');
     Route::get('/projects/{id}/issues/new', 'IssuesController@create');
     Route::get('/projects/{project}/commits', 'CommitsController@show')->name('project.commits');

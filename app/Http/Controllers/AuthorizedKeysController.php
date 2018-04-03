@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\AuthorizedKeys;
 use App\AuthorizedKey;
+use Illuminate\Http\RedirectResponse;
 
 class AuthorizedKeysController extends Controller
 {
@@ -21,7 +22,7 @@ class AuthorizedKeysController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store() : RedirectResponse
     {
         $this->validate(request(), [
             'title' => 'required|min:3',
@@ -39,7 +40,7 @@ class AuthorizedKeysController extends Controller
      * @param AuthorizedKey $authorizedKey
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(AuthorizedKey $authorizedKey)
+    public function destroy(AuthorizedKey $authorizedKey) : RedirectResponse
     {
         auth()->user()->removeKey($authorizedKey);
 

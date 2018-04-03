@@ -36,7 +36,8 @@ class SpacesController extends Controller
         if (license_check('private_spaces') == false && request('private') == true) abort(403, 'License required');
 
         $spaceName = request('name');
-        $space =  $project->spaces()->save(new Space([
+
+        $space = $project->createSpace(new Space([
             'name' => $spaceName,
             'user_id' => auth()->id(),
             'slug' => str_slug($spaceName)

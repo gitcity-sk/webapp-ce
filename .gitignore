@@ -13,3 +13,4 @@ yarn-error.log
 /volumes
 *.sqlite
 /config/nginx.conf
+/config/nginx-ssl.conf

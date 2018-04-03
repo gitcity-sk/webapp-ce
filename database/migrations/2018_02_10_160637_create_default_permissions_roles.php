@@ -14,7 +14,8 @@ class CreateDefaultPermissionsRoles extends Migration
         ['name' => 'create-issue', 'label' => 'Can create issue'],
         ['name' => 'create-comment', 'label' => 'Can create comment'],
         ['name' => 'show-space', 'label' => 'Can show space'],
-        ['name' => 'assign-permission', 'label' => 'Can assign permission to role']
+        ['name' => 'assign-permission', 'label' => 'Can assign permission to role'],
+        ['name' => 'do:admin:actions', 'label' => "can do all admin actions"]
     ];
 
     /**
@@ -24,7 +25,7 @@ class CreateDefaultPermissionsRoles extends Migration
      */
     public function up()
     {
-        $role = Role::create(['name' => 'administrator', 'title' => 'server-administrator']);
+        $role = Role::create(['name' => 'administrator', 'label' => 'server-administrator']);
 
         foreach ($this->permissions as $permission) {
             $permission = Permission::create($permission);
