@@ -36,7 +36,7 @@ class AuthServiceProvider extends ServiceProvider
 
         //Gate::define('show:project', 'App\Policies\ProjectPolicy@view');
 
-        if (app()->environment() !== 'testing') {
+        if (app()->environment() !== 'testing' && Schema::hasTable('permissions')) {
             foreach ($this->getPermissions() as $permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
                     return $user->hasRole($permission->roles);
