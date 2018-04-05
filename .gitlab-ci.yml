@@ -82,6 +82,13 @@ stages:
         - php artisan config:cache
         - phpunit --coverage-html ./public/coverage
 
+.phpunit-codecov-html: &phpunit-codecov-html
+    stage: post-test
+    script:
+        - php artisan key:generate
+        - php artisan config:cache
+        - phpunit --coverage-clover=coverage.xml
+
 .phpunit-pg-tests: &phpunit-pg-tests
     <<: *postgres-service
     <<: *pull-cache-dev
@@ -143,6 +150,16 @@ pages:
     artifacts:
         paths:
         - public
+
+codecov:
+    <<: *postgres-service
+    <<: *pull-cache-dev
+    <<: *run-on-do-docker
+    <<: *phpunit-codecov-html
+    before_script:
+        - cp .env.testing.pgsql .env
+    after_script:
+        - bash <(curl -s https://codecov.io/bash) -t "$CODECOV_TOKEN"
 
 # Build
 build image:
