@@ -1,8 +1,8 @@
 image: registry.gitcity.eu/gitcity-sk/gitcity-build-images:php-7.2-fpm
 
 stages:
-    - prepare
     - build
+    - prepare
     - test
     - post-test
     - deploy
@@ -183,8 +183,7 @@ codecov:
         - bash <(curl -s https://codecov.io/bash) -t "$CODECOV_TOKEN"
 
 # Build
-build image:
-    <<: *pull-cache
+build master image:
     image: docker:latest
     services:
         - docker:dind
@@ -197,6 +196,23 @@ build image:
     <<: *run-on-do-docker
     only:
         - master
+    when: manual
+
+build image:
+    image: docker:latest
+    services:
+        - docker:dind
+    stage: build
+    before_script:
+        - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
+    script:
+        - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
+        - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+    <<: *run-on-do-docker
+    except:
+        - master
+    when: manual
+
 
 # Deploy
 deploy:to-docker-cloud:
@@ -214,9 +230,10 @@ deploy:to-docker-cloud:
     <<: *run-on-do-docker
     only:
         - master
+    when: manual
 
+# Deploy
 deploy:tags-to-docker-cloud:
-    <<: *pull-cache
     image: docker:latest
     services:
         - docker:dind
@@ -225,10 +242,10 @@ deploy:tags-to-docker-cloud:
         - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
         - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
     script:
-        - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
-        - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
-        - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" maymeow/webapp-ce:"$CI_COMMIT_REF_NAME"
-        - docker push maymeow/webapp-ce:"$CI_COMMIT_REF_NAME"
+        - docker pull "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+        - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" "maymeow/webapp-ce:$CI_COMMIT_REF_NAME"
+        - docker push maymeow/webapp-ce:latest
     <<: *run-on-do-docker
     only:
         - tags
+    when: manual
