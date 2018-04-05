@@ -122,12 +122,13 @@ stages:
     image: registry.gitcity.eu/gitcity-sk/gitcity-build-images:php-7.2-nginx-laravel-dusk-node
     stage: test
     before_script:
-        - cp .env.testing.pgsql .env
+        - cp .env.dusk.pgsql .env
         - composer require --dev laravel/dusk
     script:
         - configure-laravel
         - start-nginx-ci-project
         - php artisan dusk --colors --debug
+    allow_failure: true
 
 # ------------------------
 # End Configuration part
