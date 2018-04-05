@@ -45,7 +45,7 @@
         <form class="form-inline" action="/groups/{{ $group->id }}/milestones" method="post">
         {{ csrf_field() }}
             <div class="form-group mx-sm-3 mb-2">
-                <input type="text" class="form-control" id="project_id" name="project_id" placeholder="Enter milestone id">
+                <input type="text" class="form-control" id="milestone_id" name="milestone_id" placeholder="Enter milestone id">
             </div>
             <button type="submit" class="btn btn-outline-secondary mb-2">Add Milestone to group</button>
         </form>

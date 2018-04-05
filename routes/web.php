@@ -49,11 +49,12 @@ Route::get('/', function () {
 Route::group(['namespace' => 'Groups'], function () {
     Route::get('/groups', 'GroupsController@index');
     Route::get('/groups/create', 'GroupsController@create');
-    Route::get('/groups/{group}', 'GroupsController@show');
-    Route::get('/groups/{group}/milestones', 'MilestonesController@index');
+    Route::get('/groups/{group}', 'GroupsController@show')->name('groups.show');
+    Route::get('/groups/{group}/milestones', 'MilestonesController@index')->name('groups.milestones');
 
     Route::post('/groups', 'GroupsController@store');
     Route::post('/groups/{group}/projects', 'ProjectsController@store');
+    Route::post('/groups/{group}/milestones', 'MilestonesController@store');
 });
 
 /**

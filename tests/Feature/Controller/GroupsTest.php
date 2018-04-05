@@ -10,6 +10,7 @@ use App\Project;
 use App\Profile;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Milestone;
 
 class GroupsTest extends TestCase
 {
@@ -47,5 +48,53 @@ class GroupsTest extends TestCase
         $response = $this->get('/groups/' . $this->group->id);
         $response->assertStatus(200); 
         $response->assertSee($this->group->name);  
+    }
+
+    /** @test */
+    public function users_can_add_milestone_to_group()
+    {
+        $milestone = factory(Milestone::class)->create();
+
+        $respone = $this->actingAs($this->user)->withSession(['_token' => 'test'])->post('/groups/' . $this->group->id . '/milestones', [
+            'milestone_id' => $milestone->id
+        ]);
+        // after add milestone redirect back to group
+        $respone->assertRedirect('/groups/' . $this->group->id . '/milestones');
+        $attachedMilestone = $this->group->milestones()->where('title', $milestone->title)->first();
+
+        $this->assertEquals($milestone->title, $attachedMilestone->title);
+    }
+
+    /** @test */
+    public function user_can_add_project_to_group()
+    {
+        $project = factory(Project::class)->create();
+
+        $respone = $this->actingAs($this->user)->withSession(['_token' => 'test'])->post('/groups/' . $this->group->id . '/projects', [
+            'project_id' => $project->id
+        ]);
+        // after add milestone redirect back to group
+        $respone->assertRedirect('/groups/' . $this->group->id);
+        $attachedProject = $this->group->projects()->where('name', $project->name)->first();
+
+        $this->assertEquals($project->name, $attachedProject->name);
+    }
+
+    /** @test */
+    public function user_can_create_group()
+    {
+        $name = 'Group test';
+        $description = 'Group test description';
+
+        $response = $this->actingAs($this->user)->withSession(['_token', 'test'])->post('/groups', [
+            'name' => $name,
+            'description' => $description,
+            '_token' => 'test'
+        ]);
+        $response->assertRedirect('/groups');
+
+        $createdGroup = Group::where('name', $name)->first();
+        $this->assertEquals($name, $createdGroup->name);
+        $this->assertEquals($description, $createdGroup->description);
     }
 }

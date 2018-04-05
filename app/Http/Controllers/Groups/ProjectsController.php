@@ -18,6 +18,6 @@ class ProjectsController extends Controller
         $project = Project::findOrFail(request('project_id'));
         $group->attachProject($project);
 
-        return back();
+        return redirect()->route('groups.show', $group);
     }
 }
