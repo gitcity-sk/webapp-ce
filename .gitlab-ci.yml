@@ -115,6 +115,24 @@ stages:
         - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
     allow_failure: true
 
+.dusk: &dusk
+    <<: *postgres-service
+    <<: *pull-cache-dev
+    <<: *run-on-do-docker
+    image: registry.gitcity.eu/gitcity-sk/gitcity-build-images:php-7.2-nginx-laravel-dusk-node
+    stage: test
+    before_script:
+        - cp .env.testing.pgsql .env
+        - composer require --dev laravel/dusk
+    script:
+        - configure-laravel
+        - start-nginx-ci-project
+        - php artisan dusk --colors --debug
+
+# ------------------------
+# End Configuration part
+# ------------------------
+
 # Prepare
 composer-install: 
     <<: *run-on-do-docker
@@ -135,6 +153,7 @@ composer-install-dev:
 # Tests
 phpunit-pg-tests 1 1: *phpunit-pg-tests
 phpunit-mysql-tests 1 1: *phpunit-mysql-tests
+laravel-dusk-test: *dusk
 
 # Post Test
 phpcs-tests 1 1: *phpcs-tests
@@ -151,6 +170,7 @@ pages:
         paths:
         - public
 
+# Push coverage to codecov.io
 codecov:
     <<: *postgres-service
     <<: *pull-cache-dev
