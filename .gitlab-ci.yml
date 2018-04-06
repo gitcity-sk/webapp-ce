@@ -77,10 +77,13 @@ stages:
 
 .phpunit-html-coverage: &phpunit-html-coverage
     stage: post-test
+    environment:
+        name: code-coverage/$CI_COMMIT_REF_NAME
+        url: http://$CI_PROJECT_NAMESPACE.gitcity.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_SLUG/coverage/
     script:
         - php artisan key:generate
         - php artisan config:cache
-        - phpunit --coverage-html ./public/coverage
+        - phpunit --coverage-html ./public/$CI_COMMIT_REF_SLUG/coverage
 
 .phpunit-codecov-html: &phpunit-codecov-html
     stage: post-test

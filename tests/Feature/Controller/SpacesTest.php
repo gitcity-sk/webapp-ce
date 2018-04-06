@@ -22,17 +22,36 @@ class SpacesTest extends TestCase
 
         // Pforile belongs to user so lets create user with profile
         $this->user = factory(User::class)->create();
-        $this->space = factory(Space::class)->create(['user_id' => $this->user->id]);
         $this->project = factory(Project::class)->create(['user_id' => $this->user->id]);
         $this->profile = factory(Profile::class)->create(['user_id' => $this->user->id]);
+        $this->space = factory(Space::class)->create(['user_id' => $this->user->id]);
+
+        // private space must include project information to generate view
+        $this->privateSpace = factory(Space::class)->create(['user_id' => $this->user->id, 'private' => true, 'project_id' => $this->project->id]);
     }
 
     /** @test */
-    public function user_can_see_space()
+    public function anyone_can_see_public_space()
     {
         $response = $this->get('/spaces/' . $this->space->slug);
         $response->assertStatus(200);
         $response->assertSee($this->space->name);
+    }
+
+    /** @test */
+    public function logged_in_user_can_see_private_space()
+    {
+        $response = $this->actingAs($this->user)->get('/spaces/' . $this->privateSpace->slug);
+        $response->assertStatus(200);
+        $response->assertSee($this->privateSpace->name);
+        $response->assertSee('fa-lock-alt');
+    }
+
+    /** @test */
+    public function not_logged_in_user_can_not_see_private_space()
+    {
+        $response = $this->get('/spaces/' . $this->privateSpace->slug);
+        $response->assertStatus(404);
     }
 
     /** @test */

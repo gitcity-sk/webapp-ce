@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Space;
 use App\Repositories\Spaces;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class SpacesController extends Controller
 {
@@ -33,7 +34,10 @@ class SpacesController extends Controller
 
         // check if space is private
         if ($space->private) {
-            abort(404);
+            if (!Auth::check()) abort(404);
+            $project = $space->project;
+
+            return view('spaces.private-show', compact(['space', 'path', 'project']));
         }
 
         return view('spaces.show', compact(['space', 'path']));

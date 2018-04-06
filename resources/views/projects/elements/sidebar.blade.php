@@ -86,7 +86,7 @@
     <li class="{{ Request::is('*spaces') ? 'active' : '' }}">
         <a href="/projects/{{ $project->id }}/spaces" class="nav-link">
             <span class="mr-2">
-            <svg class="svg-inline--fa fa-dot-circle fa-w-16" aria-hidden="true" data-prefix="far" data-icon="dot-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"></path></svg>
+            <svg class="svg-inline--fa fa-boxes-alt fa-w-20" aria-hidden="true" data-prefix="fal" data-icon="boxes-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M624 224H480V16c0-8.8-7.2-16-16-16H176c-8.8 0-16 7.2-16 16v208H16c-8.8 0-16 7.2-16 16v256c0 8.8 7.2 16 16 16h608c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16zm-112 32v64h-64v-64h64zM288 32h64v64h-64V32zm-96 0h64v64c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32V32h64v192H192V32zm-64 224h64v64h-64v-64zm176 224H32V256h64v64c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32v-64h80v224zm304 0H336V256h80v64c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32v-64h64v224z"></path></svg>
             </span>
             Spaces <span class="badge badge-danger ml-1">Beta</span>
         </a>
