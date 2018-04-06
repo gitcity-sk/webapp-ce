@@ -12,9 +12,13 @@ class Shell
      */
     public static function isAllowed($secretKey) : bool
     {
-        if (null == $secretKey) return false;
+        if (null == $secretKey) {
+            return false;
+        }
 
-        if ($secretKey != config('webapp.shell_secret')) return false;
+        if ($secretKey != config('webapp.shell_secret')) {
+            return false;
+        }
 
         return true;
     }

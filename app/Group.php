@@ -27,11 +27,21 @@ class Group extends Model
         return $this->belongsToMany(Project::class);
     }
 
+    public function milestones()
+    {
+        return $this->hasMany(Milestone::class);
+    }
+
     /**
      * @param Project $project
      */
     public function attachProject(Project $project)
     {
         $this->projects()->save($project);
+    }
+
+    public function attachMilestone(Milestone $milestone)
+    {
+        $this->milestones()->save($milestone);
     }
 }

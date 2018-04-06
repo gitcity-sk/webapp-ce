@@ -19,6 +19,7 @@ class Commit extends BaseModel
         if ($repo && (count($repo->getBranches(true)) != 0)) {
             return $repo->getLog('HEAD');
         }
+
         return null;
     }
 
@@ -35,6 +36,7 @@ class Commit extends BaseModel
         if ($repo && (count($repo->getBranches(true)) != 0)) {
             return $repo->getCommit($sha);
         }
+
         return null;
     }
 }

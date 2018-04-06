@@ -39,7 +39,10 @@ Route::get('/dashboard', 'HomeController@index')->name('home');
  * You can update configu if you want redirect Homepage to another page
  */
 Route::get('/', function () {
-    if (config('webapp.redirect_home_page')) return redirect(config('webapp.redirect_home_page'));
+    if (config('webapp.redirect_home_page')) {
+        return redirect(config('webapp.redirect_home_page'));
+    }
+
     return view('home')->with('name', 'CodeOcean');
 });
 
@@ -49,11 +52,12 @@ Route::get('/', function () {
 Route::group(['namespace' => 'Groups'], function () {
     Route::get('/groups', 'GroupsController@index');
     Route::get('/groups/create', 'GroupsController@create');
-    Route::get('/groups/{group}', 'GroupsController@show');
-    Route::get('/groups/{group}/milestones', 'MilestonesController@index');
+    Route::get('/groups/{group}', 'GroupsController@show')->name('groups.show');
+    Route::get('/groups/{group}/milestones', 'MilestonesController@index')->name('groups.milestones');
 
     Route::post('/groups', 'GroupsController@store');
     Route::post('/groups/{group}/projects', 'ProjectsController@store');
+    Route::post('/groups/{group}/milestones', 'MilestonesController@store');
 });
 
 /**
@@ -85,7 +89,7 @@ Route::group(['namespace' => 'Projects'], function () {
     Route::get('/projects/{project}/milestones', 'MilestonesController@index')->name('projectMilestones');
     Route::get('/projects/{project}/milestones/new', 'MilestonesController@create');
     Route::get('/projects/{project}/spaces', 'SpacesController@index')->name('project.spaces');
-    
+
     // POST, PUT
     Route::post('/projects', 'ProjectsController@store');
     Route::post('/projects/{project}/issues', 'IssuesController@store');

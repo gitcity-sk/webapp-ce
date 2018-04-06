@@ -21,6 +21,7 @@ class DiffObject extends BaseModel
         if ($repo && (count($repo->getBranches(true)) != 0)) {
             return $repo->getDiff($repo->getCommit($repo->getBranch($sourceBranch)->getSha()), $repo->getCommit($repo->getBranch($targetBranch)->getSha()));
         }
+
         return null;
     }
 }

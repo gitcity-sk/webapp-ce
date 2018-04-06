@@ -61,7 +61,7 @@ class Issue extends Model
     }
 
     /**
-     * @param Label $label
+     * @param Label $labelId
      * @return Model
      */
     public function addLabel($labelId)
@@ -70,7 +70,7 @@ class Issue extends Model
     }
 
     /**
-     * @param Label $label
+     * @param Label $labelId
      * @return Model
      */
     public function removeLabel($labelId)

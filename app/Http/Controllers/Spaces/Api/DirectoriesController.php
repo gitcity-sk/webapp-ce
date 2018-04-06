@@ -18,7 +18,7 @@ class DirectoriesController extends Controller
     {
         $this->middleware(['cors', 'throttle:60,1']);
     }
-    
+
     /**
      * @param Space $space
      * @param null $path

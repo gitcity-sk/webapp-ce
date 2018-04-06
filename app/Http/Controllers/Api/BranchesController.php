@@ -31,7 +31,9 @@ class BranchesController extends Controller
         $gitBranches = new Branch();
         $branches = $gitBranches->get($project->user->name, $project->slug);
 
-        if (!$branches) return $this->returnEmptyData();
+        if (!$branches) {
+            return $this->returnEmptyData();
+        }
 
         // branches returns array of gitObject
         $array = [];

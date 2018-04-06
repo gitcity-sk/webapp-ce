@@ -15,6 +15,6 @@ $factory->define(App\Space::class, function (Faker $faker) {
         'name' => $name,
         'slug' => str_slug($name),
         'private' => false,
-        
+
     ];
 });

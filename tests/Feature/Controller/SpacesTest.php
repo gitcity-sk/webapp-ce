@@ -25,7 +25,6 @@ class SpacesTest extends TestCase
         $this->space = factory(Space::class)->create(['user_id' => $this->user->id]);
         $this->project = factory(Project::class)->create(['user_id' => $this->user->id]);
         $this->profile = factory(Profile::class)->create(['user_id' => $this->user->id]);
-
     }
 
     /** @test */

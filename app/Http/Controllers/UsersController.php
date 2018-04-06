@@ -15,7 +15,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        if (!auth()->user()->can('do:admin:actions')) abort (403, 'You do not have permission to see this page');
+        if (!auth()->user()->can('do:admin:actions')) {
+            abort(403, 'You do not have permission to see this page');
+        }
 
         $users = User::all();
 
@@ -28,7 +30,9 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        if (!auth()->user()->can('do:admin:actions')) abort (403, 'You do not have permission to see this page');
+        if (!auth()->user()->can('do:admin:actions')) {
+            abort(403, 'You do not have permission to see this page');
+        }
 
         $roles = Role::all();
 

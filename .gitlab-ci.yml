@@ -1,8 +1,8 @@
-image: registry.gitcity.eu/gitcity-sk/gitcity-build-images:php-7.1-fpm-redis-phpunit-6.5.6
+image: registry.gitcity.eu/gitcity-sk/gitcity-build-images:php-7.2-fpm
 
 stages:
-    - prepare
     - build
+    - prepare
     - test
     - post-test
     - deploy
@@ -82,6 +82,13 @@ stages:
         - php artisan config:cache
         - phpunit --coverage-html ./public/coverage
 
+.phpunit-codecov-html: &phpunit-codecov-html
+    stage: post-test
+    script:
+        - php artisan key:generate
+        - php artisan config:cache
+        - phpunit --coverage-clover=coverage.xml
+
 .phpunit-pg-tests: &phpunit-pg-tests
     <<: *postgres-service
     <<: *pull-cache-dev
@@ -108,6 +115,25 @@ stages:
         - vendor/bin/phpcs -p --extensions=php --standard=vendor/cakephp/cakephp-codesniffer/CakePHP ./app ./tests ./routes ./database
     allow_failure: true
 
+.dusk: &dusk
+    <<: *postgres-service
+    <<: *pull-cache-dev
+    <<: *run-on-do-docker
+    image: registry.gitcity.eu/gitcity-sk/gitcity-build-images:php-7.2-nginx-laravel-dusk-node
+    stage: test
+    before_script:
+        - cp .env.dusk.pgsql .env
+        - composer require --dev laravel/dusk
+    script:
+        - configure-laravel
+        - start-nginx-ci-project
+        - php artisan dusk --colors --debug
+    allow_failure: true
+
+# ------------------------
+# End Configuration part
+# ------------------------
+
 # Prepare
 composer-install: 
     <<: *run-on-do-docker
@@ -128,6 +154,7 @@ composer-install-dev:
 # Tests
 phpunit-pg-tests 1 1: *phpunit-pg-tests
 phpunit-mysql-tests 1 1: *phpunit-mysql-tests
+laravel-dusk-test: *dusk
 
 # Post Test
 phpcs-tests 1 1: *phpcs-tests
@@ -144,9 +171,19 @@ pages:
         paths:
         - public
 
+# Push coverage to codecov.io
+codecov:
+    <<: *postgres-service
+    <<: *pull-cache-dev
+    <<: *run-on-do-docker
+    <<: *phpunit-codecov-html
+    before_script:
+        - cp .env.testing.pgsql .env
+    after_script:
+        - bash <(curl -s https://codecov.io/bash) -t "$CODECOV_TOKEN"
+
 # Build
-build image:
-    <<: *pull-cache
+build master image:
     image: docker:latest
     services:
         - docker:dind
@@ -159,6 +196,23 @@ build image:
     <<: *run-on-do-docker
     only:
         - master
+    when: manual
+
+build image:
+    image: docker:latest
+    services:
+        - docker:dind
+    stage: build
+    before_script:
+        - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
+    script:
+        - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
+        - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+    <<: *run-on-do-docker
+    except:
+        - master
+    when: manual
+
 
 # Deploy
 deploy:to-docker-cloud:
@@ -176,9 +230,10 @@ deploy:to-docker-cloud:
     <<: *run-on-do-docker
     only:
         - master
+    when: manual
 
+# Deploy
 deploy:tags-to-docker-cloud:
-    <<: *pull-cache
     image: docker:latest
     services:
         - docker:dind
@@ -187,10 +242,10 @@ deploy:tags-to-docker-cloud:
         - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
         - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
     script:
-        - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" .
-        - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
-        - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" maymeow/webapp-ce:"$CI_COMMIT_REF_NAME"
-        - docker push maymeow/webapp-ce:"$CI_COMMIT_REF_NAME"
+        - docker pull "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
+        - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" "maymeow/webapp-ce:$CI_COMMIT_REF_NAME"
+        - docker push maymeow/webapp-ce:latest
     <<: *run-on-do-docker
     only:
         - tags
+    when: manual

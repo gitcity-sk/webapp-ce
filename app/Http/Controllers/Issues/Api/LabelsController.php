@@ -17,7 +17,7 @@ class LabelsController extends Controller
     {
         $this->middleware(['auth', 'api']);
     }
-    
+
     /**
      * @param Issue $issue
      * @return mixed
@@ -29,9 +29,9 @@ class LabelsController extends Controller
 
     /**
      * Create relationship between label and issue
-     * 
+     *
      * @param Issue $issue
-     * @param integer $id
+     * @param int $id
      * @return mixed
      */
     public function store(Issue $issue, $id)

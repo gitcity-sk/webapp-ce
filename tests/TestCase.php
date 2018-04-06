@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-
 use App\Permission;
 use App\User;
 use GitElephant\GitBinary;
@@ -36,7 +35,6 @@ abstract class TestCase extends BaseTestCase
     {
         return $this->testingLicense;
     }
-
 
     protected function createEmptyBareRepository(string $userName, string $repositoryName)
     {

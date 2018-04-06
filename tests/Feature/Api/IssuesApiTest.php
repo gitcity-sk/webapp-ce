@@ -59,16 +59,15 @@ class IssuesControllerTest extends TestCase
     /** @test */
     public function api_can_get_open_issues()
     {
-        $response = $this->actingAs($this->user)->get('/api/milestones/' . $this->milestone->id . '/issues/open' );
+        $response = $this->actingAs($this->user)->get('/api/milestones/' . $this->milestone->id . '/issues/open');
         $response->assertStatus(200);
         $response->assertSee($this->issue->title);
-
     }
 
     /** @test */
     public function api_can_get_closed_issues()
     {
-        $response = $this->actingAs($this->user)->get('/api/milestones/' . $this->milestone->id . '/issues/closed' );
+        $response = $this->actingAs($this->user)->get('/api/milestones/' . $this->milestone->id . '/issues/closed');
         $response->assertStatus(200);
         $response->assertSee($this->closed_issue->title);
     }

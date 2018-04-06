@@ -12,13 +12,19 @@ class BlobResource
 
     public function __construct($name, $size)
     {
-        if (null !== $name) $this->name = $name;
-        if (null !== $size) $this->size = $size;
+        if (null !== $name) {
+            $this->name = $name;
+        }
+        if (null !== $size) {
+            $this->size = $size;
+        }
     }
 
     public function setContent($content)
     {
-        if (null !== $content) $this->content = $content;
+        if (null !== $content) {
+            $this->content = $content;
+        }
 
         return $this;
     }

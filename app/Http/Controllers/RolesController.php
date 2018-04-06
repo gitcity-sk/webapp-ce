@@ -24,7 +24,9 @@ class RolesController extends Controller
      */
     public function index(Role $role)
     {
-        if (!auth()->user()->can('do:admin:actions')) abort (403, 'You do not have permission to see this page');
+        if (!auth()->user()->can('do:admin:actions')) {
+            abort(403, 'You do not have permission to see this page');
+        }
 
         $roles = Role::all();
 
@@ -51,7 +53,9 @@ class RolesController extends Controller
      */
     public function create()
     {
-        if (!auth()->user()->can('do:admin:actions')) abort (403, 'You do not have permission to see this page');
+        if (!auth()->user()->can('do:admin:actions')) {
+            abort(403, 'You do not have permission to see this page');
+        }
 
         return view('admin.roles.create');
     }
@@ -62,7 +66,9 @@ class RolesController extends Controller
      */
     public function store(Role $role)
     {
-        if (!auth()->user()->can('do:admin:actions')) abort (403, 'You do not have permission to see this page');
+        if (!auth()->user()->can('do:admin:actions')) {
+            abort(403, 'You do not have permission to see this page');
+        }
         // Todo this is admin action? If yes update URL
         // dd(request());
         Role::create([
@@ -79,7 +85,9 @@ class RolesController extends Controller
      */
     public function assignTo(User $user)
     {
-        if (!auth()->user()->can('do:admin:actions')) abort (403, 'You do not have permission to see this page');
+        if (!auth()->user()->can('do:admin:actions')) {
+            abort(403, 'You do not have permission to see this page');
+        }
         // TODO this is admin action?
         // dd(request('role_id'));
         $user->assignRole(request('role_name'));

@@ -19,7 +19,7 @@ class SpacesController extends Controller
 
     public function show(Space $space)
     {
-        $information = Cache::remember(static::CACHE_KEY_PREFIX . 'space.show' . $space->slug, 10 ,function() use ($space) {
+        $information = Cache::remember(static::CACHE_KEY_PREFIX . 'space.show' . $space->slug, 10, function () use ($space) {
             return new SpaceResource($space);
         });
 
@@ -33,14 +33,13 @@ class SpacesController extends Controller
     public function getSize(Space $space)
     {
         // remember into cache
-        $size = Cache::remember(static::CACHE_KEY_PREFIX . 'space-size-for' . $space->slug, 10, function() use ($space) {
+        $size = Cache::remember(static::CACHE_KEY_PREFIX . 'space-size-for' . $space->slug, 10, function () use ($space) {
             //get size for all files
             $files =  Storage::allFiles('spaces/' . $space->slug);
-            foreach ($files as $file)
-            {
+            foreach ($files as $file) {
                 $this->totalSpaceSize += Storage::size($file);
             }
-            
+
             return ['data' => [
                 'size' => $this->totalSpaceSize,
                 'human_readable_size' => size_for_humans($this->totalSpaceSize)
@@ -57,14 +56,13 @@ class SpacesController extends Controller
     public function sizeOf($path)
     {
         // remember into cache
-        $size = Cache::remember($path, 10, function() use ($path) {
+        $size = Cache::remember($path, 10, function () use ($path) {
             //get size for all files
             $files =  Storage::allFiles($path);
-            foreach ($files as $file)
-            {
+            foreach ($files as $file) {
                 $this->totalSpaceSize += Storage::size($file);
             }
-            
+
             return ['data' => [
                 'size' => $this->totalSpaceSize,
                 'human_readable_size' => size_for_humans($this->totalSpaceSize)
@@ -88,5 +86,4 @@ class SpacesController extends Controller
             'data' => Url::temporarySignedRoute('storage.file', now()->addMinutes(1), ['filename' => $path])
         ];
     }
-
 }
