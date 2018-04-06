@@ -7,6 +7,7 @@
             <tr>
                 <th scope="col">Issue</th>
                 <th scope="col">Size</th>
+                <th></th>
             </tr>
         </thead>
             <tbody>

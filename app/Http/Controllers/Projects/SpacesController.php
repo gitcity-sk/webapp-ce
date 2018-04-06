@@ -37,11 +37,13 @@ class SpacesController extends Controller
             abort(403, 'License required');
         }
 
+        //dd(request('private'));
         $spaceName = request('name');
 
         $space = $project->createSpace(new Space([
             'name' => $spaceName,
             'user_id' => auth()->id(),
+            'private' => request('private') == false ? 0 : 1,
             'slug' => str_slug($spaceName)
         ]));
 
