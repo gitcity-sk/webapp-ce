@@ -4,7 +4,6 @@ namespace App\Api\Git;
 
 use GitElephant\Objects\GitObject;
 
-
 class GitResource
 {
     /**
@@ -23,19 +22,21 @@ class GitResource
      */
     public static function collection($entity)
     {
-        if (null == $entity) return null;
-        
-        if (! $entity instanceof GitObject) throw new \Exception("Entity must be instance of " . GitObject::class);
+        if (null == $entity) {
+            return null;
+        }
+
+        if (! $entity instanceof GitObject) {
+            throw new \Exception("Entity must be instance of " . GitObject::class);
+        }
 
         $array = [];
         $AnonymousResource = get_called_class();
 
-        foreach ($entity as $item)
-        {
+        foreach ($entity as $item) {
             $array[] = (new $AnonymousResource($item))->toArray();
         }
-        
+
         return $array;
     }
-
 }

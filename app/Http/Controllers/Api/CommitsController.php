@@ -48,8 +48,9 @@ class CommitsController extends Controller
         $key = 'commit-' . $projectId . '-' . $sha;
 
         // Load from Cache if key exists
-        $commit = Cache::remember($key, 10, function() use ($gitLog, $projectId, $sha) {
+        $commit = Cache::remember($key, 10, function () use ($gitLog, $projectId, $sha) {
             $project = Project::find($projectId);
+
             return $gitLog->getSingle($project->user->name, $project->slug, $sha);
         });
 

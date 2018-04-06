@@ -20,6 +20,7 @@ class Tag extends BaseModel
         if ($repo && (count($repo->getBranches(true)) != 0)) {
             return $repo->getTags();
         }
+
         return null;
     }
 }

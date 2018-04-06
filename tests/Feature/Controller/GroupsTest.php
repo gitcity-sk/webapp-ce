@@ -2,15 +2,16 @@
 
 namespace Tests\Feature\Controller;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Group;
-use App\Project;
+use App\Milestone;
 use App\Profile;
+use App\Project;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Milestone;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+
 
 class GroupsTest extends TestCase
 {
@@ -46,8 +47,8 @@ class GroupsTest extends TestCase
     public function users_can_see_one_groups()
     {
         $response = $this->get('/groups/' . $this->group->id);
-        $response->assertStatus(200); 
-        $response->assertSee($this->group->name);  
+        $response->assertStatus(200);
+        $response->assertSee($this->group->name);
     }
 
     /** @test */

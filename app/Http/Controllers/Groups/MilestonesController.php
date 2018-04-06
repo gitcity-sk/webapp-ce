@@ -25,7 +25,7 @@ class MilestonesController extends Controller
     {
         $milestone = Milestone::findOrFail(request('milestone_id'));
         $group->attachMilestone($milestone);
-        
+
         return redirect()->route('groups.milestones', [$group]);
     }
 }

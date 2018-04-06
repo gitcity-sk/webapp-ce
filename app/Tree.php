@@ -22,10 +22,14 @@ class Tree extends BaseModel
         // initialize null branch
         $branch = null;
 
-        if ($options !== null) $this->_configure($options);
+        if ($options !== null) {
+            $this->_configure($options);
+        }
 
         $repo = Repo::open($userName, $projecSlug);
-        if ($repo) $branch = $repo->getBranch($this->branch);
+        if ($repo) {
+            $branch = $repo->getBranch($this->branch);
+        }
 
         if (null !== $branch) {
             return $repo->getTree($branch, $this->path);

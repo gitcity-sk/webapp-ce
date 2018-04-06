@@ -42,7 +42,9 @@ class Projects
         $matches = explode('/', $projectPath);
         $user = User::where('name', $matches[0])->firstOrFail();
 
-        if ($user) return $user->projects()->where('slug', $matches[1])->firstOrFail();
+        if ($user) {
+            return $user->projects()->where('slug', $matches[1])->firstOrFail();
+        }
 
         return null;
     }

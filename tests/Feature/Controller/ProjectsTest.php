@@ -90,7 +90,6 @@ class ProjectsTest extends TestCase
         $response->assertStatus(200);
     }
 
-
     /** @test */
     public function users_can_see_project_branches_no_permission()
     {

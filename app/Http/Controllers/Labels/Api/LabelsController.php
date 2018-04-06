@@ -27,7 +27,9 @@ class LabelsController extends Controller
 
         // Formating output
         if (request()->has('format')) {
-            if (request('format') == 'list') return ListResource::collection($labels);
+            if (request('format') == 'list') {
+                return ListResource::collection($labels);
+            }
         }
 
         return LabelResource::collection($labels);

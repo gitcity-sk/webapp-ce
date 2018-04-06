@@ -15,7 +15,6 @@ class BranchesController extends Controller
     public function show(Project $project)
     {
         if (auth()->user()->can('show-project')) {
-
             return view('projects.branches', compact('project'));
         }
 

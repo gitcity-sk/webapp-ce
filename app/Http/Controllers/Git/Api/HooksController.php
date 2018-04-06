@@ -24,21 +24,27 @@ class HooksController extends Controller
      */
     public function update()
     {
-        if (!Shell::isAllowed(request('shell_secret_key'))) abort(404);
+        if (!Shell::isAllowed(request('shell_secret_key'))) {
+            abort(404);
+        }
 
         $project = $this->projects->findFromPath(request('project'));
-        
+
         return new ProjectResource($project);
     }
 
     public function key()
     {
-        if (!Shell::isAllowed(request('shell_secret_key'))) abort(404);
-        
+        if (!Shell::isAllowed(request('shell_secret_key'))) {
+            abort(404);
+        }
+
         $keyData = AuthorizedKey::find(request('key_id'));
 
-        if(null == $keyData) abort (404);
-        
+        if (null == $keyData) {
+            abort(404);
+        }
+
         return new AuthorizedKeyResource($keyData);
     }
 }

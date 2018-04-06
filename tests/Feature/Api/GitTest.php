@@ -20,7 +20,6 @@ class GitTest extends TestCase
         $this->user = factory(User::class)->create();
         $this->project = factory(Project::class)->create();
         $this->repo = $this->createEmptyBareRepository($this->user->name, $this->project->name);
-
     }
 
     /** @test */
@@ -34,7 +33,6 @@ class GitTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get('/api/projects/' . $this->project->id . '/branches');
         $response->assertStatus(200);
-
     }
 
     /** @test */
@@ -42,7 +40,6 @@ class GitTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get('/api/projects/' . $this->project->id . '/tags');
         $response->assertStatus(200);
-
     }
 
     /** @test */
@@ -50,7 +47,6 @@ class GitTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get('/api/projects/' . $this->project->id . '/commits');
         $response->assertStatus(200);
-
     }
 
     /** @test */
@@ -58,6 +54,5 @@ class GitTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get('/api/projects/' . $this->project->id . '/tree');
         $response->assertStatus(200);
-
     }
 }

@@ -69,8 +69,8 @@ class Markdown extends \Parsedown
                     $block['element']['text'][$iterator_element]['text'][$iterator_text] = '<input type="checkbox" disabled /> '.
                         substr(trim($block['element']['text'][$iterator_element]['text'][$iterator_text]), 4);
                     $block['element']['text'][$iterator_element]['attributes'] = ['class' => 'parsedown-task-list parsedown-task-list-open'];
-                } 
-                
+                }
+
                 if ('[x] ' === $begin_line) {
                     $block['element']['text'][$iterator_element]['text'][$iterator_text] = '<input type="checkbox" checked disabled /> '.
                         substr(trim($block['element']['text'][$iterator_element]['text'][$iterator_text]), 4);

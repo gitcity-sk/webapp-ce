@@ -32,7 +32,9 @@ class TagsController extends Controller
         $gitTags = new Tag();
         $tags = $gitTags->get($project->user->name, $project->slug);
 
-        if(!$tags) return $this->returnEmptyData();
+        if (!$tags) {
+            return $this->returnEmptyData();
+        }
 
         // tags returns array of gitObject
         $array = [];

@@ -33,7 +33,7 @@ class TreeController extends Controller
         $tree = $treeGit->get($project->user->name, $project->slug, [
             'path' => $path
         ]);
-        
+
         return [
             'data' => TreeResource::collection($tree)
         ];

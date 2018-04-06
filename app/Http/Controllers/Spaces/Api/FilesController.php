@@ -38,7 +38,7 @@ class FilesController extends Controller
     {
         $path == null ? $key = $space->slug . 'root-folder' : $key = $space->slug . $path;
 
-        $filesData = Cache::remember($key, 10, function() use ($space, $path) {
+        $filesData = Cache::remember($key, 10, function () use ($space, $path) {
 
             $files = [];
             $currentPath = str_finish('spaces/' . $space->slug . '/' . $path, '/');
@@ -58,10 +58,11 @@ class FilesController extends Controller
             }
 
             return $files;
-
         });
 
-        if (request()->has('type')) $filesData = $this->_filter($filesData, request('type'));
+        if (request()->has('type')) {
+            $filesData = $this->_filter($filesData, request('type'));
+        }
 
         return ['data' => $filesData];
     }
@@ -74,10 +75,14 @@ class FilesController extends Controller
     protected function _filter($filesData, $type)
     {
         // if given type dont exists in array then return empty array
-        if(!array_key_exists($type, $this->fileTypes)) return [];
+        if (!array_key_exists($type, $this->fileTypes)) {
+            return [];
+        }
 
         foreach ($filesData as $key => $file) {
-            if (!in_array(strtolower($file['extension']), $this->fileTypes[$type])) unset($filesData[$key]);
+            if (!in_array(strtolower($file['extension']), $this->fileTypes[$type])) {
+                unset($filesData[$key]);
+            }
         }
 
         return $filesData;

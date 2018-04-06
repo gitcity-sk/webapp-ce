@@ -14,7 +14,7 @@ class PassportController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         return view('admin.passport.index');

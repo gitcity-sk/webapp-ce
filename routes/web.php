@@ -39,7 +39,10 @@ Route::get('/dashboard', 'HomeController@index')->name('home');
  * You can update configu if you want redirect Homepage to another page
  */
 Route::get('/', function () {
-    if (config('webapp.redirect_home_page')) return redirect(config('webapp.redirect_home_page'));
+    if (config('webapp.redirect_home_page')) {
+        return redirect(config('webapp.redirect_home_page'));
+    }
+
     return view('home')->with('name', 'CodeOcean');
 });
 
@@ -86,7 +89,7 @@ Route::group(['namespace' => 'Projects'], function () {
     Route::get('/projects/{project}/milestones', 'MilestonesController@index')->name('projectMilestones');
     Route::get('/projects/{project}/milestones/new', 'MilestonesController@create');
     Route::get('/projects/{project}/spaces', 'SpacesController@index')->name('project.spaces');
-    
+
     // POST, PUT
     Route::post('/projects', 'ProjectsController@store');
     Route::post('/projects/{project}/issues', 'IssuesController@store');

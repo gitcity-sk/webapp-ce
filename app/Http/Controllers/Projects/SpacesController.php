@@ -33,7 +33,9 @@ class SpacesController extends Controller
      */
     public function store(Project $project)
     {
-        if (license_check('private_spaces') == false && request('private') == true) abort(403, 'License required');
+        if (license_check('private_spaces') == false && request('private') == true) {
+            abort(403, 'License required');
+        }
 
         $spaceName = request('name');
 
@@ -43,7 +45,9 @@ class SpacesController extends Controller
             'slug' => str_slug($spaceName)
         ]));
 
-        if($space) Storage::makeDirectory('spaces/' . $space->slug);
+        if ($space) {
+            Storage::makeDirectory('spaces/' . $space->slug);
+        }
 
         return redirect()->route('project.spaces', [$project]);
     }

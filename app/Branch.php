@@ -20,6 +20,7 @@ class Branch extends BaseModel
         if ($repo && (count($repo->getBranches(true)) != 0)) {
             return $repo->getBranches();
         }
+
         return null;
     }
 }

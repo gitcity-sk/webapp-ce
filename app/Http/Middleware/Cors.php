@@ -8,7 +8,7 @@ class Cors
 {
     /**
      * Handle an incoming request.
-     * 
+     *
      * GET, POST, PUT, DELETE, OPTIONS
      *
      * @param  \Illuminate\Http\Request  $request

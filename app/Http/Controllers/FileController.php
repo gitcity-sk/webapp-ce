@@ -15,7 +15,7 @@ class FileController extends Controller
         if (! request()->hasValidSignature()) {
             abort(404, 'Not found');
         }
-        
+
         return response()->download(storage_path('app/'. $file), null, [], null);
     }
 }

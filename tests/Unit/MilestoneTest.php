@@ -20,7 +20,7 @@ class MilestoneTest extends TestCase
 
         $this->milestone = factory(Milestone::class)->create();
     }
-    
+
     /** @test */
     public function milestone_can_belongs_to_group()
     {

@@ -32,7 +32,9 @@ class SpacesController extends Controller
         $space = $this->spaces->findBySlug($slug);
 
         // check if space is private
-        if($space->private) abort(404);
+        if ($space->private) {
+            abort(404);
+        }
 
         return view('spaces.show', compact(['space', 'path']));
     }

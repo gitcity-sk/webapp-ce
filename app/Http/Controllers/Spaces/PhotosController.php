@@ -34,7 +34,9 @@ class PhotosController extends Controller
         //dd([$slug, $path]);
 
         // check if space is private
-        if($space->private) abort(404);;
+        if ($space->private) {
+            abort(404);
+        };
 
         return view('spaces.photos', compact(['space', 'path']));
     }
