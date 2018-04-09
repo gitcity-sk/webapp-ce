@@ -185,7 +185,7 @@ codecov:
     after_script:
         - bash <(curl -s https://codecov.io/bash) -t "$CODECOV_TOKEN"
 
-# Build
+# Build master image (latest)
 build master image:
     image: docker:latest
     services:
@@ -201,6 +201,7 @@ build master image:
         - master
     when: manual
 
+# Build everything else
 build image:
     image: docker:latest
     services:
@@ -217,12 +218,15 @@ build image:
     when: manual
 
 
-# Deploy
+# Deploy latest image to docker
 deploy:to-docker-cloud:
     image: docker:latest
     services:
         - docker:dind
     stage: deploy
+    environment:
+        name: release/latest
+        url: https://hub.docker.com/r/maymeow/webapp-ce/tags/
     before_script:
         - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
         - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
@@ -235,19 +239,22 @@ deploy:to-docker-cloud:
         - master
     when: manual
 
-# Deploy
+# Deploy Tagged image to docker
 deploy:tags-to-docker-cloud:
     image: docker:latest
     services:
         - docker:dind
     stage: deploy
+    environment:
+        name: release/$CI_COMMIT_REF_NAME
+        url: https://hub.docker.com/r/maymeow/webapp-ce/tags/
     before_script:
         - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
         - echo "$CLOUD_REGISTRY_SECRET" | docker login -u "maymeow" --password-stdin
     script:
         - docker pull "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME"
         - docker tag "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME" "maymeow/webapp-ce:$CI_COMMIT_REF_NAME"
-        - docker push maymeow/webapp-ce:latest
+        - docker push "maymeow/webapp-ce:$CI_COMMIT_REF_NAME"
     <<: *run-on-do-docker
     only:
         - tags
