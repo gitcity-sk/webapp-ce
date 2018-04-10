@@ -24,7 +24,7 @@
                                     <a class="text-dark" style="font-weight: 600;" href="#">{{ tag.name }}</a>
                                     <div>
                                         <small>
-                                            <span class="mr-2"><i class="far fa-code-commit"></i></span><a href="#">{{ tag.commit.hash_short }}</a> {{ tag.commit.message }} {{ tag.commit.created_at.date | moment }}
+                                            <span class="mr-2"><i class="far fa-code-commit"></i></span><a href="#" class="text-monospace">{{ tag.commit.hash_short }}</a> {{ tag.commit.message }} {{ tag.commit.created_at.date | moment }}
                                         </small>
                                     </div>
                                 </div>

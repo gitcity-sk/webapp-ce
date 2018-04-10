@@ -3,8 +3,8 @@
     <td><span class="mr-2"><i class="fal fa-box-alt"></i></span><a :href="'/spaces/' + spaceData.slug" style="font-weight: 600" class="text-dark">{{ spaceData.name }}</a></td>
     <td><span v-if="done"> {{ space.data.human_readable_size }} </span></td>
     <td class="text-right">
-        <span v-tooltip:top="'Private space - To access is need verification.'" v-if="spaceData.private == 1"><i class="far fa-lock-alt"></i></span>
-        <span v-tooltip:top="'Public space - Can be acessed without verifiaction.'" v-else><i class="fal fa-globe"></i></span>
+        <span v-tooltip:left="'Private space - To access is need verification.'" v-if="spaceData.private == 1"><i class="far fa-lock-alt"></i></span>
+        <span v-tooltip:left="'Public space - Can be acessed without verifiaction.'" v-else><i class="fal fa-globe"></i></span>
     </td>
 </tr>
 </template>
