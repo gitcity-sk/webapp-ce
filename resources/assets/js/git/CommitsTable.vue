@@ -25,7 +25,7 @@
                                     <div><small>{{ commit.author.name }} authored {{ commit.created_at.date | moment }}</small></div>
                                 </div>
 
-                                <div class="ml-auto text-right">
+                                <div class="ml-auto text-right text-monospace">
                                     {{ commit.hash_short }}
                                 </div>
                             </div>
