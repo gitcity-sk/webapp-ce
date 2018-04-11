@@ -1,4 +1,11 @@
-v 18.4.1 (unreleased)
+v 18.4.2
+
+* UPDATE When user is logged homepage will be redirected to projects index
+* UPDATE Blob viewer now using one dark theme
+* UPDATE More narrow view for blob viewer
+* FIX Blob viewer padding for code
+
+v 18.4.1
 
 * ADD Users can add milestone to group
 
