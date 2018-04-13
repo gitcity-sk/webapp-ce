@@ -22,7 +22,7 @@ class WebappTest extends TestCase
     /** @test */
     public function non_logged_user_see_home_page()
     {
-        $response = $this->actingAs($this->nonAdminUser)->get('/');
+        $response = $this->get('/');
         $response->assertStatus(200);
     }
 
