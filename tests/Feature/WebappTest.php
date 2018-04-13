@@ -37,7 +37,7 @@ class WebappTest extends TestCase
     public function admin_see_link_to_admin_area()
     {
         $adminUser = $this->createUserWithPermissionTo('do:admin:actions');
-        $response = $this->actingAs($adminUser)->get('/');
+        $response = $this->actingAs($adminUser)->get('/projects');
         $response->assertSee('class="nav-link" href="/admin/roles"');
     }
 
