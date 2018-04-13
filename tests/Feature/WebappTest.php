@@ -20,24 +20,31 @@ class WebappTest extends TestCase
     }
 
     /** @test */
+    public function non_logged_user_see_home_page()
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+    }
+
+    /** @test */
+    public function logged_in_user_is_redirected_to_projects()
+    {
+        $response = $this->actingAs($this->nonAdminUser)->get('/');
+        $response->assertRedirect('/projects');
+    }
+
+    /** @test */
     public function admin_see_link_to_admin_area()
     {
         $adminUser = $this->createUserWithPermissionTo('do:admin:actions');
-
-        $response = $this->actingAs($adminUser)->get('/');
-        $response->assertStatus(200);
+        $response = $this->actingAs($adminUser)->get('/projects');
         $response->assertSee('class="nav-link" href="/admin/roles"');
-
-        $this->assertTrue(true);
     }
 
     /** @test */
     public function non_admin_cannot_see_link_to_admin_area()
     {
         $response = $this->actingAs($this->nonAdminUser)->get('/');
-        $response->assertStatus(200);
         $response->assertDontSee('class="nav-link" href="/admin/roles"');
-
-        $this->assertTrue(true);
     }
 }

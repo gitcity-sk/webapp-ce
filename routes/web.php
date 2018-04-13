@@ -43,6 +43,10 @@ Route::get('/', function () {
         return redirect(config('webapp.redirect_home_page'));
     }
 
+    if (Auth::check()) {
+        return redirect('/projects');
+    }
+
     return view('home')->with('name', 'CodeOcean');
 });
 
