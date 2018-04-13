@@ -30,7 +30,7 @@ class WebappTest extends TestCase
     public function logged_in_user_is_redirected_to_projects()
     {
         $response = $this->actingAs($this->nonAdminUser)->get('/');
-        $response->assertRedirectedTo('/projects');
+        $response->assertRedirect('/projects');
     }
 
     /** @test */
