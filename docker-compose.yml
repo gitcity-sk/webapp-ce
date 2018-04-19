@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   codeocean-source:
-    build: .
+    # build: .
     volumes:
       - /var/www/html
       - ./volumes/git-data:/var/opt/gitcity/git-data:rw
@@ -52,24 +52,4 @@ services:
     volumes_from:
       - codeocean-source
     ports:
-      - "8877:80"
-
-  git:
-    image: maymeow/php:cli-git
-    restart: always
-    depends_on:
-      - codeocean-source
-    volumes_from:
-      - codeocean-source
-    ports:
-      - "2281:22"
-
-  unicorn:
-    image: maymeow/workhorse:latest
-    restart: always
-    depends_on:
-      - codeocean-source
-    volumes_from:
-      - codeocean-source
-    ports:
-      - "8801:8801"
+      - "80:80"
