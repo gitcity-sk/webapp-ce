@@ -3,6 +3,7 @@ version: '2.1'
 services:
   codeocean-source:
     # build: .
+    image: registry.gitcity.eu/webapp/webapp-ce:latest
     volumes:
       - /var/www/html
       - ./volumes/git-data:/var/opt/gitcity/git-data:rw
