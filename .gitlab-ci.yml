@@ -5,7 +5,12 @@ stages:
     - prepare
     - test
     - post-test
+    - pages
+    - post-cleanup
     - deploy
+
+# Pages section
+# ----------------------------------
 
 # Tags
 .run-on-do-docker: &run-on-do-docker
@@ -13,23 +18,19 @@ stages:
         - digitalocean
         - docker
 
+.run-on-staging: &run-on-staging
+    tags:
+        - digitalocean
+        - staging
+
+# Cache section
+# ----------------------------------
+
 # Cache configuration
 .default-cache: &default-cache
     paths:
         - vendor/
         - storage/
-
-.push-cache: &push-cache
-    cache:
-        <<: *default-cache
-        key: "cake-app-with-php-7"
-        policy: push
-
-.pull-cache: &pull-cache
-    cache:
-        <<: *default-cache
-        key: "cake-app-with-php-7"
-        policy: pull
 
 .push-cache-dev: &push-cache-dev
     cache:
@@ -42,6 +43,9 @@ stages:
         <<: *default-cache
         key: "cake-app-with-php-7-dev"
         policy: pull
+
+# Services section
+# ----------------------------------
 
 # Services configuration
 .postgres-variables: &postgres-service
@@ -60,6 +64,9 @@ stages:
     services:
         - mariadb
 
+# Tests section
+# ----------------------------------
+
 # PHP UNIT tests configuration
 .phpunit-tests: &phpunit-tests
     stage: test
@@ -76,7 +83,7 @@ stages:
         expire_in: 1 week
 
 .phpunit-html-coverage: &phpunit-html-coverage
-    stage: post-test
+    stage: pages
     environment:
         name: code-coverage/$CI_COMMIT_REF_NAME
         url: http://$CI_PROJECT_NAMESPACE.gitcity.io/$CI_PROJECT_NAME/$CI_COMMIT_REF_SLUG/coverage/
@@ -108,6 +115,9 @@ stages:
     before_script:
         - cp .env.testing.mysql .env
 
+# Post test section
+# ----------------------------------
+
 # PHPCS configuration
 .phpcs-tests: &phpcs-tests
     <<: *pull-cache-dev
@@ -137,15 +147,10 @@ stages:
 # End Configuration part
 # ------------------------
 
-# Prepare
-composer-install: 
-    <<: *run-on-do-docker
-    <<: *push-cache
-    stage: prepare
-    script:
-       - chmod +x ./prepare.sh
-       - ./prepare.sh prod pgsql
+# Prepare section
+# ----------------------------------
 
+# Prepare
 composer-install-dev:
     <<: *run-on-do-docker
     <<: *push-cache-dev
@@ -154,13 +159,33 @@ composer-install-dev:
         - chmod +x ./prepare.sh
         - ./prepare.sh dev pgsql
 
+# Tests section
+# ----------------------------------
+
 # Tests
 phpunit-pg-tests 1 1: *phpunit-pg-tests
 phpunit-mysql-tests 1 1: *phpunit-mysql-tests
 laravel-dusk-test: *dusk
 
+# Post tests section section
+# ----------------------------------
+
 # Post Test
 phpcs-tests 1 1: *phpcs-tests
+
+# Push coverage to codecov.io
+codecov:
+    <<: *postgres-service
+    <<: *pull-cache-dev
+    <<: *run-on-do-docker
+    <<: *phpunit-codecov-html
+    before_script:
+        - cp .env.testing.pgsql .env
+    after_script:
+        - bash <(curl -s https://codecov.io/bash) -t "$CODECOV_TOKEN"
+
+# Pages section
+# ----------------------------------
 
 # Deploy page
 pages:
@@ -174,16 +199,8 @@ pages:
         paths:
         - public
 
-# Push coverage to codecov.io
-codecov:
-    <<: *postgres-service
-    <<: *pull-cache-dev
-    <<: *run-on-do-docker
-    <<: *phpunit-codecov-html
-    before_script:
-        - cp .env.testing.pgsql .env
-    after_script:
-        - bash <(curl -s https://codecov.io/bash) -t "$CODECOV_TOKEN"
+# Build section
+# ----------------------------------
 
 # Build master image (latest)
 build master image:
@@ -217,6 +234,8 @@ build image:
         - master
     when: manual
 
+# Deploy section
+# ----------------------------------
 
 # Deploy latest image to docker
 deploy:to-docker-cloud:
@@ -258,4 +277,33 @@ deploy:tags-to-docker-cloud:
     <<: *run-on-do-docker
     only:
         - tags
+    when: manual
+
+deplloy:review-webapp:
+    <<: *run-on-staging
+    stage: deploy
+    environment:
+        name: review-webapp/$CI_COMMIT_REF_NAME
+        url: http://167.99.34.153
+        on_stop: stop-review-webapp
+    before_script:
+        - docker-compose --version
+    script:
+        - docker-compose build
+        - docker-compose up -d
+    only:
+        - master
+    when: manual
+
+stop-review-webapp:
+    <<: *run-on-staging
+    stage: post-cleanup
+    environment:
+        name: review-webapp/$CI_COMMIT_REF_NAME
+        action: stop
+    script:
+        - docker-compose down -v
+        - docker rmi registry.gitcity.eu/webapp/webapp-ce:latest
+    only:
+        - master
     when: manual
