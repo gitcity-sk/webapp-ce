@@ -21,7 +21,6 @@ stages:
 .run-on-staging: &run-on-staging
     tags:
         - digitalocean
-        - docker
         - staging
 
 # Cache section
