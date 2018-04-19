@@ -288,6 +288,7 @@ deplloy:review-webapp:
         on_stop: stop-review-webapp
     before_script:
         - docker-compose --version
+        - echo "$CI_JOB_TOKEN" | docker login -u "gitlab-ci-token" "$CI_REGISTRY" --password-stdin
     script:
         - docker-compose build
         - docker-compose up -d
@@ -304,6 +305,7 @@ stop-review-webapp:
     script:
         - docker-compose down -v
         - docker rmi registry.gitcity.eu/webapp/webapp-ce:latest
+        - docker logout "$CI_REGISTRY"
     only:
         - master
     when: manual
