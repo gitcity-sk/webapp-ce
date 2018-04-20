@@ -26,7 +26,7 @@ services:
       DB_PASSWORD: "5RGGjwubxdqyF6dL"
       WEBAPP_ALLOW_REGISTRATION: "true"
       APP_KEY: "base64:i401pX1nVrGs5i4eWFoxB67N5mkfVhrF9kxqKSkj15o="
-      APP_ENV: testing
+      APP_ENV: local
       GIT_BINARY: git
       GIT_DATA: "/var/opt/gitcity/git-data/"
       GIT_SSH_KEYS: "/var/opt/gitcity/git-data/.ssh/"
