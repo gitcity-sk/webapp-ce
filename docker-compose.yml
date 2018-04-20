@@ -6,9 +6,9 @@ services:
     image: registry.gitcity.eu/webapp/webapp-ce:latest
     volumes:
       - /var/www/html
-      - ./volumes/git-data:/var/opt/gitcity/git-data:rw
-      - ./volumes/spaces-data:/var/opt/gitcity/spaces-data:rw
-      - ./volumes/storage:/var/www/html/storage/app:rw
+      - git-data:/var/opt/gitcity/git-data:rw
+      - spaces-data:/var/opt/gitcity/spaces-data:rw
+      - storage-data:/var/www/html/storage/app:rw
 
   php:
     build: ./docker/php-fpm
@@ -24,6 +24,7 @@ services:
       DB_DATABASE: "gitcity-test"
       DB_USERNAME: postgres
       DB_PASSWORD: "5RGGjwubxdqyF6dL"
+      WEBAPP_ALLOW_REGISTRATION: "true"
       APP_KEY: "base64:i401pX1nVrGs5i4eWFoxB67N5mkfVhrF9kxqKSkj15o="
       APP_ENV: testing
       GIT_BINARY: git
@@ -37,7 +38,7 @@ services:
     depends_on:
       - codeocean-source
     volumes:
-      - ./volumes/db/data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
     restart: always
     environment:
       POSTGRES_PASSWORD: "5RGGjwubxdqyF6dL"
@@ -54,3 +55,9 @@ services:
       - codeocean-source
     ports:
       - "80:80"
+      
+volumes:
+    db-data:
+    git-data:
+    storage-data:
+    spaces-data:
