@@ -8,6 +8,16 @@ use App\Permission;
 
 class CreateDefaultPermissionsRoles extends Migration
 {
+    /**
+     * model:action
+     * 
+     * Default
+     * model:show - Can show model entity
+     * model:create - Create model entity
+     * model:manage - Edit/delete model entity
+     * 
+     * Add more actions if you want
+     */
     protected $permissions = [
         ['name' => 'show-project', 'label' => 'Can show project'],
         ['name' => 'create-project', 'label' => 'Can create project'],
