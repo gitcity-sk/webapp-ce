@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top flex-md-nowrap p-0 bg-dark"
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top flex-md-nowrap p-0 bg-sandbox-dark"
          style="background-color: #292961">
         <a class="navbar-brand ml-2" href="/">
             <span class="mr-2">
