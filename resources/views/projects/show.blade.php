@@ -69,6 +69,7 @@
                 <div class="card-body text-center">
                     <p><span class="text-danger">Project is not created on server.</span> If problem presist contact server administrator. </p>
                     <a href="/projects/{{ $project->id }}/create-on-server" class="btn btn-outline-primary">Refresh</a>
+                    <a href="/projects/{{ $project->id }}/create-on-server" class="btn btn-warning">Disable repository</a>
                 </div>
             </div>
         @endif 
