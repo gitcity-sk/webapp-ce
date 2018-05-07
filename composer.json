@@ -11,6 +11,7 @@
         "laravel/passport": "^5.0",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "maymeow/php-encrypt": "^2018.5",
         "moonlitbc/gitelephant": "~2018.1"
     },
     "require-dev": {
